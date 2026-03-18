@@ -1,5 +1,4 @@
 
 [2]Katoon P M, Turukmane A V. Interoperable blockchain network for healthcare data using Fabric, Ethereum and IPFS[J]. Discover Artificial Intelligence, 2025, 5(1): 1-27.
-
 [4]Hadi H A A, Ghani R F. The Future of E-Health: Blockchain Solutions with Hyperledger Fabric and IPFS[J]. Ingénierie des Systèmes d'Information, 2025, 30(1).
 [5]Wen F, Wang Z, Qu L, et al. Enhancing secure multi-group data sharing through integration of IPFS and hyperledger fabric[J]. PeerJ Computer Science, 2024, 10: e1962.
