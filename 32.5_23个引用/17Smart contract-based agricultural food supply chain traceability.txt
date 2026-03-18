@@ -1,0 +1,1228 @@
+来源文件：17Smart contract-based agricultural food supply chain traceability.pdf
+============================================================
+
+【第1页】
+Received December 17, 2020, accepted January 5, 2021, date of publication January 8, 2021, date of current version January 15, 2021.
+Digital Object Identifier 10.1109/ACCESS.2021.3050112
+Smart Contract-Based Agricultural Food Supply
+Chain Traceability
+LU WANG
+1,2,3, LONGQIN XU1,2,3,4,5, ZHIYING ZHENG1,2,4, SHUANGYIN LIU
+1,2,3,4,5,6,
+XIANGTONG LI1,2,5, LIANG CAO1,2,3,4,5, JINGBIN LI6, AND CHUANHENG SUN
+7
+1College of Information Science and Technology, Zhongkai University of Agriculture and Engineering, Guangzhou 510225, China
+2Smart Agriculture Engineering Technology Research Center of Guangdong Higher Education Institutes, Zhongkai University of Agriculture and Engineering,
+Guangzhou 510225, China
+3Guangzhou Key Laboratory of Agricultural Products Quality & Safety Traceability Information Technology, Zhongkai University of Agriculture and
+Engineering, Guangzhou 510225, China
+4Academy of Smart Agricultural Engineering Innovations, Zhongkai University of Agriculture and Engineering, Guangzhou 510225, China
+5Guangdong Province Key Laboratory of Waterfowl Healthy Breeding, Guangzhou 510225, China
+6College of Mechanical and Electric Engineering, Shihezi University, Shihezi 832000, China
+7National Engineering Research Center for Information Technology in Agriculture, Beijing 100097, China
+Corresponding author: Shuangyin Liu (hdlsyxlq@126.com)
+This work was supported in part by the National Natural Science Foundation of China under Grant 61871475, in part by the Special Project
+of Laboratory Construction of Guangzhou Innovation Platform Construction Plan under Grant 201905010006, in part by the Guangdong
+Science and Technology Plan of Project under Grant 2017B0101260016, in part by the Foundation for High-level Talents in Higher
+Education of Guangdong Province under Grant 2017GCZX0014, Grant 2016KZDXM0013, Grant 2017KTSCX094, and
+Grant 2018LM2168; in part by the Guangzhou Science and Technology Project under Grant 2018GXJK072, and in part by the Beijing
+Natural Science Foundation under Grant 4182023.
+ABSTRACT The complexity of a supply chain makes product safety or quality issues extremely difﬁcult
+to track, especially for the basic agricultural food supply chains of people’s daily diets. The existing
+agricultural food supply chains present several major problems, such as numerous participants, inconvenient
+communication caused by long supply chain cycles, data distrust between participants and the centralized
+system. The emergence of blockchain technology effectively solves the pain-point problem existing in
+the traceability system of agricultural food supply chains. This paper proposes a framework based on the
+consortium and smart contracts to track and trace the workﬂow of agricultural food supply chains, implement
+traceability and shareability of supply chains, and break down the information islands between enterprises as
+much as possible to eliminate the need for the central institutions and agencies and improve the integrity of
+the transaction records, reliability and security. At the same time, farmers record details of the environment
+and crop growth data in the InterPlanetary File System (IPFS) and store ﬁle IPFS hashes in smart contracts,
+which not only increases data security but also alleviates the blockchain storage explosion problem. This
+framework has been applied in Shanwei Lvfengyuan Modern Agricultural Development Co., Ltd. Although
+there are still many defects, the framework has successfully realized functions such as disintermediation and
+tracing of agricultural product information through QR codes. Thus, the framework proposed in this paper
+is of great signiﬁcance and reference value for enterprises to ensure product quality and safety traceability.
+INDEX TERMS Blockchain, smart contract, agricultural food supply chain, traceability, food safety.
+I. INTRODUCTION
+The supply chain connects many entities, such as suppli-
+ers, logistics providers, processors, distributors, retailers, and
+consumers, forming a complex network chain structure. This
+complex supply chain may go through dozens or even hun-
+dreds of stages, leading to considerable time consumption
+and involving a wide range of regions. Therefore, in this case,
+The associate editor coordinating the review of this manuscript and
+approving it for publication was Emanuele Bellini
+.
+if the product has safety or quality problems, the traceability
+process is extremely difﬁcult. Especially in agricultural food
+supply chains, the process ensures the traceability of the ﬁnal
+products, which not only guarantees consumer life and health
+but also improves user trust in the product and enterprise.
+In recent years, prevalent food safety accidents have caused
+people to devote more attention to food safety and quality.
+However, the current agricultural food supply chains are char-
+acterized by a long life cycle, numerous and complex links,
+and dynamic information, etc., so it is difﬁcult to track and
+9296
+This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/
+VOLUME 9, 2021
+
+
+【第2页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+trace problems in a certain link. Agricultural foods are foods
+produced by agriculture, such as sorghum, rice, peanuts, corn,
+and wheat, which form the basis of people’s daily food,
+and their importance is self-evident. Subsequently, it is very
+important to establish and improve the agricultural food sup-
+ply chain traceability system ‘‘from farm to fork’’ [1]–[3].
+There are three major problems with the existing agri-
+cultural food supply chains. First, there are many partici-
+pants in the supply chain, and the communication between
+them is not convenient, leading to a long cycle of the whole
+supply chain. Then, due to the large number of participants
+and distribution in different links, the information sharing
+is poor, and data is not trusted among participants. Finally,
+the agricultural food supply chain is a centralized system
+with power concentrated on the central manager and data
+easily tampered with. Although the central manager is under
+the supervision of government departments, there are always
+loopholes in human supervision [1], [4]–[6]. By reason of
+this situation, in order to effectively track product informa-
+tion, ensure product safety and quality, and thus ensure the
+safety of consumers, the research on advanced traceability
+technology and its systems wields important research value to
+guarantee the quality and safety of agricultural food. To date,
+many researchers have studied and developed supply chain
+traceability systems based on barcodes, QR codes and radio
+frequency identiﬁcation devices (RFID), but most of these
+systems still have some problems. First, most of the traceabil-
+ity systems are develop based on a single enterprise, which is
+an internal traceability system by which information is not
+easily shared. Second, the majority of traceability systems
+are based on centralized development, and the information
+is opaque and asymmetric, with the risk of tampering by
+the administrator and low credibility. Finally, existing trace-
+ability systems have a single point of failure, and once a
+node fails, the whole system will crash. The emergence of
+blockchain technology effectively solves the pain point of the
+existing agricultural food supply chain traceability systems.
+Blockchain is a distributed ledger system which consists of
+one-by-one blocks with timestamps in the form of a decen-
+tralized database in the point-to-point (P2P) network. There-
+fore, it has the characteristics of decentralization, immutabil-
+ity, anti-tampering and traceability. Blockchain technology is
+introduced into the agricultural food traceability system to
+track the information of the supply chain process, offering
+the advantages of reducing the management cost, improving
+the information credibility, realizing the visualization of the
+supply chain process data and the traceability of the infor-
+mation, etc. [2], [7]–[10]. In view of the many advantages
+of blockchain, the research on traceability systems based
+on blockchain is growing rapidly [11]. In the medical ﬁeld,
+Yong et al. [12] developed a ‘‘vaccine blockchain’’ system
+based on the blockchain and machine learning technology,
+and can be used to address the problems of vaccine expiration
+and vaccine record fraud by using the traceability and smart
+contract of the blockchain. Tripathi et al. [13] proposed an
+smart healthcare system framework based on blockchain to
+provide a secure and privacy-protecting healthcare system.
+In the ﬁeld of protecting privacy, Chen et al. [14] pro-
+posed a novel on-chain and off-chain data storage model and
+developed a prototype system to verify the feasibility of the
+model, thus solving the problems of information redundancy
+and insufﬁcient storage space in blockchain. However, this
+framework is only applicable to personnel information man-
+agement system and has not been extended to more ﬁelds.
+Yang et al. [15] proposed a blockchain privacy-preservation
+crowdsensing system, which solves the risk that the existing
+crowd-testing system is vulnerable to attack, invasion and
+manipulation. In the ﬁeld of traceability, Liu and Li [16],
+with respect to the background of cross-border e-commerce,
+proposed a framework based on blockchain and developed
+a set of corresponding technologies and methods to realize
+product traceability and transaction traceability in supply
+chain management. The key methods and algorithms, such as
+the information anchoring method, key distribution method,
+information encryption algorithm and anti-counterfeiting
+algorithm, are developed to solve the key recovery problem
+and effectively resist clone attack, counterfeit label attack
+and counterfeit product attack. However, this system is not
+implemented for actual business. Baralla et al. [17] proposed
+a traceability system for agricultural product supply chains
+based on the blockchain hyperledger Sawtooth technology,
+which implements the EU’s ‘‘farm-to-fork’’ model. Con-
+sumers can learn detailed product information through QR
+code scanning and verify product quality and safety. How-
+ever, the Sawtooth technology is not mature enough and lacks
+materials and applications. Yu and Huang [18] designed a
+foot ring based on blockchain and RFID technology to solve
+the problem of poultry food safety, which is conducive to
+timely detection of health problems in the poultry breed-
+ing process, and helps consumers to track information and
+quickly locate speciﬁc links in the poultry breeding life
+cycle when problems occur. Nevertheless, RFID technology
+is not mature enough and exhibits insufﬁcient security and
+excessive cost: it is thus not practical for the full application
+to large poultry farms. Based on the research of RFID and
+blockchain technology, Tian [19] established a traceability
+system for agricultural food supply chains which covers the
+whole process of data collection and information manage-
+ment of all links of the entire supply chain, and also realizes
+the quality and safety monitoring, traceability and traceability
+management of agricultural supply chains. Similarly, because
+of the same shortcomings as those of the previous paper,
+the system cannot be widely used in all ﬁelds.
+This paper proposes a framework based on consortium
+chain and smart contracts to track and trace workﬂows in
+agricultural food supply chains, implement traceability and
+shareability of supply chains, and disrupt information islands
+between enterprises as much as possible to eliminate the need
+for the central agencies and intermediaries and improve the
+transaction record integrity, reliability, and security. At the
+same time, farmers record the environmental information and
+details of crop growth data into the InterPlanetary File System
+VOLUME 9, 2021
+9297
+
+
+【第3页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+(IPFS). The ﬁle IPFS hash is stored in the smart contracts,
+which not only increases the data security but also allevi-
+ates the blockchain storage explosion problem. Besides, this
+framework has been applied in Shanwei Lvfengyuan Modern
+Agricultural Development Co., Ltd. Although there are still
+many defects, it has successfully achieved decentralization
+and traced the information of agricultural products through
+QR codes, which will be brieﬂy introduced in the following
+article.
+The remainder of this paper is organized as follows.
+Section 2 reviews the related work. Section 3 introduces
+some basic knowledge. In Section 4, we discuss the
+design, system overview and entity sequence diagram. Then,
+Section 5 describes implementation details including algo-
+rithms for agricultural food sales between various partici-
+pants using smart contracts. Finally, Section 6 presents the
+conclusions.
+II. RELATED WORK
+Food is the basis of people’s survival, and food safety is
+closely related to people’s health: thus, people are devoting
+increasing attention to food safety. In recent years, experts
+have become more interested in food traceability. The ﬁrst
+technology applied to food safety traceability is Internet
+of Things (IoT) technology [20], [21], such as barcodes,
+QR codes, and RFID technology. Li et al. [22] proposed a
+food traceability system for the dairy supply chain based on
+QR codes, which improves the transparency from production
+to sales and builds a food traceability platform. However,
+QR codes are not suitable for living bodies, such as poul-
+try and waterfowl, and are easily damaged by pollution.
+RFID is the most widely used technology in the IoT to
+realize food traceability due to its low cost and small size.
+De-an et al. [23] developed an RFID-based pork supply chain
+traceability system. A set of pork quality monitoring and
+tracking systems was constructed by using Structured Query
+Language (SQL) Server 2000 and intelligent identiﬁcation
+technology to realize the information traceability of the entire
+pork production process. Yiying et al. [24] designed a com-
+plete life cycle food traceability system, which uses RFID
+technology to realize whole process monitoring from source
+to consumption. At the same time, the RFID fault-tolerant
+mechanism is designed to ensure the practicability of the
+system. Mondal et al. [25] used object-based validation pro-
+tocols, real-time quality monitoring with RFID sensors at
+the physical level, and blockchain technology at the net-
+work level to create a transparent food supply chain. How-
+ever, RFID technology also presents some defects such
+as immature technology, high cost, inconsistent technical
+standards and low security. In addition, most of the trace-
+ability system data based on the IoT are stored in SQL
+Server and other central databases, which leads to problems
+like information asymmetry, data tampering and escalating
+data volume, thus increasing the cost of centralized stor-
+age. Blockchain technology has the characteristics of decen-
+tralization, immutability, anti-tampering and traceability.
+The application of blockchain technology in agricultural
+food safety traceability systems can store traceable data in
+chronological order, which is conducive to solving the prob-
+lems remaining in the existing agricultural food traceability
+systems.
+As a result, the combination of blockchain technology and
+food traceability has become a new trend in recent years.
+Tian [26] proposed the traceability of food supply chains
+based on hazard analysis and critical control points (HACCP)
+by combining blockchain and IoT. IoT technology automati-
+cally collects and stores information, improves the reliability
+of information and enhances food safety. Blockchain can
+ensure that data will not be tampered with after the chain,
+which improves the authenticity of the traceability informa-
+tion. However, since data quantities are constantly increasing,
+the blockchain cannot hold all of it. Hao et al. [27] stud-
+ied a traceability storage scheme using IPFS and secondary
+databases. IPFS is a technique for storing and sharing data
+in a distributed ﬁle system. To retrieve data from the IPFS,
+the transaction hash must be accesssed from the secondary
+database and then the IPFS hash must be retrieved from the
+blockchain. This approach solves the blockchain data explo-
+sion problem, but if the secondary database fails, the entire
+system will fail.
+With the advent of the blockchain 2.0 era, the self-execution
+and self-veriﬁcation features of smart contracts have made
+them widely used in food safety traceability systems.
+Wang et al. [3] proposed a product quality management
+system that uses smart contracts technology to permanently
+record all product transactions. In [28], the author presented
+a collaborative food safety traceability system based on
+blockchain and EPCIS, and adopted enterprise-level smart
+contracts to solve problems such as disclosure of sensitive
+information, data tampering and trust transfer. At the same
+time, the system also adopts the dynamic management of data
+on and off the chain to alleviate the problem of data explosion
+on the blockchain. Salah et al. [2] researched a method of
+using blockchain and smart contracts to execute business
+transactions, so as to realize traceability and visibility in
+the soybean supply chain. The solution aims to eliminate a
+trusted centralized authority, provide transaction records, and
+use smart contracts to manage and control transaction inter-
+actions between participants in the soybean supply system.
+These transactions are recorded and stored on the blockchain
+and connected to the IPFS, providing transparency and trace-
+ability to the soybean supply chain system in a safe and
+reliable manner. The huge advantage of smart contracts is not
+only widely used in food safety traceability. Omar et al. [29]
+presented a method based on blockchain, using Ethereum
+smart contracts and decentralized storage system to automate
+processes and information exchange, and capture the detailed
+algorithm of interaction between supply chain stakeholders,
+provides them with a compact, safe, reliable and transparent
+communication mode, has solved the Vendor Managed Inven-
+tory operation of data integrity, transparency, traceability
+and single point of failure. Zhang et al. [30] proposed a
+9298
+VOLUME 9, 2021
+
+
+【第4页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+novel secure billing protocol for online ride-hailing vehicles,
+which solved the difﬁcult problem of fare estimation and
+automatic payment through smart contracts. Xuan et al. [31]
+proposed a data sharing incentive model based on evolution-
+ary game theory using blockchain with smart contracts, which
+could dynamically control the excitation parameters and
+continuously encourages users to participate in data sharing.
+Tso et al. [32] introduced the ﬁrst decentralized electronic
+voting and bidding systems based on a blockchain and smart
+contract, which improved the anonymity of participants,
+privacy of data transmission, and reliability and verifability of
+data.
+The consortium chain is a kind of blockchain which
+is managed by multiple organizations or institutions, and
+the data can only be read, written and maintain by these
+organizations or institutions. This disrupts the information
+islands between enterprises and is very suitable for agricul-
+tural food safety traceability systems. Ethereum and hyper-
+ledger are two popular consortium chain platforms [2] based
+on Ethereum, while Wal-Mart [33], the world’s largest
+retailer, is experimenting with food traceability through
+IBM’s hyperledger. Taking advantage of the key features
+of the blockchain and smart contracts, Shahid et al. [34]
+deployed the Ethereum blockchain network to propose a
+blockchain-based reputation system in the agricultural and
+food supply chain. In [35], the authors proposed a decen-
+tralized storage mechanism based on Ethereum. The use
+of IPFS overcomes the problems of centralized storage of
+sensitive data leaks and single points of failure. Before the
+data is stored in IPFS, the ﬁle is encrypted using the ﬁle
+encryption algorithm, and the ciphertext is uploaded to IPFS,
+which provides the hash value of the stored ﬁle recorded in
+Ethereum. However, due to the increased computing over-
+head, the proposed solution will not work effectively in an IoT
+scenario.
+III. PRELIMINARIES
+A. BLOCKCHAIN
+As we mentioned above, blockchain is a distributed ledger
+system that consists of one-by-one blocks with timestamps in
+the form of a decentralized database in the P2P network [23],
+[24]. As the underlying technology of Bitcoin, blockchain
+technology has gradually emerged into the public conscious-
+ness. Although this new concept has become a hot topic in
+recent years, in fact, some technologies it relies on, such as
+asymmetric encryption technology and P2P network proto-
+col, have existed for a long time. However, blockchain is a
+good combination of encryption technology, consensus algo-
+rithm, timestamp technology and smart contracts, forming a
+distributed system where users can be anonymous and data
+can be trusted. It offers the advantages of decentralization,
+immutability, anti-tampering and traceability, etc. It is widely
+applied in the ﬁelds of medical treatment, education, credit
+and supply chain traceability. Fig. 1 shows the blockchain
+structure.
+FIGURE 1. The structure of blockchain.
+As can be observed from the diagram, the connection
+between blocks is produced by the hash value of the previous
+block, which is the unique identiﬁer of each block. In this
+way, the connection from the latest block to the ﬁrst block is
+created by the sequence of each block to its parent hash value,
+creating a form similar to a data structure. The block consists
+of a header and a body. The header contains a version number,
+nonce, timestamp, previous block hash, block difﬁculty and
+Merkle tree. The block difﬁculty determines the difﬁculty of
+mining. The nonce is the answer to the math problem the
+miners are looking for, and the previous block hash is used to
+connect the previous block. The timestamp is the generation
+time of each block, which corresponds to the authentication of
+each transaction record, ensuring the authenticity of the trans-
+action record. The body mainly contains transaction data.
+The Merkle tree appears to be very similar to a binary tree,
+and it can summarize and quickly verify all transaction data
+in a block. Each leaf node uses the hash of the data block as
+its tag, and each non-leaf node uses the encrypted hash of its
+child node’s tag as its tag. As shown in the body area of the
+diagram, the respective hash values of each transaction are
+taken as leaf nodes, and the hash values of the two leaf nodes
+are combined for another hash calculation to generate the
+parent node, namely the Merkle root. When the transaction
+records are tampered with, the value will be inconsistent.
+Such a storage method not only enables the blockchain to
+quickly discover that the information has been tampered with
+but also enables it to quickly locate the speciﬁc transaction
+information.
+B. CONSORTIUM CHAIN
+The blockchain is divided into public chain, private chain and
+consortium chain. In the public chain, anyone can send trans-
+actions and participate in the consensus process. The whole
+network is open, without authorization, and characterized by
+‘‘complete decentralization’’. The private chain is generally
+the blockchain within the enterprise, whose authority is com-
+pletely in the hands of an organization or a person, with
+the lowest degree of decentralization. The consortium chain
+exists between the public chain and the private chain and is
+a special blockchain requiring registration and permission: it
+is only open to speciﬁc organizations or institutions, so it can
+maintain the distributed structure, limit the number of par-
+ticipants, and can only be veriﬁed in the blockchain through
+VOLUME 9, 2021
+9299
+
+
+【第5页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+pre-set nodes, thus enhancing security. The consensus algo-
+rithm is implemented by validating data and blocks through
+pre-selected nodes rather than by all nodes in the entire net-
+work, which accelerates the generation of blocks and shortens
+the time to reach consensus and validate data. Therefore,
+the consortuim chain exhibits characteristics such as few
+consensus nodes, high system operation efﬁciency and rapid
+transaction speed. Agricultural food traceability systems have
+high requirements with respect to privacy protection, trans-
+action speed and internal supervision: if every participant
+joins the consortium chain, these systems combined with the
+smart contracts technique can effectively solve the issue that
+existing agricultural food traceability systems are established
+on the basis of a single enterprise development, thus disrupt-
+ing the information islands between enterprises to make the
+adoption of consortium chains in agricultural food traceabil-
+ity systems more suitable [36]–[40].
+C. HYPERLEDGER
+Hyperledger is an open source collaborative project initiated
+by the Linux Foundation in 2015 to promote blockchain
+digital technology and transaction veriﬁcation. It is the
+ﬁrst distributed ledger platform for enterprise application
+scenarios, involving technology and ﬁnancial giants such
+as IBM, Intel, Cisco, and R3. Hyperledger can be divided
+into distributed ledger technology, libraries and tools. Fab-
+ric is the most important application project of Hyper-
+ledger technology, which is a general license blockchain
+with modular and extensible characteristics, follows the
+execution-sequence-validation paradigm and fundamentally
+deviates from the order-execution model. Fabric consists
+of four parts: (1) Describing the roles between nodes in
+the infrastructure; (2) Execution of the smart contracts;
+(3) Conﬁgurable consensus; (4) Membership services, whose
+modular structure provides a high degree of conﬁdential-
+ity, ﬂexibility and extensibility applicable to any industry
+[41],
+[42].
+HyperLedger
+establishes
+consortium
+chain
+through channel and uses membership service provider(MSP)
+to control the permissions of nodes. As an important commu-
+nication mechanism, channel is an independent communica-
+tion channel between members that transactions sent in it can
+only be seen by members belonging to the channel. There
+can be multiple channels in the network, and each channel
+maintains an account of its own channel.
+IV. AGRICULTURAL FOOD TRACEABILITY
+BASED ON BLOCKCHAIN
+In this section, we use the hyperledger fabric to build con-
+sortium chain and smart contracts named chaincode to track
+and execute transactions in the agricultural food supply chain.
+This method eliminates the need for a central authority, real-
+izes decentralization, and provides complete, reliable and
+secure transaction records for the management and security of
+the agricultural food supply chain, ensuring the authenticity
+and reliability of the agricultural food information that ulti-
+mately reaches the consumer.
+A. SYSTEM OVERVIEW
+Smart contracts have the ability to integrate agricultural and
+agricultural food safety into an integrated intelligent system,
+thus ensuring the quality and safety of agricultural food and
+the health of consumers. This paper presents a framework
+for the use of automated smart contracts on the hyperledger
+platform. According to the information in the agreed contract,
+when the trigger condition is met, the smart contracts auto-
+matically send out the preset data resources, including the
+events of the trigger condition. This is a system of transaction
+processing modules and state mechanisms that do not gener-
+ate or modify smart contracts but only enable a complex set
+of digital commitments with trigger conditions to be executed
+correctly according to the will of the participants. Smart con-
+tracts are executed by tens of thousands of nodes distributed
+around the world and are the result of consensus. Nodes are
+one of the components of the blockchain network, namely,
+participating entities in the agricultural food supply chain.
+These nodes can collect, validate, and execute transactions,
+and store the data and results of these transactions in a ledger,
+which will eventually be replicated and synchronized by all
+nodes. As a result, all nodes have the same ledger information
+without contingency. As mentioned earlier, smart contracts
+receive transactions and trigger events in the form of function
+calls, enabling participating entities to continuously monitor,
+track, and receive appropriate alerts when violations occur.
+Fig. 2 depicts a general overview of the system architecture
+presented in this paper, with the main participating entities
+including the agricultural bureau, farmer, processor, qual-
+ity supervision bureau, distributor, retailer, consumer, and
+blockchain implementing smart contracts.
+As shown in Fig. 2, in order to achieve traceability of
+agricultural food, information is recorded using hyperledger
+smart contracts, and all participants in the agricultural food
+supply chain are added to the process. The agricultural bureau
+records farmer information, seed information, plot informa-
+tion and yield information, etc., and carries out uniﬁed man-
+agement of farmers’ production to ensure the authenticity of
+source information. Farmers cultivate crops and record the
+environment and growth detail data of the crops in IPFS,
+where the growth images of the crops are marked with times-
+tamps. Timestamps represent complete and veriﬁable data
+that already exists at a given point in time, providing the user
+with electronic proof of when some of the user’s data was
+generated. The ﬁle IPFS hash is stored in smart contracts.
+When the crops mature, the farmer harvests them and then
+sells them to a processor for a series of processing steps.
+The quality supervision bureau supervises the processing to
+ensure the safety and quality of agricultural food. The ﬁn-
+ished agricultural foods are purchased in bulk by a distributor,
+stored and sold to a retailer, who buys agricultural food from
+a distributor and sells it directly to the customer in small
+quantities.
+Data stored in the blockchain or IPFS is encrypted by the
+entity storing the data using a digital signature, which offers
+the following advantages: (1) Anti-tampering: After signing,
+9300
+VOLUME 9, 2021
+
+
+【第6页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+FIGURE 2. A system overview for agricultural food traceability using
+hyperledger smart contracts.
+the authenticity of the data is determined through the calcula-
+tion and veriﬁcation of the signature to ensure the integrity of
+the data; (2) Non-repudiation: A digital signature can be used
+as the identity authentication of the stored data entity, or as
+the evidence of the signer’s operation; (3) Conﬁdentiality:
+Data loss is likely to lead to data leakage, but the digitally
+signed data needs to be decrypted to obtain the original data.
+Entities are responsible for their own data, the blockchain
+automatically executes programs through smart contracts,
+and entities will execute punishment measures if they commit
+illegal activities. In the planting stage, farmers use a variety
+of sensors to upload the growing environment information
+and details of crops directly to the server in real time. The
+data is not processed by human beings, which enhances the
+authenticity and anti-tampering characteristic of the data and
+enables the data to be audited and trusted.
+B. SYSTEM DESIGN
+The agricultural food supply chain completes the entire pro-
+duction and transportation process ‘‘from farm to fork’’,
+involving many participating entities, and forming long and
+complex characteristics that make tracking the entire pro-
+cess very cumbersome. Therefore, for traceability purposes,
+we record the information and add the unique identity and lot
+number of the food to each subsequent transaction when the
+transaction is initiated, and record the hash value to ensure
+the authenticity of the transaction. A batch is a group of
+foods in a warehouse whose batch number is the unique
+identiﬁer. To address the blockchain data explosion and IPFS
+limitations, the hash of the data is stored in the hyperledger,
+and the transaction data is stored in the IPFS. Access control
+policy is adopted to restrict blockchain reads and writes,
+ensuring that transactions are executed by authorized users
+and enhancing data security. Similarly, smart contracts allow
+only speciﬁc entities to execute. Entities are registered in
+the system and interact through the smart contracts. The
+processing of the entity in the agricultural food supply chain
+is shown in Fig. 3, and the description of each entity is as
+follows:
+1) AGRICULTURAL BUREAU
+The agriculture bureau is an organization that manages farm-
+ers, keeping records of farmers’ information, seed informa-
+tion, plot information and yield information to ensure the
+FIGURE 3. The simple agricultural food process in the agricultural food
+supply chain.
+authenticity of source information. The information is stored
+in the IPFS, and its hash value is stored on the chain.
+2) FARMER
+The farmer is responsible for planting crops, using sensors
+to monitor and record details of crop growth, such as water,
+air, sunlight and soil quality in the growing environment, and
+storing the information regarding the process of crop growth
+in IPFS in the form of images or MPEG ﬁles. In addition,
+the farmer is responsible for creating smart contracts and
+storing IPFS data hashes in smart contracts.
+3) PROCESSOR
+The farmer harvests crops and sells them to the processor,
+who processes the raw crops into produce purchased by the
+ﬁnal consumer, and stores the batch information, quantity,
+and inspection information of the ﬁnished products in IPFS.
+The data hash is stored in the blockchain, and the data label
+is ﬁnally generated and pasted on the product packaging.
+4) QUALITY SUPERVISION BUREAU
+The quality supervision bureau mainly manages the pro-
+cessing and guides the quality supervision and inspection,
+and is responsible for the implementation of product quality
+supervision and compulsory inspection of the production
+enterprises. To investigate and punish violations of laws and
+regulations concerning standardization, measurement and
+quality, and crackdown on illegal activities related to coun-
+terfeiting and shoddy goods, its information is recorded on
+the IPFS, and the hash value is stored on the blockchain.
+5) DISTRIBUTOR
+The ﬁnished product may go through multiple levels of
+distribution before reaching the retailer. The distributor is
+responsible for storing processed agricultural products and
+selling them to retailers in batches. Company information,
+product selling time, price and other information is stored
+in IPFS, and like the situation for the quality supervision
+bureau, the hash value is stored in blockchain to ensure that
+the subsequent data is not tampered with.
+6) RETAILER
+The retailer buys processed produce from the distributor and
+sells it in small quantities to consumers. Basic information of
+the retailer, time of selling, quantity sold and other informa-
+tion is recorded in IPFS, and the hash value is also recorded
+in the blockchain.
+7) CUSTOMER
+Consumers are the users who purchase and consume the ﬁnal
+agricultural food, and can obtain the complete supply chain
+information of the agricultural food according to the barcode,
+VOLUME 9, 2021
+9301
+
+
+【第7页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+FIGURE 4. Entity relationship diagram.
+RFID or QR code on the product package to realize the
+traceability function of agricultural food information.
+C. ENTITY SEQUENCE DIAGRAM
+The relationships between entities, as shown in Fig. 4, show
+some of the key properties and capabilities of the smart
+contracts, as well as the relationships between entities and
+smart contracts. Each participating entity in the agricultural
+food supply chain participates by calling a function in the
+smart contracts. The smart contracts are created by the farmer,
+who grows the crop and uploads the growing environment,
+details and images to the IPFS by calling updateGrowthInfo(),
+which is stored in the IPFS hash, and updates the update-
+GrowthInfo() until the crop is ready for harvest. When the
+crops are harvested, the trade begins between the farmer
+and the processor. Once the farmer and the processor have
+negotiated the details of the agreement, the farmer agrees and
+sells the crop to the processor. Fig. 5 shows the sequence
+diagram of the farmer and processor executing the sellToPro-
+cessor() and buyCropFromFarmer() functions, respectively.
+First, the processor executing the buyCropFromFarmer()
+function, passing processor address, quantity and sales date
+parameters to activate the smart contract trigger the CropRe-
+quested() event to notify the participants, and passing and
+recording these parameters. Then, the farmer executing the
+sellToProcessor() function, passing the farmer address, pro-
+cessor address, quantity and sales date parameters, the smart
+contract trigger the CropSold() event to notify closing the
+transaction, and passing and recording these parameters.
+Fig. 6 shows a sequence diagram of the processor and dis-
+tributor collaboration using smart contracts. The distributor
+is a warehouse that buys processed produce in bulk from
+various processors and sells it to retailers. Firstly, the distribu-
+tor trigger AgriFoodRequestedByDistributor() event, passing
+distributor address, processor address, quantity and sales date
+parameters to notiﬁes the processor selling agricultural food
+to it, then the farmer performs the sellAgriFoodToDistribu-
+tor() function, passing processor address, distributor address,
+FIGURE 5. Sequence diagram showing interactions among farmers, smart
+contracts, and processors.
+FIGURE 6. Sequence diagram showing interactions among processors,
+smart contracts, and distributors.
+sales quantity and sales date parameters to activate the Agri-
+FoodSoldToDistributor() event to notify interaction entities.
+Retailers buy agricultural food from distributors, execut-
+ing the buyAgriFoodFromDistributor() function, and passing
+retailer address, distributor address, quantity parameters. The
+activation AgriFoodRequestedByRetailer() event notiﬁes the
+distributor, the distributor then performs the sellAgriFood-
+ToRetailer() function to sell agricultural food to the retailer,
+and activated event AgriFoodSoldToRetailer() notiﬁes the
+relevant participant of this process. At the same time, passing
+the addresses of both parties, quantity, batch number and sales
+date parameters. Finally, the retailer sells the agricultural
+food to the customer by executing the sellAgriFoodToCus-
+tomer() function, passing retailer address, customer address,
+agri-food name and sales date parameters, and broadcasts
+the process for the agricultural food via the AgriFoodSold()
+event. Fig. 7 shows a sequence diagram of distributor, retailer
+and customer.
+V. IMPLEMENTATION
+As mentioned above, the smart contracts are created by the
+farmer. In the initial state of establishing the smart contracts,
+the smart contracts will check whether the farmer is regis-
+tered. The processor then issues a purchase request, at which
+time the contract status is buyCropFromFarmer, and two
+conditions need to be checked: (1) Whether the requested
+9302
+VOLUME 9, 2021
+
+
+【第8页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+FIGURE 7. Sequence diagram showing interactions among distributors,
+smart contracts, retailers and customers.
+processor is a registered entity; (2) Whether the processor has
+paid the fee. If these two conditions are satisﬁed, the contract
+status changes to CropRequestAgreed, the processor status
+is now WaitForCropFromFarmer, the farmer status changes
+to SellCropToProcessor and all active entities receive infor-
+mation from the farmer about selling crops to the processor.
+If the above two conditions are not met, the contract state
+becomes CropRequestFailed, the processor state is Request-
+Failed, and the farmer state is CancelRequestOfProcessor.
+Algorithm 1 describes the process by which farmers sell their
+crops to processors.
+Algorithm 1 Farmer Sell Crops to Processor
+Input: ‘rp’ is the list of registered Processors
+Address of Processor,
+Address of Farmer,
+Quantity, DatePurchased, CropPrice
+1 Contractstate is buyCropFromFarmer
+2 State of the processor is CropRequested
+3 Farmer state is WaitForSellCropToProcessor
+4 Restrict access to only rp ∈ Processor
+5 if CropSale is agreed and CropPrice = paid then
+6
+Contract state changes to CropRequestAgreed
+7
+Change State of the processor to
+WaitForCropFromFarmer
+8
+Farmer state is SellCropToProcessor
+9
+Send a notiﬁcation of crop sale to processor
+10 end
+11 else
+12
+Contract state changes to CropRequestFailed
+13
+State of processor is RequestFailed
+14
+Farmer state is CancelRequestOfProcessor
+15
+Send a notiﬁcation stating request failure
+16 end
+17 else
+18
+Reset contract and displays an error message.
+19 end
+The processor then sells the processed crop to a distributor,
+who in turn sells it to retailer, as shown in algorithm 2.
+At this point, the production date, sales quantity and purchase
+date of the agricultural food are important parameters of the
+current stage. First, with respect to recognition address and
+the states of the distributor and retailer, due to the distributor
+having just ﬁnished the trade with the processor, the smart
+contract status is AgriFoodSoldToDistributor, and the state
+of the distributor is AgriFoodReceivedFromProcessor. The
+status of the retailer is ReadyToPurchase, which must satisfy
+two conditions: (1) Whether the requested retailer is a reg-
+istered entity; (2) Whether to agree to the sales agreement
+and whether the agricultural food payment has been com-
+pleted. If these two conditions are satisﬁed, the contract will
+automatically execute the transaction with the contract status
+changed to SaleRequestedSuccess, distributor status changed
+to AgriFoodSoldToRetailer, and retailer status changed to
+AgriFoodDeliveredSuccess. Upon completion of the transac-
+tion, the deed will send a notiﬁcation of successful delivery
+to the retailer. If the above two conditions are not satisﬁed,
+the contract status is changed to SaleRequestDenied, the dis-
+tributor status is changed to RequestFailed, the retailer sta-
+tus is changed to AgriFoodDeliveryFailure, and the contract
+sends a notiﬁcation of failure to all participants.
+Algorithm 2 Distributor Sell Agri-Food to Retailer
+Input: ‘rr’ is the list of registered Retailer
+Address of Distributor,
+Address of Retailer,
+DateManufactured, Quantity,
+DatePurchase
+1 Contractstate is AgriFoodSoldToDistributor
+2 State of the distributor is
+AgriFoodReceivedFromProcessor
+3 Retailer state is ReadyToPurchase
+4 Restrict access to only rr ∈ Retailer
+5 if Sale is agreed and Price = paid then
+6
+Contract state changes to SaleRequestedSuccess
+7
+Change State of the distributor to
+AgriFoodSoldToRetailer
+8
+Reatailer state is AgriFoodDeliveredSuccess
+9
+Send a ‘success’ notiﬁcation to retailer.
+10 end
+11 else
+12
+Contract state changes to SaleRequestDenied
+13
+State of distributor is RequestFailed
+14
+Retailer state is AgriFoodDeliveryFailure
+15
+Send a ‘failure’ notiﬁcation to all participants.
+16 end
+17 else
+18
+Reset contract and displays an error message.
+19 end
+Algorithm 3 describes the algorithm for consumers to pur-
+chase agricultural food from retailers. First, the consumer’s
+initial state is ReadyToBuy. Thanks to the successful dealings
+between retailers and distributors, the smart contract state is
+SaleRequestAgreedSuccess, while retailer status is AgriFood-
+DeliveredSuccess. Similarly, smart contracts restrict cus-
+tomers who register with retailer to make purchase requests.
+The important parameters at this stage are customer address,
+VOLUME 9, 2021
+9303
+
+
+【第9页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+retailer address, purchase date, sales ID, and AgriFood ID.
+When consumers successfully pay agricultural food prices,
+contract status changes to AgriFoodSoldToCustomer, retailer
+status to SuccessfulPurchaseAgriFoodSaleSuccess, and cus-
+tomer status to SuccessfulPurchase. If the payment is not
+successful or the paid price is incorrect, the contract status
+will be changed to SaleOfAgriFoodDenied, the retailer status
+will be AgriFoodSaleFailure, and then the customer status
+will be changed to FailedPurchase.
+Algorithm 3 Customer Buys From Retailer
+Input: Address of Retailer,
+Address of Customer,
+SalesID, AgriFoodID,
+DatePurchased
+1 Contractstate is SaleRequestAgreedSuccess
+2 State of the retailer is AgriFoodDeliveredSuccess
+3 Customer state is ReadyToBuy
+4 Restrict access to only Customers
+5 if Price = paid then
+6
+Contract state changes to AgriFoodSoldToCustomer
+7
+Change State of the retailer to
+SuccessfulPurchaseAgriFoodSaleSuccess
+8
+Customer state is SuccessfulPruchase
+9
+Send a ‘purchase success’ notiﬁcation.
+10 end
+11 else
+12
+Contract state changes to SaleOfAgriFoodDenied
+13
+State of retailer is AgriFoodSaleFailure
+14
+Customer state is FailedPurchase
+15
+Send a ‘purchase failure’ notiﬁcation.
+16 end
+17 else
+18
+Reset contract and displays an error message.
+19 end
+VI. RESULTS AND ANALYSIS
+A. APPLICATION EXAMPLE INTRODUCTION
+Shanwei Lvfengyuan Modern Agriculture Development Co.,
+Ltd., is committed to crop planting, processing, and agricul-
+tural technology promotion services, etc. Based on this, on the
+basis of the ﬁeld survey of the enterprise, a smart farm cloud
+platform was built to manage and track the buckwheat supply
+chain information. The system adopts browser/server (B/S)
+structure, uses the VMware virtual machine to deploy the
+blockchain network, and uses IPFS to store data with the
+Hyperledger Fabric platform to realize distributed deploy-
+ment. System development languages include Go, JavaScript,
+HTML and CSS, with data processing and sending in
+JSON format based on Nodejs and Bootstrap framework
+development.
+Fig. 8 shows the monitoring interface. Video monitoring
+equipment and high-deﬁnition cameras are installed on the
+farm. The administrator can remotely view and monitor the
+FIGURE 8. Monitoring interface.
+FIGURE 9. Traceability interface.
+FIGURE 10. Traceability QR code.
+crop situation and agricultural production situation in real
+time. For the sake of reducing the use of agricultural pesti-
+cides and ensuring the safety of agricultural food, the early
+warning function for diseases and pests was designed.
+An image recognition algorithm was adopted to match a large
+number of image libraries of diseases and pests to quickly and
+accurately identify pests for early warning and prevention.
+Fig. 9 shows the crop traceability process, including
+uploading crop information and creating a QR code and
+attaching it to the crop package. When the crops are trans-
+ported to the next link, the logistics manager can also check
+them in the background, so as to clearly understand the ﬂow
+direction of the crops. In case of any problems, crops can be
+locate quickly and rapidly recalled, thus effectively avoiding
+the spread of crops with problems and greater losses being
+suffered by the enterprise.
+The information on the ﬁnal product packaging purchased
+by the consumer includes not only the product name, pro-
+duction time and manufacturer’s name but also a pasted
+9304
+VOLUME 9, 2021
+
+
+【第10页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+FIGURE 11. Tracing the specific information of buckwheat.
+traceable QR code, such as the buckwheat traceability QR
+code generated by the above platform as shown in Fig. 10.
+Upon scanning the QR code, the information shown in Fig. 11
+will appear, including planting information, farm infor-
+mation, enterprise qualiﬁcation and on-link information,
+etc. This platform can trace the entire life cycle of buck-
+wheat from planting to consumer, and guarantee the con-
+sumers’ right to know almost all information. The cultivation,
+production
+and
+processing
+of
+transparent
+buckwheat
+increase the trust between consumers and enterprises. Mean-
+while, the application of blockchain technology also pre-
+vents data tampering. In general, the platform built based
+on blockchain technology realizes buckwheat information
+traceability, which increases the trust between consumers
+and maximizes the interests of both sides while also
+providing reference signiﬁcance for various researchers and
+enterprises.
+B. COST ANALYSIS AND PROBLEM DISCUSSION
+Smart contracts in Ethereum exist in the form of accounts.
+The successful deployment of a smart contract will create
+a smart contract account. After that, the smart contract is
+called, that is, a transaction is initiated to the smart con-
+tract account, which consumes a number of gas. Gas is the
+unit of calculation for all calculations in Ethereum. In [3]
+and [29], the authours used Ethereum smart contracts to solve
+the researched problems, and conducted detailed testing and
+analysis. The results showed that the use of Ethereum smart
+contracts can cost-savings and increase stakeholder proﬁts.
+However, unlike the Ethereum smart contract, the Hyper-
+ledger smart contract is directly deployed on each node with-
+out built-in tokens, so it does not need to consume tokens to
+terminate the execution of the smart contract. The payment
+model of Ethereum can avoid the abuse of resources. Once
+you have to pay for each operation, you will write the code
+as concise and efﬁcient as possible; the existence of Gas can
+also prevent attackers from ﬂooding the Ethereum network
+through invalid operations (unless the attacker is willing to
+pay a large sum of money to perform invalid operations), but
+if the gas is consumed, the contract will fail to execute and the
+consumed fee will not be refunded. The Hyperledger smart
+contract uses a timer scheme, which uses time as a standard
+to measure whether a contract has entered an inﬁnite loop: if
+the contract has not terminated normally before the timeout
+period is reached, then it is considered to have entered an inﬁ-
+nite loop and forced to terminate. Therefore, the Hyperledger
+smart contract can save resource consumption. Although the
+timer can partially solve the downtime problem, in a dis-
+tributed system, the execution time of each node may not
+be guaranteed to be consistent, and the performance and
+load of each node are different, resulting in the judgment
+of whether the contract runs overtime. Inconsistencies occur,
+which greatly increases the failure rate of the consensus
+algorithm, which is an important disadvantage of the timer
+solution.
+In addition, smart contracts also have some common secu-
+rity issues, which reduce the security guarantees for con-
+structing agricultural food traceability systems. Firstly, smart
+contracts cannot be modiﬁed once deployed, so they are vul-
+nerable to security vulnerabilities. Secondly, the open source
+code of smart contracts reduces the attack cost of hackers
+and becomes vulnerable to attacks. Finally, due to the late
+start and short development time of smart contracts, there are
+still some shortcomings, such as the lack of rigorous code
+will cause loopholes. Therefore, in the future, research can
+be conducted on these security issues of smart contracts.
+VII. CONCLUSION
+We propose a framework for tracking and executing
+transactions by using hyperledger smart contracts, which
+changes the centralized model, eliminates intermediaries and
+VOLUME 9, 2021
+9305
+
+
+【第11页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+intermediate nodes, and realizes the decentralized model of
+the agricultural food supply chain, thus meeting the demand
+for traceability of agricultural food. With respect to agricul-
+tural food safety problems, this paper expounds the impor-
+tance of food safety traceability, summarizes related research,
+introduces blockchain and consortium chain, and presents a
+framework using hyperledger smart contracts to track and
+implement the agricultural food trade; it presents system
+architecture design and describes the relationship between
+the agricultural food supply chain entities and the interaction
+between entities. In the end, the smart contracts algorithms
+are implemented in order to realize tracking and tracing of the
+agricultural food supply chain, and the practical application
+in Shanwei Lvfengyuan Modern Agricultural Development
+Co., Ltd., is introduced, cost analysis and problem discussion.
+However, regarding the existing problems of blockchain scal-
+ability, privacy and regulation, we have presented a solution
+which does not take into account the reliability and auditabil-
+ity of data transactions and payments, and with the develop-
+ment of the agricultural food supply chain, the decentralized
+automatic payment mechanism is needed to ensure that all
+system entities abide by the promise of deﬁciencies in the
+deal. As a goal of our future work, we plan to study related
+problems and to be able to ameliorate and solve them.
+REFERENCES
+[1] X. Zhang, P. Sun, J. Xu, X. Wang, J. Yu, Z. Zhao, and Y. Dong,
+‘‘Blockchain-based safety management system for the grain supply chain,’’
+IEEE Access, vol. 8, pp. 36398–36410, 2020.
+[2] K. Salah, N. Nizamuddin, R. Jayaraman, and M. Omar, ‘‘Blockchain-based
+soybean traceability in agricultural supply chain,’’ IEEE Access, vol. 7,
+pp. 73295–73305, 2019.
+[3] S. Wang, D. Li, Y. Zhang, and J. Chen, ‘‘Smart contract-based product
+traceability system in the supply chain scenario,’’ IEEE Access, vol. 7,
+pp. 115122–115133, 2019.
+[4] F.-F. Hu and Z.-H. Wu, ‘‘Research on grain supply chain mode innovation:
+A case study of China non-primary grain-yielding areas,’’ in Proc. Int.
+Conf. Manage. Service Sci., Aug. 2010, pp. 1–4.
+[5] C. Chen, J. Zhang, and T. Delaurentis, ‘‘Quality control in food supply
+chain management: An analytical model and case study of the adulter-
+ated milk incident in China,’’ Int. J. Prod. Econ., vol. 152, pp. 188–199,
+Jun. 2014.
+[6] Y. P. Tsang, K. L. Choy, C. H. Wu, G. T. S. Ho, and H. Y. Lam,
+‘‘Blockchain-driven IoT for food traceability with an integrated consensus
+mechanism,’’ IEEE Access, vol. 7, pp. 129000–129017, 2019.
+[7] X. Li, F. Lv, F. Xiang, Z. Sun, and Z. Sun, ‘‘Research on key technologies
+of logistics information traceability model based on consortium chain,’’
+IEEE Access, vol. 8, pp. 69754–69762, 2020.
+[8] H. Xu, Q. He, X. Li, B. Jiang, and K. Qin, ‘‘BDSS-FA: A blockchain-
+based data security sharing platform with ﬁne-grained access control,’’
+IEEE Access, vol. 8, pp. 87552–87561, 2020.
+[9] S. Li, T. Qin, and G. Min, ‘‘Blockchain-based digital forensics investiga-
+tion framework in the Internet of Things and social systems,’’ IEEE Trans.
+Comput. Social Syst., vol. 6, no. 6, pp. 1433–1441, Dec. 2019.
+[10] L. Wang, Z. Hu, S. Liu, Z. Zheng, L. Cao, L. Xu, and X. Li, ‘‘Application
+of non-orthogonal multiple access for IoT in food traceability system,’’ in
+Proc. IEEE 4th Adv. Inf. Technol., Electron. Autom. Control Conf. (IAEAC),
+vol. 1, Dec. 2019, pp. 104–109.
+[11] J. Al-Jaroodi and N. Mohamed, ‘‘Blockchain in industries: A survey,’’
+IEEE Access, vol. 7, pp. 36500–36515, 2019.
+[12] B. Yong, J. Shen, X. Liu, F. Li, H. Chen, and Q. Zhou, ‘‘An intelligent
+blockchain-based system for safe vaccine supply and supervision,’’ Int.
+J. Inf. Manage., vol. 52, Jun. 2020, Art. no. 102024.
+[13] G. Tripathi, M. A. Ahad, and S. Paiva, ‘‘S2HS—A blockchain based
+approach for smart healthcare system,’’ Healthcare, vol. 8, no. 1,
+Mar. 2020, Art. no. 100391.
+[14] J. Chen, Z. Lv, and H. Song, ‘‘Design of personnel big data management
+system based on blockchain,’’ Future Gener. Comput. Syst., vol. 101,
+pp. 1122–1129, Dec. 2019.
+[15] M. Yang, T. Zhu, K. Liang, W. Zhou, and R. H. Deng, ‘‘A blockchain-based
+location privacy-preserving crowdsensing system,’’ Future Gener. Comput.
+Syst., vol. 94, pp. 408–418, May 2019.
+[16] Z. Liu and Z. Li, ‘‘A blockchain-based framework of cross-border
+e-commerce supply chain,’’ Int. J. Inf. Manage., vol. 52, Jun. 2020,
+Art. no. 102059.
+[17] G. Baralla, A. Pinna, and G. Corrias, ‘‘Ensure traceability in European food
+supply chain by using a blockchain system,’’ in Proc. IEEE/ACM 2nd Int.
+Workshop Emerg. Trends Softw. Eng. Blockchain (WETSEB), May 2019,
+pp. 40–47.
+[18] W. Yu and S. Huang, ‘‘Traceability of food safety based on block chain
+and RFID technology,’’ in Proc. 11th Int. Symp. Comput. Intell. Design
+(ISCID), vol. 1, Dec. 2018, pp. 339–342.
+[19] F. Tian, ‘‘An agri-food supply chain traceability system for China based
+on RFID & blockchain technology,’’ in Proc. 13th Int. Conf. Service Syst.
+Service Manage. (ICSSSM), Jun. 2016, pp. 1–6.
+[20] A. Vangala, A. K. Das, N. Kumar, and M. Alazab, ‘‘Smart secure sensing
+for IoT-based agriculture: Blockchain perspective,’’ IEEE Sensors J., early
+access, Jul. 27, 2020, doi: 10.1109/JSEN.2020.3012294.
+[21] N. Bore, A. Kinai, P. Waweru, I. Wambugu, J. Mutahi, E. Kemunto,
+R. Bryant, and K. Weldemariam, ‘‘ADW: Blockchain-enabled small-
+scale farm digitization,’’ 2020, arXiv:2003.06862. [Online]. Available:
+http://arxiv.org/abs/2003.06862
+[22] H. B. Li, B. Zhang, L. Zhang, Y. Xue, M. He, and C. Ren, ‘‘A food
+traceability framework for dairy and other low-margin products,’’ IBM
+J. Res. Develop., vol. 60, nos. 5–6, pp. 10.1–10.8, Sep./Nov. 2016.
+[23] Z. De-An, T. Cui-Feng, and W. Xian-Wang, ‘‘Design of traceability system
+for pork safety production based on RFID,’’ in Proc. 2nd Int. Conf. Intell.
+Comput. Technol. Autom., vol. 3, Oct. 2009, pp. 562–565.
+[24] Z. Yiying, R. Yuanlong, L. Fei, S. Jing, and L. Song, ‘‘Research on meat
+food traceability system based on RFID technology,’’ in Proc. IEEE 3rd
+Inf. Technol., Netw., Electron. Autom. Control Conf. (ITNEC), Mar. 2019,
+pp. 2172–2175.
+[25] S. Mondal, K. P. Wijewardena, S. Karuppuswami, N. Kriti, D. Kumar, and
+P. Chahal, ‘‘Blockchain inspired RFID-based information architecture for
+food supply chain,’’ IEEE Internet Things J., vol. 6, no. 3, pp. 5803–5813,
+Jun. 2019.
+[26] F. Tian, ‘‘A supply chain traceability system for food safety based on
+HACCP, blockchain & Internet of Things,’’ in Proc. Int. Conf. Service Syst.
+Service Manage., Jun. 2017, pp. 1–6.
+[27] J. Hao, Y. Sun, and H. Luo, ‘‘A safe and efﬁcient storage scheme based
+on blockchain and IPFS for agricultural products tracking,’’ J. Comput.,
+vol. 29, no. 6, pp. 158–167, 2018.
+[28] Q. Lin, H. Wang, X. Pei, and J. Wang, ‘‘Food safety traceability system
+based on blockchain and EPCIS,’’ IEEE Access, vol. 7, pp. 20698–20707,
+2019.
+[29] I. A. Omar, R. Jayaraman, K. Salah, M. Debe, and M. Omar, ‘‘Enhancing
+vendor managed inventory supply chain operations using blockchain smart
+contracts,’’ IEEE Access, vol. 8, pp. 182704–182719, 2020.
+[30] H. Zhang, E. Deng, H. Zhu, and Z. Cao, ‘‘Smart contract for secure billing
+in ride-hailing service via blockchain,’’ Peer-Peer Netw. Appl., vol. 12,
+no. 5, pp. 1346–1357, Sep. 2019.
+[31] S. Xuan, L. Zheng, I. Chung, W. Wang, D. Man, X. Du, W. Yang,
+and M. Guizani, ‘‘An incentive mechanism for data sharing based on
+blockchain with smart contracts,’’ Comput. Electr. Eng., vol. 83, May 2020,
+Art. no. 106587.
+[32] R. Tso, Z.-Y. Liu, and J.-H. Hsiao, ‘‘Distributed E-voting and E-bidding
+systems based on smart contract,’’ Electronics, vol. 8, no. 4, p. 422,
+Apr. 2019.
+[33] R. Kamath, ‘‘Food traceability on blockchain: Walmart’s pork and mango
+pilots with IBM,’’ J. Brit. Blockchain Assoc., vol. 1, no. 1, pp. 1–12,
+Jul. 2018.
+[34] A. Shahid, A. Almogren, N. Javaid, F. A. Al-Zahrani, M. Zuair, and
+M. Alam, ‘‘Blockchain-based agri-food supply chain: A complete solu-
+tion,’’ IEEE Access, vol. 8, pp. 69230–69243, 2020.
+[35] S. Wang, Y. Zhang, and Y. Zhang, ‘‘A blockchain-based framework for data
+sharing with ﬁne-grained access control in decentralized storage systems,’’
+IEEE Access, vol. 6, pp. 38437–38450, 2018.
+9306
+VOLUME 9, 2021
+
+
+【第12页】
+L. Wang et al.: Smart Contract-Based Agricultural Food Supply Chain Traceability
+[36] S. Zhang, M. Pu, B. Wang, and B. Dong, ‘‘A privacy protection scheme
+of microgrid direct electricity transaction based on consortium blockchain
+and continuous double auction,’’ IEEE Access, vol. 7, pp. 151746–151753,
+2019.
+[37] X. Zhang and D. Wang, ‘‘Adaptive trafﬁc signal control mechanism for
+intelligent transportation based on a consortium blockchain,’’ IEEE Access,
+vol. 7, pp. 97281–97295, 2019.
+[38] Z. Jin, R. Wu, X. Chen, and G. Li, ‘‘Charging guiding strategy for
+electric taxis based on consortium blockchain,’’ IEEE Access, vol. 7,
+pp. 144144–144153, 2019.
+[39] Z. Yu, D. Xue, J. Fan, and C. Guo, ‘‘DNSTSM: DNS cache resources
+trusted sharing model based on consortium blockchain,’’ IEEE Access,
+vol. 8, pp. 13640–13650, 2020.
+[40] W. She, Z.-H. Gu, X.-K. Lyu, Q. Liu, Z. Tian, and W. Liu, ‘‘Homomor-
+phic consortium blockchain for smart home system sensitive data privacy
+preserving,’’ IEEE Access, vol. 7, pp. 62058–62070, 2019.
+[41] X. Zeng, N. Hao, J. Zheng, and X. Xu, ‘‘A consortium blockchain paradigm
+on hyperledger-based peer-to-peer lending system,’’ China Commun.,
+vol. 16, no. 8, pp. 38–50, Aug. 2019.
+[42] Y. Jiang and S. Ding, ‘‘A high performance consensus algorithm for
+consortium blockchain,’’ in Proc. IEEE 4th Int. Conf. Comput. Commun.
+(ICCC), Dec. 2018, pp. 2379–2386.
+LU WANG received the bachelor’s degree from
+the Zhujiang College, South China Agricultural
+University, China, in 2018. She is currently pursu-
+ing the master’s degree with the Zhongkai Univer-
+sity of Agriculture and Engineering. Her current
+research interests include blockchain technology,
+the IoT technology, and traceability, among others.
+LONGQIN XU received the M.S. degree from
+the Faculty of Computer, Guangdong University
+of Technology, in 2006. She is currently a Pro-
+fessor with the College of Information Science
+and Technology, Zhongkai University of Agricul-
+ture and Engineering. Her main research interests
+include intelligent information systems for agri-
+culture, artiﬁcial intelligence, machine learning,
+data mining, and computational intelligence.
+ZHIYING ZHENG received the bachelor’s degree
+from the Guangdong University of Education,
+China, in 2016. She is currently pursuing the
+master’s degree with the Zhongkai University of
+Agriculture and Engineering. Her current research
+interests include natural language processing,
+knowledge graphs, and so on.
+SHUANGYIN LIU received the Ph.D. degree
+from the College of Information and Electri-
+cal Engineering, China Agricultural University,
+in 2014. He is currently a Professor with the
+College of Information Science and Technology,
+Zhongkai University of Agriculture and Engineer-
+ing. His current research interests include intelli-
+gent information systems for agriculture, artiﬁcial
+intelligence, big data, software engineering, and
+computational intelligence.
+XIANGTONG LI received the bachelor’s degree
+from the Hubei University of Science and Technol-
+ogy, China, in 2018. He is currently pursuing the
+master’s degree with the Zhongkai University of
+Agriculture and Engineering. His current research
+interests include deep learning, the IoT technol-
+ogy, artiﬁcial intelligence, and so on.
+LIANG CAO received the M.S. degree in com-
+puter technology engineering from Sun Yat-sen
+University, Guangzhou, China, in 2008. He is cur-
+rently an Engineer with the Zhongkai University
+of Agriculture and Engineering, Guangzhou. His
+research interests include computer technology
+and the Internet of Things technology and appli-
+cations.
+JINGBIN LI received the Ph.D. degree in mechan-
+ical and electronic engineering from China Agri-
+cultural University, in 2013. He is currently a
+Professor and a Ph.D. Supervisor of agricultural
+engineering with the School of Mechanical and
+Electrical Engineering, Shihezi University. His
+research interests include agricultural machinery
+equipment innovation and performance design,
+image information acquisition, and processing.
+CHUANHENG SUN received the Ph.D. degree in
+information technology in agriculture from China
+Agriculture University, Beijing, China, in 2012.
+He is currently a Researcher with the National
+Engineering Research Center for Information
+Technology in Agriculture, Beijing. His research
+interests include food traceability, blockchain
+technology, and the Internet of Things technology
+and applications.
+VOLUME 9, 2021
+9307
+

@@ -1,0 +1,1570 @@
+来源文件：2Interoperable blockchain network for healthcare data using Fabric, Ethereum and IPFS.pdf
+============================================================
+
+【第1页】
+RESEARCH
+Open Access
+© The Author(s) 2025. Open Access  This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International 
+License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate 
+credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. 
+You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party 
+material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material 
+is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted 
+use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit  h t t p : / / c r e a t i v e c o m m o n s . o r g / l i c e n s 
+e s / b y - n c - n d / 4 . 0 /.
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+https://doi.org/10.1007/s44163-025-00564-7
+*Correspondence:
+Anil V Turukmane
+anil.turukmane@vitap.ac.in
+1School of Computer Science and 
+Engineering, VIT-AP University, 
+Vijayawada, AP, India
+Interoperable blockchain network 
+for healthcare data using Fabric, Ethereum 
+and IPFS
+Patan Mushiya Katoon1 and Anil V Turukmane1*
+1 Introduction
+As healthcare transitions to digital platforms, EHRs must be managed efficiently, 
+securely, and with interoperability. Hospitals must preserve sensitive patient informa-
+tion and swiftly access and assess it for medical decision-making upon the adoption of 
+digital technologies [1]. Security protects patient data, while efficiency accelerates infor-
+mation sharing. Interoperability enables healthcare systems and providers to exchange 
+and understand health data irrespective of the platform used. This integrative strategy 
+enhances care coordination, reduces administrative costs, minimizes medical errors, 
+and ensures service continuity [2]. Contemporary healthcare ecosystems necessitate 
+robust, scalable, and interoperable digital health systems to address increasing demands 
+and enhance safety, responsiveness, and efficiency [3].
+Discover Artificial Intelligence
+Abstract
+Electronic Health Records (EHR) is the main core of modern healthcare, but 
+interoperability across different blockchain platforms is a key challenge. This work 
+proposes a cross-chain middleware architecture, which facilitates secure and real-
+time synchronization of EHR data between Hyperledger Fabric (private blockchain) 
+and Ethereum Sepolia Testnet (public blockchain). The framework integrates AES-
+256 encryption and Inter Planetary File System (IPFS) as decentralized storage to 
+enhance patient privacy. To facilitate interoperability across the blockchains the 
+research introduces a smart middleware layer. This layer autonomously monitors 
+the blockchain events, processes encrypted CIDs, enforces real time cross chain 
+consistency and smart contract-based access control. The experimental evaluation 
+shows that proposed framework achieves low synchronization times (< 195 ms), 
+low gas and latency costs, small encryption overhead (< 4–5 KB), robust file storage 
+and retrieval through IPFS. Such positive evaluations with scalable and real-time 
+deployment, sets the foundation of patient centric interoperable healthcare 
+ecosystems.
+Keywords Cross-chain, EHR, Ethereum, Hyperledger fabric, Interoperability and IPFS
+
+
+【第2页】
+Page 2 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+On the similar backgrounds few approaches such as AI-assisted diagnosis [4], UAV-
+assisted healthcare communication [5], and sustainable AI in agriculture and medicine 
+[6] point to the growing desire to combine sophisticated computing with secure data 
+management.
+Traditional centralized systems, although historically utilized in healthcare, face sig-
+nificant challenges that hinder single point of failure, scalability, and efficiency [7]. These 
+systems also pose a major security and privacy risks, as centralized systems accumulate 
+extensive amounts of sensitive data in singular repositories, making them attractive tar-
+gets for cybercriminals. These risks not only compile personal information but also raise 
+concerns over data ownership, censorship, surveillance, and potential manipulation [8, 
+9].
+Blockchain technology provides a decentralized, secure, and transparent framework 
+for tackling challenges in healthcare data management. Blockchain can eliminate data 
+silos, enhance interoperability, strengthen privacy, and reduce the risk of data breaches. 
+Blockchain technology, through smart contracts, can automate operations such as 
+consent management and insurance claims, allowing healthcare providers to securely 
+exchange patient data without reliance on a central authority [10]. The unalterable char-
+acteristics of blockchain ensure that medical records remain secure from tampering, 
+while people gain increased authority over their health information, fostering confidence 
+and involvement [7]. Blockchain technology offers a feasible alternative for creating 
+interoperable, patient-centric healthcare ecosystems that are more efficient, secure, and 
+transparent.
+Nonetheless, despite its potential, most existing blockchain-based healthcare solu-
+tions are limited to specific blockchain platforms. This insular approach hinders the 
+achievement of true interoperability among diverse healthcare companies, leading to 
+fragmented patient information and inefficiencies in care coordination [11]. Without 
+cross-chain communication, healthcare professionals face difficulties in acquiring com-
+plete patient histories, leading to treatment delays and unnecessary testing. Further-
+more, single-platform applications often fail to leverage the unique benefits of various 
+blockchain technologies, such as scalability, privacy features, and consensus mecha-
+nisms. To fully exploit the potential of blockchain in healthcare, there is an increas-
+ing demand for interoperable solutions that can connect diverse blockchain platforms, 
+enabling safe and real-time exchange of health data across multiple organizational and 
+technological obstacles [12].
+Single-chain architectures in healthcare systems face significant limitations, includ-
+ing poor scalability, high costs, and inadequate cross-institutional interoperability [13]. 
+As healthcare transactions and data volumes increase, individual blockchains often 
+face challenges due to the elevated demand, leading to processing delays and network 
+congestion. Increased operational and computational costs exacerbate these problems, 
+especially when all data and smart contracts must be processed on a single platform 
+[14]. Furthermore, incompatible single-chain systems obstruct the sharing of patient 
+data between healthcare organizations, resulting in fragmented medical records and 
+incomplete patient histories. These limitations impede single-chain systems from fully 
+realizing the potential of blockchain’s secure, transparent, and coordinated data-sharing 
+capabilities.
+
+
+【第3页】
+Page 3 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+Interoperability between blockchains, particularly for cross-chain electronic health 
+record sharing, is crucial for enabling seamless transmission of patient data among 
+diverse healthcare providers and regions [15]. Presently, patients often receive treat-
+ment from many institutions using various blockchain systems. Without interoper-
+ability, patient records are fragmented, leading to impediments in continuity of care, 
+medical inaccuracies, and delays in treatment [16]. Cross-chain blockchain solutions 
+provide secure communication, verification, and synchronization of health data, pro-
+viding authorized healthcare practitioners with timely and accurate information [17]. 
+This enhances clinical decision-making, bolsters patient safety, and increases healthcare 
+efficiency. Interoperable blockchain networks can eliminate data silos, creating a more 
+interconnected and patient-centric healthcare ecosystem that fosters improved out-
+comes and increased care coordination globally [18].
+To meet the increasing demands of modern healthcare systems, there is a critical 
+need for secure, scalable, and real-time cross-chain EHR sharing frameworks that pro-
+tect patient privacy while enabling swift and efficient data access [1, 19]. A framework 
+facilitating uninterrupted access to medical records, irrespective of the blockchain plat-
+form, is essential, as patients often receive care from several physicians across various 
+locations and institutions. Traditional single-chain or compartmentalized systems lack 
+essential interoperability, resulting in fragmented data and delayed clinical choices. A 
+robust cross-chain architecture must ensure the confidentiality of sensitive health data, 
+handle significant data volumes, and operate in real-time for important medical scenar-
+ios [20]. Furthermore, these frameworks must prioritize patient security and adhere to 
+stringent regulations such as HIPAA and GDPR while employing advanced encryption 
+techniques [21, 22]. These concepts are crucial for creating an interoperable, patient-
+centered healthcare ecosystem that enables rapid and accurate data sharing, hence 
+enhancing care coordination and overall health outcomes [22].
+This research proposes a comprehensive Cross-Chain EHR Sharing Framework that 
+integrates many advanced technologies to address the critical need for secure, scalable, 
+and efficient healthcare data sharing. A sophisticated middleware synchronization layer 
+orchestrates Hyperledger Fabric, Ethereum Sepolia Testnet, IPFS decentralized storage, 
+and AES encryption.
+Hyperledger Fabric, a permissioned blockchain, guarantees secure and confidential 
+transactions within trustworthy healthcare institutions, safeguarding sensitive health 
+information. The Ethereum Sepolia Testnet, a public blockchain platform, enables insti-
+tutions to safely exchange electronic health records across blockchain systems. IPFS 
+(Inter Planetary File System) ensures the secure distributed storage of extensive health-
+care data files without reliance on centralized servers.
+Sensitive patient data is encrypted using AES during transmission and storage. Finally, 
+a smart middleware synchronization layer ensures blockchain platform compatibility, 
+enabling healthcare providers to share data and synchronize records. This innovative 
+technology overcomes cross-chain EHR sharing technical and operational difficulties 
+and maintains patient data safe, accessible, and compliant with healthcare regulations.
+The organization of the paper is as follows:
+  •
+A Literature review of blockchain-based EHR management and cross-chain 
+interoperability is represented in Sect. 2.
+
+
+【第4页】
+Page 4 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+  •
+A Proposed Architecture for Electronic Health Record (EHR) Sync and Transfer 
+Across Chains in Sect. 3.
+  •
+Section  4 details the experimental setup, performance metrics, and analysis of 
+results.
+The paper is concluded in Sect. 5 by presenting essential outcomes from research and 
+proposing future developments for improvement.
+2 Literature review
+Multiple research projects have investigated the utilization of blockchain technology in 
+the management of Electronic Health Records (EHR), emphasizing data quality, prov-
+enance, and access control [1–3]. These initiatives generally utilize blockchain’s immu-
+table ledger to preserve a verifiable history of medical records and implement safe access 
+protocols for approved healthcare entities. These solutions seek to mitigate the dangers 
+of tampering and illegal data usage inherent in traditional centralized systems by decen-
+tralizing control.
+Simultaneously, scientists have developed machine learning systems of fraud detec-
+tion [23, 24] and biometric-based security [25] that enhance the blockchain by increas-
+ing trust and identity control in online ecosystems.
+A common approach is employing Ethereum-based technologies for the management 
+of electronic health records. Ethereum’s support for smart contracts enables automated 
+consent management and dynamic access control [26]. Nevertheless, Ethereum’s reli-
+ance on Proof-of-Work (PoW) or even Proof-of-Stake (PoS) consensus mechanisms on 
+public networks leads to increased gas fees and limited scalability, making it inappropri-
+ate for real-time healthcare environments that necessitate low-latency access to patient 
+data [27, 28].
+Beyond the performance costs, Ethereum’s security model is based on economic 
+incentives between untrusted validators using cryptographic PoS mechanisms to 
+ensure openness. But it also has variable transaction fees and probabilistic finality. This 
+decentralized public model is very different from permissioned blockchains such as 
+Hyperledger Fabric that rely on certificate-based identity and modular consensus proto-
+cols (such as Raft or Kafka). In Fabric, access to the security is controlled through access 
+control lists and endorsement policies instead of anonymous validators, which allows for 
+deterministic execution. It facilitates very high throughput in trusted consortium net-
+works. However, lack of interoperability with public blockchains limits to extend trust 
+beyond consortium members.
+In order to directly compare proposed framework to the existing systems major differ-
+ences are presented in Table 1. In contrast to single-chain solutions, like FHIRChain and 
+MedRec, our solution offers bi-directional cross-Chain interoperability (Fabric ↔ Ethe-
+reum), privacy with AES-256 using IPFS, and sub-500 ms end-to-end latency appropri-
+ate. There was also less public-chain gas exposure because the writes are offloaded to 
+Fabric but the reads remain on Ethereum. Such conformity to HIPAA/GDPR standards 
+and real-time performance goals addresses gaps of previous systems.
+Conversely, Hyperledger Fabric, a permissioned blockchain platform, has been utilized 
+in numerous research and deployments to facilitate private healthcare networks [39]. 
+Fabric provides high throughput, a modular design, and permissioned access control—
+attributes that are ideal for overseeing sensitive health information among a consortium 
+
+
+【第5页】
+Page 5 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+System
+Block-
+chain 
+scope
+Interoper-
+ability
+Privacy 
+method
+Stor-
+age
+Latency 
+(ms)
+Gas / 
+Cost
+Auditability Com-
+pliance 
+align-
+ment
+Huang et 
+al., 2024 
+(Cluster 
+Comput-
+ing) [30]
+Hy-
+perledger 
+Fabric + IPFS
+Within Fabric 
+consortia; no 
+public chain 
+link
+Proxy 
+re-encryption
+Off-
+chain 
+(IPFS)
+N/R
+N/R
+Limited 
+(consortium 
+only)
+Partial 
+(HIPAA/
+GDPR 
+not dis-
+cussed)
+Guo et 
+al., 2024 
+(Applied 
+Sciences) 
+[31]
+Hy-
+perledger 
+Fabric + IPFS
+Dual-channel 
+within Fabric
+AES + Proxy 
+re-encryption
+Off-
+chain 
+(IPFS)
+N/R
+N/R
+Limited to 
+Fabric
+Partial
+Kumari et 
+al., 2024 
+(Computer 
+Networks – 
+HealthRec-
+Chain) 
+[32]
+Ethere-
+um + IPFS
+Single-chain 
+(Ethereum)
+Java GPG 
+encryption
+Off-
+chain 
+(IPFS)
+N/R
+High 
+(Ethe-
+reum 
+gas 
+fees 
+apply)
+Yes 
+(Ethereum)
+Partial
+Sun et 
+al., 2023 
+(MedRSS) 
+[33]
+Hy-
+perledger 
+Fabric + IPFS
+Fabric only (pri-
+vate networks)
+AES + ECC
+Off-
+chain 
+(IPFS)
+N/R
+N/R
+Limited 
+(consortium 
+only)
+Partial
+Azbeg et 
+al., 2022 
+(Block-
+MedCare) 
+[34]
+Ethereum 
+(PoA) + IPFS
+Single-chain
+Smart 
+contracts
+Off-
+chain 
+(IPFS)
+N/R
+Mod-
+erate 
+(PoA 
+cheap-
+er 
+than 
+PoW)
+Yes (Ethe-
+reum logs)
+Partial
+Abdelgalil, 
+2023 
+(Health-
+Block) [35]
+Hy-
+perledger 
+Fabric + Hy-
+perledger 
+Indy
+Fabric + Indy 
+federation
+Patient-con-
+trolled identity 
+mgmt.
+Off-
+chain 
+(IPFS)
+N/R
+N/R
+Limited to 
+consortia
+Partial
+Hashim et 
+al., 2022 
+(Federated 
+Fabric) 
+[36]
+Mul-
+tiple Fabric 
+networks
+Inter-Fabric 
+federation
+Transaction-
+level access 
+control
+Fab-
+ric-
+only
+Commit 
+time ~ 2s 
+(reported)
+N/R
+Limited
+Partial
+Lan et 
+al., 2021 
+(Trust-
+Cross) [37]
+Multi-
+platform 
+(trusted 
+hardware 
+bridge)
+Cross-chain via 
+TEEs
+TEE-based 
+confidential 
+computing
+Off-
+chain; 
+cross-
+chain
+N/R
+N/R
+Yes (TEE 
+logs + block-
+chain audit)
+Partial
+Zhang 
+et al., 
+FHIRChain 
+(2018) [38]
+Single-
+chain 
+(Ethereum)
+HL7 FHIR–
+aligned provid-
+er-to-provider 
+sharing; 
+smart-contract 
+mediated 
+identities
+Public-key 
+signatures 
+& on-chain 
+references; 
+data shared 
+off-chain
+Off-
+chain 
+clini-
+cal 
+data; 
+on-
+chain 
+point-
+ers/
+trans-
+ac-
+tions
+N/R
+Ac-
+knowl-
+edges 
+pub-
+lic-
+chain 
+costs 
+and 
+scal-
+ability 
+limits
+Yes (public 
+chain logs/
+traceability)
+Aligns 
+with 
+ONC in-
+terop-
+erability 
+road-
+map; 
+HIPAA 
+not 
+claimed 
+as 
+fulfilled 
+in-
+paper.
+Table 1 Comparative analysis of prior healthcare blockchain systems and the proposed cross-chain 
+framework
+
+
+【第6页】
+Page 6 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+of trusted entities [40]. Prominent implementations underscore Fabric’s proficiency in 
+effectively managing access and transaction velocity. Nonetheless, its absence of com-
+patibility with public or alternative blockchain platforms limits its potential for exten-
+sive, cross-institutional data sharing among geographically and technologically varied 
+healthcare institutions [41].
+IPFS (Inter Planetary File System) has being examined to enhance blockchain storage. 
+The on-chain storing of large health data files is costly and inefficient [42]. Off-chain data 
+is decentralized in IPFS, whereas the blockchain secures file hashes and regulates access. 
+This design alleviates the on-chain storage issue; however, certain studies ([Kumari et 
+al.], [Sun et al.]) did not adequately encrypt or protect key management procedures for 
+off-chain data, thereby exposing sensitive patient information to future breaches [43].
+MedRec [37] and FHIRChain’s [38] were earlier blockchain based healthcare systems 
+that offered the basic solutions to secure health data exchange. FHIRChain uses Ethe-
+reum smart contracts and HL7 FHIR compliance to provider-to-provider exchange, but 
+is limited to single-chain environments with no cross-chain interoperability. Likewise, 
+Ethereum-based access control and off-chain data storage are used in MedRec, which 
+is limited to scalability and gas costs limitations. Both systems emphasize the potential 
+of blockchain in healthcare but do not have the possibility to integrate several hetero-
+geneous blockchain platforms. Conversely, the proposed framework offers secure and 
+bi-directional synchronization between Ethereum and Hyperledger Fabric, AES-256 
+encryption, and IPFS decentralized storage- thus directly addressing the interoperability, 
+privacy, and scalability limitations of earlier systems.
+System
+Block-
+chain 
+scope
+Interoper-
+ability
+Privacy 
+method
+Stor-
+age
+Latency 
+(ms)
+Gas / 
+Cost
+Auditability Com-
+pliance 
+align-
+ment
+Azaria, A., 
+Ekblaw, A., 
+Vieira, T., & 
+Lippman, 
+A. MedRec 
+(2016) [39]
+Single-
+chain 
+(Ethereum)
+Patient–provid-
+er relationship 
+& access con-
+trol via smart 
+contracts
+Access control 
+via smart 
+contracts; data 
+kept at provid-
+ers (off-chain)
+Off-
+chain 
+EMR 
+with 
+on-
+chain 
+per-
+mis-
+sions/
+index
+N/R
+Proto-
+type 
+on 
+Ethe-
+reum; 
+recog-
+nizes 
+opera-
+tional 
+costs 
+on 
+public 
+chain
+Yes (public 
+audit trail 
+of access 
+permissions)
+Com-
+pliance 
+dis-
+cussed 
+con-
+ceptu-
+ally; no 
+formal 
+HIPAA/
+GDPR 
+claim.
+Proposed 
+Frame-
+work (This 
+paper)
+Cross-
+chain: Hy-
+perledger 
+Fabric ↔ 
+Ethereum 
+(Sepo-
+lia) via 
+middleware
+Bi-directional 
+sync across 
+permis-
+sioned + public 
+chains; sup-
+ports real-time 
+exchange
+AES-256 
+encryption; 
+permissioned 
+identities 
+(Fabric 
+X.509) + smart-
+contract ACLs; 
+encrypted CID 
+only on-chain
+IPFS 
+for 
+en-
+crypt-
+ed 
+files; 
+on-
+chain 
+CIDs
+Fabric: 
+Store ≈ 49, 
+Fetch ≈ 30; 
+Middle-
+ware 
+sync ≈ 195 
+(all ≪ 
+500 ms 
+threshold)
+40–
+45% 
+gas 
+effi-
+ciency 
+vs. 
+Ethe-
+reum-
+only; 
+pre-
+dict-
+able 
+costs
+Yes (public 
+verifiability 
+on Ethere-
+um + private 
+controls on 
+Fabric)
+Yes 
+(design 
+aligns 
+with 
+HIPAA/
+GDPR 
+princi-
+ples; no 
+plain-
+text on-
+chain)
+Table 1 (continued)
+ 
+
+
+【第7页】
+Page 7 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+Research on cross-chain technologies, particularly in token transfers and decentral-
+ized finance, has proliferated swiftly [44, 45]. Surveys and interoperability frameworks 
+such as Cosmos, Polkadot, and blockchain bridges focus digital asset transfer mecha-
+nisms. Nevertheless, the exchange of sensitive data, particularly in healthcare, where 
+privacy and real-time access are paramount, often overlooked [46].
+Despite significant advancements, certain essential research shortcomings remain. 
+Existing systems currently lack effective and real-time cross-chain synchronization 
+mechanisms suitable for the latency-sensitive demands of EHR access [47]. Secondly, 
+privacy-preserving encryption techniques are not consistently integrated into block-
+chain-IPFS solutions, leaving off-chain data vulnerable to exposure [48]. Third, there 
+is an absence of integrated frameworks that combine the benefits of both Hyperledger 
+Fabric and Ethereum, while also employing efficient decentralized storage (e.g., IPFS) 
+and cryptographic protections such as AES [49, 50]. These inadequacies underscore the 
+imperative for a unified, secure, and interoperable cross-chain framework tailored for 
+healthcare data exchange.
+2.1 Our contribution
+This work is novel in cross-chain EHR sharing framework, which both accomplishes 
+HIPAA/GDPR compliance and public auditability by combining the permissioned Role 
+Based Access (RBAC) model of Fabric with the transparency of the Ethereum platform, 
+and coordinates, via an event-driven middleware layer, with AES-256 + IPFS.
+So, there are basic differences in consensus and security i.e. Ethereum: global trans-
+parency and verifiability but at the cost of latency and throughput; Fabric: controlled, 
+efficient and secure private execution but with limitations of interoperability. These dif-
+ferences are sufficient motivation for our hybrid middleware solution. In essence, pro-
+posed framework is designed to overcome the limitations of single-platform systems by 
+simultaneously offering privacy-preserving permissioned data processing and public 
+verifiability.
+This study tackles the notable shortcomings in existing literature by presenting a low-
+latency, privacy-preserving cross-chain framework for the exchange of Electronic Health 
+Records (EHR). The design enables the secure and efficient transfer of patient data 
+across various blockchain platforms, including Hyperledger Fabric and the Ethereum 
+Sepolia Testnet. The application of Advanced Encryption Standard (AES) encryption 
+ensures the confidentiality and security of off-chain health data stored in the Inter Plan-
+etary File System (IPFS) against unauthorized access. The framework employs bidirec-
+tional synchronization mechanisms to facilitate seamless data transfer between the two 
+blockchain networks, enabling real-time interoperability while preserving the advan-
+tages of each platform—Fabric’s permissioned access and throughput, and Ethereum’s 
+public verifiability and smart contract capabilities. This comprehensive technique not 
+only mitigates the limitations of isolated single-chain systems but also enables scalable, 
+secure, and privacy-compliant electronic health record interchange across institutional 
+and technological boundaries.
+Such an integration of Fabric, Ethereum, and IPFS overcomes the shortcomings of 
+earlier single-chain systems. Fabric keeps authorized, low latency transactions appro-
+priate to clinical operations, and Ethereum offers public verifiability and transparency. 
+IPFS is distributed storage of massive EHR files, which does not overload a blockchain, 
+
+
+【第8页】
+Page 8 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+and preserves confidentiality by using AES-256 encryption. This combination directly 
+overcomes the high gas costs and latency of Ethereum-only systems and interoperability 
+limitations of Fabric-only systems thereby providing a balanced and scalable healthcare 
+interoperability solution.
+3 Proposed methodology
+The proposed research implements a cross-chain structure which enables encrypted 
+EHRs to share and synchronize between multiple blockchain networks effortlessly. 
+The system leverages both Hyperledger Fabric and Ethereum Sepolia Testnet networks 
+which communicate through an advanced integration middleware combined with 
+decentralized file storage system i.e. Inter Planetary File System (IPFS). The design pre-
+serves privacy and availability combined with data consistency by using permissioned 
+and public blockchains.
+The EHR encryption process takes place through the user or doctor before an EHR is 
+uploaded to IPFS. IPFS creates and returns a Content Identifier (CID) upon completing 
+an encrypted file upload successfully. This CID enables secure reference to the stored file 
+data. The CID functions as the central component for blockchain management although 
+it never exposes medical information directly.
+The system design features a smart middleware layer which tracks events broadcasts 
+from blockchain-based smart contracts present on both Ethereum and Fabric networks. 
+When the middleware detects events such as StoreEHR or FetchEHR, it initiates equiv-
+alent transactions on both chains for synchronized operation. EHR metadata changes 
+affecting one blockchain create near-real-time duplicates on the other blockchain 
+because of the implemented cross-chain interoperability.
+The system architecture shown in Fig.  1 presents individual descriptions of all its 
+defined elements.
+Fig. 1 Proposed architecture for cross-chain EHR sync and transfer
+ 
+
+
+【第9页】
+Page 9 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+4 Components of the proposed system
+4.1 Doctor/user
+Doctors or users begin the process by making EHRs encryption at the local level shortly 
+before storage. The encryption method protects patient-sensitive information before 
+any external network receives it. The system makes blockchain complexities disappear 
+through its feature of providing a straightforward user interface.
+Before storing any EHR, it is encrypted with AES-256 encryption. Even if CID is 
+exposed, the underlying EHR data will remain unreadable without the decryption key. 
+Encryption provides a crucial additional layer of data privacy beyond what blockchain 
+immutability offers.
+4.2 IPFS network
+The IPFS network stores encrypted EHR files with distributed and secure features 
+including feature of tamper-resistance. The IPFS network uses CIDs as cryptographic 
+hashes to refer to stored files. The CID serves as the only blockchain-stored data point 
+because it protects private data by keeping it separate from blockchain storage.
+The permanence of medical files in IPFS is guaranteed in the long term by pinning 
+services (pinata gateway in our case) that avoid collection of garbage. In institutional 
+deployments of production, it can be integrated with institutional clusters or incen-
+tive-based systems including Filecoin to ensure that encrypted EHRs are durable and 
+available.
+4.3 Content identifier (CID)
+The CID is obtained through IPFS which is used to represent the encrypted EHR. This 
+pointer maintains a permanent status as an effective reference that enables quick data 
+access without revealing the actual data contents. The lightweight nature of CIDs makes 
+them suitable for blockchain transactions which in turn reduces the storage expenses on 
+a blockchain.
+4.4 Hyperledger fabric chaincode
+The Fabric network deploys a specifically developed chaincode that handles two core 
+operations.
+  •
+StoreEHR: The StoreEHR chaincode records the Fabric ledger with the CID and 
+simultaneously generates an external notification event.
+  •
+FetchEHR: The FetchEHR chaincode retrieves EHR CIDs from Fabric ledger. This 
+retrieval is based on access permission. The chaincode also triggers specific events 
+upon permission approval.
+Only authorized healthcare organizations and users can have access to EHR as Fabric 
+network is permissioned blockchain.
+4.5 Fabric ledger
+Fabric ledger maintains permanent storage of EHR-related metadata that includes both 
+CID and access control data. The private healthcare consortium network uses this sys-
+tem to keep all transaction data secure while enabling version control. Hyperledger Fab-
+ric network adopted Raft consensus to order. It is a protocol that is crash fault tolerant 
+
+
+【第10页】
+Page 10 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+and delivers deterministic finality. Validation is also enforced by the endorsement poli-
+cies, and collectively it helps to provide Byzantine-resilient consensus suitable to per-
+missioned healthcare networks.
+4.5.1 Ethereum smart contract (Sepolia Testnet)
+A smart contract based on the Ethereum Sepolia Testnet functions identically to the 
+Fabric Chaincode. It supports:
+  •
+StoreEHR: The system accepts and stores the CID with basic metadata through 
+StoreEHR smart contract.
+  •
+FetchEHR: The FetchEHR smart contract acts as the interface for user access 
+requests and emission of post-validation events. Using this smart contract EHR is 
+fetched.
+The system strengthens transparency between multiple stakeholders through its public 
+blockchain deployment which provides decentralized trust features.
+4.6 Ethereum ledger
+Ethereum ledger ensures availability and immutability of data by storing CID mappings 
+publicly. Even though the CIDs are public on the ledger, patient data confidentiality is 
+ensured as direct exposure of sensitive information is prevented. Ethernet Sepolia Test-
+net was employed in our implementation and functions under Proof-of-Stake (PoS) con-
+sensus. This allows quicker block finality as well as reduced energy consumption than 
+Proof-of-Work and maintains public verifiability.
+4.7 Middleware layer
+This layer performs orchestration of real time with bidirectional EHR synchronization 
+between Fabric and Ethereum. It is also responsible for four core tasks:
+  •
+Monitors chaincode events such as StoreEHR and FetchEHR on Fabric.
+  •
+It monitors smart contract events on Ethereum for similar operations.
+  •
+On detecting an event on one blockchain, it triggers the matching transaction on 
+the other blockchain so that the CID updates and retrievals stay in sync on both 
+networks.
+  •
+It handles retry logic to do idempotent operations in case of transient failures or 
+duplicate event emissions.
+Extensibility is supported by the middleware layer with additional blockchains or health-
+care systems able to be added.
+In contrast to oracle-based or third-party bridging systems, cross-chain synchroniza-
+tion of the proposed framework is accomplished by a custom of off-chain middleware. 
+The middleware is subscribed to events on both chaincode of Fabric through gRPC and 
+Ethereum smart contract events through Web3.js/ethers.js. Then middleware constructs 
+and submits equivalent transactions on the other chain. The design does not depend 
+on external oracles or sidechains and thus supports lightweight, real-time and secure 
+interoperability that is relevant to the healthcare systems.
+
+
+【第11页】
+Page 11 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+4.8 Access control mechanism
+At multiple layers access control is enforced.
+  •
+Organization level access granting policies are enforced by Fabric Chaincode.
+  •
+If Ethereum Smart Contracts are used, then Ethereum allows visibility of CID to only 
+authorized users.
+  •
+The middleware layer also makes sure that access permissions are synchronized 
+between the two blockchains.
+Users can only retrieve any EHR CID from either Fabric or Ethereum if they request, 
+and gain explicit access granted to do so. Smart contracts tend to reject unauthorized 
+access attempts automatically.
+4.9 Pseudocodes
+The EHR_Manager chaincode and smart contract were used in the experimentation of 
+the proposed approach. Pseudocodes of the same are as follows.
+4.10 Pseudocode for hyperledger fabric chaincode (EHR manager)
+
+
+【第12页】
+Page 12 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+4.11 Pseudocode for ethereum smart contract (EHR manager)
+4.12 Synchronization workflow
+In facilitating the secure, decentralized, and cross chain EHR exchange, the proposed 
+system uses a orchestrated mechanism used to synchronize the Hyperledger Fabric, 
+Ethereum (Sepolia Testnet), and the IPFS network. As far as the structure of this syn-
+chronization workflow is concerned, its primary objective is that the operations of EHR 
+storing, accessing and retrieving are actually placed on both blockchain networks con-
+sistently but meanwhile ensuring the integrity, confidentiality, and interoperability of the 
+health care data.
+First a user-side function undertaken, that of AES to encrypt the EHR file containing 
+sensitive medical information. Once encrypted, the file is uploaded to the IPFS network 
+where a unique Content Identifier (CID) for it is created. Once this CID is sent to the 
+
+
+【第13页】
+Page 13 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+Cross Chain Middleware, it will act as a secure reference pointer and is recorded on Fab-
+ric and Ethereum blockchains synchronously along with a series of coordinated opera-
+tions by the Cross Chain Middleware.
+Similarly, access permissions for the EHR are also managed and synchronized on both 
+blockchain networks. It also empowers users to grant access dynamically, making autho-
+rized entities in other networks to retrieve the encrypted EHRs from IPFS without any 
+trouble. In terms of the decryption and final retrieval process, it is entirely user-centric 
+and strictly data private.
+In the Fig. 2, the detailed briefing of synchronization workflow across all the compo-
+nents, EHR encryption and storage, permission granting and secure retrieval.
+Step 1: When the user, either a doctor or a patient, wants to encrypt an EHR file, it 
+locally encrypts the file with the AES encryption mechanism to ensure that the data will 
+be confidential. Through a secure interface, the user uploads the encrypted EHR file to 
+the Cross Chain Middleware. First, this encrypted file is uploaded by the middleware 
+to the IPFS decentralized storage and obtains a CID that points to the file in the IPFS 
+network.
+Step 2: When the CID acquired from IPFS is ready, the middleware transmits a trans-
+action on the blockchain. It triggers StoreEHR chaincode on Hyperledger Fabric and 
+passes the CID as a parameter. The Fabric ledger securely makes the CID a part of some 
+metadata, such as timestamps or the owner identity. Immediately after successfully stor-
+age, the Fabric Chaincode emits a StoreEHR event indicating that a new encrypted EHR 
+record has been committed to the ledger.
+Fig. 2 Sequence diagram showing the order of operations, including encryption at the User end, IPFS storage, 
+Fabric/Ethereum synchronization via Middleware, and AES decryption for final retrieval
+ 
+
+
+【第14页】
+Page 14 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+Step 3: The Cross-Chain Middleware listens for this StoreEHR event in real-time. The 
+event is captured by the middleware which invokes the storeCID function on the Ethe-
+reum Smart Contract to sync update on other chains. Cross chain redundancy and con-
+sistency of the EHR pointer is achieved by storing the same CID on Ethereum.
+Step 4: The user initiates requests in the middleware when another authorized indi-
+vidual or healthcare provider wishes to access EHR. The GrantAccess function of the 
+Hyperledger Fabric Chaincode is invoked with the middleware, causing an update of the 
+access control records to allow permissions to be awarded solely to certain user identi-
+ties. Once the grant operation has done its work, Fabric will emit a GrantAccess event, 
+advertising to external systems the permission change that has occurred. The same oper-
+ation is performed to grant access on the Ethereum blockchain as well.
+Step 5: The middleware detects the GrantAccess event and immediately synchronizes 
+this permission information by calling the grantAccess function to the Ethereum Smart 
+Contract. This guarantees in a fault tolerant, tamper proof way, that Fabric and Ethe-
+reum ledgers have access to synchronized access control states.
+Step 6: The user request to fetch EHR is routed through the middleware to the Fabric 
+Chaincode. The permissions stored are then used to execute access control verification. 
+The chaincode returns the corresponding CID from the encrypted EHR hosted in IPFS 
+(IPFS Address) if the requester has enough access rights.
+Step 7: Once the CID is obtained, the middleware will query the IPFS network to 
+retrieve the encrypted EHR file. A secure delivery of the encrypted file back to the autho-
+rized user through the middleware is made. To receive the encrypted EHR, the user uses 
+the AES decryption key to locally decrypt the data, recovering the original EHR in order 
+to consult, diagnose, or treat using it.
+Throughout the entire workflow cross-Chain Middleware ensures that Hyperledger 
+Fabric, Ethereum, and IPFS are synchronized, event handled, permission replicated, and 
+data retrieval. This synchronization maintains a secure, transparent, and interoperable 
+decentralized EHR management.
+4.13 Experimentation and analysis
+A robust experimental setup was established to make sure that a comprehensive evalu-
+ation of the proposed cross chain EHR sharing framework is done. Proposed approach 
+is implemented into two different blockchain platforms i.e. Ethereum (Sepolia Testnet) 
+and Hyperledger Fabric v2.5 with the help of a lightweight Node.js based middleware. 
+Symmetric encryption using AES-256 was used for securing EHR data and decentral-
+ized storage using IPFS was added into the setup. Hardware and software environment 
+was picked to closely reflect the realistic deployment environment, as well as truly evalu-
+ate the performance metrics. In Table 2, the complete system configuration is detailed.
+5 Implementation details
+To implement the proposed Cross-Chain EHR Sharing System, a multi component 
+architecture is followed which includes Ethereum Smart Contracts, Hyperledger Fabric 
+Chaincode, Node.js based Middleware, and IPFS decentralized storage. Each of the com-
+ponents were designed with a particular focus on lightweight design, modular interac-
+tions, secure data transmission, and the User’s ability to interact with.
+The system includes the following key elements.
+
+
+【第15页】
+Page 15 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+  •
+Ethereum Smart Contract: A Solidity-based contract deployed on the Sepolia 
+Testnet, responsible for recording metadata (CIDs) and controlling access 
+permissions using a basic access control list (ACL).
+  •
+Hyperledger Fabric Chaincode: A Go based chaincode deployed on the 
+Hyperledger Fabric v2.5 to read or write encrypted EHR CIDs, verify access 
+permissions, and emit chaincode events when Encrypted EHR CIDs are accessed or 
+written to.
+  •
+Node.js based Cross-Chain Middleware: For listening to both Ethereum and 
+Fabric networks for specific transaction events, the middleware is developed to 
+synchronize EHR between chains in the near real time. An AES-256 encryption and 
+IPFS integration modules were integrated for secure storage and retrieval.
+As a result, the IPFS Storage Layer was used for uploading encrypted patient files using 
+AES-256. The message sent is broken into pieces and stored on block chains only for the 
+resulting CID (Content Identifier) to avoid light and privacy free transactions.
+  •
+Security Mechanisms: (End-to-end encryption (AES-256), certificate-based access 
+control (X.509 identities for Fabric, account level access for Ethereum), event driven 
+synchronization to ensure integrity, confidentiality, and reliability of the system.
+This research is implemented and validated with full workflow by having two event lis-
+teners standing up Fabric and Ethereum network. Seamless cross chain communication 
+and real time synchronization of encrypted EHR references (CIDs) are realized in the 
+system using an off-chain middleware layer.
+6 Results
+6.1 StoreEHR invoke time & FetchEHR query time
+StoreEHR Invoke Time metric is to measure the time required to submit an EHR record 
+(CID) to the Hyperledger Fabric ledger. It includes the time required to Proposal cre-
+ation, endorsements, and committing the transactions to the block. It points to the 
+speed and efficiency of data storage of a patient in a private block of blockchain. A low 
+invoke time means that climate control healthcare providers will experience minimal 
+latency when adding new EHRs. Fabric is shown to respond responsively to these real-
+world medical record updates.
+FetchEHR Query Time is the time to get an existing EHR CID from Fabric ledger 
+on demand when a user requests access to it. It consists of nothing but reading (query 
+Table 2 System configuration
+Parameter
+Description
+Blockchain Networks
+Ethereum (Sepolia Testnet, PoS) 
+Hyperledger Fabric v2.5 (Two Organizations, Single Channel)
+Middleware
+Node.js v18, Fabric SDK (fabric-network), ethers.js
+Storage
+IPFS via Pinata Cloud Gateway
+Smart Contracts
+Solidity (Ethereum) 
+Go Chaincode (Fabric)
+Encryption Mechanism
+AES-256 symmetric encryption for EHR files
+Identity Management
+X.509 certificates (Fabric Wallet) and Ethereum Wallets
+Hardware Setup
+Ubuntu 22.04 LTS, 16 GB RAM, Intel Core i7-12700 CPU, 512 GB SSD
+Communication Channels
+ Infura API for Ethereum interaction 
+ gRPC protocol for Fabric peer communication
+Development Tools
+Visual Studio Code, Hardhat, Docker, Docker Compose
+
+
+【第16页】
+Page 16 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+endorsement). It is crucial for doctors and hospitals in emergency patient care that they 
+can get information quickly. It shows how quickly Fabric can respond to the legitimate 
+EHR access. It guarantees real-time health record availability inside the private network.
+StoreEHR and FetchEHR performance with respect to time is represented in Fig. 3.
+The 10 iterations of the Hyperledger Fabric blockchain is compared on the StoreEHR 
+invoke time to the FetchEHR query time. All of these operations are essential for the effi-
+cient control of EHRs. It is clearly observed in the Fig. 3, that the StoreEHR invoke time 
+is higher consistently than the FetchEHR query time. Store operations are writing data 
+to the ledger, validating, endorsement policy, and world state updates, hence the slight 
+increase in the latency is observed. In general, the StoreEHR invoke times are within 
+45ms–53ms range, with slight fluctuations mainly due to the delays in the underlying 
+network and endorsement validation. On the other hand, the FetchEHR query times are 
+consistently faster, having very small amount range of 28 ms to 32 ms. FetchEHR is a 
+simple read operation, without endorsement, no world state update involved.
+Key observations:
+  •
+Average StoreEHR Time: Around 49 ms.
+  •
+Average FetchEHR Time: Around 30 ms.
+  •
+18–20 ms faster for FetchEHR than StoreEHR.
+The standard deviation across 10 iteration runs was 2.6 ms for StoreEHR and 1.5 ms for 
+FetchEHR - demonstrating stable and predictable performance with low performance 
+variance.
+Fabric’s consistency and deterministic execution are shown in both operations with 
+minimal deviation across multiple iterations and good stability. Consensus slightly 
+increases the write intensive operation (StoreEHR) but is still highly acceptable and has 
+a low latency range for real world EHR systems. FetchEHR read operations are very fast 
+and predictable and are the best choice for use by healthcare providers and patients 
+looking to quickly retrieve information. The StoreEHR and FetchEHR logics using Fab-
+ric are over 95% faster in latency than Ethereum-only operations on the Sepolia testnet, 
+which operate at an average of over 2100 ms to confirm a transaction. So, with these 
+Fig. 3 Comparative invoke and query times of hyperledger fabric
+ 
+
+
+【第17页】
+Page 17 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+results Hyperledger Fabric has confirmed as a good solution to support high throughput 
+EHR systems with its fast storage and retrieval speed to provide real time interoperabil-
+ity in a permissioned healthcare blockchain ecosystem.
+6.2 StoreEHR & FetchEHR gas consumption (Ethereum)
+StoreEHR Gas measures the gas that’s needed to record an EHR CID to the Ethereum 
+Smart Contract. Thus, this represents the transaction’s cost in public Ethereum net-
+works. This is because since Ethereum charges real fees based on gas, optimizing this 
+makes the system chargeable. The gas statements also indicate that better smart contract 
+design and efficient CID recording are associated with lower gas.
+FetchEHR Gas measures what is the gas needed to read (call view function) on Ethe-
+reum Smart Contract. Writes, on the other hand, require much more gas than reading 
+EHR. It makes sure fetching medical records across chains is low cost and scalable. This 
+is important when there are multiple stakeholders (the hospitals, insurance companies) 
+that need to validate data often.
+The gas consumption by StoreEHR & FetchEHR is represented in Fig. 4.
+Comparing gas consumption for StoreEHR vs. FetchEHR transactions in Fig. 4 shows 
+that these are quite dissimilar operations in terms of computational demands. StoreEHR 
+would consume more gas (about 1410000 Wei to 1430000 Wei) than FetchEHR (about 
+980000 Wei to 1020000 Wei).
+StoreEHR involves the creation of new CID (Content Identifier, or more colloquially 
+referred to as a file name) and writing it onto the Ethereum blockchain. This is a state 
+changing transaction and hence naturally more computationally and storage expen-
+sive. On the other hand, FetchEHR is a read only operation. Since reading data from the 
+blockchain does not modify the state, it is inherently cheaper and thus less gas.
+Although gas usage through the iterations varied slightly, the deployed smart contract 
+logic proved largely predictable and efficient, keeping the two operations more or less 
+consistent and stable.
+Key Observations:
+Fig. 4 Comparatives of gas consumption by StoreEHR & FetchEHR
+ 
+
+
+【第18页】
+Page 18 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+  •
+Average StoreEHR Gas Usage ≈ 1,420,000 Wei.
+  •
+Average FetchEHR Gas Usage ≈ 1,000,000 Wei.
+  •
+StoreEHR consistently used about 40–45% more gas than FetchEHR.
+The standard deviation of gas used in each run was small (~ 22,000 Wei for StoreEHR 
+and ~ 18,000 wei for FetchEHR), indicating smart contracts are running predictably and 
+efficiently.
+Smart contracts also show no signs of jaw dropping spikes or erratic behavior which 
+shows they do smart contracts well optimized for gas efficiency. Whenever only Ethe-
+reum is used for the metadata storage, it is repeated with gas charges on all operations. 
+Whereas the hybrid implementation pushes the metadata storage onto Fabric and only 
+synchronises references to Ethereum. The design leads to a gas efficiency of 40–45%, 
+which indicates that the proposed framework is cost advantageous. The proposed mid-
+dleware system and Ethereum Smart Contracts are working well and consistently to 
+store as well as fetch the data from the EHR. Due to the presumed reliability, the solu-
+tion can be deployed in the real world with predictable gas costs.
+6.3 Middleware sync time
+Time taken by Middleware to receive, detect and push into Ethereum a Fabric Event or 
+vice versa is Sync Time. It includes the time required for event listening, extraction of 
+CID, and submission of Ethereum transaction (or transaction commit at Hyperledger). 
+It defines the speed level of cross chain synchronization. The lower the sync time, the 
+sooner it would get propagated to Fabric and the Ethereum network as real time EHR. 
+It ensures the consistency of patient data in Fabric and Ethereum chains. Middleware 
+synch time for this experimentation is shown in Fig. 5.
+Over the 10 iterations, the Middleware Sync Time variation is seen to be quite regu-
+lar, with values of around 200 ms being used. As this large amount of variance is caused 
+by the low variance, it can be said that synchronization is highly stable even under the 
+Fig. 5 Middleware sync time
+ 
+
+
+【第19页】
+Page 19 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+influence of such external variables as network fluctuations (as this is a public Testnet of 
+the Sepolia Ethereum).
+Key Observations:
+  •
+The average synchronization time is around 195ms which is very acceptable for cross 
+chain operations to carry out.
+  •
+Our middleware shows the best possible Sync Time record of 185 ms and worst of 
+210 ms, indicating that it is highly optimized.
+  •
+The event handling mechanism (listening on Fabric and initiating Ethereum 
+transactions) is robust and resilient as no abnormal spikes or delays would appear.
+  •
+With minimal performance degradation, the middleware can capture IPFS CID’s 
+from Fabric and make corresponding eth transactions.
+The standard deviation was 7.8 ms, which clearly indicates that synchronization delays 
+were small and showed limited variability across many trials.
+Observed Factors contributing to such efficiency are:
+  •
+Event Listener is efficient so that it can quickly detect and process the chaincode 
+events without being delayed.
+  •
+Using Infura’s low-latency endpoints decreases the Ethereum network propagation 
+time to the point where they are essentially optimized Ethereum Client.
+  •
+The middleware picks up events asynchronously and blocking calls do not happen, 
+making the operations to be faster.
+  •
+Since the payload size (CID) is small, transaction creation and submittal are fast.
+The Middleware Sync Time analysis proves that the proposed cross-chain EHR synchro-
+nization system is viable for real world use cases. Moreover, the mean synchronization 
+time of approximately 195 ms is nearly 90% lower than the confirmation of Ethereum 
+native block (> 2 s). It highlights an advantage of cross-chain middleware to share health-
+care data on time. It enables the fast and secured EHR exchange across two different 
+blockchains (Fabric and Ethereum) with low latency, thereby highly fitting into time sen-
+sitive healthcare kind of environments.
+Data access latency of less than 500 ms is usually required in healthcare systems to 
+facilitate emergency care operations and clinician decision-making [40]. We have 
+achieved results at 49 ms average StoreEHR time, 30 ms FetchEHR time and 195 ms 
+middleware synchronization, which are well within this limit indicating that it is appro-
+priate in clinical environments to exchange EHRs real-time.
+6.4 EHR file size
+Original EHR File Size is an EHR file prior to encryption (or IPFS upload). It represents 
+real-world medical record size. It is important to assess storage requirements. It also 
+directly influences the upload time and encryption time of IPFS.
+The EHR file size will increase slightly after AES encryption as the result of padding 
+and block cipher structure. It determines storage and transmission overhead of encryp-
+tion. It makes sure security is achieved with little inflation in size. It also helps optimize 
+IPFS costs since storage on decentralized networks can be size oriented.
+In Fig. 6, both columns of iteration are represented where, one for Original EHR File 
+Size and one for Encrypted EHR File Size.
+
+
+【第20页】
+Page 20 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+Insights from the visualization of Fig. 6 can be mentioned as:
+  •
+Encryption Overhead: Every encrypted file is always larger than the original file for 
+all 10 iterations. Such behavior is expected as encryption algorithms like AES (which 
+is used in this implementation) adds padding, metadata and cipher blocks.
+  •
+Increase in file size: The increase in file size is relatively small (around 2 to 5 KB on 
+average per file). Therefore, it demonstrates that while encryption introduces some 
+additional size, it is manageable, lightweight, and preserves efficiency in cases of 
+sharing large scale EHRs.
+  •
+Uniformity in iterations: The pattern and stability of the file sizes of the original 
+and encrypted files do not change greatly with each iteration. In other words, this 
+says that encryption should also be predictable and consistent, which is desirable for 
+health care data systems where the predictability of the size is useful for storage and 
+bandwidth planning.
+  •
+Practical Implication: The minimal increase suggests that encrypted EHR files can 
+be sent over the network with appropriate bandwidth and storage decrease from the 
+unencrypted versions.
+  •
+Security vs. Size Trade off: The slight size penalty on the EHR payload is worth 
+investing in because it has enormous gain in security and confidentiality of patient 
+data and thus, encryption is an essential but low-cost step to propagate the cross 
+chain EHR sharing workflow.
+This encryption scheme is also efficient in terms of encrypting EHR files while imposing 
+minimal overhead in storage for the additional security and privacy of sensitive health 
+data between the chains of Fabric and Ethereum.
+6.5 AES encryption time
+It estimates the amount of time needed to encrypt the EHR file before encryption into 
+IPFS. It measures the encryption overhead incurred to provide confidentiality of the 
+medical records. It is important in resource-constrained environments (like IoT health-
+care devices). Its value should remain low so that upload synchronization process is not 
+delayed. AES encryption time for 10 iterations is mentioned in Fig. 7.
+Fig. 6 Comparison of original vs. encrypted EHR files sizes
+ 
+
+
+【第21页】
+Page 21 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+The graph of AES Encryption Time with respect to 10 iterations shows a high effi-
+ciency and consistent performance of the AES Encryption Mechanism when it was pro-
+grammed within proposed cross chain EHR sharing framework. The encryption time fits 
+within the orders of the magnitude of 4.7–5.3 ms throughout the iterations. This means 
+that encryption of data by the AES imposes only a small but highly predictable compu-
+tational overhead (critical for keeping synchronization in real time) and hence the over-
+head is so small.
+The encryption time is on average 5 milliseconds, which means even with multiple 
+encryption operations the system keeps the lowest latency. The values vary very little 
+(± 0.3 ms) which implies that the hardware processing, file sizes and encryption key gen-
+erating are stable within different runs. The time required to encrypt an end-to-end EHR 
+transfer (encryption + blockchain interaction + middleware processing) result in accept-
+able transfer delay for healthcare applications where time sensitivity is crucial.
+Key Observations:
+  •
+The encryption from AES is very light weight, especially for current EHR data files 
+(50–55 KB encrypted), even at slightly higher peak of 5.3 ms.
+  •
+No degradation or unstable iterations with performance spikes signifying the 
+robustness of the middleware encryption service.
+With negligible additional delay, the AES Encryption integration into the middleware 
+is proven to be highly effective in securing the EHR data prior to cross chain transmis-
+sion with strong cryptographic security. AES proves itself as an optimal choice for a real-
+time, secure and scalable EHR interoperability solution.
+6.6 Smart contract deployment gas (Ethereum)
+It indicates the price of gas consumed during the initial deployment of the EHR Smart 
+Contract. It is the setup cost for creating the Cross Chain EHR system on Ethereum. 
+While there is only one deployment, the contract complexity is high. Optimized con-
+tracts are required to incur low deployment gas. For experimentation, 1,415,000 wei gas 
+was required to deploy smart contract.
+Fig. 7 AES encryption time
+ 
+
+
+【第22页】
+Page 22 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+6.7 IPFS upload & download time
+It is the time needed to upload the encrypted EHR file onto IPFS and get the CID of it. 
+It represents the off-chain storage delay. It directly affects the overall time prior to when 
+the EHR CID can be registered on Fabric and Ethereum. It is a critical factor for near real 
+time EHR availability. The IPFS upload and download times are represented in Fig. 8.
+The IPFS Upload vs. Download Time graph shows how the encrypted EHR files are 
+stored and retrieved in a comparative time through different iterations. As per the obser-
+vations, the upload time is always more than download time in all iterations. Uploading 
+a new file to the decentralized IPFS network includes processes like chunking the file, 
+hash computation (for CID generation), and Distributing content across multiple IPFS 
+nodes for redundancy and availability. That’s why the IPFS upload time is higher com-
+paratively. On the other hand, download operations predominantly involve a download 
+of content using an already computed CID, so computationally (and network) overhead 
+does not have to be computed and added. That’s why IPFS download time is lower than 
+upload time.
+The upload time varies across the 10 iterations from 148 to 157 ms, and the download 
+time stays at this lower level from 88 to 95 ms. This is helpful for medical record systems 
+in which provision of EHRs by IPFS should be offered to ensure rapid access to EHRs for 
+clinical decision making. Also, the small variation margins for the upload and download 
+times between iterations for both upload and download times show the reliability and 
+stability of IPFS operations even when performing several transactions. The significant 
+takeaway from the graph is that the download speed consistently outperforms upload 
+speed, which is ideal for a healthcare environment where frequent access to records 
+(reads) is more common than writing (uploads). The combined graph reflects high effi-
+ciency, stability, and low latency in storing and fetching EHRs through IPFS integration 
+into the Cross-Chain Middleware. Thus, IPFS proves to be a robust choice for off-chain 
+encrypted storage in the proposed architecture.
+6.8 Security model and threat assumptions
+The proposed framework makes a realistic adversary model for healthcare blockchain 
+environments. Following possible actions of adversaries are assumed:
+Fig. 8 IPFS upload and download time
+ 
+
+
+【第23页】
+Page 23 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+  •
+Malicious blockchain participant: An authorized participant can try to manipulate 
+the ledger data or make invalid transactions. This is mitigated by trust based on 
+Hyperledger Fabric’s endorsement policies and the consensus mechanism of 
+Ethereum, which prevents any data manipulations.
+  •
+Compromised node: If one of the peer nodes in Fabric or a validator node in 
+Ethereum is compromised, the system is resilient enough because of distributed 
+consensus and redundant validation across multiple entities (so it won’t be 
+dominated by just one node).
+  •
+Eavesdropping on data transmission: Because sensitive health records are 
+encrypted using AES-256 before being uploaded to IPFS, the exposure of content 
+identifiers (CIDs) alone does not result in the disclosure of medical information.
+  •
+Limited access control: Fabric Chaincode and Ethereum Smart Contracts provide 
+fine-grained access control for their constituent components. Unauthorized requests 
+automatically get denied at both blockchain levels.
+  •
+Replay or synchronization attacks: The middleware has idempotent event 
+processing and retry logic to prevent repeated or fake events from desynchronizing 
+the ledgers.
+Above mentioned mechanisms provide a layered security model: confidentiality is 
+enforced via encryption, integrity is enforced via blockchain immutability, and access 
+control is enforced via smart contracts and chaincode. This multi-layer defense greatly 
+reduces the attack surface and ensures strong protection for patient health data.
+Besides providing cryptographic security, the framework also complies with standard 
+requirements like HIPAA and GDPR. Patient data is never stored on-chain in plaintext. 
+Access to EHR is controlled by smart contracts and chaincode, and auditability can be 
+achieved through immutable blockchain records. The encryption of EHRs stored in IPFS 
+is achieved using AES-256 encryption standard which also meets data confidentiality 
+requirements stipulated by such regulations.
+6.9 Potential bottlenecks and mitigation strategies
+The above-mentioned observations, indicates promising results of the proposed frame-
+work. But still there might be few bottlenecks while deploying it in real time. Following 
+bottlenecks have been considered for this research.
+  •
+Infura Dependency (Ethereum Access): Infura endpoints have been used to 
+communicate with the Sepolia testnet. Delay may occur because of infura rate limits 
+or outages in case of large-scale usage. It is possible to reduce this through running 
+special Ethereum nodes, or even through redundant provider services (e.g., Alchemy, 
+Quick Node) to achieve availability.
+  •
+Fabric Channel Scaling Constraints: The performance of Hyperledger Fabric relies 
+upon endorsement and ordering services. Consent overhead can increase along 
+with the number of organizations or channels. This can be addressed by refining 
+endorsement policy, using raft/Kafka endorsing service clusters and sharding patient 
+data through several channels.
+  •
+IPFS Availability and Persistence: Despite IPFS having distributed storage, content 
+availability is pegged on nodes that pin the files. When pinned nodes fail, the latency 
+
+
+【第24页】
+Page 24 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+of data retrieval may become higher. It can be mitigated by relying on IPFS pinning 
+services (e.g. Pinata, Filecoin integration) and persistent institutional IPFS clusters.
+The proposed framework can maintain scalability, robustness, and reliability within large 
+health care networks by addressing these bottlenecks proactively.
+7 Conclusion
+This work presented in this paper is an integrated solution for cross-chain EHR interop-
+erability that combines the strengths of private and public blockchains, off-chain IPFS 
+storage, and lightweight AES encryption to ensure secure, real-time, and decentral-
+ized health data management. By bridging Hyperledger Fabric and Ethereum through 
+a smart middleware synchronization layer, the framework addresses critical gaps in tra-
+ditional healthcare record management systems i.e. lack of interoperability, limited trust 
+models, and privacy risks. The middleware’s capability to capture, process, and synchro-
+nize events between blockchains ensures consistency without relying on centralized 
+authorities.
+Experimental results validate that the system maintains fast transaction invoke/query 
+times, predictable gas costs, low middleware synchronization delay, and efficient encryp-
+tion overhead, making it highly suitable for time-sensitive healthcare applications. The 
+system thus offers a practical, scalable, and secure approach for cross-organizational 
+health data sharing without relying on centralized intermediaries.
+The proposed solution successfully demonstrates that blockchain interoperability, 
+when combined with privacy-preserving off-chain storage and smart contract-based 
+access control, can significantly enhance the efficiency, reliability, and scalability of EHR 
+exchange networks. This lays a strong foundation for future decentralized healthcare 
+architectures.
+The proposed solution aligns with healthcare latency thresholds i.e. less than 500 ms 
+and HIPAA / GDPR principles for confidentiality, integrity, and access control. Such 
+alignment demonstrates strong potential for deployment in real-world EHR systems.
+The framework bridges several important healthcare interoperability gaps through 
+Fabric to ensure real-time, privacy-preserving, and verifiable interchange of EHR across 
+heterogeneous networks; Ethereum to build transparency; and IPFS to provide decen-
+tralized storage.
+8 Future work
+While the current system achieves cross-chain EHR interoperability between two block-
+chains, further enhancements are envisioned to broaden the solution’s applicability and 
+robustness:
+  •
+Multi-Blockchain Expansion:
+  •
+Extend the middleware to support more than two blockchains simultaneously, 
+enabling broader healthcare networks (e.g., Polkadot, Corda).
+  •
+Advanced Privacy Enhancements:
+  •
+Integrate Zero Knowledge Proofs (ZKPs) or Multi-Party Computation (MPC) to 
+allow privacy-preserving EHR queries without exposing CIDs or metadata even to 
+authorized parties.
+  •
+Middleware Resilience Upgrades:
+
+
+【第25页】
+Page 25 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+  •
+Implement Fault-Tolerant Event Queuing and Retry Mechanisms with Blockchain 
+Event Reconciliation to enhance robustness under network failures.
+  •
+Performance Optimization:
+  •
+Explore Layer-2 scaling solutions like Rollups or state channels for Ethereum 
+interactions to further reduce gas costs and latency.
+Through these extensions, the system can evolve into a production-grade, globally scal-
+able cross-chain healthcare interoperability platform, paving the way for secure and effi-
+cient decentralized healthcare ecosystems.
+Scalability and real-world relevance can be further improved with the integration of 
+blockchains and AI-based healthcare [4], sustainable AI to clinical and agricultural data-
+sets [6] and fraud-resistant ML frameworks [23, 24].
+Acknowledgements
+No.
+Author contributions
+Dr Anil V Turukmane - Writing PaperPatan Mushiya Katoon- Introduction, Methodology.
+Funding
+VIT-AP University
+Data availability
+Data sharing not applicable to this article as no datasets were generated or analysed during the current study.
+Declarations
+Competing interests
+The authors declare no competing interests.
+Clinical trial number
+Not applicable.
+Ethics, consent to participate, and consent to publish declarations
+Not applicable.
+Received: 23 July 2025 / Accepted: 29 September 2025
+References
+1. 
+Carlos Ferreira J, Elvas LB, Correia R, Mascarenhas M. Enhancing EHR interoperability and security through distributed 
+ledger technology: a review. In Healthcare (Vol. 12, No. 19, p. 1967). MDPI (2024).
+2. 
+Shull JG. Digital health and the state of interoperable electronic health records. JMIR Med Inf. 2019;7(4):e12712.
+3. 
+Javaid M, Haleem A, Singh RP. Health informatics to enhance the healthcare industry’s culture: an extensive analysis of its 
+features, contributions, applications and limitations. Inf Health. 2024;1(2):123–48.
+4. 
+Ullah R, Sarwar N, Alatawi MN, Alsadhan AA, Alwageed S, Khan H, M., Ali A. Advancing personalized diagnosis and treat-
+ment using deep learning architecture. Front Med. 2025;12:1545528.
+5. 
+Ahmad W et al. IoUT and collaborative cloud computing based UAV channel modelling for agriculture communication. in 
+IEEE Trans Consum Electron, https://doi.org/10.1109/TCE.2025.3593867
+6. 
+Naveed, F., Masih, A., Mahmood, J., Ahmed, M., Ali, A., Saddiq, A., Agbozo, E. Sustainable AI for plant disease classification 
+using ResNet18 in few-shot learning. Array, 26, 100395 (2025).
+7. 
+King JL. Centralized versus decentralized computing: organizational considerations and management options. ACM 
+Comput Surv (CSUR). 1983;15(4):319–49.
+8. 
+Turn R, Shapiro NZ, Juncosa ML. Privacy and security in centralized vs. decentralized databank systems. Policy Sci. 
+1976;7(1):17–29.
+9. 
+Richer G, Pister A, Abdelaal M, Fekete JD, Sedlmair M, Weiskopf D. Scalability in visualization. IEEE Trans Visual Comput Graph 
+(2022).
+10. Islam S, Apu KU. Decentralized vs. Centralized database solutions in blockchain: advantages, challenges, and use cases. 
+Global Mainstream J Innov Eng Emerg Technol. 2024;3(4):58–68.
+11. Weber I, Lu Q, Tran AB, Deshmukh A, Gorski M, Strazds M. A platform architecture for multi-tenant blockchain-based 
+systems. In 2019 IEEE International Conference on Software Architecture (ICSA) (pp. 101–110). IEEE (2019).
+12. Kuo TT, Rojas Z, H., Ohno-Machado L. Comparison of blockchain platforms: a systematic review and healthcare examples. 
+J Am Med Inform Assoc. 2019;26(5):462–78.
+13. Sion SI, Zhang K, April A, Lutete TM, Bouchard C. A comprehensive review of multi-chain architecture for blockchain 
+integration in organizations. In International Conference on Business Process Management (pp. 5–24). Cham: Springer (2024).
+
+
+【第26页】
+Page 26 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+14. Shrimali B, Patel HB. Blockchain state-of-the-art: architecture, use cases, consensus, challenges and opportunities. J King 
+Saud Univ-Comput Inform Sci. 2022;34(9):6793–807.
+15. Abdelouahid RA, Debauche O, Mahmoudi S, Marzak A. Literature review: clinical data interoperability models. Information. 
+2023;14(7):364.
+16. Alenoghena CO, Onumanyi AJ, Ohize HO, Adejo AO, Oligbi M, Ali SI, Okoh SA. Ehealth: a survey of architectures, develop-
+ments in mHealth, security concerns and solutions. Int J Environ Res Public Health. 2022;19(20):13071.
+17. Zaman U, Imran N, Mehmood F, Iqbal N, Kim J, Ibrahim M. Towards secure and intelligent internet of health things: a 
+survey of enabling technologies and applications. Electronics. 2022;11(12):1893.
+18. Hardjono T, Lipton A, Pentland A. Toward an interoperability architecture for blockchain autonomous systems. IEEE Trans 
+Eng Manag. 2019;67(4):1298–309. https://doi.org/10.1109/tem.2019.2920154.
+19. Othman SB, Getahun M. Leveraging blockchain and IoMT for secure and interoperable electronic health records. Sci Rep. 
+2025;15(1):12358.
+20. Ismail L, Materwala H, Zeadally S. Lightweight blockchain for healthcare. IEEE Access. 2019;7:149935–51.
+21. Nedunoori V. A comprehensive review of encryption and protection techniques for healthcare data. Artif Intell Healthc 
+Inform Syst—Secur Priv Chall 147–70 (2025).
+22. Tariq MU. Enhancing cybersecurity protocols in modern healthcare systems: strategies and best practices. Transformative 
+approaches to patient literacy and healthcare innovation. IGI Global; 2024. pp. 223–41.
+23. Al-Maari AA, Abdulnabi M, Nathan Y, Ali A, Ali U, Khan M. Optimized credit card fraud detection leveraging ensemble 
+machine learning methods. Eng Technol Appl Sci Res. 2025;15(3):22287–94.
+24. Hussain, S., Sarwar, N., Ali, A., Khan, H., Din, I., Alqahtani, A. M., Ali, A. An enhanced random forest (ERF)-based Machine 
+Learning Framework for Resampling, Prediction,and Classification of Mobile Applications using Textual Features. Engineer-
+ing, Technology& Applied Science Research, 15(1), 19776–19781 (2025).
+25. Adil M, Farouk A, Ali A, Song H, Jin Z. Securing tomorrow of next-generation technologies with biometrics, state-of-the-art 
+techniques, open challenges, and future research directions. Comput Sci Rev. 2025;57:100750.
+26. Sookhak M, Jabbarpour MR, Safa NS, Yu FR. Blockchain and smart contract for access control in healthcare: a survey, issues 
+and challenges, and open issues. J Netw Comput Appl. 2021;178:102950.
+27. Trivedi C, Rao UP, Parmar K, Bhattacharya P, Tanwar S, Sharma R. A transformative shift toward blockchain-based IoT envi-
+ronments: consensus, smart contracts, and future directions. Secur Priv, 6(5), e308 (2023).
+28. Yadav AS, Singh N, Kushwaha DS. Evolution of blockchain and consensus mechanisms & its real-world applications. Mul-
+timed Tools Appl. 2023;82(22):34363–408.
+29. Huang H, Wang Y, Cai Y, Wang H. A novel approach for energy consumption management in cloud centres based on 
+adaptive fuzzy neural systems. Cluster Comput. 2024;27(10):14515–38.
+30. Guo S, Zheng Y, Zhai X. Artificial intelligence in education research during 2013–2023: a review based on bibliometric 
+analysis. Educ Inform Technol. 2024;29(13):16387–409.
+31. Kumari D, Parmar AS, Goyal HS, Mishra K, Panda S. HealthRec-chain: patient-centric blockchain enabled Ipfs for privacy 
+preserving scalable health data. Comput Netw. 2024;241:110223.
+32. Sun Z, Han D, Li D, Weng TH, Li KC, Mei X. MedRSS: a blockchain-based scheme for secure storage and sharing of medical 
+records. Comput Ind Eng. 2023;183:109521.
+33. Azbeg K, Ouchetto O, Andaloussi SJ. BlockMedCare: a healthcare system based on IoT, blockchain and IPFS for data man-
+agement security. Egypt Inf J. 2022;23(2):329–43.
+34. Abdelgalil L, Mejri M. Health block: a framework for a collaborative sharing of electronic health records based on block-
+chain. Future Internet. 2023;15(3):87.
+35. Hashim F, Shuaib K, Sallabi F. Connected blockchain federations for sharing electronic health records. Cryptography. 
+2022;6(3):47.
+36. Lan Y, Gao J, Li Y, Wang K, Zhu Y, Chen Z. TrustCross: enabling confidential interoperability across blockchains using trusted 
+hardware. In Proceedings of the 2021 4th international conference on blockchain technology and applications (pp. 17–23) 
+(2021).
+37. Zhang P, White J, Schmidt DC, Lenz G, Rosenbloom ST. FHIRChain: applying blockchain to securely and scalable share clini-
+cal data. Comput Struct Biotechnol J. 2018;16:267–78.
+38. Azaria A, Ekblaw A, Vieira T, Lippman A. MedRec: Using blockchain for medical data access and permission management. 
+In 2016 2nd international conference on open and big data (OBD) (pp. 25–30). IEEE (2016).
+39. Androulaki, E., Barger, A., Bortnikov, V., Cachin, C., Christidis, K., De Caro, A., Yellick, J. Hyperledger fabric: a distributed oper-
+ating system for permissioned blockchains. In Proceedings of the thirteenth EuroSys conference (pp. 1–15) (2018).
+40. Nasir Q, Qasse IA, Abu Talib M, Nassif AB. Performance analysis of hyperledger fabric platforms. Secur Communication 
+Networks. 2018;2018(1):3976093.
+41. Baliga A, Solanki N, Verekar S, Pednekar A, Kamat P, Chatterjee S. Performance characterization of hyperledger fabric. In 
+2018 Crypto Valley conference on blockchain technology (CVCBT) (pp. 65–74). IEEE (2018).
+42. Daniel E, Tschorsch F. IPFS and friends: a qualitative comparison of next generation peer-to-peer data networks. IEEE Com-
+mun Surv Tutorials. 2022;24(1):31–52.
+43. Steichen M, Fiz B, Norvill R, Shbair W, State R. Blockchain-based, decentralized access control for IPFS. In 2018 Ieee interna-
+tional conference on internet of things (iThings) and ieee green computing and communications (GreenCom) and ieee cyber, 
+physical and social computing (CPSCom) and ieee smart data (SmartData) (pp. 1499–1506). IEEE (2018).
+44. Rahman MM, Sakib FA, Faisal F, Anastasopoulos A. To token or not to token: a comparative study of text representations for 
+cross-lingual transfer. arXiv preprint arXiv:2310.08078 (2023).
+45. Borkowski M, Sigwart M, Frauenthaler P, Hukkinen T, Schulte S. DeXTT: deterministic cross-blockchain token transfers. IEEE 
+Access. 2019;7:111030–42.
+46. Kwon J, Buchman E. Cosmos whitepaper. Netw Distrib Ledgers. 2019;27:1–32.
+47. Dai F, Hossain MA, Wang Y. State of the Art in parallel and distributed systems: emerging trends and challenges. Electron-
+ics. 2025;14(4):677.
+48. Jayabalan J, Jeyanthi N. Scalable blockchain model using off-chain IPFS storage for healthcare data security and privacy. J 
+Parallel Distrib Comput. 2022;164:152–67.
+
+
+【第27页】
+Page 27 of 27
+Katoon and Turukmane Discover Artificial Intelligence           (2025) 5:308 
+49. Mohanta BK, Awad AI, Dehury MK, Mohapatra H, Khan MK. Protecting IoT-Enabled healthcare data at the edge: integrating 
+Blockchain, AES, and Off-Chain decentralized storage. IEEE Internet Things J. (2025)
+50. Kumar S, Bharti AK, Amin R. Decentralized secure storage of medical records using blockchain and IPFS: a comparative 
+analysis with future directions. Secur Priv, 4(5), e162 (2021).
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+

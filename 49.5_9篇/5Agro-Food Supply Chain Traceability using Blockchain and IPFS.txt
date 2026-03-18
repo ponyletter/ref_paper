@@ -1,0 +1,904 @@
+来源文件：5Agro-Food Supply Chain Traceability using Blockchain and IPFS.pdf
+============================================================
+
+【第1页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+393 | P a g e  
+www.ijacsa.thesai.org 
+Agro-Food Supply Chain Traceability using 
+Blockchain and IPFS 
+Subashini Babu, Hemavathi Devarajan 
+Department of Data Science and Business Systems-School of Computing, SRM Institute of Science and Technology 
+Chengalpattu, Kattankulathur, Tamilnadu 603 203, India 
+ 
+ 
+Abstract—Many blockchain initiatives significantly use the 
+InterPlanetary File System (IPFS) to store user data off-chain. 
+The centralized administration, ambiguous data, unreliable data, 
+and ease of creating information islands are all issues with 
+traditional traceability systems. This study develops a monitoring 
+system using blockchain technology to record and inquire about 
+product information in the supply network of Non-Perishable 
+(NP) agro goods to address the above issues. The transparency 
+and trustworthiness of traceability data were considerably 
+improved by employing blockchain technology's distributed, 
+tamper-proof, and traceable properties. To alleviate the strain on 
+the blockchain and enable efficient information inquiry, a 
+storage structure is built in which both public and private data 
+are stored in the blockchain and the Inter Planetary File System 
+(IPFS) using cryptography. Because of its ability to trace the 
+origin of food, blockchain technology contributes to the 
+development of reliable food supply chains and the establishment 
+of rapport between farmers and their customers. Since it 
+provides a secure location for data to be kept, it can pave the way 
+for implementing data-driven farming techniques. In addition to 
+improving data security, recording farm data in IPFS and 
+storing encrypted file IPFS hashes in smart contracts solves the 
+issue of blockchain storage explosion. And when used in tandem 
+with smart contracts, it enables instantaneous outflows between 
+parties in response to changes in data stored in the blockchain. 
+The paper also offers simulations of the implementation and 
+analysis of the performance. The findings validate that our 
+system improves security for sensitive information, safeguards 
+supply chain data, and meets the needs of real-world 
+applications. Furthermore, it boosts throughput efficiency while 
+reducing latency. 
+Keywords—Blockchain; IPFS; supply chain management; 
+traceability; Ethereum 
+I. 
+INTRODUCTION 
+Everyone is concerned about the nutritional value of the 
+meal they are about to consume. The food supply chain is 
+prevalent, with tedious processes prone to human errors [1]. A 
+blockchain-based supply chain can offer visibility into the 
+movement of commodities by making all transaction records 
+accessible to all network nodes. End-to-end traceability is 
+another feature of the blockchain-enabled food supply chain 
+technology that is helpful in the case of a food investigation or 
+recall. Supply chain management combines actions to 
+transform raw materials into completed goods, increasing 
+customer value and achieving a long-term competitive 
+advantage. The supply chain generally encompasses people, 
+things, initiatives, and organizations involved in transforming 
+raw materials into finished goods, mainly and secondary to 
+fulfilling customer orders. Although the government has 
+developed national traceability requirements for significant 
+products, fake and subpar interests are still common in the 
+marketplace. Thus, several issues with food security have led 
+to a crisis in consumer confidence, which is also a significant 
+obstacle to national efforts to build a trustworthy society [2]. 
+NP agro-food monitoring program can determine food 
+origin and provide detailed information about food production 
+and distribution. The farm-to-table process includes the 
+production, processing, transportation, and sale of agricultural 
+products. Any fraud in any of the connections above can result 
+in potentially fatal threats to food safety. Therefore, various 
+management solutions have arisen with IoT, automation, and 
+different learnings. These systems can trace the complete 
+procedure autonomously, but they must solve the problem of 
+altered data and food poisoning. The reason for this is that in 
+the conventional data storage procedure, there is always the 
+risk of data being tampered with or lost. Researchers have 
+been experimenting with blockchain technology to store data 
+and protect data security by addressing the issues above [3]. It 
+develops a blockchain-based system for storing agricultural 
+product provenance data. Due to their linkage to IoT devices, 
+agricultural items will automatically transmit whatever data 
+they collect to a network. 
+Once again, the server will dynamically record the 
+information onto the blockchain following data processing. In 
+this instance, provenance data secure storage is implemented 
+using blockchain technology. As a result, it successfully 
+ensures the authenticity of provenance data. A lot of real-time 
+monitoring data would be produced when many agro items 
+joined the provenance monitoring platform. Blockchain was 
+initially 
+developed 
+for 
+transactions 
+involving 
+digital 
+currencies; the volume of data generated is far less than that of 
+real-time monitoring data. This makes it extremely difficult 
+for the rate of block construction to stay consistent with 
+storing traceability information. Thus, more than a direct 
+application of blockchain technology is needed. We merge the 
+IPFS and blockchain to offer a data storage and query method 
+for a traceability solution for farm products. IPFS is a peer-to-
+peer decentralized file system with the ambitious goal of 
+connecting all devices that use computers to a single, universal 
+file system. It first suggests a data storage model based on 
+blockchain and IPFS [4]. The submitted video, picture, and 
+sensor data are automatically encapsulated and parsed by this 
+model. The above information is then sent to IPFS, and the 
+blockchain is updated with the associated hash addresses. The 
+blockchain transaction's hash values are then saved in the 
+
+
+【第2页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+394 | P a g e  
+www.ijacsa.thesai.org 
+database. By requesting the authenticity database hash address 
+of an item in IPFS, customers can access the provenance data 
+using the transaction content from the blockchain. 
+The article is divided into the following sections: 
+Section II provides a quick review of blockchain technology 
+and terminology, stages, methods, and benefits of traceability. 
+Section III also discusses previous initiatives to incorporate 
+blockchain into provenance systems. Section IV describes a 
+modeling approach that has been presented. Section V goes 
+through the outcomes and performance. Section VI brings the 
+paper to a conclusion. 
+II. 
+BLOCKCHAIN FOR TRACEABILITY 
+Blockchain technology can offer improved tracking of 
+agri-foods from the ranch to your dinner plate. Blockchain 
+technology might greatly minimize the food safety concerns 
+arising from deliberate deception, terrible organization, and 
+being short of guidelines. [5] Blockchain technology will 
+revolutionize how traceability is viewed by overcoming the 
+challenges in Table I. 
+TABLE I. 
+CHALLENGES IN TRACEABILITY SYSTEM 
+Challenges 
+Security and privacy 
+Credentials and Governing Compliance 
+Lack of end-to-end visibility 
+Interoperability 
+Expiration and Counterfeit Products 
+Stakeholders Trust management 
+Conflict of interests 
+Temperature-controlled Logistics 
+A. Functioning of Blockchain 
+The digital register is a "link" of unique "blocks" 
+information. As new data is added to the network, a new block 
+is created and linked to the chain. To maintain consistency, all 
+nodes (computers) must update their versions of the 
+blockchain ledger. One of the elements that make blockchain 
+so highly secure is the process of adding new blocks [6]. This 
+is due to the requirement that a participating node verifies and 
+validate the validity of new data well before a new node can 
+be recorded to the blockchain. About cryptocurrencies, this 
+can mean proving that brand-new transactions within a block 
+are legitimate and that no coins have been spent more than 
+once. 
+On the other hand, a single database or worksheet permits 
+revisions to a single version without restriction. Once 
+consensus is reached, the block is added to the ledger, and the 
+underlying records are kept in the distributed ledger [7]. 
+Blocks are safely joined together to form a secure digital chain 
+that extends from the start of the log to the latest addition. 
+Nodes are frequently given fresh amounts of the native 
+currency of the blockchain in appreciation for their work 
+confirming revisions to the linked data. 
+B. Merkle Tree 
+The Merkle binary hash tree of 1987[8] is an essential 
+component of the Blockchain structure. Each node of the 
+Merkle tree is called a leaf, a separate data item or record. A 
+cryptographic hash function H (), is used for evaluating a leaf 
+of X records which in turn has a 2X −1 inner node. A tree with 
+X = 2y nodes has a complexity of y = log X. Also, a single 
+unique root at height y = 0 is the source of the entire 
+hierarchical tree. The claim that the root value Ŕ encapsulates 
+the correctness of all the entries in the tree constitutes a 
+statement made to the entirety of the tree. Conforming to each 
+child n at height y’, Z forms a collection of y‟ systems on the 
+whole hierarchy. 
+      (   )  
+ 
+(1) 
+where, HFt is a succession of y’ hash function 
+H(.)calculations. The entire Merkle hash tree is stored by an 
+untrustworthy party to prove, whereas a verifier only stores 
+the root Ŕ. The party attempting to verify the authenticity of 
+node n provides Z for each node in the tree. Given, 
+      (   )  
+ 
+(2) 
+Eq. (2) concludes that statement n∈Ŕ, where n is the 
+existing root. Knowing the present Ŕ, a steady improvement 
+state occurs from Ŕ towards R = Hft (m’, Zm) every time the 
+current node m reorganized to m’. 
+Hashing 
+For a continuously increasing value, m=α0, α1, αn, a hash 
+function h(.) is applied. This results from a declaration Ḡ 
+called Gatherer Hash (GH) to the progression. The process to 
+get nth hash gatherer Ḡn is given in eq. (3), 
+      (   )      (       )         
+    (           ) 
+ 
+(3) 
+Also, a cryptographic hash function's h () attribute assures 
+that determining any sequence of numbers other than α0, α1... 
+αn that yields the current GHβn is unfeasible. 
+C. IPFS 
+Despite multiple attempts to develop distributed file 
+structures, IPFS has been the initial universal storage structure 
+to achieve high throughput and autonomous delivery on a 
+global scale and on the system level. Peer-to-peer (P2P) 
+networks and blockchain technology allow secure information 
+sharing without a central organization. InterPlanetary File 
+System may replace HTTP (Hyper Text Transfer Protocol). 
+IPFS is a persistent, open-source data storage system. It's used 
+by many to exchange content efficiently. IPFS distributes files 
+throughout the network and uses their cryptographic hashes to 
+identify each item based on its content. IPFS stores file off-
+chain while referencing blockchain hashes [9]. While IPFS 
+incorporates useful concepts from earlier peer-to-peer 
+systems, its primary contribution is in streamlining, 
+advancing, and integrating tried-and-true methodologies into a 
+single coherent system that is more effective than the sum of 
+its parts [10]. The IPFS constructs an algorithmically 
+authorized data model on top of these, a Merkle Directed 
+Acyclic Graph (DAG) of permanent objects, to aid in 
+effectively disseminating files and file version control. Git13 
+is a popular system for managing file revisions and 
+distribution. Content addressability, tamper resistance, and 
+
+
+【第3页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+395 | P a g e  
+www.ijacsa.thesai.org 
+deduplication are all provided by the core IPFS principles 
+[11]. Additionally, the IPFS implements the InterPlanetary 
+Linked Data (IPLD) standards to produce more adaptable, 
+flexible, decentralized data structures that are globally 
+addressable and linkable for many types of data. The 
+Interplanetary Way back is a persistent Web archive that 
+distributes data files into the IPFS network [12]. The CDXJ 
+index is built, and then IPFS is used to disperse the response 
+records' headers and payloads independently. The method has 
+the potential to speed up indexing generally. 
+III. 
+RELATED STUDY 
+To solve the problem of the blockchain's lack of 
+significant data storage, Yang et al. [13] employed 
+Hyperledger as the provenance link that processes the 
+database. Its disadvantages over IPFS data storage include 
+expensive costs, a slow rate of data movement, inadequate 
+privacy, and so on. Additionally, it needs a feedback feature 
+for the customer, preventing retailers from initially accessing 
+the information on product security and other factors. Liao and 
+Xu [14] developed a blockchain monitoring system utilizing 
+intelligent farming and sensor networks to manage tea quality 
+and safety. Using hazard characteristics; they also developed 
+technologies for culinary threat assessment and safety tracing. 
+Xie et al. [15]'s ETH-based traceability of agricultural items 
+used IoT technology to protect data from unauthorized 
+tampering or damage. However, information is saved utilizing 
+blockchain technology at the file storage layer; as a result, 
+network overheads will increase as data volumes do. 
+Bumblauskas et al. [16] integrated IoT and blockchain to track 
+products in real time. Using a Midwestern company's egg 
+supply chain as an example, blockchain technology was 
+implemented from farm to consumer. 
+A 
+provenance 
+storage 
+solution 
+using 
+blockchain 
+technology would record food progress information in IPFS 
+and analyze such data with the aid of an auxiliary database, 
+claims a study by Hao et al. [17]. Yu and Huang [18] proposed 
+the broiler chicken traceability method by fusing RFID and 
+blockchain technology. The "inverted tooth" design of the 
+chicken claw ring prevents it from being resold. The approach 
+allows intelligent technologies to scan the ring's QR code and 
+access the relevant details and data. Benet [8] advises using 
+the InterPlanetary File System (IPFS) to link all related 
+devices using a single file system. Using a content-addressed 
+strategy, IPFS is a peer-to-peer dispersed file system that 
+provides high-throughput storage space. There are other 
+attempts as well that aim to establish a global file system. The 
+AFS system is installed by Howard et al. [19] and can enhance 
+the capability of cache validation, server process structure, and 
+other things. Additionally, several sizable media file-sharing 
+platforms like Napster, KaZaA, and BitTorrent are developed 
+to hold enormous amounts of data. 
+IV. 
+PROPOSED MODELLING 
+A. Non-Perishable (NP) Agro-food Supply Chain Traceability 
+System 
+Poor server management and maintenance from distributed 
+cloud storage providers or an extremely concentrated variety 
+of cloud providers are the main causes of the present issues 
+with cloud storage [20]. A backup file's hard disk position 
+might match the original file's hard disk location if the cloud 
+hard drives are centralized, even if both files are kept on the 
+same cloud hard drive. As a result, in the event of a power 
+failure or other issue, the servers malfunction and are 
+unavailable from the outside; the only option is to wait for the 
+servers to recover. Though it is unrestricted, IPFS is a more 
+current Internet technology than the HTTP protocol. It is 
+based on the idea that a file can be divided into numerous bits 
+dispersed throughout the network and obtained from multiple 
+servers consecutively using a P2P network (PPN). If some 
+servers are unavailable, users from outside the network can 
+still connect to the system and access data. Additionally, the 
+network has many backups, even if some nodes' data is 
+completely lost as a result of an error. Data loss, outdated 
+infrastructure, and a lack of user feedback are just a few issues 
+with the conventional centralized public cloud that can be 
+addressed with IPFS's benefits. 
+High standards for transaction data backup are necessary 
+to ensure the traceability of the supply chains for agricultural 
+products. Since it divides a file into several pieces and 
+disperses them across the network, the IPFS storage system 
+has a more reliable backup capability than cloud storage. The 
+openness of the information kept in IPFS may be ensured by 
+blockchain technology, which is excellent for the supply chain 
+traceability of agricultural products. In this section, we have 
+used the blockchain to track and execute the interactions in the 
+NP agro supply chain products to decrease trust in the central 
+database. We can do this with the help of smart contracts and 
+IPFS transaction records. We can do this by leveraging smart 
+contracts and documenting transactions in IPFS. 
+B. System Model Overview 
+Numerous parties, including producers, manufacturers, 
+distributors, retailers, logistics, and customers, are involved in 
+the NP agri-food supply chain model. The regulatory 
+framework that governs the traceability system is responsible 
+for distributing both the public and the private keys to each 
+participant. 
+It is possible to strengthen customers' confidence in the 
+safety of NP agricultural products by providing consumers 
+with complete information on agricultural products via a 
+traceability system. This will allow for increased sales of NP 
+agricultural products.In this article, the relationships between 
+production, manufacture, distribution, retailing, logistics, and 
+sales are disentangled to investigate agricultural goods' 
+transparency. The NP agri-food is planted, transplanted, 
+watered, fertilized, and harvested as part of the production 
+link. Additionally, it requires recording essential data, 
+including 
+details 
+on 
+seedlings, 
+planting 
+techniques, 
+environmental 
+factors, 
+and 
+product 
+transactions. 
+NP 
+commodities are categorized, weighed, packed, priced, and 
+subjected to various operations in the manufacturing unit. It 
+also includes keeping track of data on NP products, production 
+processes, processing parameters, product transactions, and 
+other essential facts. The distribution unit transports the full 
+goods from one place to several others. When handling the 
+delivery of items to the consumer, the shop takes great care. 
+Transportation that is a part of IoT operations is used during 
+production, manufacturing, distribution, and retail operations. 
+
+
+【第4页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+396 | P a g e  
+www.ijacsa.thesai.org 
+Law enforcement agencies can track down incidents 
+involving how good and safe agricultural products are and 
+identify the principal parties at fault. To certify the integrity 
+and openness of provenance data in farm produce monitoring 
+systems, 
+traceability 
+uses 
+blockchain 
+technology's 
+decentralization, non-tampering, and tracking properties. The 
+production, 
+processing, 
+transportation, 
+and 
+sales 
+of 
+agricultural products may all be monitored with the help of the 
+blockchain-based NP agro products tracking system, which 
+maintains growth data, processing data, logistics details, and 
+sales data. Fig. 1 depicts the structural layout of the 
+blockchain-based monitoring system for NP agro products. 
+The regulator must approve the blockchain traceability 
+scheme, including all parties. The approval follows 
+registration. After registration is complete, the parties 
+involved can transfer individual and NP product traceability 
+data. If you want to check if the data on your chain of custody 
+has been tampered with, you can use the provided a 
+comparison tool to check for validity. Data analysis, a 
+consensus mechanism, key management, smart contracts 
+based on a user's reputation, and key authorization is all part 
+of the system. The most fundamental applications of smart 
+contracts are adding data to blockchains and the subsequent 
+querying of that data. When a request is made, the smart 
+contract immediately begins carrying it out. Businesses may 
+input data in various links, customers can query traceability 
+data, and regulators can keep tabs on it all through the 
+system's platform, which is designed to accommodate a wide 
+range of users. We store the data to IPFS in order to prevent 
+blockchain data explosion. The IPFS hash value is kept in the 
+blockchain once consensus has been reached. 
+C. IPFS Encrypted Storage 
+The blockchain traceability system's current storage option 
+entails immediately writing the traceability data of each 
+system of agricultural goods onto the blockchain. The burden 
+on blockchain's storage grows as there are more nodes, 
+resulting in more transaction data being collected [21]. Due to 
+the blockchain‟s unique chain-type topology, users of a single 
+blockchain community can view all the information on the 
+blockchain even when query efficiency is extremely low. To 
+address these issues, this article developed a solution 
+integrating encrypted private data storage and hash storage for 
+public data to enhance the storage style of a blockchain 
+monitoring system for NP agro products. Traceability data for 
+products is just one part of the supply chain's comprehensive 
+dataset, including sensitive information authorized parties may 
+only access. Data confidentiality is a significant concern for 
+rival businesses. Public information may be about the 
+producer, 
+manufacturers, 
+retailers, 
+logistics 
+and 
+their 
+reputation, product details, date of manufacture, price, and 
+provenance. In this work, Algorithm 1 depicts the data entry to 
+the blockchain in protecting traceable information, in which 
+sensitive data is encrypted using a smart contract and then 
+stored on the blockchain alongside the corresponding hash 
+value of public data. 
+Algorithm 1: Double Encryption 
+Initialize Stakeholders ID, Public_data, Sensitive_info, Keys. 
+Stakeholders ID → SID 
+ If  
+ Sensitive_info! = Null then do 
+ Generate a Random key (KA) 
+ Sensitive_info →Encry (GCM (Sensitive_info, KA)) 
+ Encry_key→Encry(Key_Encryption_Method  
+     (KA, PuK)) 
+ (Sensitive_info + Public_data) → IPFS 
+ Hash (Sensitive_info) + Hash (Public_data) → BC 
+ End If 
+ If  
+ Sensitive_info == Null then 
+ Hash (Public_data) → BC 
+ End If 
+ End 
+ Result: The hash value stored in the blockchain. 
+ 
+ 
+Fig. 1. Blockchain-oriented traceability mode. 
+
+
+【第5页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+397 | P a g e  
+www.ijacsa.thesai.org 
+ 
+Fig. 2. Storage of public and sensitive data. 
+The AES encryption technique uses the Galois/Counter 
+Mode (GCM) to encode sensitive data, „Senstive_Info‟. The 
+necessary Key, „KA‟ is chosen at random by a random 
+generator using the smart contract, which also creates as well 
+as uploads encoded substitution cipher to the network. The 
+Key is encrypted using the Key Encryption Method (ECC) to 
+guarantee its security. The viewing node was approved by the 
+encrypted Public Key, „PuK‟. Sensitive data as well as open 
+data are transferred to IPFS. A pair of keys made up of the 
+Encrypted Key and the Public Key of the Trusted Observing 
+Nodes are kept in the current picture of the smart contract and 
+sent to the ledger as IPFS hashes as shown in Fig. 2. The 
+existing node's private key, „PiK„ is used to decipher the 
+blockchain's encoded key in order to acquire the original Key, 
+which is then used to decipher the sensitive data and sight it 
+when the appropriate nodes access the private data. 
+V. 
+RESULTS AND DISCUSSIONS 
+Ethereum is a blockchain open-source platform that is used 
+for simulations. We create and test smart contracts using the 
+Remix Integrated Development Environment (IDE), Ganache, 
+Truffle, and Metamask. The smart contracts are used and 
+tested on the Ethereum Ropsten test networks. The script was 
+created using the Remix IDE and Solidity version 0.8.7. The 
+system requirements include an x64-based processor, Win10 
+Pro, a 64-bit operating system, an Intel(R) Xeon(R) CPU E5-
+2630 v4 @ 2.20GHz, and IPFS version 0.8.0. Ganache does 
+nevertheless distribute a certain amount of cryptocurrency to 
+virtual accounts. After each transaction, the cryptocurrency is 
+removed from the contract's designated account. In Ganache, 
+every account has a unique address and private key. The 
+truffle is the framework. Through the Metamask, a bridged 
+browser plugin, Ganache, and the Remix IDE may 
+communicate with one another. 
+Through IPFS, the file is uploaded to the blockchain. It 
+displays a ledger with a number of records. The key that 
+represents each transaction is used to identify each record. The 
+record is a file's many hashes. Each entry starts with a key, 
+then a record that includes the multi-hash value of the file, the 
+ID of the network node reading the file, and the time stamp. 
+Due to the network's addition of IPFS hash addresses, access 
+to files on blockchains using IPFS is constrained. This restricts 
+access to the IPFS system and its associated hash addresses to 
+legitimate users only. This lowers the number of handlers who 
+have admittance to the files. Also, lessen illegal admittance to 
+the file as well. Since user activity is not recorded on the IPFS 
+network, users are free to view any files without fear of 
+repercussions. This experiment places a barrier on unwanted 
+access due to the immutable logging of user file access. 
+A. Consensus 
+The consensus mechanism assures blockchain nodes have 
+the latest blocks. Popular ones include Proof of work, Proof of 
+stake, Delegated Proof of Stake, and Practical Byzantine Fault 
+Tolerance [22]. By facilitating competition between dispersed 
+nodes in terms of computational power, POW increases data 
+consistency and integrity, which is helpful in fending off Sybil 
+attacks. The researchers created a POS approach that doesn't 
+require processing resources and a DPOS mechanism to 
+reduce power consumption. PBFT can reach a consensus with 
+a few malicious nodes. Signatures, verification, and hashing 
+prevent tampering, counterfeiting, and message repudiation 
+and made BFT polynomial. PBFT's high consensus cost 
+renders 
+it unsuitable 
+for 
+public chains. Fewer-node 
+consortiums or private chains operate better. The consortium 
+chain is the core network, while PBFT is the consensus 
+method. 
+B. Performance and Evaluation 
+Here, we measure how long it takes to verify a transaction 
+by evaluating all the transaction data from the moment the 
+validator first receives it until the transaction is authenticated. 
+On the Ethereum Ropsten testbed, we assess the latency and 
+throughput 
+of 
+our 
+implementation. 
+The 
+approximate 
+transaction validation time is given for all transaction types, 
+including stakeholders. 
+Key extraction in ECC encryption is as simple as 
+producing a random integer between two specified values. 
+Any positive integer within the range is valid as an ECC secret 
+key. It is possible to minimize the time spent waiting by taking 
+two different approaches when computing keys throughout 
+decryption and encryption. ECC provides less delay than the 
+alternative by processing keys in two stages. Since the ECC 
+key is shorter, it consumes less computing capacity while still 
+providing 
+secure 
+protocols 
+for 
+authorized 
+mutual 
+authentication. 
+Some of these are reasonable despite the large additional 
+operations required, such as validating signatures and hash 
+data to and from IPFS, confirming permissions in the control 
+list, and performing several other overheads. Transactions take 
+the longest to complete since the qualifications of both the 
+buyer and the vendor must be confirmed. The effectiveness of 
+the blockchain network is examined in this section regarding 
+various transaction rates. As a result, testing involved using 
+transaction counts of 50, 100, 150, 200, 250, and 300 per 
+second. By changing the number of transactions occurring, the 
+impact of having numerous transactions active in a blockchain 
+was examined. 
+Standard operations and query transactions were both put 
+to the test in every situation. The number of total transactions 
+has been adjusted to facilitate the development of a more 
+comprehensive understanding of how the amount of all 
+transactions influences the throughput and latency of the 
+blockchain. Each transaction on the blockchain has its 
+
+
+【第6页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+398 | P a g e  
+www.ijacsa.thesai.org 
+throughput and latency recorded and logged for future 
+reference. This information is stored in a distributed ledger. 
+Fig. 3 and 4 presents the calculations‟ results on the specifics 
+of the delay and throughput measurements. 
+ 
+Fig. 3. Transaction throughput of the traceability system. 
+TABLE II. 
+AVERAGE LATENCY AND THROUGHPUT OF THE TRACEABILITY 
+SYSTEM 
+ 
+Ethereum (Ropsten) 
+Average Latency 
+3927.32 MS 
+Average Throughput 
+52.21TPS 
+ 
+Fig. 4. Transaction latency of the traceability system. 
+Average delay and average throughput are determined 
+from test results on the Ropsten test networks and are shown 
+in Table II. Calculations are done for various transactions, 
+including registration, the record of trace data, approvals, 
+querying of recalls, etc. 
+C. IPFS Read Write Latency 
+While reading files over the network, IPFS reads them 
+more quickly than it writes or adds them. A 0.256 MB file is 
+typically received in around three seconds and written to a 
+remote IPFS gateway in about five seconds. Because it caches 
+the data locally after the initial transmission, IPFS is 
+substantially faster when requesting the same file a second 
+time. We also tested the performance of IPFS on its own to 
+compare the outcomes of the combined systems. Files were 
+sent between local workstations, and the server latency 
+fluctuated. The impact of delays is more significant on smaller 
+files than on bigger ones. The following is a performance 
+analysis of scaling-out IPFS-attached storage. Table III 
+displays their reading and writing results for different file 
+sizes and latency. 
+TABLE III. 
+IPFS READ WRITE LATENCY 
+Read Latency 
+5MS 
+10MS 
+20MS 
+25MS 
+25MB 
+0.395 
+0.511 
+0.755 
+0.841 
+100MB 
+1.453 
+1.505 
+1.93 
+1.82 
+1GB 
+13.26 
+13.24 
+14.14 
+15.11 
+ 
+Write Latency 
+5MS 
+10MS 
+20MS 
+25MS 
+25MB 
+0.443 
+0.474 
+0.741 
+0.891 
+100MB 
+1.597 
+1.694 
+1.893 
+1.99 
+1GB 
+14.10 
+14.73 
+15.32 
+15.89 
+D. Comparisons 
+Our system has the following benefits: a better standard of 
+decentralization; better network resilience; more integrity in 
+data communication; and high reliability in data processing, 
+according to the assessment of findings. The time-suggested 
+technique enables more transactions to be added to the chain 
+at the same rate, serving more users and enhancing overall 
+scalability. We are evaluating our solution in comparison to 
+several traceability systems. 
+TABLE IV. 
+COMPARATIVE RESULTS 
+Features 
+Conventional 
+Traceability 
+Blockchain 
+Traceability 
+Traceability 
+Yes 
+High 
+Supervision 
+Medium 
+High 
+Credibility 
+Less 
+High 
+Storage Mode 
+Medium 
+Medium 
+Data sharing Scope 
+Medium 
+High 
+Scalability 
+Less 
+Medium 
+Query Rate 
+High 
+Medium 
+Table IV contains comparable outcomes. The performance 
+of the decentralized and blockchain-based traceability systems 
+is lower than that of the proposed method. All designs can 
+track data. The proposed system cannot be altered in any way, 
+making it superior to centralized systems and other 
+approaches. Our method is decentralized, scalable, and 
+protects users' privacy at the same time. This method reduces 
+the amount of data generated compared to conventional 
+blockchain technology. 
+VI. 
+CONCLUSIONS 
+ In this study, we developed and assessed a system for 
+tracking agricultural products using blockchain's tracing and 
+anti-tampering features. We also examined the system's 
+architecture for querying and storage. The problems of the 
+blockchain traceability system's enormous data overload 
+
+
+【第7页】
+(IJACSA) International Journal of Advanced Computer Science and Applications, 
+Vol. 14, No. 1, 2023 
+399 | P a g e  
+www.ijacsa.thesai.org 
+constraint and the lack of private security is addressed, and a 
+suggestion for on-chain and off-chain file storage is made. The 
+public data consumers see in the supply chain is stored in the 
+IPFS, whose hash value is uploaded to the ledger system. For 
+discussing with related firms, the blockchain maintains private 
+data that has been encrypted using an encryption method. The 
+storage approach described in this model integrates the 
+existing scenario, considering the necessity for public scrutiny 
+of supply chain public data and the requirement that private 
+corporate information is encrypted, and minimizes the data 
+burden on the chain. After the consumer scans the Tracking 
+number for public database information, the system validates 
+the information using the relevant block to verify if the 
+product information has been updated. Blockchain technology 
+is expected to develop in the direction of numerous test beds, 
+platforms, and sharding. We will continue looking into the 
+technology tying together diverse platforms and a cutting-edge 
+consensus mechanism suitable for traceability in future 
+studies. 
+ACKNOWLEDGMENT 
+The authors would like to express their gratitude to 
+everyone who helped them write this article and provided data 
+for this research. 
+REFERENCES 
+[1] K. Sornalakshmi, S. Sindh, G. Sujatha, and D. Hemavathi, “An 
+architectural framework of a Decision Support System (DSS) to increase 
+the returns of small-scale farmers in Kanchipuram District, India,” EAI 
+Endorsed Trans. Energy Web, Vol. 0, No. 0, 2018, pp. 163978, 
+https://doi.org/10.4108/eai.13-7-2018.163978. 
+[2] L. Zhang, W. Zeng, Z. Jin, Y. Su and H Chen , "A Research on 
+Traceability Technology of Agricultural Products Supply Chain Based 
+on Blockchain and IPFS." Security and Communication Networks 2021, 
+2021, https://doi.org/10.1155/2021/3298514. 
+[3] F. Tian, “A supply chain traceability system for food safety based on 
+HACCP, blockchain & Internet of things,” in 2017 International 
+Conference on Service Systems and Service Management, 2017, 
+https://doi.org/10.1109/ICSSSM.2017.7996119. 
+[4] M. K. Pawar, P. Patil, and P. S. Hiremath, “A Study on Blockchain 
+Scalability,” in Advances in Intelligent Systems and Computing, 
+Singapore: 
+Springer 
+Singapore, 
+2021, 
+pp. 
+307–316, 
+https://doi.org/10.1007/978-981-15-8289-9_29. 
+[5] S. Balachander and A. Murugan, "Challenges and Opportunities in the 
+Advancement of Privacy and Security of Blockchain Technology." 
+Telematique, Vol. 21, No. 1, pp. 6651-6659, 2022. 
+[6] Shanthi and K. Venkatesh, “An analysis of various techniques in 
+blockchain applications,” in 2022 6th International Conference on 
+Intelligent 
+Computing 
+and 
+Control 
+Systems 
+(ICICCS), 
+2022, 
+https://doi.org/10.1109/ICICCS53718.2022.9788137. 
+[7] S.Nakamoto, "Bitcoin: A peer-to-peer electronic cash system." 
+Decentralized Business Review (2008), pp.21260,2008, (White paper). 
+[8] R.C.Merkle, "A digital signature based on a conventional encryption 
+function." In Conference on the theory and application of cryptographic 
+techniques, 
+Springer, 
+Berlin, 
+Heidelberg, 
+1987, 
+pp. 
+369-378, 
+https://doi.org/10.1007/3-540-48184-2_32. 
+[9] E. Politou, F. Casino, E. Alepis and C. Patsakis, "Blockchain mutability: 
+Challenges and proposed solutions." IEEE Transactions on Emerging 
+Topics in Computing, Vol. 9, No. 4, 2019, pp.1972-1986, 
+https://doi.org/10.1109/TETC.2019.2949510. 
+[10] J. Benet, "Ipfs-content addressed, versioned, p2p file system." arXiv 
+preprint 
+arXiv:1407.3561, 
+2014, 
+https://doi.org/10.48550/arXiv.1407.3561. 
+[11] C. Patsakis and F. Casino, "Hydras and IPFS: a decentralised 
+playground for malware." International Journal of Information Security, 
+Vol. 18, No. 6, 2019, pp.787-799, https://doi.org/10.1007/s10207-019-
+00443-0. 
+[12] S. Alam, M. Kelly, and M. L. Nelson, “Interplanetary Wayback: The 
+permanent web archive,” in Proceedings of the 16th ACM/IEEE-CS on 
+Joint 
+Conference 
+on 
+Digital 
+Libraries, 
+2016, 
+https://doi.org/10.1145/2910896.2925467. 
+[13] X. Yang, M. Li, H. Yu, M. Wang, D. Xu, and C. Sun, “A trusted 
+blockchain-based traceability system for fruit and vegetable agricultural 
+products,” 
+IEEE 
+Access, 
+Vol. 
+9, 
+2021, 
+pp. 
+36282–36293, 
+https://doi.org/10.1109/ACCESS.2021.3062845. 
+[14] Y. Liao and K. Xu, “Traceability system of agricultural product based 
+on block-chain and application in tea quality safety management,” 
+Journal of Physics: Conference Series, Vol. 1288, No. 1, 2019, pp. 
+012062, https://doi.org/10.1088/1742-6596/1288/1/012062. 
+[15] C. Xie, Y. Sun, and H. Luo, “Secured data storage scheme based on 
+block chain for agricultural products tracking,” in 2017 3rd International 
+Conference on Big Data Computing and Communications (BIGCOM), 
+2017, https://doi.org/10.1109/BIGCOM.2017.43. 
+[16] D. Bumblauskas, A. Mann, B. Dugan and J. Rittmer, "A blockchain use 
+case in food distribution: Do you know where your food has been?" 
+International Journal of Information Management, Vol.52, 2020, 
+pp.102008, https://doi.org/10.1016/j.ijinfomgt.2019.09.004. 
+[17] J. Hao, Y. Sun, and H. Luo, “A safe and efficient storage scheme based 
+on blockchain and IPFS for agricultural products tracking,” Journal of 
+Computers, 
+Vol. 
+29, 
+2018, 
+pp. 
+158–167, 
+doi:10.3966/199115992018122906015. 
+[18] W. Yu and S. Huang, “Traceability of food safety based on block chain 
+and RFID technology,” in 2018 11th International Symposium on 
+Computational 
+Intelligence 
+and 
+Design 
+(ISCID), 
+2018, 
+DOI 
+10.1109/ISCID.2018.00083. 
+[19] J. H. Howard et al., “Scale and performance in a distributed file system,” 
+ACM Trans. Computer Systems, Vol. 6, No. 1, 1988, pp. 51–81, 
+https://doi.org/10.1145/35037.35059. 
+[20] K. Venkatesh, L. N. B. Srinivas, M. B. Mukesh Krishnan, and A. 
+Shanthini, “QoS improvisation of delay sensitive communication using 
+SDN based multipath routing for medical applications,” Future 
+Generation Computer Systems, Vol. 93, 2019, pp. 256–265, 
+https://doi.org/10.1016/j.future.2018.10.032. 
+[21] J. F. Galvez, C. Juan, and J. Mejuto, “Future challenges on the use of 
+blockchain for food traceability analysis,” TrAC Trends in Analytical 
+Chemistry, 
+Vol. 
+107, 
+2018, 
+pp. 
+222–232, 
+https://doi.org/10.1016/j.trac.2018.08.011. 
+[22] K. Harshini Poojaa and S. Ganesh Kumar, “Scalability Challenges and 
+Solutions in Blockchain Technology,” in Inventive Computation and 
+Information Technologies, Singapore: Springer Nature Singapore, 2022, 
+pp. 595–606 , DOI: 10.1007/978-981-16-6723-7_44. 
+

@@ -1,0 +1,2194 @@
+来源文件：2中国农产品质量安全可追溯体系发展历程与展望.pdf
+============================================================
+
+【第1页】
+ 
+▪  专论与综述（《农业工程学报》创刊 40 周年专题）  ▪
+中国农产品质量安全可追溯体系发展历程与展望
+孙传恒 ，朱文颖 ，邢　斌 ，罗　娜 ，杨信廷※
+（1.   国家农业信息化工程技术研究中心，北京 100097；2.   农产品质量安全追溯技术及应用国家工程研究中心，北京 100097；
+3.   农业农村部农产品冷链物流技术重点实验室，北京 100097）
+摘　要：农产品质量安全可追溯体系作为保障食品安全的关键技术手段，能够有效提升供应链主体与消费者之间的信任
+关系，为实施精准化质量安全召回机制提供科学依据，因而成为近年来学术研究的重点。该文系统梳理了中国农产品质
+量安全可追溯体系的理论内涵和分类框架，通过历史演进视角将其发展进程划分为初步构建制度框架、全面推广平台建
+设和体系完善与数字智能化转型 3 个阶段。重点剖析了物联网、大数据、人工智能、区块链等信息技术在追溯技术体系
+中的创新应用，从追溯信息感知、信息处理、信息系统平台建设 3 个方面客观评述各类技术的优势与局限性。通过系统
+梳理国家标准、行业标准及地方标准的建设现状，指出当前标准化进程中存在的区域差异性与技术适配性等问题。最后
+提出未来发展建议，探讨了量子区块链、元宇宙、数字孪生等前沿技术在农产品质量安全可追溯领域的应用潜力，并强
+调构建跨链协同、虚实融合的智能化可追溯体系，为推进中国农产品质量安全可追溯体系向智能化与协同化发展提供理
+论支撑和实践路径。
+关键词：可追溯体系；质量安全；标识技术；物联网；区块链；人工智能
+doi：10.11975/j.issn.1002-6819.202503157
+中图分类号：TS201.6　　　　文献标志码：A　　　　文章编号：1002-6819(2025)-12-0001-14
+孙传恒，朱文颖，邢斌，等. 中国农产品质量安全可追溯体系发展历程与展望[J]. 农业工程学报，2025，41(12)：1-14.
+doi: 10.11975/j.issn.1002-6819.202503157　　http://www.tcsae.org
+SUN Chuanheng, ZHU Wenying, XING Bin, et al. Development history and prospects of agricultural product quality and safety
+traceability system in China[J]. Transactions of the Chinese Society of Agricultural Engineering (Transactions of the CSAE),
+2025, 41(12): 1-14. (in Chinese with English abstract)　　doi: 10.11975/j.issn.1002-6819.202503157　　http://www.tcsae.org
+ 
+0　引　言
+农产品质量安全直接关系到人民身体健康和社会的
+可持续发展，是全球农业治理与食品供应链创新的核心
+议题[1]。中国作为全球最大的农产品生产国和消费市场，
+构建高效、透明、可信赖的农产品质量安全可追溯体系，
+既是落实食品安全监管要求的关键路径，更是提升中国
+农产品国际竞争力的关键举措[2]。中国政府持续加强政
+策供给与技术赋能双轮驱动：在制度层面上，国务院办
+公厅 2015 年印发《关于加快推进重要产品追溯体系建设
+的意见》，明确将农产品纳入重点追溯品类，构建法规
+标准、平台建设、信息共享三维一体的制度框架[3]；在
+技术层面，农业农村部致力于推动物联网、大数据等现
+代信息技术在可追溯体系中的应用，提升可追溯体系的
+智能化水平和数据处理能力，为保障农产品质量安全提
+供强有力的技术支撑[4]。商务部积极推动追溯体系在流
+通领域的应用，通过建立追溯平台、推广追溯技术以及
+加强市场监管等措施，提高农产品从产地到市场的全程
+透明度和安全性。
+国际标准组织定义“可追溯性”为追溯客体的历史、
+应用情况或所处位置的能力[5]。食品标准委员会将其定
+义为：追溯食品在生产、加工和流通各特定阶段流动的
+能力，并确保供应链信息记录的完整性、连续性和可验
+证性。在农产品领域，该能力通过标准化标识、全链路
+数据采集、可信化存储及智能化追溯等技术手段，实现
+从农田到餐桌的全过程追溯闭环[6-7]。农产品质量安全追
+溯系统是为实现上述特性的工程化载体，已从传统纸质
+档案阶段发展为融合物联网技术、分布式数据库和智能
+合约的数字化平台，其核心架构通过实时采集、加密存
+储及智能分析全供应链数据，依托数据追踪与区块链溯
+源功能，实现从生产源头到消费终端的全生命周期质量
+管控[8-11]。
+经过 20 余年发展，中国农产品质量安全可追溯体系
+已形成制度演进、技术创新与标准建设的发展格局。在
+制度演进方面，本文重点分析了农产品质量安全可追溯
+管理体系在政策迭代机制优化与制度框架完善过程中的
+发展逻辑与实践路径；在技术创新方面，研究聚焦了物
+联网、大数据、区块链和人工智能等技术的融合应用，
+系统解析其在农产品质量安全可追溯体系中信息感知、
+信息处理与系统平台建设的关键突破路径；在标准建设
+方面，详细阐述了标准体系在国家标准、行业标准和地
+方标准的制定与实施现状。该文构建制度、技术、标准
+三位一体分析框架，系统解析了管理体系在制度演进中
+的政策适配性挑战，技术体系在智能升级中的创新瓶颈，
+标准体系在协同建设中的实施困境及破解路径，为中国
+农产品质量安全可追溯体系的持续完善和优化提供理论
+依据和实践指导。
+ 
+  
+收稿日期：2025-03-21　　修订日期： 2025-05-08
+基金项目：国家重点研发计划项目（2023YFD2001304）
+作者简介：孙传恒，研究员，研究方向为农产品及食品质量安全管理与溯
+源技术。Email：sunch@nercita.org.cn
+※通信作者：杨信廷，研究员，研究方向为农产品及食品质量安全管理与
+溯源技术。Email：yangxt@nercita.org.cn
+ 
+第 41 卷 　 第 12 期
+农  业  工  程  学  报 　
+Vol.41　No.12
+2025 年 　　 6 月
+Transactions of the Chinese Society of Agricultural Engineering
+June 2025
+1
+
+
+【第2页】
+1　中国农产品质量安全可追溯体系框架
+中国农产品质量安全可追溯体系的构建以提升全链
+条监管效能和消费者信任为核心目标，实现对农产品从
+产地源头到餐桌的全程追溯。该文提出管理体系、技术
+体系、标准体系三位一体的体系框架，如图 1 所示。管
+理体系按历史进程分为初步构建制度框架、全面推广平
+台建设、体系完善与数字智能化转型 3 个阶段。管理体
+系通过制定和实施相关法律法规及政策措施，确保追溯
+体系的合法性，增强整个追溯体系的透明度和公信力。
+技术体系是实现全程可追溯的关键支撑，通过物联网、
+大数据、区块链、人工智能等现代信息技术，实现农产
+品从田间到餐桌的实时监控和数据采集，提高追溯的准
+确性和效率，为风险预警提供强有力支持。标准体系为
+可追溯体系的规范化运作提供重要保障，通过制定和实
+施统一的技术标准、数据标准和操作规范，确保全国范
+围、行业范围、地方范围内信息互通和协同运作。
+ 
+ 
+中国农产品质量安全追溯管理体系
+初步构建制度框架
+(2003—2010)
+全面推广平台建设
+(2011—2020)
+体系完善与数字化转型
+(2021—至今)
+有
+效
+监
+管
+高
+效
+智
+能
+规
+范
+统
+一
+地方标准
+行业标准
+国家标准
+中国农产品质量安全追溯技术体系
+标识技术
+物联网
+大数据
+区块链
+人工智能
+未来趋势
+虚拟现实
+增强现实
+元宇宙
+数字孪生
+机器学习
+深度学习
+计算机
+视觉
+数据存储
+隐私保护
+加密
+追溯监管
+Hadoop
+Spark
+数据采集
+数据传输
+数据处理
+应用层
+条形码
+RFID
+NFC
+生物特征
+中国农产品质量安全追溯标准体系
+图 1　中国农产品质量安全可追溯体系框架图
+Fig.1    The framework diagram of agricultural product quality and
+safety traceability system in China
+ 
+农产品质量安全可追溯按照可追溯方向分为正向可
+追溯和反向可追溯：正向可追溯是从生产源头到最终消
+费者的过程，确保农产品在各环节符合质量安全标准；
+反向可追溯是从消费者回溯到生产源头的过程，能够实
+现精准召回和责任追究。按照可追溯范围分为内部可追
+溯和外部可追溯：内部可追溯指在单个企业或组织内部
+的追溯过程，旨在确保产品符合质量标准；外部可追溯
+是指跨越多个企业和组织信息共享的追溯过程，需要参
+与方之间紧密合作和信息共享以确保整个供应链的可追
+溯性。目前，中国形成了以政府为主导的外部可追溯和
+以企业为主导的内部可追溯的应用模式[12]。追溯颗粒度
+是追溯系统能够追踪和识别到的最小信息单元或产品单
+元，颗粒度大小直接影响追溯系统的精度和效率[13-14]。
+QIAN 等[15] 以宽度、深度和精确度为核心，构建包含 2
+层结构、7 个因子可量化多因素追溯颗粒度评价模型。
+农产品质量安全可追溯依据农产品类别不同如果蔬
+类、畜禽类、水产类、乳制品等形成差异化的技术路线。
+果蔬类的研究聚焦地理标识认证与代谢组学分析。SUN
+等[16] 通过分析桃子特征与产地间的关联关系，成功开展
+了水果地理来源认证与追溯研究；HAN 等[17] 通过融合
+多源异构数据对大蒜的地理来源追溯和识别研究，实现
+了蔬菜产地准确鉴定和溯源。畜禽类追溯侧重于生物标
+记物检测技术，WANG 等[18] 基于质谱分析技术对不同
+产地牛肉鉴别研究，评估其在牛肉产地鉴别中的效果，为
+肉类溯源提供更精确分析方法。VARRA 等[19] 对不同国家
+章鱼的原产地进行标签监测，为水产品溯源提供有效便
+捷的技术手段。BEHKAMI 等[20] 基于人工神经网络模型
+分析奶源特征，成功实现了牛奶种类和产地的精确识别，
+为乳制品质量控制提供新方法。PAN 等[21] 结合拉曼光谱
+对白牡丹茶的地理来源进行快速识别，实现了不同产地
+白牡丹茶的准确鉴别，为茶叶溯源提供高效分析方法。
+此外，不同类别农产品在追溯信息的采集方式、采
+集内容、质量安全关键点及监管等方面存在差异[22-24]。
+例如，果蔬类重点采集农药残留检测、产地认证、采收
+批次与新鲜度、冷链温度波动等追溯内容。畜禽类重点
+采集疫病防控、屠宰检疫证明、激素及抗生素残留、屠
+宰分割批次标识等追溯内容。水产类重点采集养殖与捕
+捞主体、养殖用药记录、重金属及微生物污染检测、冷
+链环境等追溯内容。乳制品重点采集原奶菌落总数、三
+聚氰胺检测、杀菌工艺、杀菌时间等追溯内容，不同品
+类农产品追溯的差异分析如表 1 所示。
+ 
+ 
+表 1    不同品类农产品追溯的差异分析
+Table 1    Differences in traceability of agricultural products
+品类
+Categories
+特点
+Characteristics
+追溯环节
+Traceability process
+追溯重点
+Key points of traceability
+果蔬
+Fruit &
+Vegetable
+易腐、季节性
+强、种类多
+品种繁育、种植、加
+工、仓储物流、批发
+和零售
+农药使用记录、采收时间、
+运输温湿度
+畜禽类
+Meat
+多环节、冷链
+运输、高价值
+养殖、屠宰、分割、
+包装、贮存、出厂
+疫苗注射记录、屠宰检疫
+编号、分割批次
+水产品
+Sea food
+环境依赖、冷
+链运输、易腐
+苗种繁育、养殖、鲜
+活运输、加工、仓储
+物流、批发和零售
+捕捞坐标、养殖水质、冷
+链温度连续性
+乳制品
+Milk
+高营养、易变
+质、冷链运输
+养殖、加工、运输、
+检验、销售
+原奶成分、杀菌工艺参数、
+分销渠道追踪
+其他
+Other
+差异化
+个性化追溯环节
+质量安全信息
+ 
+ 
+2　中国农产品质量安全可追溯管理体系
+在全球农产品质量安全治理从危机应对向风险预防
+转型的背景下，为有效解决食品安全事件频发等问题，
+中国政府构建了农产品质量安全可追溯管理体系[25-26]。
+该体系的演进历程可分为初步构建制度框架（2003—
+2010 年）、全面推广平台建设（2011—2020 年）以及体
+系完善与数字智能化转型（2021 年—至今）3 个阶段，
+如图 2 所示。
+ 
+ 
+初步构建制度框架
+(2003—2010年)
+Preliminary establishment of
+the institutional framework
+政策萌芽
+Policy germination
+法律基础
+Legal foundation
+试点推进
+Pilot promotion 
+全面推广平台建设
+(2011—2020年)
+Comprehensive promotion
+and platform construction
+政策支持目标明确
+Policy support and clear
+objectives
+全国推广平台建设
+Domestic promotion and
+platform construction
+体系完善与数字智能化转型
+(2021年—至今)
+System improvement and
+digital intelligence
+新技术创新应用
+Application of new
+technological innovations
+数字智能化转型
+Digital intelligence
+transformation
+图 2　中国农产品质量安全可追溯管理体系发展历程图
+Fig.2    The development history of agricultural product quality and
+safety traceability management system in China
+ 
+ 
+2.1　初步构建制度框架阶段（2003—2010 年）
+2003 年，国家质量监督检验检疫总局启动“中国条
+　 2
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第3页】
+码推进工程”，推动采用 EAN.UCC 系统，标志着中国
+农产品质量安全追溯管理体系开始进入初步探索阶段[27]。
+2004 年，农业部实施城市农产品质量安全监管系统试点
+工作，开展了农产品质量安全可追溯体系试点建设，探
+索建立种植业、农垦、动物标识及疫病和水产品 4 个专
+业的追溯体系。2006 年颁布的《中华人民共和国农产品
+质量安全法》规定了农产品安全标准、产地、生产、包
+装标识、监督检查、法律责任等基本要求。2009 年进一
+步完善《中华人民共和国农产品质量安全法》，确立了
+以食品安全风险监测和评估为基础的科学管理制度，明
+确了食品安全风险评估结果作为制定、修订食品安全标
+准和对食品安全实施监督管理的科学依据。
+ 
+2.2　全面推广平台建设阶段（2011—2020 年）
+2011 年以来，中国农产品质量安全可追溯管理体系
+进入全面推广平台建设阶段，商务部、财政部等开展肉
+类、蔬菜流通追溯体系建设，支持物联网、大数据等现
+代信息技术应用于农产品质量安全追溯，试点地区通过
+部署传感器、RFID 读写器等物联网设备，建立从种植到
+销售的全程追溯信息数据库。2015 年，国家明确提出了
+要加快建设覆盖全国、互联互通、协同共享的重要产品
+追溯体系，并强调了农产品追溯体系建设的重要性[3]。
+2016 年，农业部提出了《农产品质量安全追溯管理办
+法》，对健全追溯管理制度、推进追溯平台建设、强化
+追溯技术支撑等提出了具体要求，细化了农产品质量安
+全追溯体系的建设目标、任务和措施，规范了农产品质
+量安全追溯的实施和运行管理[4,28]。2018 年，农业农村
+部规定与农业农村重大创建认定、农业品牌推选、农产
+品认证、农业展会等农产品实行追溯管理，推进农产品
+质量安全可追溯体系的实施，提高了农产品可追溯覆盖面[29]。
+ 
+2.3　体系完善与数字智能化转型阶段（2021 年—至今）
+2021 年，农业农村部印发了《农产品质量安全信息
+化追溯管理办法（试行）》等配套制度，标志着农产品
+质量安全信息化追溯体系进入体系完善与数字智能化新
+阶段，该制度明确了追溯责任，确保了追溯信息的真实
+性、完整性、安全性和可追溯性，进一步完善了信息共
+享、考核评价、应急管理和数据管理等，确保了追溯体
+系的高效运行[30]。数字智能化转型阶段，通过区块链去
+中心化架构与智能合约不可篡改机制构建可信追溯，并
+融合人工智能技术实现数据智能分析与动态隐私保护策
+略优化，同时结合物联网多源感知数据与知识图谱技术
+建立全链时空关联模型，形成区块链存证、智能合约执
+行、人工智能风险预警的协同追溯体系，有效提升农产
+品从生产端到消费端的全链追溯精度与监管效能，实现
+农产品质量安全问题的跨域协同治理。
+ 
+3　中国农产品质量安全可追溯技术体系
+中国农产品质量安全可追溯技术体系框架由追溯信
+息感知、信息处理和系统集成平台建设 3 部分组成，如
+图 3 所示。在追溯信息感知方面，将物联网、传感器、
+包装标识、时间温度指示器（time-temperature indicator，
+TTI）、电子交易识别、手机终端等感知技术应用于生产、
+加工、储运、交易和监管溯源环节实现追溯数据采集。
+在信息处理方面，通过大数据、人工智能、区块链等技
+术对获取的多源异构数据融合处理，实现了数据清理与
+标准化治理、质量安全风险智能预警以及全流程追溯链
+条动态重构，为农产品质量安全追溯技术体系提供强大
+的数据驱动能力。在系统集成平台方面，为生产与加工
+企业、物流企业、批发零售企业、消费者、政府职能部
+门等追溯供应链主体提供安全生产与管理加工系统、仓
+储配送管理系统、市场交易管理系统、质量安全溯源等
+系统，构建区块链服务平台，实现农产品质量安全供应
+链一物一码、身份管理、信息上链、溯源查询等功能[31]。
+ 
+ 
+区
+块
+链
+平
+台
+建
+设
+信
+息
+处
+理
+信
+息
+感
+知
+构建区块链服务平台
+监管机构
+分析
+中心
+共识节点
+生产
+加工
+储运
+交易
+监管溯源
+农产品供应链溯源
+一物一码 身份管理
+信息上链 溯源查询
+大数据 人工智能
+区块链
+安全生产与
+加工管理系统
+仓储配送
+管理系统
+市场交易
+管理系统
+质量安全
+溯源系统
+质量安全
+管理系统
+政府职能部门
+消费者
+批发零售企业
+物流企业
+生产与加工企业
+联盟
+节点
+审计节点
+物联网
+传感器
+包装
+标识
+传感器
+TTI
+电子交
+易识别
+手机
+终端
+图 3　中国农产品质量安全可追溯技术体系框架图
+Fig.3    The system framework of agricultural products quality and
+safety traceability in China
+ 
+ 
+3.1　追溯信息感知技术
+ 
+3.1.1　标识技术
+标识技术是通过特定编码系统为农产品及其全链条
+环节赋予唯一可识别标识符的核心技术，通过数据录入、
+动态追踪和闭环管理，为农产品质量安全可追溯体系提
+供底层数据支撑。农产品质量安全追溯技术体系中的标
+识技术包括条形码、二维码、射频识别（radio frequency
+identification，RFID）、近场通信（near field communi-
+cation，NFC）、生物特征、同位素等，如表 2 所示。
+ 
+ 
+表 2    农产品质量安全追溯体系中的标识技术
+Table 2    The identification technology in the traceability system
+for agricultural product quality and safety
+技术
+Technology
+特点
+Characteristics
+应用
+Applications
+优点
+Advantages
+缺点
+Disadvantages
+一维码
+1D Barcode
+编码信息，机
+器可读，成本
+低廉
+新鲜果蔬、谷
+物、肉类等普
+通农产品
+成本低廉，实施简
+单，易于普及
+信息容量有限，
+易污染，读取
+需直线扫描
+二维码
+2D Barcode
+存储各种类型
+的数据信息
+高端果蔬、肉
+类等农产品
+功能齐全，易扫描，
+存储容量高
+无法自动感应、
+无法存储高分
+辨图片
+RFID
+射频信号自动
+识别目标并获
+取相关数据
+高端水果、肉
+类、水产品等
+农产品
+读取速度快，批量
+处理能力强，数据
+存储量大
+成本较高，易
+受干扰，设备
+维护复杂
+NFC
+非接触式数据
+交换、短程无
+线通信
+高端水果、肉
+类、水产品等
+农产品
+方便简单
+并与智能手机兼容
+有限使用范围
+安全问题，
+采用障碍
+生物特征
+Biometrics
+DNA、鼻纹、
+视网膜、面部
+识别
+高端肉类、水
+产品等农产品
+安全性高，准确性
+强，难以复制
+技术成本高，
+难度大
+同位素
+Isotope
+放射性或稳定
+同位素标记
+高端肉类等农
+产品
+高精度、难以仿制、
+稳定性高
+技术成本高，
+难度大
+标识技术初期阶段主要采用 EAN.UCC 系统对农产
+品追溯编码[27]。条形码具有成本低廉、易于实施的优点，
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+3 　
+
+
+【第4页】
+但存在信息容量有限、易受污损等局限性。为解决条形
+码信息容量有限问题，FRSCHLE 等[32] 通过实验室预试
+验建立了一套微型线型/二维数据矩阵条码在禽类喙部与
+腿部的喷墨印刷应用方案，采用卡方检测与皮尔逊检验
+对分类数据进行独立性分析，量化不同读取组间的可读
+性差异，试验结果确定了条码最佳附着位点及扫描最优
+读取模式，为后续活体试验提供参考数据。随着智能手
+机普及和移动互联网的发展，二维码技术因其信息容量
+大、易读取的特点广泛应用于追溯领域。
+20 世纪 90 年代，一种非接触式快速读取的 RFID 技
+术开始应用于追溯标识，通过无线射频信号实现了对农
+产品的自动识别和数据采集，显著提高了农产品质量安
+全的追溯效率和准确率[33-37]。针对人工采摘新鲜水果的
+局限性，AMPATZIDIS 等[38] 提出采用 RFID 技术改进方
+案，并设计了两种果筐果树匹配方法，有效提高了追溯
+效率和准确性。QIAN 等[39] 在面粉加工过程的质量安全
+追溯系统中应用 RFID 技术，精确掌握农产品在供应链
+中的位置和状态，成功完成系统测试。同时，NFC 作为
+更高安全等级的短程无线通信技术在追溯标识方面发挥
+重要作用，PIGINI 等[40] 提出了一种基于 NFC 技术的食
+品供应链信息追溯解决方案，通过 NFC 标签构建复合标
+识系统，在供应链各环节持续累积数据，实现完整记录
+食品加工过程信息和优化生产工艺的目的，通过安卓智
+能手机应用程序将追溯数据上传至云端数据库，消费者
+通过安卓应用获取相关信息。
+除了传统物理标识手段外，基于生物特征的标识技
+术逐步应用于家畜个体标识，如 DNA 分析能够实现精
+准个体识别[41]、利用自体免疫性抗体标签生成独特免疫
+标记[42]、利用鼻纹识别技术扫描家畜鼻部纹路[43]、通过
+视网膜和面部识别进行高精度个体区分[44]，为畜禽追溯
+管理提供强有利的技术支持。同时，李春霖等[45] 将稳定
+同位素标识技术应用于农产品产地溯源，建立了可靠的
+产地溯源和质量认证体系，有效区分有机茶和常规茶，
+防治假冒伪劣产品进入市场。
+随着信息技术发展，农产品质量安全可追溯技术体
+系中的标识技术已从传统条形码标向基于农产品本身生
+物特征的智能标识系统转变。当前技术升级呈现两大核
+心方向：一是依托 DNA、表皮指纹等本身生物特征构建
+新型标识载体，二是通过区块链加密等技术强化防伪机
+制。未来该领域将聚焦标识技术本体升级与防伪体系优
+化的协同发展，形成以生物特征为核心、防伪认证为保
+障的双重技术架构。
+ 
+3.1.2　物联网感知技术
+物联网技术通过信息感知实现农产品全供应链的实
+时监测、数据采集、传输分析，解决数据孤岛、准确性
+不足、技术标准规范不统一等问题，构建具有全面感知、
+实时传输与智能决策能力的农产品质量安全追溯体系。
+杨信廷等[46] 基于物联网构建“一核、双轴、三链”的追
+溯体系框架，以实现农产品质量安全溯源的核心目标，
+以农产品从生产到监管溯源的供应链为横轴，以物联网
+技术从信息感知、信息传输到信息处理与决策为纵轴，
+形成面向供应生命周期的产品链、面向供应链主体的服
+务链和面向物联网的技术链。
+物联网技术可划分为数据采集层、数据传输层、数
+据处理层和应用层 4 个层次[47]。数据采集层是物联网的
+核心环节，通过在供应链各个环节部署智能设备，实现
+对农产品全供应链的温湿度环境、位置信息、质量检测
+等数据的实时监测和采集，为农产品质量安全追溯技术
+体系提供全面精确的数据支持，常见的物联网感知技术
+包括传感器、北斗、全球定位系统（global positioning
+system, GPS）、摄像头和智能电子秤等，如表 3 所示。
+FANG 等[48] 设计开发了基于掌上电脑的农田信息快速采
+集系统，系统构建了面向对象的农场模型，结合 GPS 和
+地理信息系统技术，实现了农场要素精准描述、采样方
+案灵活编辑及采样过程智能控制，为精准农业提供了高
+效的田间数据实时采集与处理支持。AKYILDIZ 等[49] 研
+究了无线传感器网络（wireless sensor network, WSN）技
+术在农产品供应链中的应用，WSN 技术具有易于布置、
+方便控制、低功耗、灵活通信、低成本的特点，为生产
+环境信息的快速采集与实施监测提供了有效支撑。
+ 
+ 
+表 3    农产品质量安全追溯技术体系中的物联网感知技术
+Table 3    Internet of things in the agricultural product quality and
+safety traceability technology system
+技术
+Technology
+特点
+Characteristics
+应用
+Applications
+优点
+Advantages
+缺点
+Disadvantages
+传感器
+Sensor
+实时监测，精
+准高效
+生产、加工、
+运输、仓储
+数据精准、实
+时性强
+成本较高、维
+护复杂
+北斗/GPS
+精确地理定位，
+运输路径跟踪
+运输、仓储
+定位精度高，
+实时监测
+信号易受干扰，
+设备成本较高
+摄像头
+Camera
+实时监控可视
+化数据支持
+生产加工运输、
+仓储销售
+直观视觉信息
+大量存储空间、
+数据处理分析
+较复杂
+智能电子秤
+Smart
+electronic scale
+实时记录质量
+信息
+销售、交易
+数据准确、防
+欺骗
+设备成本高
+ 
+在解决生鲜农产品冷链物流追溯方面，卢升荣等[50]
+研究生鲜农产品在冷链过程中问题和风险，基于物联网
+技术设计了生鲜农产品冷链物流追溯系统，包括传感器
+节点、数据采集和传输模块、远程监控平台等组成部分，
+实现了农产品生产、加工、运输等环节相关数据可视化和
+查询功能。张建奎[51] 阐述了中国农产品冷链物流平台中
+存在的技术问题，分析了物联网技术在农产品冷链物流
+平台中应用优点及发展前景，倡导建立以政府为主导的
+安全高效的冷链物流公共信息服务平台，构建安全高效
+的冷链物流科技体系，实现了冷链全程监控和资源共享。
+未来物联网技术在保持信息感知能力的基础上，将
+聚焦于生产环节自动化数据提取、大规模感知管控追溯
+数据与全链条安全性强化 3 大核心趋势，推动农产品质
+量安全可追溯技术体系的发展。通过部署智能传感器与
+边缘计算节点，实现种植环境参数、采收作业状态及加
+工过程数据的实时自动化采集，构建田间到市场的多模
+态感知网络，推动农产品追溯体系向智能化、可信化与
+抗风险方向升级，为农产品质量安全追溯提供关键支持。
+ 
+3.2　信息处理技术
+ 
+3.2.1　大数据技术
+大数据技术是一种通过分布式计算、存储和分析等
+手段，对海量、高速增长且类型多样化的数据进行处理、
+挖掘和应用的技术。基于大数据的农产品质量安全追溯
+平台可实现农产品生产、加工、销售一体化。在生产方
+　 4
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第5页】
+面，大数据与物联网技术深度融合，为种植管理者带来
+更精准高效决策辅助，实现气象气候的精准预测，提供
+可靠的种植决策和保值方案，为农业精细化、自动化和
+智能化发展提供技术支持。在加工方面，大数据可实现
+加工数据采集分析，质量检测预警以及问题产品追根溯
+源，助力农产品标准化加工，促进追溯朝更高质量效益
+发展。在销售方面，大数据技术能够精确把握市场动态，
+强化农产品信息管控，有效降低风险[52]。
+XU 等[53] 基于 Hadoop 的云计算追溯平台，实时监
+测食品质量和预测保质期，实现了 WSN 采集和存储数
+据的功能，并为数据挖掘和决策支持建立了知识和模型
+库。BAN 等[54] 基于 Spark 数据分析，提供完整的可视化
+界面，实现了农产品价格预测、销售分析和生产过程的
+质量追溯。智丽平等[55] 通过探讨大数据与粮食质量安全
+监管的融合追溯系统，分析其在提高监管效率、加强风
+险预警能力、增强透明度和可追溯性等方面的作用，及
+时发现解决潜在质量安全问题，实现了对关键参数实时
+预警的功能。孙笑严[56] 通过分析食品安全追溯系统的需
+求，设计了基于大数据的食品安全追溯系统，旨在全面
+监控和管理食品供应链，提高食品的安全性和透明度。
+此外，大数据还支持预测分析和供应链优化，制定了科
+学的防控策略和高效的物流方案，实现了农产品质量控
+制与安全认证。
+未来基于大数据技术的追溯平台将推动农产品质量
+安全可追溯体系向实时流式数据分析方向升级。通过多
+源异构数据融合与多模态对齐技术，实现历史静态分析
+向动态感知的转型。依托单品全生命周期数据架构，构
+建农产品生产调度优化模型与价格智能调控机制，推进
+全供应链的互联互通。同时基于时空耦合分析框架，建
+立覆盖品类、地域及周期的三维监管矩阵，形成数据驱
+动、精准调控、风险预判的闭环治理体系。
+ 
+3.2.2　人工智能技术
+人工智能技术通过智能化的数据处理、分析和预测，
+实现对农产品从生产到销售全过程的精准监控、风险预
+测、质量评估和高效追溯，涉及机器学习、深度学习和
+计算机视觉等关键技术[57]，如表 4 所示。机器学习为农
+产品质量安全可追溯提供风险评估和数据处理能力，结
+合光谱等检测手段实现农产品风险识别和预警；深度学
+习通过海量追溯数据的深度挖掘和分析，增强了缺陷检
+测、成分分析和序列数据处理能力；计算机视觉通过图
+像监管和图像检测，实现了农产品供应链全程监控和非
+接触式检测。
+机器学习结合光谱技术等检测手段，能够识别捕捉
+产品关键特征，并据此预测、决策或执行特定任务，通
+过数据预处理、模型训练优化等集成框架，确定目标并
+优化决策流程，实现了农产品风险识别和预警，主要方
+法包括随机森林和支持向量机（support vector machine,
+SVM）等[58-63]。王文秀等[64] 为探究二维相关同步光谱优
+选生鲜肉新鲜度特征变量的可行性，建立猪肉新鲜度的
+SVM 判别模型，有利于解析生鲜肉在腐败变质过程中的
+光谱特征信息变化，为近红外光谱分析中变量筛选提供
+新思路。WEI 等[65] 将分光光度法与机器学习相结合，基
+于茶汤光谱特征实现了红茶中胭脂红的快速检测，定性
+模型对红茶中胭脂红存在与缺失的判别准确率高达 100%。
+XU 等[66] 研究了傅里叶变换光谱技术结合化学计量方法
+在豆腐干保质期快速分析中的应用，开发了具有良好泛
+化性能的非线性模型，显著提升建模与预测精度。
+ 
+ 
+表 4    农产品质量安全追溯技术体系中的人工智能技术
+Table 4    Artificial intelligence in the agricultural product quality
+and safety traceability technology system
+关键技术
+Key technology
+方法
+Methods
+优点
+Advantages
+缺点
+Disadvantages
+机器学习
+Machine learning
+随机森林
+集成学习，提升风险
+评估准确性和稳定性
+数据量大、解释性差、
+维护复杂、实时性差
+支持向量机
+分类和回归能力强，
+适用于真伪鉴别、微
+生物污染检测等
+核函数选择难、参数
+敏感、计算量大、解
+释性差、样本要求高
+深度学习
+Deep learning
+人工神经网络 较强非线性映射学习
+能力
+数据需求量大、训练
+复杂
+卷积神经网络 适用于图像识别、缺
+陷检测及成分分析等
+数据量大、训练复杂、
+存在过拟合风险
+循环神经网络
+较强序列数据处理
+能力
+长期依赖问题、训练
+复杂、并行差
+计算机视觉
+Computer vision
+图像监管
+农产品供应链全程
+监管
+环境干扰大、误检率
+高、隐私风险
+图像检测
+快速、稳定、非接触
+式检测
+环境干扰大、数据依
+赖强
+ 
+基于神经网络的深度学习，通过增加计算单元的层
+级和复杂度实现对农产品供应链中海量追溯数据的深度
+挖掘和分析，增强图像识别和序列数据处理能力，包括
+人工神经网络、卷积神经网络（convolutional neural network,
+CNN）和循环神经网络等[67-68]。LIU 等[69] 开发了一种特
+异性相应脂质氧化与生物胺指标的比色微流控纸芯片分
+析装置，用于评估香肠储存期间的腐败程度，基于 CNN
+搭建的分类模型测试准确率达到 97.1%，为猪肉新鲜度
+评估提供了一种低成本快速便捷的检测方案。XIN 等[70]
+开发了一种结合小波变换与堆叠卷积自编码的深度学习
+方法，用于提取生菜叶片复合重金属检测的深层特征，
+研究结果证实了高光谱技术结合深度学习算法在复合重
+金属检测中的巨大潜力。ISMAIL 等[71] 提出了一种基于
+先进深度学习与堆叠集成方法的高效机器视觉系统，为
+水果新鲜度与外观的自动化无损低成本检测提供解决方
+案。项辉宇等[72] 提出了一种基于深度学习的苹果质量检
+测及分级方法，可准确快速对苹果总体质量评级。
+计算机视觉技术用于农产品质量安全追溯的全程智
+能化监管和非接触式检测，主要方法包括图像监管和图
+像检测[73]。刘晶璟[74] 开展了人工智能在食品安全监管领
+域的应用研究，通过可视化技术与人工智能相结合的方
+式，为食品安全监管部门提供了一种新的监管手段和监
+管思路，从而提高食品安全监管效率和监管水平。窦瑞
+华[75] 利用计算机视觉构建了用于农产品生产、加工、储
+存、运输以及销售全过程的物流监控体系，全面提高了
+食品安全监管的效率和水平。张淳等[76] 介绍了面向食品
+加工过程的计算机视觉技术，在过程监控、质量检测、
+食品安全等工程领域的应用情况，阐释了计算机视觉技
+术与智能优化控制、网络化多机器人系统协作技术在食
+品加工过程智能化发展进程中的重要作用。LUO 等[77]
+探索利用气流 3D 机器视觉技术与机器学习模型，通过
+牛肉的黏弹性特性评估其新鲜度的可行性，为无损高效
+的牛肉新鲜度评估提供了技术参考。
+未来人工智能将持续优化机器学习、深度学习及计
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+5 　
+
+
+【第6页】
+算机视觉等技术，推动农产品质量安全可追溯技术体系
+向全链智能感知与决策发展。在生产环节，基于多模态
+大模型实现种植行为实时解析，通过视频流与传感器数
+据融合，精准识别违规操作并构建动态风险评估矩阵。
+加工环节采用时空图神经网络建立品质关联模型，实现
+分拣参数自适应优化与加工异常溯源。运输环节依托图
+嵌入技术构建异构供应链拓扑结构，结构深度强化学习
+动态规划冷链路径。销售环节集成因果推理与联邦学习
+框架，构建时空、品类、风险监管模型，实现市场端质
+量问题的多粒度归因分析。通过大模型的行为认知、图
+神经网络的网络化追溯及多模态风险预警，形成贯穿产
+加储运销的全链自主优化能力。
+ 
+3.2.3　区块链技术
+区块链技术具有去中心化、数据不可篡改、可追溯、
+高可用等特点，能够解决数据共享的安全信任问题，构
+建与追溯需求契合的可信交易环境，实现农产品生产、
+加工、运输及销售信息的真实透明可靠，关键技术包括
+数据存储、隐私保护加密和追溯监管等[78-80]，如表 5 所示。
+数据存储技术能够有效应对农产品供应链中产生的海量
+数据，显著提高处理效率；隐私保护加密技术确保供应
+链的隐私数据被充分保护，提高数据安全性和隐私性；
+追溯监管技术有效解决因供应链结构复杂导致的监管难
+题，为实现全程可追溯性提供可靠技术保障。
+追溯数据存储技术能够解决农产品供应链中海量数
+据的存储问题，主要包括多链和链上链下协同技术[81-83]。
+张文芳等[84] 提出了基于树形结构的主从多链架构，在联
+盟链场景中实现不同数字资产的分类、并发处理，可达
+到数据隔离的隐私需求。DING 等[85] 提出了双链的追溯
+许可链共识机制，主层部署联盟链用来追溯信息查询共
+享，辅助层部署私有链存储追溯信息，在保证追溯链私
+密性的同时，保持高效的运行效率。赵磊等[86] 提出了一
+种基于账户区块链和交易区块链双链架构大数据生鲜食
+品追溯平台，并从信息生态视角分析用户，提出追溯参
+与主体的风险补偿方案，但是目前关于区块链多链架构
+的研究并没有考虑追溯数据特有的时间周期特性。
+针对链上链下协同技术，刘浩宇等[87] 提出智能合约
+即服务方案，提供链上合约与链下服务协同的方法，通
+过链下服务的链上认证，将服务生命周期纳入区块链管
+理，使之具有合约服务的可信化特点，支持服务的注册、
+定制和组合。SALAH 等[88] 提出了一种利用以太坊区块
+链和智能合约执行业务交易的方法，设计基于区块链的
+大豆可追溯性溯源过程，并将区块链技术与中心化数据
+库结合使用，将溯源数据存放在数据库中来减少链上存
+储数据量。JAYABALAN 等[89] 提出了一种基于区块链和
+星际文件系统溯源架构，并提出了链上链下数据的存储
+结构来解决区块链的数据存储压力大的问题。董云峰等[90]
+基于区块链技术设计了粮食食品全供应链可信追溯原型
+系统，并提出了“链上+云数据库”的数据存储模式，保
+证了区块链系统的运行成本与效率。但是在链上链下数
+据协同扩容中并没有考虑链上密文的差异化访问以及链
+上链下追溯数据的穿透式监管。综上所述，追溯数据的
+管理研究集中于数据的存储管理，如何建立农产品供应
+链追溯数据空间高效存储模型，并从数据周期性存储角
+度考虑哪些数据具有时效性、哪些数据可被删除、如何
+删除失效数据是区块链追溯系统亟需解决的首要问题。
+ 
+ 
+表 5    农产品质量安全追溯技术体系中的区块链技术
+Table 5    Block chain in the agricultural product quality and safety
+traceability technology system
+关键技术
+Key technology
+方法
+Methods
+优点
+Advantages
+缺点
+Disadvantages
+数据存储技术
+Data storage
+technology
+多链技术
+提高系统效率、增强
+数据安全性、实现数
+据隔离与权限控制
+跨链协同困难、维护
+成本高、数据一致性
+难、扩展受限
+链上链下
+协同技术
+提升数据处理速度、
+降低区块链负载、实
+现数据实时更新与
+查询
+系统复杂、协同困难、
+维护成本高、数据同
+步难、扩展受限
+隐私保护加密技术
+Privacy protection
+encryption
+technology
+对称加密
+计算量小、加密效
+率高
+密钥分发难、安全性
+低、不可否认弱
+非对称
+加密
+安全性高、不易破解 计算量大、储存需求
+高、量子威胁
+Hash 算法 数据快速验证且密文
+不可逆转
+碰撞风险、储存压力、
+安全依赖
+数字签名
+保障交易安全生成抗
+抵赖性交易凭证
+计算量大、处理效率
+低、量子威胁
+零知识证
+明
+不会获取任何相关知
+识
+计算量大、验证效率
+低、技术门槛高
+安全多方
+计算
+在无可信第三方情况
+下，安全进行多方协
+同计算
+计算量大、实现复杂、
+通信成本高、维护
+困难
+差分隐私
+保护数据隐私，降低
+数据泄露风险
+数据可用性降低、噪
+声干扰大
+可信计算
+敏感数据在硬件保护
+下可以避免非授权访
+问数据
+硬件依赖导致成本高、
+兼容性差、性能开
+销大
+联邦学习
+极大程度上保护用户
+隐私，降低通讯负载
+通信开销大、数据异
+构性强、协调困难、
+收敛性差
+监管技术
+Supervisory
+technology
+节点接入
+认证
+确保节点合法性、提
+升系统安全性、防止
+非法节点接入
+认证效率低、密钥管
+理难、扩展性差、安
+全风险高
+节点权限
+管理
+细化权限控制、保障
+数据安全、实现访问
+控制与审计
+权限划分复杂、难以
+动态调整、管理成本
+高、协同性差
+节点行为
+审查
+及时发现异常行为、
+提高系统透明度、确
+保数据操作合规性
+审查繁琐、实时性差、
+标准不统一、人为误
+差
+节点追踪
+零知识证明、精准定
+位、分段可控、透明
+可查
+信息孤岛、协同难、
+冗余高、维护复杂、
+单点风险
+跨链监管
+哈希锁、智能合约、
+中继链、扩展灵活、
+监管全面
+技术复杂、协议差异、
+安全风险、维护复杂、
+协同难
+ 
+数据隐私保护加密技术通过分层技术架构实现全生
+命周期的安全管理，主要包括对称加密算法、非对称加
+密算法（rivest-Shamir-Adleman, RSA）、哈希算法（Hash）、
+数字签名、零知识证明、多方安全计算、硬件可信计算和
+联邦学习等。孙传恒等[91] 通过高级加密标准（advanced
+encryption standard, AES）对称加密实现隐私数据的加密
+上链，通过非对称加密 AES 密钥，进而实现密钥的传输，
+为隐私数据的访问提供了传输方法。非对称加密采用公
+私密钥保证数据隐私。马腾等[92] 结合非对称加密算法设
+计农产品原产地可信追溯系统。VIJAYARAGAVAN 等[93]
+提出了一种去中心化区块链系统的构建方法，在分布式
+网络上实现了农业信息的数据安全共享。王乃洲等[94] 通
+过 RSA 加密算法和共识算法保证基于区块链的用户身份
+认证信息的安全性。
+Hash 函数可识别源数据的任何更改且具有单向不可
+还原特点，杨信廷等[95] 设计的农产品区块链追溯系统信
+息存储模型将追溯明文信息存储在各节点本地数据库，
+　 6
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第7页】
+上传经过 MD5 哈希算法的哈希值到区块链。李宣等[96]
+基于区块链和物联网设计的双区块链防伪追溯系统，基
+于私有链存储交易数据，交易明文经 Hash 函数加密后的
+密文上传到联盟链。陈枫等[97] 引入变色龙哈希函数可为
+区块链编辑功能的实现提供可能性，可编辑区块链存储
+模型可进一步提升系统的健壮性和数据的完整性。
+零知识证明和安全多方计算强调输入数据的保密性，
+弥补区块链重视计算的可验证性而忽略数据验证性的问
+题[98]。联邦学习强调在保护数据隐私的前提下完成模型
+训练工作，有利于促进企业间的合作共赢[99]。综上所述，数
+据隐私保护技术集中于链上数据隐私保护，如何在数据
+隐私保护的基础上实现追溯数据的差异化访问和高效共
+享，是需要解决的关键问题。同时在应用方面结合权限
+控制体系和证书认证体系管理多组织间信息传递或共享，
+将权限管理紧密结合供应链追溯业务场景，加速促进区
+块链农产品供应链追溯的应用落地是亟需解决的问题。
+追溯监管技术能够解决农产品供应链因周期长、结
+构复杂而导致的监管难度大的问题，包括节点接入认证、
+节点权限管理、阶段行为审查、节点追踪、跨链监管等
+技术。在区块链节点接入认证方面，于华竟等[100] 设计
+数据监管智能合约、基于监管授权组网建链机制，实现
+追溯网络的穿透式监管，不仅体现在追溯数据的全方面
+监管，也体现在对追溯企业节点的管控，保证追溯网络
+的健康、可持续、稳定发展。针对区块链节点权限管理
+问题，孙传恒等[101] 设计追溯数据分类混合加密上链智
+能合约，实现隐私数据保护和公开数据溯源不断链。李
+家辉等[102] 为实现可控的隐私保护提出一种基于属性加
+密的区块链多组织交易可控、可监管隐私保护方案，该
+方案允许交易组织自行控制隐私保护的范围，同时监管
+部门可以根据不同的交易组织分配不同的监管者。在区
+块链节点行为审查方面，对于节点的行为进行跟踪与监
+督，包括行为特征提取、行为识别跟踪和异常审查。
+在区块链节点追踪方面，对区块链节点追踪可确定
+区块链使用者信息，从而实现对区块链使用者的监管。
+张思亮等[103] 基于零知识证明、隐身地址技术和环签名，
+提出了一种可追踪的区块链账本隐私保护方案，使普通
+用户节点无法通过对历史账本的分析破坏匿名性，同时
+使监管者能够解密交易信息。王栋等[104] 针对电力调度
+指令存证的特定需求，设计了支持调度发起者身份隐私
+且可追踪、接收者身份以及调度指令隐私且合规的区块
+链存证方案。宋靖文等[105] 引入监管方角色，基于一次性
+地址加密和零知识证明设计了可监管的交易接收方身份
+隐私保护方案，结合可链接环签名和可撤销环签名设计
+了可链接可撤销环签名方案，以实现基于自主混淆的可
+监管交易发送方身份隐私保护方案。李致远等[106] 提出
+了一种基于节点影响力的账户余额模型区块链交易追踪
+方法，旨在追踪特定目标账户模型地址的主要资金流向。
+在异构多链跨链监管方面，区块链技术的快速发展
+催化出许多异构的区块链网络，每个网络都具有自己的
+规则、协议和生态系统。经普杰等[107] 提出了一种分层
+跨链的监管架构，设计了“监管链-业务链”跨链协作的
+以链治链的监管模式。该架构以构建去中心化的监管链
+的方式改善了信息系统监管的集权特性；以策略层和监
+管层、业务层分离的方式，实现了监管行为和监管技术
+的分离，从而保证了区块链监管结构的通用性。陈晓丰
+等[108] 针对多级多维的监管需求提出一套多链协同的“以
+链治链”监管框架，设计了由分层多级监管链和异构接
+入链构成的监管架构，明确了该架构下区块链监管的基
+本流程；将该框架下的监管技术体系抽象成基础层、决
+策层、跨链层、接入层、执行层和数据层，并提出一系
+列对监管系统构建最为关键的监管骨干机制。
+跨链技术主要包括中继链、哈希锚定等技术，通过
+实现不同区块链网络之间的数据互通与合作，解决信息
+孤岛问题，促进多环节、多地区间的信息流动性，实现
+异构多链之间的跨链通信，显著提升存储能力、查询效
+率和安全性[109-113]。上述方法应用于联盟区块链监管取得
+了初步成效，但并无针对大规模农产品供应链追溯提出
+的监管技术。因此需要深入研究大规模农产品供应链追
+溯监管模型，设计适配农产品追溯数据的监管智能合约，
+将监管条例写成智能合约部署在链上，通过智能合约与
+监管技术相结合实现监管的自动执行，使区块链本身能
+够对外部治理做出反应，减轻监管机构在现有政治和企
+业治理系统方面的负担。
+区块链技术已在数据存储、隐私加密与追溯监管等
+核心技术领域实现突破，未来将通过农产品质量安全追
+溯技术体系的应用实践，推动其架构向更高可用性持续
+发展。在技术层，基于异构分片架构的可扩展区块链将
+支撑亿级单品数据上链，结合抗量子计算特征实现长期
+数据抗破解能力，通过动态可编辑智能合约满足供应链
+条款的灵活迭代；在应用层，基于 Web3.0 构建的去中
+心化交易市场与元宇宙数字孪生农场深度融合，利用非
+同质化通证农产品数字护照实现跨平台可信流转，降低
+产地直供模式交易成本；在追溯机制上，采用轻量化零
+知识证明与同态加密技术，在确保隐私合规前提下完成
+跨境质量认证，结合物联网设备，形成物理流转、数据
+存证、价值交换三位一体的可追溯模式，最终构建具备
+弹性扩展，量子安全与经济效能的新型农产品质量安全
+追溯技术体系。
+ 
+3.3　信息系统集成平台
+目前，中国政府从国家层面与地方层面共同推动农
+产品质量安全可追溯信息系统集成平台建设。国家层面
+上，国家市场监督管理总局下属单位中国物品编码中心，
+从实施“中国条码推进工程”以来，依托国际物品编码
+组织（GS1）全球统一标识系统在全国建立了 100 多个
+产品质量安全追溯应用示范基地，形成以电子产品代码
+信息服务为核心的数据交换标准。农业农村部主导建设
+了国家农产品质量安全追溯管理信息平台，实现农产品
+“来源可追溯、去向可追踪、责任可追究”的全链条监
+管。商务部、财政部开展肉类蔬菜流通追溯体系建设，
+建成以中央、省、市三级平台为主体、全国互连互通、
+协调运作的追溯管理网络，形成生产与流通有效衔接的
+肉类蔬菜流通追溯体系。
+地方层面上，浙江、广东、北京等地区在农产品质
+量安全可追溯信息系统集成平台建设方面进行了大量的
+工作。“浙江省浙食链系统”集成 Hyperledger Fabric 区
+块链技术，建立包含生产环境数据、检测报告等 7 类元
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+7 　
+
+
+【第8页】
+数据的分布式账本。“广东省水产品质量安全追溯平台”
+部署多智能体系统，通过合同网络协议实现养殖户、加
+工厂等 12 类主体的协同决策。2018 年，农产品质量安
+全追溯技术及应用国家工程研究中心探索了基于“区块
+链+物联网+大数据”的追溯模式，实现了自动化数据采
+集、精准可信溯源与智能分析，并在浙江宁波水果番茄、
+山东烟台苹果、云南大洋芋、广东英德红茶等农产品进
+行应用，如图 4 所示。
+ 
+ 
+图 4　农产品质量安全追溯平台
+Fig.4    Agricultural product quality and safety traceability platform
+ 
+在面向物联网、大数据、区块链与人工智能技术融
+合的复杂系统架构设计中，通过区块链智能合约触发人
+工智能模型迭代、物联网传感数据上链存证、大数据分
+析结果反哺边缘设备策略优化，形成感知、决策、执行
+闭环架构，最终在农产品安全追溯场景中达成实时数据
+采集，溯源查询相应时间毫秒级的技术指标。采用面向
+服务的架构对物联网边缘计算单元、大数据分析引擎进
+行服务化抽象，依托数据总线构建统一数据平面，利用
+数据抽取、转化和加载工具链实现物联网时序数据、区
+块链交易记录与人工智能特征数据的标准化清洗与模式
+映射，并借助事件驱动型数据管道实现多模态数据流的
+实时分发 [114-115]。
+未来信息系统集成平台在中国农产品质量安全追溯
+体系中将呈现超大规模协同与弹性架构演进的核心趋势，
+重点突破高并发访问、高吞吐量及性能可插拔 3 大技术
+瓶颈。通过分布式微服务架构与事件驱动型数据管道，
+构建支持千万级终端并发的动态扩展能力，实现全链数
+据毫秒级响应，依托异构数据库联邦技术与列式存储优
+化，将供应链追溯数据的吞吐量提升百万量级，满足跨
+省域农产品流通的实时追溯需求；采用模块化可插拔设
+计，通过轻量化接口协议实现区块链存证、人工智能质
+检分析等功能的即插即用，兼容农业场景的动态技术迭
+代需求，从而推动追溯体系从碎片化孤岛向全链条数据
+贯通跃迁，最终形成弹性扩展、超低延迟、智能适配的
+一体化追溯。
+ 
+4　中国农产品质量安全可追溯标准体系
+农产品质量安全可追溯标准体系通过制定和实施技
+术标准和操作规程，为追溯体系的规范化运作提供标准
+支撑，主要包括国家标准、行业标准和地方标准。
+目前，中国已发布食品追溯相关国家标准共计 17 项，
+涉及不同品类农产品、不同技术等领域。2009 年，首个
+食品追溯相关国家标准建立了农产品可追溯体系设计流
+程和实施总则[116]。随后，建立了农产品可追溯体系设计
+的原则和步骤，提出内部、外部、基本和扩展追溯信息
+等概念[117]。全国标准化研究院制定了果蔬等多种品类农
+产品在供应链各个环节的记录要求，对追溯管理中的专
+业术语明确定义和分类整理[118-119]。2023 年，涉及到进
+口食品追溯的国家标准开始实施[120]。国家标准提供了宏
+观指导和总体框架，确保追溯体系在全国范围的统一性
+和规范性。
+行业标准则根据不同农产品的特性和生产流程，制
+定更为细致和专业的技术规范，为各行业提供具体操作
+指南。目前，食品追溯相关行业标准共计 75 项，涉及
+RFID、标签防伪、操作规程、编码导则、技术要求等领
+域。2007 年首例行业标准实施，为农产品追溯提供统一
+技术规范和编码指导原则[121]。随后，规定了水果、茶叶
+等 10 项农产品的追溯操作规程，以及追溯体系的编码规
+则、信息感知、信息传输、信息处理等技术要求[122-123]。
+2024 年，海关总署规定了水产品等 20 项进口食品的溯
+源指南[124]。2025 年，北京市农林科学院信息技术研究
+中心规定了生鲜农产品冷链规则，为农产品追溯提供了
+详细专业的技术规范和操作指南[125]。
+地方标准的制定是对行业标准和国家标准的补充、
+细化和完善。目前各省市监督管理部门根据本地特色农
+产品的实际情况已制定追溯地方标准 210 项，如河北省
+质量技术监督局制定了首个针对果品的地方标准[126]，广
+东省完善了针对特色水产品的溯源体系[127]，宁夏回族自
+治区市场监督管理厅明确了针对枸杞的追溯要求[128]，湖
+南省市场监督管理局针对洞庭香米明确了其质量追溯基
+础信息[129]。地方标准充分考虑了各地的自然条件、农业
+生产特点以及市场需求，制定了符合当地实际情况的追
+溯细则，增强了追溯体系的可操作性和适应性。
+目前，农产品质量安全可追溯标准体系面临结构性
+重构需求，需破解当前多维标准化框架与产业实践深度
+脱节的矛盾。一方面，跨部门标准交叉重复、体系离散
+化与标准迭代周期滞后于技术演进速率，导致现有标准
+对区块链动态存证、边缘计算实时处理等新技术适配度
+不足；另一方面，标准内容停留于数据格式表层规范，
+缺乏对追溯因果关联、多模态数据融合机理等底层逻辑
+的深层定义。未来发展趋势将聚焦全链治理框架构建，
+通过建立基础共性标准、技术专用标准、场景应用标准
+三级协同架构，实现标准体系从碎片化向全生命周期覆
+盖转型，最终形成兼具技术穿透力与产业适配性的多模
+态标准协同生态。
+ 
+5　结论与展望
+中国农产品质量安全追溯体系框架由管理体系、技
+术体系与标准体系 3 部分构成。管理体系发展经历初步
+构建制度框架、全面推广平台建设和体系完善与数字智
+能化转型 3 个阶段，通过优化管理流程、强化数字监管
+手段，为技术体系与标准体系的落地实施提供政策保障。
+技术体系深度集成物联网、大数据、区块链、人工智能
+等关键技术，在信息感知、信息处理、信息系统平台建
+设等方面取得显著进展。标准体系以国家标准为核心，
+统筹行业标准与地方标准，为追溯系统的规范化建设与
+运行提供准则。然而，当前不同地区和企业所采用的追
+　 8
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第9页】
+溯技术与管理模式存在差异，数据孤岛问题凸显，且系
+统缺乏统一的标准和规范，致使数据难以实现共享与整
+合。此外，追溯系统建设与维护成本较高，新兴技术与
+追溯体系的融合受到限制，进而制约了追溯体系的覆盖
+面与普及率。随着追溯技术体系的持续革新、管理体系
+的不断优化以及标准体系的逐步完善，中国农产品质量
+安全可追溯体系需以基础理论研究为出发点，以市场应
+用为导向，以平台为实践基础，向更深层次发展。未来
+可能主要研究和应用方向如下：
+1）在追溯信息感知方面，标识技术将逐步构建以生
+物特征为核心、防伪认证为保障的新型标识体系，物联
+网感知技术将聚焦生产环节自动化数据提取、大规模感
+知与管控追溯数据及全链条安全性强化 3 大核心趋势，
+增强农产品质量安全可追溯技术体系的信息感知和控制
+能力，引领其向更智能化自动化方向发展。
+2）在追溯信息处理方面，大数据技术将依托多源异
+构数据融合与多模态对齐技术，突破传统静态数据分析
+的局限，构建动态感知系统。人工智能技术将通过大模
+型的行为认知、时空图神经网络的网络化追溯及多模态
+风险预警，形成贯穿产加储运销的全链自主优化能力。
+区块链技术将探索量子区块链、Web3.0 等前沿应用场景，
+推动农产品质量安全可追溯技术体系向更加高效可信的
+智能化方向发展。
+3）在追溯信息交互领域，深度融合元宇宙、数字孪
+生等前沿技术，信息系统集成平台将朝着超大规模协同
+与弹性架构方向演进，着力攻克高并发访问响应慢、高
+吞吐量处理难、性能模块不够灵活扩展 3 大技术瓶颈，
+实现用户与海量数据的流畅交互，实现虚实空间的实时
+互动和信息共享，推动农产品质量安全可追溯技术体系
+向智能化、沉浸式交互体验全面升级。
+4）在追溯标准建设领域，跨平台、跨部门、跨区域
+乃至跨国界的协同追溯合作已成为必然趋势。未来，农
+产品质量安全可追溯体系将构建基础共性标准、技术专
+用标准、场景应用标准三级协同架构，实现标准体系从
+碎片化向全生命周期覆盖转型。
+[ 参     考     文     献 ]
+ 
+ KEKENNEDY S. Why can't we test our way to absolute food
+safety?[J]. Science, 2009, 322(5908): 1641-1643.
+[1]
+ 黄红星，苏倩，郑业鲁，等. 农产品安全追溯的发展与应
+用[J]. 农业网络信息，2009(12)：116-119.
+HUANG  Hongxing,  SU  Qian,  ZHENG  Yelu,  et  al.
+Development and application of tracing back of agricultural
+products
+ safety[J]. 
+Agriculture
+ Network
+ Information,
+2009(12): 116-119. (in Chinese with English abstract)
+[2]
+ 中华人民共和国国务院新闻办公室. 国务院办公厅 关于加
+快推进重要产品追溯体系建设的意见[EB/OL]. （2015-12-
+30）[2024-12-19]. http://www.gov.cn/gongbao/content/2016/
+content_5036271.htm.
+[3]
+ 农业部关于加快推进农产品质量安全追溯体系建设的意
+见[R/OL]. （2017-11-28）[2024-12-19]. http://www.moa.gov.cn/
+nybgb/2016/diqi qi/201711 /t20171128_5921713.htm.
+[4]
+ SAMANTHA  I,  JONATHAN  M  C.  Food  traceability:  A
+generic  theoretical  framework[J].  Food  Control,  2021,  123:
+107848.
+[5]
+ TARJAN L, SENK I, TE G S, et al. A readability analysis for
+QR  code  application  in  a  traceability  system[J].  Computers
+[6]
+and Electronics in Agriculture, 2014, 109(11): 1-11.
+ STEWART  W  G.  Food  authentication  and  traceability:  An
+Asian  and  Australian  perspective[J].  Food  Control,  2017,
+72(2): 168-176.
+[7]
+ 谢菊芳，陆昌华，李保明，等. 基于. NET 构架的安全猪
+肉全程可追溯系统实现[J]. 农业工程学报，2006，22(6)：
+218-220.
+XIE
+ Jufang,
+ LU
+ Changhua,
+ LI
+ Baoming,
+ et
+ al.
+Implementation  of  pork  traceability  system  based  on.  NET
+framework[J].  Transactions  of  the  Chinese  Society  of
+Agricultural Engineering (Transactions of the CSAE), 2006,
+22(6): 218-220. (in Chinese with English abstract)
+[8]
+ 杨信廷，钱建平，孙传恒，等. 蔬菜安全生产管理及质量
+追溯系统设计与实现[J]. 农业工程学报，2008，24(3)：
+162-166.
+YANG  Xinting,  QIAN  Jianping,  SUN  Chuanheng,  et  al.
+Design  and  application  of  safe  production  and  quality
+traceability  system  for  vegetable[J].  Transactions  of  the
+Chinese Society of Agricultural Engineering (Transactions of
+the CSAE), 2008, 24(3): 162-166. (in Chinese with English
+abstract)
+[9]
+ 任晰，傅泽田，穆维松，等. 基于 Web 的罗非鱼养殖质量
+安全信息可追溯系统[J]. 农业工程学报，2009，25(4)：
+163-167.
+REN Xi, FU Zetian, MU Weisong, et al. Traceability system
+for tilapia breeding quality safety information based on Web[J].
+Transactions  of  the  Chinese  Society  of  Agricultural
+Engineering (Transactions of the CSAE), 2009, 25(4): 163-167.
+(in Chinese with English abstract)
+[10]
+ 熊本海，傅润亭，林兆辉，等. 生猪及其产品从农场到餐
+桌质量溯源解决方案：以天津市为例[J]. 中国农业科学，
+2009，42(1)：230-237.
+XIONG Benhai, FU Runting, LIN Zhaohui, et al. A solution
+on  pork  quality  safety  production  traceability  from  farm  to
+dining  table:  Taking  Tianjin  city  as  an  example[J].  Scientia
+Agricultura  Sinica,  2009,  42(1):  230-237.  (in  Chinese  with
+English abstract)
+[11]
+ QIAN J P, YANG X T, WANG X, et al. Framework for an IT-
+based  vegetable  traceability  system  integrated  two  different
+operating  mechanisms  in  China  on  comparison  with  two
+cities[J]. Journal of Food Agriculture & Environment, 2013,
+11(3/4): 317-323.
+[12]
+ 钱建平，刘学馨，杨信廷，等. 可追溯系统的追溯粒度评
+价指标体系构建[J]. 农业工程学报，2014，30(1)：98-104.
+QIAN  Jianping,  LIU  Xuexin,  YANG  Xinting,  et  al.
+Construction  of  index  system  for  traceability  granularity
+evaluation  of  traceability  system[J].  Transactions  of  the
+Chinese Society of Agricultural Engineering (Transactions of
+the  CSAE),  2014,  30(1):  98-104.  (in  Chinese  with  English
+abstract)
+[13]
+ BERTOLINI  M,  BEVILACQUA  M,  MASSINI  R.  FMECA
+approach to product traceability in the food industry[J]. Food
+Control, 2006, 17(2): 137-145.
+[14]
+ QIAN  J  P,  FAN  B  L,  WU  X  M,  et  al.  Comprehensive  and
+quantifiable granularity: A novel model to measure agro-food
+traceability[J]. Food Control, 2017, 74(4): 98-106.
+[15]
+ SUN  Y,  LI  Y  H,  PAN  L  Q,  et  al.  Authentication  of  the
+geographic  origin  of  Yangshan  region  peaches  based  on
+hyperspectral
+ imaging[J]. 
+Postharvest
+ Biology
+ and
+Technology, 2021, 171: 111320.
+[16]
+ HAN H, SHA R Y, DAI J, et al. Garlic origin traceability and
+identification based on fusion of multi-source heterogeneous
+spectral information[J]. Foods, 2024, 13(7): 1016.
+[17]
+ WANG K W, XU L, WANG X, et al. Discrimination of beef
+from  different  origins  based  on  lipidomics:  A  compari-son
+study  of  DART-QTOF  and  LC-ESI-QTOF[J].  LWT,  2021,
+[18]
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+9 　
+
+
+【第10页】
+149: 111838.
+ VARRA M O, GHIDINI S, FABRILE M P, et al. Country of
+origin  label  monitoring  of  musky  and  common  octopuses
+(Eledone spp. and Octopus vulgaris) by means of a portable
+near-infrared spectroscopic device[J]. Food Control, 2022, 138:
+109052.
+[19]
+ BEHKAMI S, ZAIN S M, GHOLAMI M, et al. Classification
+of  cow  milk  using  artificial  neural  network  developed  from
+the
+ spectral
+ data
+ of
+ single
+ and
+ three-detector
+spectrophotometers[J]. Food Chemistry, 2019, 294: 309-315.
+[20]
+ PAN W, LIU W J, HUANG X J. Rapid identification of the
+geographical origin of Baimudan tea using a multi-AdaBoost
+model  integrated  with  Raman  spectroscopy[J].  Current
+Research in Food Science, 2024, 8: 100654.
+[21]
+ DONNELLY  K  A  M,  KARLSEN  K  M,  OLSEN  P.  The
+importance of transformations for traceability: A case study of
+lamb and lamb products[J]. Meat Science, 2009, 83(1): 68-73.
+[22]
+ WANG  L  X,  KWOK  S  K,  IP  W  H.  A  radio  frequency
+identification and sensor-based system for the transportation
+of food[J]. Journal of Food Engineering, 2010, 101(1): 120-
+129.
+[23]
+ AUNG M M, CHANG Y S. Traceability in food supply chain:
+Safety and quality perspectives[J]. Food Control, 2014, 39(1):
+172-184.
+[24]
+ 赵晓飞. 我国现代农产品供应链体系构建研究[J]. 农业经
+济问题，2012，33(1)：15-22.
+ZHAO  Xiaofei.  Research  on  the  construction  of  modern
+agricultural product supply chain system in China[J]. Issues in
+Agricultural Economy, 2012, 33(1): 15-22. (in Chinese with
+English abstract)
+[25]
+ MCENTIRE  J  C,  ARENS  S,  BERNSTEIN  M,  et  al.
+Traceability(product tracing) in food systems: An IFT report
+submitted  to  the  FDA,  volume  1:  Technical  aspects  and
+recommendations[J].  Comprehensive  Reviews  in  Food
+Science & Food Safety, 2010, 9(1): 92-158.
+[26]
+ 黄丹琳，廖小平，李俚. EAN. UCC 标准条码设计的实验
+研究[J]. 广西大学学报：自然科学版，2008，33(增刊)：
+333-336.
+HUANG  Danlin,  LIAO  Xiaoping,  LI  Li.  The  designing
+experiment  of  EAN.  UCC  standard  barcode[J].  Journal  of
+Guangxi
+ University:
+ Natural
+ Science
+ Edition, 
+2008,
+33(Supp.): 333-336. (in Chinese with English abstract)
+[27]
+ 农业农村部关于全面推广应用国家农产品质量安全追溯
+管理信息平台的通知[EB/OL]. （2018-10-11）[2024-12-19].
+http://www.jgj.moa.gov.cn /zsgl/201904/t20190418_6186148.
+htm.
+[28]
+ 农业农村部关于农产品质量安全追溯与农业农村重大创建
+认定、农业品牌推选、农产品认证、农业展会等工作挂钩
+的意见[EB/OL]. （2018-11-23）[2024-12-19]. http://www.gov.
+cn/zhengce/zhengceku/2018-12/31/content_5443438.htm.
+[29]
+ 农业农村部办公厅关于印发《农产品质量安全信息化追
+溯管理办法（试行）》及若干配套制度的通知[EB/OL].
+（2021-11-04）[2024-12-19]. http://www.moa.gov.cn/nybgb/
+2021/202108/202111 /t20211104_6381383.htm.
+[30]
+ 钱建平，吴文斌，杨鹏. 新一代信息技术对农产品追溯系
+统智能化影响的综述[J]. 农业工程学报，2020，36(5)：
+182-191.
+QIAN  Jianping,  WU  Wenping,  YANG  Peng.  Review  on
+agricultural  products  smart  traceability  system  affected  by
+new  generation  information  technology[J].  Transactions  of
+the Chinese Society of Agricultural Engineering (Transactions
+of the CSAE), 2020, 36(5): 182-191. (in Chinese with English
+abstract)
+[31]
+ FRSCHLE H K, GONZALES-BARRON U, MCDONNELL
+K, et al. Investigation of the potential use of e-tracking and
+tracing of poultry using linear and 2D barcodes[J]. Computers
+[32]
+and Electronics in Agriculture, 2009, 66(2): 126-132.
+ JEDERMANN  R,  RUIZ-GARCIA  L,  LANG  W.  Spatial
+temperature  profiling  by  semi-passive  RFID  loggers  for
+perishable food transportation[J]. Computers and Electronics
+in Agriculture, 2009, 65(2): 145-154.
+[33]
+ ALFIAN G, SYAFRUDIN M, FAROOQ U, et al. Improving
+efficiency  of  RFID-based  traceability  system  for  perishable
+food by utilizing IoT sensors and machine learning model[J].
+Food Control, 2020, 110: 107016.
+[34]
+ 刘一健，陈业华. 基于 RFID 的生鲜农产品追溯系统探讨[J].
+食品工业，2019，40(7)：175-179.
+LIU  Yijian,  CHEN  Yehua.  Fresh  agricultural  products
+traceability system based on RFID[J]. The Food Industry, 2019,
+40(7): 175-179. (in Chinese with English abstract)
+[35]
+ 张土前，蒋平安，邹鹏. 基于 RFID 与 WebGIS 的阿克苏
+苹果质量安全溯源系统[J]. 新疆农业科学，2012，49(8)：
+1519-1524.
+ZHANG  Tuqian,  JIANG  Pingan,  ZOU  Peng.  Study  on  the
+agricultural  product  quality  tracing  system  based  on  RFID
+and  WebGIS  :  Take  apples  in  Aksu  region  for  example[J].
+Xinjiang  Agricultural  Sciences,  2012,  49(8):  1519-1524.  (in
+Chinese with English abstract)
+[36]
+ 钱建平，杨信廷，张保岩，等. 基于 RFID 的蔬菜产地追
+溯 精 确 度 提 高 方 案 及 应 用[J].  农 业 工 程 学 报 ， 2012，
+28(15)：234-239.
+QIAN Jianping, YANG Xinting, ZHANG Baoyan, et al. RFID-
+based  solution  for  improving  vegetable  producing  area
+traceability  precision  and  its  application[J].  Transactions  of
+the Chinese Society of Agricultural Engineering (Transactions
+of  the  CSAE),  2012,  28(15):  234-239.  (in  Chinese  with
+English abstract)
+[37]
+ AMPATZIDIS Y G, VOUGIOUKAS S G, BOCHTIS D D, et
+al. A yield mapping system for hand-harvested fruits based on
+RFID  and  GPS  location  technologies:  field  testing[J].
+Precision Agriculture, 2009, 10(1): 63-72.
+[38]
+ QIAN J P, YANG X T, WU X M, et al. A traceability system
+incorporating  2D  barcode  and  RFID  technology  for  wheat
+flour mills[J]. Computers and Electronics in Agriculture, 2012,
+89: 76-85.
+[39]
+ PIGINI  D,  CONTI  M.  NFC-based  traceability  in  the  food
+chain[J]. Sustainability, 2017, 9(10): 1-20.
+[40]
+ JIM-GAMERO I, DORADO G, MUNOZ-SERRANO A, et al.
+DNA
+ microsatellites
+ to
+ ascertain
+ pedigree-recorded
+information  in  a  selecting  nucleus  of  murciano-granadina
+dairy goats[J]. Small Ruminant Research, 2006, 65(3): 266-
+273.
+[41]
+ RASCHKE A, STRICH S, HUPPKE S, et al. Induction and
+detection of long-lasting peptide-specific antibody responses
+in  pigs  and  beef  cattle:  A  powerful  technology  for  tracing
+meat processing chains from stock farmers to sales counters[J].
+Food Control, 2006, 17(1): 65-74.
+[42]
+ BARRY  B,  GONZALES-BARRON  U,  BUTLER  F,  et  al.
+Using muzzle pattern recognition as a biometric approach for
+cattle  identification[J].  Transactions  of  the  ASABE,  2007,
+50(3): 1073-1080.
+[43]
+ CORKERY G, GONZALES-BARRON U, BUTLER F, et al.
+A preliminary investigation on face recognition as a biometric
+identifier of sheep[J]. Transactions of the ASABE, 2007, 50(1):
+313-320.
+[44]
+ 李春霖，汪秋红，聂晶，等. 我国有机茶稳定同位素特征
+与 δ15N 标识相关性研究[J]. 核农学报，2021，35(9)：
+2056-2064.
+LI Chunlin, WANG Qiuhong, NIE Jing, et al. Characteristics
+of stable isotopes in Chinese organic tea and correlations with
+δ15N indicator[J]. Journal of Nuclear Agricultural Sciences,
+2021, 35(9): 2056-2064. (in Chinese with English abstract)
+[45]
+　 10
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第11页】
+ 杨信廷，钱建平，孙传恒，等. 农产品及食品质量安全追
+溯 系 统 关 键 技 术 研 究 进 展[J].  农 业 机 械 学 报 ， 2014，
+45(11)：212-222.
+YANG Xinting, QIAN Jianping, SUN Chuanheng, et al. Key
+technologies for establishment agricultural products and food
+quality  safety  traceability  systems[J].  Transactions  of  the
+Chinese  Society  for  Agricultural  Machinery,  2014,  45(11):
+212-222. (in Chinese with English abstract)
+[46]
+ 何勇，聂鹏程，刘飞. 农业物联网与传感仪器研究进展[J].
+农业机械学报，2013，44(10)：216-226.
+HE Yong, NIE Pengcheng, LIU Fei. Advancement and trend
+of internet of things in agriculture and sensing instrument[J].
+Transactions  of  the  Chinese  Society  for  Agricultural
+Machinery, 2013, 44(10): 216-226. (in Chinese with English
+abstract)
+[47]
+ FANG  H,  HE  Y.  A  pocket  PC  based  field  information  fast
+collection system[J]. Computers and Electronics in Agriculture,
+2008, 61(2): 254-260.
+[48]
+ AKYILDIZ I F, SU W, SANKARASUBRAMANIAM Y, et al.
+Wireless sensor networks: A survey[J]. Computer Networks,
+2002, 38(4): 393-422.
+[49]
+ 卢升荣，陈希，刘瑶. 生鲜农产品冷链物流追溯系统设
+计[J]. 物流技术，2022，41(10)：138-141.
+LU  Shengrong,  CHEN  Xi,  LIU  Yao.  Design  of  cold  chain
+logistics traceability system for fresh agricultural products[J].
+Logistics  Technology,  2022,  41(10):  138-141.  (in  Chinese
+with English abstract)
+[50]
+ 张建奎. 物联网技术在农产品冷链物流平台上的运用分析[J].
+中国市场，2017，32：137-138.
+ZHANG  Jiankui.  Analysis  of  the  application  of  Internet  of
+Things  technology  in  the  agricultural  product  cold  chain
+logistics  platform[J].  China  Market,  2017,  32:  137-138.  (in
+Chinese with English abstract)
+[51]
+ 孙仲洋. 基于大数据时代计算机网络安全技术应用探究[J].
+网络安全技术与应用，2021，3：51-52.
+SUN  Zhongyang.  Research  on  the  application  of  computer
+network security technology in the era of big data[J]. Network
+Security  Technology  and  Application,  2021,  3:  51-52.  (in
+Chinese with English abstract)
+[52]
+ XU  M,  SIRAJ  S,  QI  L.  A  Hadoop-based  data  processing
+platform for fresh agro-products traceability[C]. //Proceedings
+of  the  IADIS  International  Conference  Intelligent  Systems
+and Agents: Las Palmas de Gran Canaria, Spain, IADIS Press,
+2015: 37-44.
+[53]
+ BAN  X,  WANG  B,  CHENG  C,  et  al.  Iron  and  steel
+enterprises big data visualization analysis based on Spark[C].
+//Cooperative  Design,  Visualization,  and  Engineering:  15th
+International  Conference,  CDVE  2018,  Hangzhou,  China,
+Proceedings 15. Springer International Publishing, 2018: 280-
+286.
+[54]
+ 智丽平，肖文可. 大数据与粮食质量安全监管的融合及应
+用研究[J]. 食品安全导刊，2024，32(29)：165-168.
+ZHI Liping, XIAO Wenke. Research on the integration and
+application of big data and grain quality safety supervision[J].
+China Food Safety, 2024, 32(29): 165-168. (in Chinese with
+English abstract)
+[55]
+ 孙笑严. 基于大数据的食品安全追溯系统设计与实现[J].
+食品安全导刊，2025，2(4)：44-46.
+SUN  Xiaoyan.  Design  and  implementation  of  a  food  safety
+traceability system based on big data[J]. China Food Safety,
+2025, 2(4): 44-46. (in Chinese with English abstract)
+[56]
+ 左敏，纪慧卓，苏礼君，等. 人工智能在食品安全中最新
+应用及进展[J]. 中国食品学报，2024，24(10)：1-13.
+ZUO  Min,  JI  Huizhuo,  SU  Lijun,  et  al.  Advancements  and
+modern applications of artificial intelligence in ensuring food
+safety[J].  Journal  of  Chinese  Institute  of  Food  Science  and
+[57]
+Technology,  2024,  24(10):  1-13.  (in  Chinese  with  English
+abstract)
+ 黄晓琛，张凯利，刘元杰，等. 机器学习与计算机视觉技
+术在食品质量评价中的研究进展[J]. 食品科学，2024，
+45(12)：1-10.
+HUANG  Xiaochen,  ZHANG  Kaili,  LIU  Yuanjie,  et  al.
+Research progress on machine learning and computer vision
+technology in food quality evaluation[J]. Food Science, 2024,
+45(12): 1-10. (in Chinese with English abstract)
+[58]
+ 王俊彦，卢金星，吴强，等. 基于人工智能和大数据的食
+品溯源数据采集真实性识别方法探讨[J]. 信息系统工程，
+2021(7)：23-26.
+WANG Junyan, LU Jinxing, WU Qiang, et al. Exploration of
+authenticity  recognition  methods  for  food  traceability  data
+collection  based  on  artificial  intelligence  and  big  data[J].
+China CIO News, 2021(7): 23-26. (in Chinese with English
+abstract)
+[59]
+ MAVANI N R, ALI J M, OTHMAN S, et al. Application of
+artificial  intelligence  in  food  industry:  A  guideline[J].  Food
+Engineering Reviews, 2022, 14(1): 134-175.
+[60]
+ JIN G, GUI X, ZHU Y Y, et al. Rapid discrimination of Anji
+Baicha origin using field-portable spectroradiometer[J]. Food
+Control, 2023, 153: 109968.
+[61]
+ DOU  X  J,  ZHANG  L  X,  YANG  R  N,  et  al.  Mass
+spectrometry in food authentication and origin traceability[J].
+Mass Spectrometry Reviews, 2023, 42(5): 1772-1807.
+[62]
+ SONI  K,  FREW  R,  KEBEDE  B.  A  review  of  conventional
+and  rapid  analytical  techniques  coupled  with  multivariate
+analysis for origin traceability of soybean[J]. Critical Reviews
+in Food Science and Nutrition, 2023, 64(19): 6616-6635.
+[63]
+ 王文秀，彭彦昆，孙宏伟，等. 二维相关可见-近红外光谱
+结合支持向量机评价猪肉新鲜度[J]. 食品科学，2018，
+39(18)：273-279.
+WANG  Wenxiu,  PENG  Yankun,  SUN  Hongwei,  et  al.
+Evaluation
+ of
+ pork
+ freshness
+ using
+ two-dimensional
+correlation visible/near-infrared spectroscopy combined with
+support vector machine[J]. Food Science, 2018, 39(18): 273-
+279. (in Chinese with English abstract)
+[64]
+ WEI L J, YANG Y H, SUN D Y. Rapid detection of carmine
+in  black  tea  with  spectrophotometry  coupled  predictive
+modelling[J]. Food Chemistry, 2020, 329: 127177.
+[65]
+ XU L, YE Z H, CUI H F, et al. Calibrating the shelf-life of
+Chinese  flavored  dry  tofu  by  FTIR  spectroscopy  and
+chemometrics:  Effects  of  data  preprocessing  and  nonlinear
+transformation  on  multivariate  calibration  accuracy[J].  Food
+Analytical Methods, 2012, 5(6): 1328-1334.
+[66]
+ ALKABBANI  H,  AHMADIAN  A,  ZHU  Q,  et  al.  Machine
+learning  and  metaheuristic  methods  for  renewable  power
+forecasting:  A  recent  review[J].  Frontiers  in  Chemical
+Engineering, 2021, 3: 665415.
+[67]
+ 丁浩晗，谢祯奇，沈嵩，等. 基于人工智能的集成食品检
+测技术应用与展望[J]. 食品科学技术学报，2024，42(5)：
+1-13.
+DING Haohan, XIE Zhenqi, SHEN Song, et al. Application
+and prospect of integrated food testing technology based on
+artificial  intelligence[J].  Journal  of  Food  Science  and
+Technology,  2024,  42(5):  1-13.  (in  Chinese  with  English
+abstract)
+[68]
+ LIU  Y,  ZHANG  Y  Y,  LONG  F  W,  et  al.  CNN  assisted
+accurate  smartphone  testing  of  μPAD  for  pork  sausage
+freshness[J]. Journal of Food Engineering, 2024, 363: 111772.
+[69]
+ XIN  Z,  SUN  J,  TIAN  Y,  et  al.  Hyperspectral  technique
+combined  with  deep  learning  algorithm  for  detection  of
+compound heavy metals in lettuce[J]. Food Chemistry, 2020,
+321: 126503.
+[70]
+ ISMAIL N, MALIK O. A. Real-time visual inspection system
+[71]
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+11 　
+
+
+【第12页】
+for  grading  fruits  using  computer  vision  and  deep  learning
+techniques[J].  Information  Processing  in  Agriculture,  2022,
+9(1): 24-37.
+ 项辉宇，黄恩浩，冷崇杰，等. 基于图像处理与深度学习
+的苹果检测分级[J]. 食品安全导刊，2022(22)：48-53.
+XIANG  Huiyu,  HUANG  Enhao,  LENG  Chongjie,  et  al.
+Apple detection and classification based on image processing
+and deep learning[J]. China Food Safety Magazine, 2022(22):
+48-53. (in Chinese with English abstract)
+[72]
+ RAKI H, AALAILA Y, TAKTOUR A, et al. Combining AI
+tools  with  non-destructive  technologies  for  crop-based  food
+safety: A comprehensive review[J]. Foods, 2023, 13(1): 11.
+[73]
+ 刘晶璟. 人工智能技术在食品安全监管领域应用研究[J].
+微型电脑应用，2018，34(6)：40-43.
+LIU Jingjing. Application of artificial intelligence technology
+in  food  safety  supervision[J].  Microcomputer  Applications,
+2018, 34(6): 40-43. (in Chinese with English abstract)
+[74]
+ 窦瑞华. 食品物流监控体系运作模式研究[J]. 计算机时代，
+2013(8)：87-88.
+DOU  Ruihua.  Research  of  operation  mode  in  food  logistics
+monitoring  system[J].  Computer  Era,  2013(8):  87-88.  (in
+Chinese with English abstract)
+[75]
+ 张 淳，秦世引. 面向食品加工过程智能化的计算机视觉技
+术进展[J]. 科技导报，2010，28(15)：112-117.
+ZHANG Chun, QIN Shiyin. Comprter vision technology for
+intelligent  automation  of  food  processing[J].  Science  &
+Technology Review, 2010, 28(15): 112-117. (in Chinese with
+English abstract)
+[76]
+ LUO  X  Z,  SUN  Q  M,  YANG  T  X,  et  al.  Nondestructive
+determination  of  common  indicators  of  beef  for  freshness
+assessment  using  airflow-three  dimensional(3D)  machine
+vision  technique  and  machine  learning[J].  Journal  of  Food
+Engineering, 2023, 340: 111305.
+[77]
+ 张长贵，张岩峰，李晓华，等. 区块链新技术综述：图型
+区块链和分区型区块链[J]. 计算机科学，2020，47(10)：
+282-289.
+ZHANG  Changgui,  ZHANG  Yanfeng,  LI  Xiaohua,  et  al.
+Survey of new blockchain techniques: DAG based blockchain
+and  sharding  based  blockchain[J].  Computer  Science,  2020,
+47(10): 282-289. (in Chinese with English abstract)
+[78]
+ 吕芙蓉，陈莎. 基于区块链技术构建我国农产品质量安全
+追溯体系的研究[J]. 农村金融研究，2016，12：22-26.
+LV  Furong,  CHEN  Sa.  Research  on  the  construction  of
+China's  agricultural  product  quality  and  safety  traceability
+system  based  on  blockchain  technology[J].  Rural  Finance
+Research, 2016, 12: 22-26. (in Chinese with English abstract)
+[79]
+ 赵维. 基于区块链技术的农业食品安全追溯体系研究[J].
+技术经济与管理研究，2019，1：16-20.
+ZHAO Wei. Research on traceability system of agricultural-
+food  safety  based  on  block  chain  technology[J].  Journal  of
+Technical  Economics  &  Management,  2019,  1:  16-20.  (in
+Chinese with English abstract)
+[80]
+ 钱建平，范蓓蕾，史云，等. 基于区块链的农产品可信追
+溯系统框架构建[J]. 中国农业信息，2019，31(3)：48-57.
+QIAN Jianping, FAN Beilei, SHI Yun, et al. The structure of
+credible traceability system for agricultural products based on
+blockchain[J]. China Agricultural Informatics, 2019, 31(3): 48-
+57. (in Chinese with English abstract)
+[81]
+ 曾小青，彭越，王琪. 物联网加区块链的食品安全追溯系
+统研究[J]. 食品与机械，2018，34(9)：100-105.
+ZENG Xiaoqing, PENG Yue, WANG Qi. Research on food
+safety  traceability  system  based  on  IoT  and  blockchain
+technology[J]. Food & Machinery, 2018, 34(9): 100-105. (in
+Chinese with English abstract)
+[82]
+ LIU  S,  HUA  G  W,  KANG  Y  X,  et  al.  What  value  does
+blockchain bring to the imported fresh food supply chain?[J].
+[83]
+Transportation Research Part E: Logistics and Transportation
+Review, 2022, 165: 102859.
+ 张文芳，孙海锋，张晏端，等. 基于树形结构构造的联盟链
+主从多链共识算法[J]. 电子学报，2022，50(2)：257-266.
+ZHANG Wenfang, SUN Haifeng, ZHANG Yanrui, et al. A
+consensus  algorithm  for  consortium  chain  with  tree  based
+master-slave  multi-chain  architecture[J].  Acta  Electronica
+Sinica, 2022, 50(2): 257-266. (in Chinese with English abstract)
+[84]
+ DING Q Y, GAO S, ZHU J M, et al. Permissioned blockchain-
+based  double-layer  framework  for  product  traceability
+system[J]. IEEE Access, 2020, 8: 6209-6225.
+[85]
+ 赵磊，毕新华，赵安妮. 基于区块链的生鲜食品移动追溯
+平台框架重构[J]. 食品科学，2020，41(3)：314-321.
+ZHAO Lei, BI Xinhua, ZHAO Anni. Frame reconstruction of
+mobile traceability information system for fresh foods based
+on  blockchain[J].  Food  Science,  2020,  41(3):  314-321.  (in
+Chinese with English abstract)
+[86]
+ 刘浩宇，马泽祁，叶亚飞，等. 链上链下协同的智能合约
+即 服 务 问 题 研 究[J].  北 京 航 空 航 天 大 学 学 报 ， 2024，
+50(10)：3262-3273.
+LIU Haoyu, MA Zeqi, YE Yafei, et al. Smart contracts-as-a-
+service with on-chain and off-chain collaboration[J]. Journal
+of Beijing University of Aeronautics and Astronautics, 2024,
+50(10): 3262-3273. (in Chinese with English abstract)
+[87]
+ SALAH  K,  NIZAMUDDIN  N,  JAYARAMAN  R,  et  al.
+Blockchain-based  soybean  traceability  in  agricultural supply
+chain[J]. IEEE Access, 2019, 7: 73295-73305.
+[88]
+ JAYABALAN J, JEYANTHI N. Scalable blockchain model
+using off-chain IPFS storage for healthcare data security and
+privacy[J].  Journal  of  Parallel  and  Distributed  Computing,
+2022, 164: 152-167.
+[89]
+ 董云峰，张新，许继平，等. 基于区块链的粮油食品全供
+应链可信追溯模型[J]. 食品科学，2020，41(9)：30-36.
+DONG Yunfeng, ZHANG Xin, XU Jiping, et al. Blockchain-
+based  traceability  model  for  grains  and  oils  whole  supply
+chain[J]. Food Science, 2020, 41(9): 30-36. (in Chinese with
+English abstract)
+[90]
+ 孙传恒，于华竟，罗娜，等. 基于智能合约的果蔬区块链
+溯源数据存储方法研究[J]. 农业机械学报，2022，53(8)：
+361-370.
+SUN  Chuanheng,  YU  Huajing,  LUO  Na,  et  al.  Blockchain
+traceability data storage method of fruit and vegetable foods
+supply chain based on smart contract[J]. Transactions of the
+Chinese Society for Agricultural Machinery, 2022, 53(8): 361-
+370. (in Chinese with English abstract)
+[91]
+ 马腾，孙传恒，李文勇，等. 基于 NB-IoT 的农产品原产
+地可信溯源系统设计与实现[J]. 中国农业科技导报，2019，
+21(12)：58-67.
+MA Teng, SUN Chuanheng, LI Wenyong, et al. Design and
+implementation of trusted traceability system for agricultural
+products origin based on NB-IoT[J]. Journal of Agricultural
+Science  and  Technology,  2019,  21(12):  58-67.  (in  Chinese
+with English abstract)
+[92]
+ VIJAYARAGAVAN  S,  PUNAR  S  E,  KUPPURASU  N.
+Decentralized block chain provenance security system using
+secure sharable advanced encryption standard for distributed
+agriculture information security[J]. Neuro Quantology, 2022,
+20(8): 6738-6749.
+[93]
+ 王乃洲，金连文，高兵，等. 基于区块链技术的身份认证与
+存储方法研究[J]. 现代信息科技，2020，4(8)：164-167.
+WANG Naizhou, JIN Lianwen, GAO Bing, et al. Research on
+identity  authentication  and  storage  method  based  on
+blockchain  technology  method[J].  Modern  Information
+Technology  ,2020,  4(8):  164-167.  (in  Chinese  with  English
+abstract)
+[94]
+ 杨信廷，王明亭，徐大明，等. 基于区块链的农产品追溯
+[95]
+　 12
+农业工程学报（http://www.tcsae.org）
+2025 年
+
+
+【第13页】
+系统信息存储模型与查询方法[J]. 农业工程学报，2019，
+35(22)：323-330.
+YANG  Xinting,  WANG  Mingting,  XU  Daming,  et  al.  Data
+storage and query method of agricultural products traceability
+information  based  on  blockchain[J].  Transactions  of  the
+Chinese Society of Agricultural Engineering (Transactions of
+the CSAE), 2019, 35(22): 323-330. (in Chinese with English
+abstract)
+ 李宣，柳毅. 基于双区块链及物联网技术的防伪溯源系统[J].
+计算机应用研究，2020，37(11)：3401-3405，3421.
+LI  Xuan,  LIU  Yi.  Traceability  system  based  on  double
+blockchain and internet of things technology[J]. Application
+Research of Computers, 2020, 37(11): 3401-3405, 3421. (in
+Chinese with English abstract)
+[96]
+ 陈枫，赵春江，杨信廷，等. 基于可编辑区块链的农产品
+供应链追溯高效存储查询模型[J]. 农业工程学报，2024，
+40(16)：143-152.
+CHEN Feng, ZHAO Chunjiang, YANG Xinting, et al. High-
+efficiency  storage  and  retrieval  model  to  trace  agri-food
+supply chain using redactable blockchain[J]. Transactions of
+the Chinese Society of Agricultural Engineering (Transactions
+of  the  CSAE),  2024,  40(16):  143-152.  (in  Chinese  with
+English abstract)
+[97]
+ NASRI  J,  RAIS  H.  Zk-BeSC:  Confidential  blockchain
+enabled  supply  chain  based  on  polynomial  zero-knowledge
+proofs[C]//2023  International  Wireless  Communications  and
+Mobile  Computing  (IWCMC),  Marrakesh,  Morocco,  2023:
+1472-1478.
+[98]
+ KUMAR P, GUPTA G P, TRIPATHI R. PEFL: Deep privacy-
+encoding-based  federated  learning  framework  for  smart
+agriculture[J]. IEEE Micro, 2021, 42(1): 33-40.
+[99]
+ 于华竟，徐大明，罗娜，等. 杂粮供应链区块链多链追溯
+监管模型设计[J]. 农业工程学报，2021，37(20)：323-332.
+YU  Huajing,  XU  Daming,  LUO  Na,  et  al.  Design  of  the
+blockchain  multi-chain  traceability  supervision  model  for
+coarse  cereal  supply  chain[J].  Transactions  of  the  Chinese
+Society  of  Agricultural  Engineering  (Transactions  of  the
+CSAE),  2021,  37(20):  323-332.  (in  Chinese  with  English
+abstract)
+[100]
+ 孙传恒，于华竟，徐大明，等. 农产品供应链区块链追溯技
+术研究进展与展望[J]. 农业机械学报，2021，52(1)：1-13.
+SUN  Chuanheng,  YU  Huajing,  XU  Daming,  et  al.  Review
+and prospect of agri-products supply chain traceability based
+on  block  chain  technology[J].  Transactions  of  the  Chinese
+Society  for  Agricultural  Machinery,  2021,  52(1):  1-13.  (in
+Chinese with English abstract)
+[101]
+ 李家辉，秦素娟，高飞，等. 基于属性加密的区块链组织
+交易可控可监管隐私保护方案[J]. 信息网络安全，2023，
+23(12)：103-112.
+LI  Jiahui,  QIN  Sujuan,  GAO  Fei,  et  al.  Controllable  and
+supervised  privacy  protection  scheme  for  blockchain
+organization  transaction  based  on  attribute  encryption[J].
+Netinfo  Security,  2023,  23(12):  103-112.  (in  Chinese  with
+English abstract)
+[102]
+ 张思亮，凌捷，陈家辉. 可追踪的区块链账本隐私保护方
+案[J]. 计算机工程与应用，2020，56(23)：31-37.
+ZHANG  Siliang,  LING  Jie,  CHEN  Jiahui.  Traceable
+blockchain  ledger  privacy  protection  scheme[J].  Computer
+Engineering  and  Application,  2020,  56(23):  31-37.  (in
+Chinese with English abstract)
+[103]
+ 王栋，王合建，玄佳兴，等. 面向电力调度指令的区块链
+隐私可追踪存证方案[J]. 计算机工程，2023，12：1-14.
+WANG  Dong,  WANG  Hejian,  XUAN  Jiaxing,  et  al.
+Blockchain  privacy-traceable  deposit  scheme  for  power-
+dispatch instructions[J]. Computer Engineering, 2023, 12: 1-
+14. (in Chinese with English abstract)
+[104]
+ 宋靖文，张大伟，韩旭，等. 区块链中可监管的身份隐私
+保护方案[J]. 软件学报，2023，34(7)：3292-3312.
+SONG Jingwen, ZHANG Dawei, HAN Xu, et al. Supervised
+identity  privacy  protection  scheme  in  blockchain[J].  Journal
+of  Software,  2023,  34(7):  3292-3312.  (in  Chinese  with
+English abstract)
+[105]
+ 李致远，徐丙磊，周颖仪. 基于节点影响力的区块链匿名
+交易追踪方法[J]. 计算机科学，2024，51(7)：1-11.
+LI  Zhiyuan,  XU  Binglei,  ZHOU  Yingyi.  Blockchain
+anonymous transaction transaction tracking method based on
+node influence[J]. Computer Science, 2024, 51(7): 1-11. (in
+Chinese with English abstract)
+[106]
+ 经普杰，王良民，董学文，等. 分层跨链结构：一种面向
+区块链系统监管的可行架构[J]. 通信学报，2023，44(3)：
+93-104.
+JING Pujie, WANG Liangmin, DONG Xuewen, et al. CHA:
+cross-chain  based  hierarchical  architecture  for  practicable
+blockchain  regulatory[J].  Journal  on  Communication,  2023,
+44(3): 93-104. (in Chinese with English abstract)
+[107]
+ 陈晓丰，宋兆雄，郑佩玉，等. 一种多链协同治理的“以
+链治链”监管框架[J]. 计算机研究与发展，2024，61(9)：
+2290-2306.
+CHEN Xiaofeng, SONG Zhaoxiong, ZHENG Peiyu, et al. A
+multichain-collaborating  governing  chain-supervising-chain
+supervision framework[J]. Journal of Computer Research and
+Development,  2024,  61(9):  2290-2306.  (in  Chinese  with
+English abstract)
+[108]
+ PENG X Z, ZHANG X, WANG X Y, et al. Research on the
+cross-chain model of rice supply chain supervision based on
+parallel blockchain  and  smart contracts[J].  Foods,  2022,  11:
+1269.
+[109]
+ GE J, SHEN T. Energy data access control method based on
+blockchain[J].  Journal  of  Computer  Applications,  2021,  41:
+2615.
+[110]
+ JING H, XIAONA C. Research on the construction of trusted
+main-side multi-chain green food traceability platform based
+on blockchain[J]. Science and Technology of Food Industry,
+2023, 44: 411-418.
+[111]
+ LI  M,  TANG  H,  HUSSEIN  A  R,  et  al.  A  sidechain-based
+decentralized  authentication  scheme  via  optimized  two-way
+peg protocol for smart community[J]. IEEE Open Journal of
+the Communications Society, 2020, 1: 282-292.
+[112]
+ SUN  H.  Development  and  application  of  blockchain  cross-
+chain technology[J]. Computer Science, 2022, 49: 287-295.
+[113]
+ 吴逸文，张洋，王涛，等. 从 Docker 容器看容器技术的发
+展： 一 种 系 统 文 献 综 述 的 视 角 [J].  软 件 学 报 ， 2023，
+34(12)：5527-5551.
+WU Yiwen, ZHANG Yang, WANG Tao, et al. Development
+exploration
+ of
+ container
+ technology
+ through
+ Docker
+containers:  A  systematic  literature  review  perspective[J].
+Journal  of  Software,  2023,  34(12):  5527-5551.  (in  Chinese
+with English abstract)
+[114]
+ SHAN  C  G,  GAO  R  Z,  YANG  Z,  et  al.  ControlService:  a
+containerized  solution  for  control-algorithm-as-a-service  in
+cloud control systems[J]. Science China Information Sciences,
+2024, 67(8): 1-18.
+[115]
+ 全国食品质量控制与管理标准化技术委员会. 饲料和食品
+链的可追溯性 体系设计与实施的通用原则和基本要求：
+GB/T 22005-2009[S]. 北京：中国标准出版社，2009.
+[116]
+ 全国食品质量控制与管理标准化技术委员会. 饲料和食品
+链 的 可 追 溯 性  体 系 设 计 与 实 施 指 南 ： GB/Z  25008-
+2010[S]. 北京：中国标准出版社，2010.
+[117]
+ 全国标准化研究院. 农产品追溯要求 果蔬：GB/T 29373-
+2012[S]. 北京：中国标准出版社，2012.
+[118]
+ 全国标准化研究院. 农产品追溯要求 水产品：GB/T 29568-
+2013[S]. 北京：中国标准出版社，2013.
+[119]
+第 12 期
+孙传恒等：中国农产品质量安全可追溯体系发展历程与展望
+13 　
+
+
+【第14页】
+ 全国物流信息管理标准化技术委员会. 进口冷链食品追溯
+追溯系统开发指南：GB/T 43195-2023[S]. 北京：中国标
+准出版社，2023.
+[120]
+ 农业农村部. 农产品追溯编码导则：NY/T 1431-2007[S].
+北京：中国标准出版社，2007.
+[121]
+ 农业农村部. 农产品质量安全追溯操作规程 通则：NY/T
+1761-2009[S]. 北京：中国标准出版社，2009.
+[122]
+ 商务部. 肉类蔬菜流通追溯体系编码规则：SB/T 10680-
+2012[S]. 北京：中国标准出版社，2012.
+[123]
+ 中华人民共和国海关总署. 基于追溯码和定位技术的进口
+食品溯源指南 第 1 部分：总则：SN/T 5652.1-2024[S]. 北
+京：中国标准出版社，2024.
+[124]
+ 北京市农林科学院信息技术研究中心. 生鲜农产品冷链物
+[125]
+流信息化水平评价规：NY/T 4698-2025[S]. 北京：中国标
+准出版社，2025.
+ 河北省质量技术监督局. 果品质量安全追溯 产地编码技术
+规范：DB13/T 1159-2009[S]. 北京：中国标准出版社，
+2009.
+[126]
+ 中国水产科学院研究院南海水产研究所质量与标准化技
+术研究所. 罗非鱼产品可追溯规范：DB44/T 737-2010[S].
+北京：中国标准出版社，2010.
+[127]
+ 宁夏回族自治区市场监督管理厅. 宁夏枸杞追溯要求：
+DB64/T 1652-2019[S]. 北京：中国标准出版社，2019.
+[128]
+ 湖南省市场监督管理局. 洞庭香米 质量追溯基础信息规范：
+DB43/T 3029-2024[S]. 北京：中国标准出版社，2024.
+[129]
+ 
+Development history and prospects of agricultural product quality and
+safety traceability system in China
+SUN Chuanheng , ZHU Wenying , XING Bin , LUO Na , YANG Xinting※
+(1. National Engineering Research Center for Information Technology in Agriculture, Beijing 100097, China;　2. National Engineering
+Laboratory for Agri-product Quality Traceability, Beijing 100097, China;　3. Key Laboratory of Cold Chain Logistics Technology for Agro-
+product, Ministry of Agriculture and Rural Affairs, Beijing 100097, China)
+Abstract: Agricultural product quality and safety traceability can effectively enhance the trust between supply chain entities
+and consumers. It is often required for precise quality and safety recall mechanisms to ensure national food safety in recent
+years. This article aims to systematically summarize the basic concepts and classifications of agricultural product quality and
+safety  traceability  in  China.  The  history  of  traceability  was  elaborated  in  three  stages:  institutional  frameworks,  platform
+construction, and digital transformation. The key technologies were successfully integrated, such as the Internet of Things, big
+data, blockchain, and artificial intelligence. Significant progress was achieved in information perception, data processing, anti-
+counterfeiting traceability, and intelligent analysis. Its technological empowerment was elucidated across the three-dimensional
+layer, including the information perception, processing, and decision-making layer. The advantages and disadvantages of these
+traceability applications were discussed to summarize the existing traceability platforms, national standards, industry standards,
+and local standards. However, some challenges remained in the data sharing and integration, including the severe data silos,
+diverse  traceability  models,  as  well  as  the  less  standards  and  specifications.  Additionally,  the  high  costs  and  the  limited
+integration of emerging technologies with the traceability framework have restricted the promotion and application of such
+systems. The traceability technology was also aligned with the market-oriented applications and platform implementation in
+practice. The optimal systems were gradually improved the standardization frameworks. Future research and application can
+focus  on  the  following  aspects.  In  the  traceability  information  perception,  the  intelligent  equipment  (such  as  embodied
+intelligence and low-altitude drones) will play a significant role in the logistics and distribution. Hardware development can
+also drive toward greater intelligence and automation. In traceability information processing, large-scale models and quantum
+blockchains  can  be  explored  in  data  processing  and  intelligent  decision-making.  In  the  traceability  information  interaction,
+cutting-edge  technologies  can  be  applied,  like  big  data,  the  Internet,  and  the  Internet  of  Things.  Furthermore,  the  next-
+generation technologies were integrated with the traceability system, such as 3D printing, the metaverse, and digital twins. The
+traceability standards can evolve into cross-platform, cross-regional, cross-departmental, and even cross-border collaborative
+traceability. Application-oriented standard leadership can be strengthened for a unified technical standard system. A traceability
+standard system can be developed to cover the entire supply chain of agricultural products. Finally, the findings can provide
+theoretical support and practical guidance to advance the intelligent and collaborative system.
+Keywords: traceability  system;  quality  and  safety;  identification  technology;  Internet  of  Things;  block  chain;  artificial
+intelligence
+　 14
+农业工程学报（http://www.tcsae.org）
+2025 年
+

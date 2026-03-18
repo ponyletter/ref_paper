@@ -1,0 +1,1219 @@
+来源文件：7基于区块链智能合约的稻米供应链动态监管模型.pdf
+============================================================
+
+【第1页】
+2 0 2 2 年 1 月
+农 业 机 械 学 报
+第 53 卷 第 1 期
+doi: 10． 6041 /j． issn． 1000-1298． 2022． 01． 040
+基于区块链智能合约的稻米供应链动态监管模型
+张
+新
+1，2
+彭祥贞
+1，2
+许继平
+1，2
+王小艺
+1，2
+李海生
+2，3
+赵峙尧
+1，2
+( 1． 北京工商大学人工智能学院，北京 100048; 2． 北京工商大学北京市食品安全大数据技术重点实验室，北京 100048;
+3． 北京工商大学计算机学院，北京 100048)
+摘要: 稻米供应链具有全生命周期冗长、主体环节参与角色复杂、危害物种类众多、信息多维多源异构等特点，实现
+稻米供应链动态监管，有助于稻米质量安全保障和溯源。以区块链智能合约为驱动，构建了适用于稻米供应链信
+息流转特性的动态模型并进行合约化实现与原型验证。首先，在稻米供应链监管信息解析及分类的基础上，基于
+区块链智能合约构建稻米供应链动态监管模型框架。其次，在监管模型的逻辑框架下，定制化设计身份初始化、数
+据调用、模型验证、数据传输、贡献评估、信用评估等 6 种智能合约，并进行模型运行流畅分析。最后，依托动态监
+管模型及智能合约，设计并研发稻米供应链监管原型系统，并进行仿真分析和案例验证。结果表明，所构建的动态
+监管模型和原型系统能够解决稻米供应链业务信息、危害物信息及人员信息的全流程实时管理，在信息层面实现
+稻米供应链全生命周期动态可信监管。
+关键词: 稻米供应链; 动态监管; 智能合约; 区块链
+中图分类号: TP391. 9
+文献标识码: A
+文章编号: 1000-1298( 2022) 01-0370-13
+OSID:
+收稿日期: 2021
+09
+25
+修回日期: 2021
+11
+16
+基金项目: 国家重点研发计划项目( 2019YFC1605306、2017YFC1600605、2020YFC1606801) 和北京工商大学 2021 科研能力提升计划项目
+作者简介: 张新( 1989—) ，男，副教授，博士，主要从事区块链与 AI 融合应用研究，E-mail: zhangxin@ btbu． edu． cn
+通信作者: 王小艺( 1975—) ，男，教授，主要从事食品安全智能感知与优化控制研究，E-mail: sdwangxy@ 163． com
+Dynamic Supervision Model of Ｒice Supply Chain Based on
+Blockchain and Smart Contract
+ZHANG Xin
+1，2
+PENG Xiangzhen
+1，2
+XU Jiping
+1，2
+WANG Xiaoyi
+1，2
+LI Haisheng
+2，3
+ZHAO Zhiyao
+1，2
+( 1． School of Artificial Intelligence，Beijing Technology and Business University，Beijing 100048，China
+2． Beijing Key Laboratory of Big Data Technology for Food Safety，Beijing Technology and Business University，Beijing 100048，China
+3． School of Computer Science and Engineering，Beijing Technology and Business University，Beijing 100048，China)
+Abstract: Nearly two-thirds of China's population uses rice as their staple food． The safety of the rice
+supply chain is directly related to the health of the people and the prosperity of the country． Ｒice supply
+chain has the characteristics of long life cycle，complex participation roles of main links，many harmful
+species，multi-dimensional and multi-source heterogeneity of information and so on． The realization of
+dynamic supervision of rice supply chain is conducive to the guarantee and traceability of rice quality and
+safety． Driven by blockchain smart contract， a dynamic model suitable for the information flow
+characteristics of rice supply chain was constructed，and contractual implementation and prototype
+verification were carried out． Firstly，based on the analysis and classification of rice supply chain
+supervision information，a dynamic supervision model framework of rice supply chain was constructed
+based on blockchain smart contract． Secondly，under the logical framework of the regulatory model，six
+types of smart contracts，including initialization smart contract，data calling smart contract，model
+verification smart contract，smart contract for data transmission，contribution evaluation smart contracts，
+and credit assessment smart contract，were custom-designed． And the smooth operation of the model was
+analyzed． Finally，based on the dynamic supervision model and smart contract，the rice supply chain
+supervision prototype system was designed and developed． And simulation analysis and case verification
+were carried out． The results showed that the dynamic supervision model and prototype system constructed
+can solve the whole process real-time management of rice supply chain business information，hazard
+information and personnel information，and realize the dynamic and credible supervision of rice supply
+
+
+【第2页】
+chain in the whole life cycle at the information level． The research presented a generation of information
+technology in the efficient coordination and resource sharing of food supply chain，and provided ideas for
+the digital transformation of the grain industry．
+Key words: rice supply chain; dynamic supervision; smart contracts; blockchain
+0
+引言
+稻米作为中国最主要的粮食作物之一，其质量
+安全关系国家安全和人民健康，截止到 2020 年全国
+水稻种植面积超 3 × 10
+7 hm
+2，总产量超 2 × 10
+8 t
+［1］。
+但我国亟需提高在稻米供应链上的粮食安全和品质
+监管能力
+［2 － 4］。我国稻米主产区分为长江中下游地
+区、华南地区以及东北地区，水稻分为早、中、晚稻，
+稻米的种植周期长，不同地区的种植时间不同步，且
+稻米分为籼米、粳米和糯米 3 种，相比于传统食品，
+稻米供应链全生命周期监管难度大。且针对稻米的
+危害物信息众多，监管部门监管审查的效率也变得
+低下
+［5］。传统的稻米供应链监管系统多为分层式
+管理，存在着监管效率低、监管难度大的问题，监管
+人员难以对其各个供应环节进行全方位动态监
+管
+［6 － 7］。稻米供应链的监管直接关系着稻米的粮食
+安全，国内外研究人员对稻米监管作了很多深入研
+究
+［8 － 9］。这些监管措施虽然在一定程度上加强了稻
+米供应链的监管能力，但稻米全供应链数据信息复
+杂，传 统 监 管 方 式 难 以 对 其 进 行 动 态 可 信 监
+管
+［10 － 11］。
+区块链技术具有独特的链式结构、非对称加密
+形式以及分布式节点存储方式，并且利用 P2P 网络
+进行节点之间的信息广播
+［12 － 14］。作为一种全新的
+去中心化链式架构，利用区块链技术可以实现节点
+之间共同维护数据的安全，并且全链数据具有可追
+溯性。在数据安全方面，区块链技术利用非对称加
+密算法、代理重加密方法等对数据进行加密处理，以
+实现数据传输的安全性
+［15 － 16］。智能合约是区块链
+2. 0 的重要标志，使得区块链从数字货币扩展到其
+他领域
+［17 － 19］。智能合约是运行在分布式账本上的
+一段具有状态和条件响应的计算机程序，合约通过
+可预置规则，完成封装、验证、执行分布式节点复杂
+行为，实现信息交换、价值转移和资产管理的功
+能
+［20］。智能合约的运行不需要人工操作且可以运
+行在整个稻米供应链上，这不但可以提高稻米供应
+链的监管效率，而且程序化的设定使整个供应链更
+具有安全性。近些年来，国内外研究人员开始探究
+区块链技术在监管方面的应用: 通过隐私数据分级
+加密及存储模式和定制化业务逻辑监管智能合约，
+来实现对稻米供应链全链条监管
+［21］; 利用二维码等
+标识技术，对数据进行显示，安全性更高，防伪程度
+更好，提高了监管的可信度
+［22 － 24］; 提出分级多层的
+智能服务交易监管框架，建立可以有效监管区块链
+交易的交易区块链和监管区块链双链结构
+［25 － 27］。
+基于智能合约，可以对稻米供应链全链条实现数据
+监管、参与人员监管、环节监管、信息可信溯源以及
+互联互通，可以有效地解决传统监管系统信息堵塞、
+难定位、难定责等问题。但现有的智能合约设计只
+是简单逻辑上的封装，稻米供应链时间、空间上跨度
+大，难以对稻米供应链进行实时的监管
+［28 － 30］。且监
+管人员处于一个动态流动的过程，保证监管人员可
+信是实现稻米供应链全链监管重要举措。
+针对上述问题，本文在分析稻米供应链全生命
+周期信息的基础上，基于区块链智能合约构建稻米
+供应链动态监管模型，定制化设计多业务监管智能
+合约，设计稻米供应链监管原型系统并进行验证
+分析。
+1
+稻米供应链监管信息解析
+稻米供应链环节主要分为种植、收储、加工、运
+输、仓储、销售。收储环节包含收购、干燥、除杂、入
+仓 4 部分，加工分为了垄谷、碾米、色选、抛光、包装
+5 部分。对稻米每个环节的基本信息、危害物信息、
+交易记录以及环节参与人员工作要求等进行了关键
+数据分类，具体如表 1 所示。在整个稻米供应链环
+节中，危害物主要分为重金属、真菌毒素、病虫害与
+农药残留 4 方面，其中重金属以及真菌毒素贯穿整
+个供应链。从种植环节开始，工厂排放的“三废”
+( 废烟、废水、废气) 等可能导致土壤污染，使土壤中
+的镉、铅、砷等重金属含量超标，从而导致稻米重金
+属污染。在收储环节，当工作人员对稻米进行干燥
+除杂时，残留的熏蒸剂以及除草剂也是主要的危害
+物之一。加工环节中碾米的方式以及抛光的方式不
+同也会导致不同危害物的产生，其主要分为了两
+种———化学方法、机械方法，整个过程可能会产生化
+学污染以及重金属污染。包装环节的材料来源也是
+监管的重要方面。在仓储环节以及运输环节极易出
+现稻米发生霉变，产生有害菌类，危害稻米的使用安
+全。交易记录中主要提取了供应链中每个环节的成
+本价格以及销售价格。供应链的参与人员主要分为
+了生产人员、收储人员、加工人员、仓储人员、运输人
+1
+7
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第3页】
+表 1
+稻米供应链监管信息分类
+Tab． 1
+Ｒice supply chain supervision information classification
+稻米供应链
+环节
+基本信息
+危害物信息
+交易记录
+环节参与人员
+工作要求
+种植
+种子来源、生产场地、种植/收获时间、
+水稻产米率、肥料 /农药使用信息
+真菌毒素、重金
+属、农药残留、病
+虫害
+种子价格、肥料价格、人工成
+本、总成本、销售价格
+无
+收储
+收购
+收购批次、收购检验报告
+干燥
+产品批次、干燥记录报告
+除杂
+产品批次、药剂使用记录、含杂量、除
+杂率
+入仓
+库存编号、产品批次、产品来源、入库
+时间、出库时间、质检报告、产品类别、
+产品数量
+真菌毒素、熏蒸
+剂及除草剂残留
+收购价格、人工成本
+无
+干燥( 设备等) /人工成本
+着装要求、卫生要求、安全培训、
+技能要求等
+除杂( 药剂、设备等) /人工成
+本
+着装要求、卫生要求、安全培训、
+技能要求等
+仓储( 库房、工具等) /人工成
+本、仓储价格
+着装要求、卫生要求、安全培训、
+技能要求等
+加工
+垄谷
+产品批次、垄谷方式、设备检验记录、
+垄谷时间、除糙 /脱壳率
+碾米
+产品批次、碾米方式、设备检验记录、
+整米 /碎米率
+色选
+产品批次、色选精度、带出比
+抛光
+产品批次、抛光方式、抛光率
+包装
+产品批次、包装材料来源、包装材料合
+格证书、产品质量信息
+真菌毒素、重金
+属
+垄谷( 设备等) /人工成本
+着装要求、卫生要求、安全培训、
+技能要求等
+碾米( 设备等) /人工成本
+着装要求、卫生要求、安全培训、
+技能要求等
+色选( 设备等) /人工成本
+着装要求、卫生要求、安全培训、
+技能要求等
+抛光( 设备) /人工成本
+着装要求、卫生要求、安全培训、
+技能要求等
+包装成本/人工成本、初成品价
+格
+着装要求、卫生要求、安全培训、
+技能要求等
+仓储
+产品批次、温湿度记录报告、产品来
+源、入库时间、出库时间
+真菌毒素
+仓储成本、出库价格
+着装要求、卫生要求、安全培训、
+技能要求等
+运输
+产品批次、运输车辆信息、车辆消毒报
+告、出发地、路径、到达时间、驾驶人员
+信息
+霉变生成的真菌
+毒素
+运输成本
+驾驶员健康证、出行记录等
+销售
+产品名称 /批次、产品完整率、进货时
+间、售卖时间、销售地址、产品数量
+无
+进货价格、销售价格
+销售人员健康证等
+员以及销售人员。参与供应链的各类人员中，参与
+人员的工作要求关系着稻米的质量安全，这也是监
+管部门监管的重要方面。
+稻米监管模型服务于参与企业、监管机构以及
+消费者，对其权限数据信息进行采集。参与企业包
+含生产企业、收储企业、加工企业、仓储企业、运输企
+业以及销售企业共 6 大类型企业。其权限数据信息
+采集主要包含企业名称、企业地址、主营业务等基础
+信息以及该企业的信用数据。监管机构包含国家粮
+食和物资储备局、财政部、国家卫生健康委员会、国
+家市场监督管理总局、农业农村部等。其权限数据
+信息采集主要包含监管机构的所属部门、监管环节、
+规章制度等信息。对消费者的权限数据信息采集主
+要包含身份信息、联系方式、购买记录等。
+2
+基于区块链智能合约的稻米供应链动态
+监管模型构建
+在稻米供应链监管信息解析及分类的基础上，
+基于区块链智能合约构建了稻米供应链动态监管模
+型框架。稻米供应链动态监管模式如图 1 所示。整
+个供应链分为 8 小类参与人员，分别为生产人员、收
+储人员、加工人员、仓储人员、运输人员、销售人员、
+监管人员以及消费者。分别对应稻米供应链 6 类企
+业，即生产企业、收储企业、加工企业、运输企业、仓
+储企业、销售企业。框架将其归为 3 大类，分别为销
+售企业、查验人员、监管人员。销售企业为稻米供应
+链的信息发布者，主要提供稻米需求，查验人员为除
+监管部门以外的所有参与人员，目的在于与监管机
+构形成相互监督的关系，既保证了监管的可信性，也
+能依托于查验人员筛选出违规监管人员，形成对监
+管部门以及稻米质量安全的双向监管。
+框架分为 3 部分，分别为区块链网络、数据挖掘
+模块、模型融合模块。区块链网络服务于整个框架，
+分为了 8 个骨干节点，分别对应稻米供应链中的种
+植、收储、加工、运输、仓储、销售、监管以及消费 8 个
+环节; 收储骨干节点包含 4 个子节点，分别为收购、
+2
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+
+
+【第4页】
+图 1
+稻米供应链动态监管模式示意图
+Fig． 1
+Schematic of dynamic supervision model of rice supply chain
+干燥、除杂、入仓; 加工骨干节点包含 5 个子节点，分
+别为垄谷、碾米、色选、抛光以及包装。模型融合模
+块实现的功能为对环节参与人员进行贡献评估，依
+据贡献系数，指导融合形成可信监管模型、标准环节
+地区模型、可信查验模型以及辅验模型，并对其信用
+进行更新。数据挖掘模块通过智能合约对稻米供应
+链各环节的关键数据进行提取，通过智能合约对数
+据进行分析，进而实现稻米全供应链数据信息动态
+监管以及监管行为动态监管。区块链模块贯穿整个
+稻米监管框架，数据挖掘模块将数据信息进行挖掘
+分析，通过智能合约实现数据交互的作用。数据融
+合模块依据智能合约调用数据挖掘模块分析整理的
+数据，进而进行贡献评估、模型融合以及参与人员信
+用更新。
+稻米供应链监管模型在区块链以及智能合约
+的基础上形成了 4 个可信监管数据源，分别为可
+信监管数据库、可信查验数据库、辅验数据库以及
+标准环节地区数据库。可信监管数据库由稻米供
+应链监管模型中筛选出来完全可信的监管模型组
+成。可信查验数据库为在业务流程中实行供应链
+监管的企业数据库。可信查验数据库为智能合约
+在查验人员的贡献系数基础上，形成的可信查验
+模型集合。辅验数据库是针对消费人员的数据
+库，是在消费者参与查验工作并且对稻米供应链
+监管发挥一定作用的模型集合。标准环节地区数
+据库为稻米供应链各环节筛选出来的有害物含量
+符合国家标准的模型集合。
+3
+稻米供应链动态监管智能合约设计
+智能合约为稻米供应链监管框架核心部分，通
+过编写相互调用、相互监督的智能合约来实现对参
+与人员的身份初始化、数据传输、数据调用、模型验
+证、信用评估以及贡献评估。利用智能合约之间相
+互调用与相互监督的设计实现稻米供应链的实时动
+态监管与信息的采集，并通过业务迭代对数据进行
+整合处理，为后续系统监管提供可信监管数据库。
+3. 1
+合约设计
+稻米供应链监管框架利用智能合约之间的协作
+实 现，即 初 始 化 智 能 合 约 ( Initialization smart
+contract，ITSC) 、数 据 调 用 智 能 合 约 ( Data calling
+smart contract，DCSC) 、模型验证智能合约 ( Model
+verification smart contract，MVSC) 、数据传输智能合
+约( Smart contract for data transmission，SCDT) 、贡献
+评 估 智 能 合 约 ( Contribution
+evaluation
+smart
+contract，CESC ) 、信 用 评 估 智 能 合 约 ( Credit
+assessment smart contract，CASC) ，合约与合约之间
+相互调用、相互监督。智能合约之间的调用关系如
+图 2 所示。
+智能合约的定义以及作用如下。
+ITSC: 服务于稻米供应链参与人员的身份初始
+化、业务信息发布。实现对业务进度的把控以及对
+参与人员的职责定位。形成查验人员名单、监管人
+员名单以及参与企业名单。
+DCSC: 作用于参与人员在各个环节之间的数据
+3
+7
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第5页】
+图 2
+动态监管智能合约关系图
+Fig． 2
+Dynamic supervision smart contract relationship diagram
+调用以及各企业之间信息的查询，包括环节污染物
+含量数据、各企业主体信息以及信用积分。
+SCDT: 应用于参与企业实时数据的上链以及模型
+验证环节中数据的加密传输以及报告、名单等数据的
+上链。主要作用为在区块链上保留交互记录信息。
+MVSC: 用于查验人员以及监管人员之间的评估
+报告提交，以及达成共识之后，发布最终评估报告，
+通过报告之间的定量分析得出可信查验人员名单、
+失信人员名单、可信监管人员名单以及违规监管人
+员名单。
+CESC: 用于计算监管人员以及查验人员的贡献
+系数，并指导形成可信监管模型、标准环节地区模
+型、可信查验模型以及辅验模型。
+CASC: 对参与该业务的所有参与者的信用积分
+进行统计，并在区块链网络上进行记录。
+智能合约是稻米监管模型的核心部分，稻米供
+应链监管模型依靠多个智能合约实现信息的采集以
+及模型的融合。本文对 ITSC、DCSC、MVSC、SCDT、
+CESC、CASC 进行编程，对稻米供应链各环节步骤进
+行梳理，采取程序化语言对稻米供应链的合约设计
+进行描述。为了区分稻米供应链模型各个阶段，本
+文采用两个无符号标志位进行区分，分别为{ startI，
+endO} = { link，link} 、{ startI，endO} = { link，break}
+以及{ startI，endO} = { break，break} ，其中 link 为真，
+break 为假，分别对应模型的初始化阶段、业务监管
+阶段以及贡献量化阶段。该模型的一些重要的符号
+表示如表 2 所示。
+3. 1. 1
+ITSC 智能合约
+ITSC 是稻米供应链运行的首要阶段，主要实现
+稻米供应链参与人员的初始化功能。首先，ITSC 对
+发布企业 O 进行信用积分验证，符合条件后，对该
+发布企业 O 赋予唯一角色代号 a。之后，合约将任
+务需求书 TＲADE 广播至区块链网络，本批次稻米业
+务 D 正式上链启动。当企业查看 TＲADE 后，申请
+参与此次业务，合约依据 TＲADE 对企业的信用积分
+进行验证后，按照企业的主营业务类型赋予相应的
+环节编号，并生成 Flist 列表。ITSC 主要对监管人员
+的身份以及信用积分进行验证，符合条件后，赋予该
+监管人员唯一角色代号 b，并生成 Ｒlist列表。除了监
+管人员以外，所有的参与人员都可以申请成为查验
+人员，ITSC 对其身份以及信用积分认证后，赋予该
+查验人员唯一角色代号 c，并生成相应的 Clist 列表。
+在初试化阶段，除了发布人员之外，合约依据申请时
+间先后以及 TＲADE 规定，对本次 D 所产生的 Clist、
+Ｒlist以及 Flist 列表的长度进行规定，当 Clist、Ｒlist 以及
+Flist列表人员数量达到 Clim、Ｒlim、Flim时，ITSC 不再接
+受申请。
+合约对参与企业进行了限定，如 F 需参与此次
+业务，信用积分必须达到一定的数值。F 的积分计
+算公式为
+HF = H1 + H2 + … + Hj
+( 1)
+式( 1) 中，Hj 为该企业参与查验工作的人员的个体
+信用积分，F 的信用积分体现在该企业参与查验工
+作的人员的信用度累积和。
+除此之外，合约对 F 的数量也进行了限定。对
+于申请认定查验者身份，合约采取对申请人员进行
+信用积分审核的方式进行验证，信用积分是稻米供
+应链监管框架进行资格认定的必要条件。
+4
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+
+
+【第6页】
+表 2
+变量说明以及描述
+Tab． 2
+Variable introduction and description
+变量
+描述
+D/p/C /Ｒ /O/F
+业务/参与人员 /查验人员 /监管人员 /发布企
+业 /参与企业
+S
+消费人员
+ZD
+参与企业此次业务产出的所有数据集
+Ｒdate
+监管数据库
+Fdate
+参与企业具体信息( 信用积分、关键数据)
+pkp /skp
+参与人员的公钥 /私钥
+Hp
+p 信用评分，p∈( O，Ci，Ｒi)
+HF
+参与企业信用积分
+Hi
+供应链各环节
+Wi /Yi /Zi
+第 i 个环节的有害物记录 /交易记录 /主体信
+息
+StepCi
+可信查验人员模型
+TSM
+可信监管人员模型
+FY
+辅验人员模型
+TL
+无污染环节模型
+Eci
+查验人员提交的环节污染物含量报告
+Ei
+监管人员提交的环节污染物含量报告
+Ecr
+达成共识的环节污染物含量报告
+θC /θＲ
+查验人员 /监管人员预设的可接受阈值
+σi
+环节污染物含量监管贡献系数
+Cset /Ｒset
+查验人员获得的环节污染物数据/监管人员
+获得的环节污染物数据
+Clist /Ｒlist /Flist
+批准参与的查验人员名单 /监管人员名单 /参
+与企业名单
+Csuclist
+查验人员检查的环节污染物含量通过了所有
+监管人员监查的名单
+Ｒverlist
+监查查验人员的监管人员名单
+CBFlist /ＲBFlist
+失信查验人员名单/失信监管人员名单
+ListＲe
+信用积分更新完成的所有参与者名单
+TＲADE
+标准的业务任务说明
+φ
+预设的污染物含量要求
+PLAi
+确认的第 i 个环节的稻米污染物含量
+γi
+监管人员发送给查验人员的第 i 个环节认证
+签名
+Tp
+参与该业务所需的信用积分，p∈( O，Ci，Ｒi)
+T + /T －
+每个环节信用积分的奖惩
+SGＲ
+C 查验单个环节所需 Ｒ 签名数量
+Clim /Ｒlim /Flim
+该业务需要的 C /Ｒ /F 最大数量
+3. 1. 2
+DCSC 智能合约
+为了方便查验人员获取环节污染物含量数据以
+及各参与企业之间沟通交流，本文设计 DCSC 来解
+决此问题。查验人员、监管人员以及各参与企业向
+DCSC 发送调用数据的哈希值，如果申请人在 Clist、
+Ｒlist以及 Flist中，DCSC 分发数据集 Cset、Ｒset以及 Fdate
+给相应申请人员。为了便于确定各个企业的访问权
+限，本文通过赋予企业唯一哈希值来解决这个问题，
+DCSC 通过辨别企业哈希值来确定企业的权限。
+DCSC 分发数据集的路径公式为
+Pathfile = { ＲDS{ Di{ Hi{ file} } } ，pkp}
+( 2)
+各企业查看其他企业信息路径公式为
+Pathfile = { ＲDS{ Fi{ file} } ，pkp}
+( 3)
+式( 2) 中，ＲDS 为云数据库，Di为云数据库中该项目
+所在库位置，DCSC 利用参与人员的公钥定位到数
+据的具体位置，对数据集进行分发。式( 3) 中 Fi 为
+各参与企业具体信息的存储库位置，各企业通过各
+自的公钥对所需查看的其他企业具体信息进行提
+取。
+3. 1. 3
+SCDT 智能合约
+SCDT 主要服务于 MVSC，作用体现在参与企业
+在稻米供应链各环节产生的数据 ZDi进行实时上链
+以及 MVSC 对模型进行验证时产生的数据进行传
+输，并将整个交互记录存储到区块链网络。当 Ci以
+及 Ｒi在本地生成 Eci报告以及 Ei报告之后，SCDT 首
+先对其身份进行验证，确定 Ci以及 Ｒi属于本次业务
+D 参与人员，之后对报告进行加密上链。同样，当
+Ｒi请求获取 Eci 报告时，SCDT 验证其身份，并对 Eci
+报告进行传输。
+SCDT 保证了数据的安全传输，整个传输过程
+采用非对称加密的形式对数据进行加密处理，即参
+与企业、查验人员与监管人员使用私钥进行签名，利
+用公钥进行验证。SCDT 智能合约与 DTSC 智能合
+约贯穿于整个稻米供应链，共同对供应链内部数据
+进行传输与调用。SCDT 智能合约与 DTSC 智能合
+约是其他智能合约相互连接、相互监督的纽带。
+3. 1. 4
+MVSC 智能合约
+MVSC 智能合约为稻米供应链的核心智能合
+约，实现对查验人员以及监管人员对数据信息的查
+验与监管，以及对查验行为、监管行为的管理，其伪
+代码设计如算法 1 所示。
+算法 1: 模型验证智能合约( MVSC)
+Input: { startI，endO} = { link，break} ; O; Clist; φ; Ｒlist;
+SGＲ;
+Output: { startI，endO} = { break，break} ; Eci; Ei; Ecr;
+Csuclist; CBFlist; ＲBflist; Ｒverlist;
+1: if Ci∈Clist
+Ｒi∈Ｒlist
+C⇒DCSC
+Ｒ⇒DCSC
+/ /调用DCSC
+return Ci⇐Cset
+Ｒi⇐Ｒset
+/ /分发数据集
+else
+5
+7
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第7页】
+end
+2: if C∈Clist
+C 依据 φ 查验环节污染物含量
+/ /实时查验
+return Eci
+Eci⇒SCDT
+if Ｒ∈Ｒlist
+Ｒ 依据 φ 查验环节污染物含量
+/ /实时监管
+return Ei
+Ei⇒DCSC
+3: if Ｒi∉ＲBFlist
+dist( Eci，Ei) ≤θC
+return Ｒi→Ci( γi)
+send ( Ci，Ｒi，γi)
+Ｒi→Ｒverlist
+else
+Ｒi驳回 Eci
+Ci→CBFlist
+return 2
+/ /对查验行为进行实时监管
+3: if γi的数量≥SGＲ
+return 4
+else
+return 2
+4: C 生成 Ecr
+Ecr⇒SCDC
+/ /调用 SCDC
+5: if dist( Ei，Ecr) ≥θＲ
+return Ｒi→ＲBFlist
+将 Ｒverlist中 Ｒi删除
+/ /对监管行为进行实时监督
+if Eci的数量小于该环节所需最少数量
+return 2
+else
+Ci→Csuclist
+6: if Csuclist = Clist or O 对稻米满意
+return
+{ startI，endO} = { break，break}
+else
+return 2
+7: output: { startI，endO} = { break，break} ; Eci; Ei; Ecr;
+Csuclist; CBFlist; ＲBflist; Ｒverlist
+查验人员以及监管人员在本地形成 Eci与 Ei，调
+用 SCDT 将其加密传输到区块链网络，Eci与 Ei加密
+传输公式为
+SendEci = { Wi，Yi，Zi} skp
+( 4)
+SendEi = { Wi，Yi，Zi} skp
+( 5)
+本文设定的传输方式为私钥加密公钥解密，以
+此来保证数据的安全性。可信监管人员( 在模型经
+过多次业务迭代之后形成的可信监管数据库中的监
+管人员) 调用 SCDT 获取 Eci，获取方式为
+Path = { ＲDS{ Di{ Hi{ Eci} } } ，pkp}
+( 6)
+在检查 Eci的可信性后，该监管人员将认证签名
+发送给该查验人员，该查验人员在获取到足够的签
+名之后发布 Ecr到区块链网络。本文将 Eci与 Ei报告
+中 3 个维度的数据进行量化，MVSC 依据设定好的
+欧氏距离对 Eci、Ei、Ecr 进行对比，从而生成 Csuclist、
+CBFlist、ＲBflist、Ｒverlist 共 4 个列表，以便 CESC 与 CASC
+进行模型的融合以及信用积分的评估。欧氏距离计
+算公式为
+Dist( Eci，Ei) =
+( WＲi － WCi)
+2 + ( YＲi － YCi)
+2 + ( ZＲi － ZCi)
+■
+2
+( 7)
+Dist( Ei，Ecr) =
+( WＲi － Wcri)
+2 + ( YＲi － Ycri)
+2 + ( ZＲi － Zcri)
+■
+2
+( 8)
+式( 4) 显示的是查验人员利用本身私钥对 Eci进行加
+密然后传输到区块链网络，Eci 为 Wi、Yi、Zi 的整合，
+同理式( 5) 显示的是监管人员对 Ei 的加密传输方
+式。式( 6) 中，模型首先访问到云数据库，之后访问
+到该项目库，再访问到该环节库，最后查询到该 Eci。
+式( 7) 、( 8) 是 Eci与 Ei之间的欧氏距离具体算法，其
+中 WＲi和 WCi、YＲi和 YCi、ZＲi和 ZCi分别表示监管人员
+和查验人员的第 i 个环节有害物记录、交易记录、主
+体信息，具体为首先对 Eci与 Ei中 3 个维度的信息进
+行量化，之后按照公式对其进行计算。
+3. 1. 5
+CESC 智能合约
+CESC 首先对 Ｒi和 Ci进行可信性验证，确定 Ｒi
+属于 Ｒverlist列表以及 Ci属于 Csuclist列表，并对 Ci进行
+中的消费者 S 以及其他查验人员进行区分。其次，
+CESC 对 Ecr报告与供应链各环节 Hi进行匹配，并确
+定确认的第 i 个环节的稻米污染物含量 PLAi小于预
+设的污染物含量要求 φ。之后，CESC 对查验人员以
+及监管人员进行贡献系数的计算，并依据贡献系数
+对可信查验模型 StepCi、可信监管模型 TSM、辅验模
+型 FY 以及标准环节地区模型 TL 进行指导融合，融
+合方式为
+StepCi = ∑
+Csuclist
+σiHi
+( 9)
+TSM = ∑
+Ｒverlist
+σiHi
+( 10)
+FY = ∑
+Csuclist
+σiHi
+( 11)
+6
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+
+
+【第8页】
+其中 TL 为相应 Ecr对应环节数据。模型在反复业务
+迭代的过程中形成可信查验数据库、可信监管数据
+库、辅验数据库以及标准环节地区数据库。贡献系
+数 σi的计算依据各类参与人员发布的 Eci、Ei、Ecr的
+数量决定，是一个等量转化的过程。CESC 形成的
+数据信息存储在云数据库中，区块链各节点存储相
+关索引信息，两者呈平行映射关系。
+3. 1. 6
+CASC 智能合约
+在稻米供应链监管模型中，信用积分是评判企
+业的参与资格以及监管人员监管质量的唯一指标。
+本文设计 CASC 对一个迭代业务过程中各个参与人
+员的信用积分进行计算更新。CASC 对信用积分的
+评判采取的方法为参与人员本身的信用积分加上预
+先设定好的积分奖励以及惩罚，这一部分可以依据
+现实情况进行定量设计。除此之外，CASC 将各环
+节的确定污染物含量传输至区块链网络，传输方式
+定义为 MSG，使 CESC 能够依据此进行标准环节地
+区模型的融合。CASC 的设计如算法 2 所示。
+算法 2: 信用评估智能合约( CASC)
+Input: { startI，endO} = { break，break} ; Csuclist; Ｒverlist;
+CBFlist; ＲBFlist; T + ; T － ;
+Output: { startI，endO} = { link，link} ; TCi; TＲi;
+1: if Ｒi∈ＲBFlist
+Ci∈CBFlist
+return
+TＲi = TＲi － T －
+TCi = TCi － T －
+/ /对查验/监管失信人员进行相应信用积分的扣除
+Ｒi→ListＲe
+Ci→ListＲe
+2: if
+Ci∈Csuclist
+Ｒi∈Ｒverlist
+return TCi = TCi + T +
+TＲi = TＲk + T +
+/ /对查验/监管可信人员进行相应信用积分的增加
+3: if Ci∈Csuclist
+return send( Ci，O，MSG)
+MSG = ( Hi
+∪
+Ｒi∈ＲverlistSig{ PLAi} skp)
+/ /传输可信环节各数据信息，以便形成标准环节地
+区数据库，Sig 为数字签名
+4: if
+len( ListＲe) = len( ＲList∪CList)
+/ /验证所有人员是否更新完毕
+return { startI，endO} = { link，link}
+else
+return 1
+5: output: { startI，endO} = { link，link} ; TCi; TＲi; ListＲe
+在整个模型中，所有的数据都可以存储在区块
+链节点之中，表 3 为智能合约在处理稻米供应链监
+管模型监管逻辑时产生的一些交互记录。
+表 3
+模型运行参数
+Tab． 3
+Model operating parameters
+参与量
+生成量
+ITSC
+F、S、Ｒ
+D、O、Clist、Ｒlist、Flist
+DCSC
+Clist、Ｒlist、Flist
+Cset、Ｒset、Fdate
+MVSC
+O、Clist、φ、Ｒlist、SGＲ
+Eci、Ei、Ecr、Csuclist、CBFlist、
+ＲBflist、Ｒverlist
+SCDT
+Ci，Ｒi，Clist、Ｒlist、Flist
+Eci、Ei、Ecr、ZD
+CESC
+Ecr、Csuclist、Ｒverlist、φ
+σi、StepCi、TSM、FY、TL
+CASC
+Csuclist、Ｒverlist、CBFlist、
+ＲBFlist、T + 、T －
+TCi、TＲi、ListＲe
+本文通过设计定制化的智能合约对稻米供应链
+监管模型内部逻辑进行封装。智能合约的设计类型
+主要分为功能型合约与服务型合约，功能型合约为
+ITSC、MVSC、CESC 以及 CASC，主要实现稻米供应
+链监管模型的初始化工作、模型验证、信用评估等主
+要功能。服务型合约主要为 DCSC 与 SCDT，其主要
+服务于稻米供应链监管模型内部数据的流动。本文
+在稻米供应链监管模型框架以及智能合约的基础
+上，对稻米供应链监管模型流程进行了设计。
+3. 2
+运行流程
+稻米供应链环节框架涵盖了从种植环节到消费
+环节，为稻米监管提供了一套完备的监管体系。在
+此基础上，本文构建了稻米供应链监管模型，整个模
+型的运行模式分为 3 个步骤，分别为初始化阶段、动
+态监管阶段以及贡献量化阶段，稻米供应链模型流
+程图如图 3 所示。
+该模型与区块链网络成平行映射的关系，整个
+流程 3 个阶段的具体操作流程如下:
+( 1) 初始化阶段
+销售企业向 ITSC 递交该业务说明书，申请发布
+此次业务。业务说明书包含所需稻米品种、参与该
+企业所需最低信用评分等。ITSC 验证总资金以及
+该销售企业信用积分，达到标准后，ITSC 通过该申
+请，将该业务发布到区块链上，并赋予企业代号 a，
+否则驳回。
+各类企业查询业务说明书，向 ITSC 申请参与该
+业务，ITSC 查验各类企业信用积分，达到要求后，
+ITSC 通过申请，赋予各申请企业代号( 1，2，…) ，每
+个代号对应唯一哈希值。输出参与企业名单。该业
+务开始，企业将数据实时上传至区块链。销售企业
+以及各参与企业可通过 DCSC 查询其他企业具体信
+息，例如地址、名称、信用积分等。
+监管部门向 ITSC 申请参与该业务，ITSC 验证
+7
+7
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第9页】
+图 3
+模型运行流程示意图
+Fig． 3
+Schematic of model running process
+监管部门信用积分，达到标准后，赋予角色代号 b 输
+出参与此次业务监管部门名单，否则驳回。
+除监管部门外所有参与企业人员均可向 ITSC
+申请成为查验人员，ITSC 验证申请人员信用积分，
+达到标准后，通过验证，赋予角色代号 c，输出查验
+人员名单，否则驳回。
+( 2) 动态监管阶段
+查验人员以及监管部门向 DCSC 提出申请获取
+各环节污染物含量数据，DCSC 验证角色代号( 哈希
+值) ，分发给查验人员以及监管部门相对应实时数
+据。查验人员依据获得的数据在本地形成该环节污
+染物报告 Ei，并将 Eci发布到区块链网络上。监管人
+员依据获得的数据在本地形成该环节污染物报告
+Ei，并将 Eci发布到区块链网络上。可信监管人员查
+看 Eci，符合要求，将认证签名发送给查验人员，如果
+Eci仅只是不符合要求而不是存在欺骗行为，仅驳回
+该报告，该查验人员可以再次提交。当查验人员发
+布的 Eci报告获得足够多的签名( 达到标准) 后，发布
+Ecr到区块链网络。
+设定欧氏距离，定量分析各报告差异。如果
+dist( Ei，Eci) ≥θC，该查验人员涉及欺骗行为，将其添
+加到失信列表中。如果 dist( Ei，Ecr) ≥θＲ，该监管人
+员涉嫌欺骗行为，将其添加到失信列表。CASC 依
+据设定好的奖惩规则，对列表中的信用积分进行扣
+除，否则增加。
+( 3) 贡献量化阶段
+当所有过程完成后，或者销售企业收到满意稻
+米后，查验人员向 CESC 发送所查验环节的污染物
+含量报告以及获得认证签名，CESC 融合形成标准环
+节地区数据模型，CASC 更新各查验人员信用积分，并
+匹配到相对应企业，将其和作为该企业信用积分，计
+算各个查验人员贡献度，CESC 融合形成可信查验人
+员数据模型，并分离出消费者，形成辅验数据模型。
+更新监管人员信用积分，计算监管人员贡献度，CESC
+融合形成可信监管数据模型。一次业务的完成为一
+次迭代，当多次迭代之后，形成相应 4 个可信数据库。
+4
+稻米供应链监管原型系统设计及模型验证
+稻米供应链监管模型能够对各个环节进行动态
+实时监管，且能够使参与人员与监管机构之间形成
+双向监管，保证了监管人员的监察可信。本文对稻
+米供应链监管模型进行了正确性以及实用性验证，
+建立稻米供应链监管原型系统，并通过系统的实际
+运用情况对该模型进行测试。
+4. 1
+原型系统设计与实现
+本文以稻米供应链监管模型为核心，构建稻米供
+应链监管原型系统。原型系统分为应用层、合约层、网
+络层、共识层以及数据层，系统架构图如图 4 所示。
+应用层服务于参与企业、消费者以及监管机构，
+主要实现数据采集、依据信用积分赋予相应权限、辅
+8
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+
+
+【第10页】
+图 4
+稻米供应链监管系统架构示意图
+Fig． 4
+Schematic of rice supply chain supervision system architecture
+助监管、全供应链监管、监管部门内部监管等功能。
+合约层主要由 6 个智能合约组成，主要服务于应用
+层的调用以及系统内部逻辑的封装。系统采取 P2P
+网络进行信息的广播，参与人员共同提供数据与服
+务，共同获取所需信息。系统采用的共识机制为实
+用 拜 占 庭 容 错 算 法 ( Practical
+Byzantine
+fault
+tolerance，PBFT) ，并采用联盟链的准入机制。数据
+层分为区块链节点存储数据以及云数据库存储数
+据。为了提高系统的运行效率，区块链节点存储各
+个环节的索引信息，存储量少。系统主体数据通过
+区块链的数据索引加密存储在云数据库，整个云数
+据库分为 4 部分: 可信查验数据库、可信监管数据
+库、辅验数据库以及标准环节地区数据库。数据采
+集层由频射技术( ＲFID) 、条形码、二维码、互联网、
+手机等组成，主要为参与企业对数据进行实时采集
+并且上传到云数据库并将其存储位置以及相关索引
+信息加密传输至区块链网络，以便数据的及时处理，
+即模型对相关人员以及上传的数据信息进行动态
+监管。
+稻米供应链原型系统的实现分为客户端、服务
+器、区块链网络以及云端数据库 4 部分，客户端以
+Web 界面的形式给用户提供服务。服务器是连接
+客户端与区块链的中介，为整个系统提供哈希计算、
+数据共享等服务。本系统使用 JavaScript 开发语言
+以及 Golang 开发语言进行区块链的开发，并使用
+Gin、Vue 作为前、后端框架进行全栈开发，平台采用
+Hyperledger Fabric，智能合约运行环境为 Docker 沙
+箱，加密体系采用 ECDH( 密钥协商算法) ，存储介质
+为 ＲDS。本系统设计的本质为各参与人员利用智
+能合约以及区块链技术，对稻米供应链产生的数据
+进行采集以及对整个稻米供应链参与人员本身产生
+的数据进行分析，将数据库分为 4 个可信数据库，从
+而提高监管的力度。稻米供应链监管系统的运行流
+程如图 5 所示。
+稻米供应链监管系统的实现过程从用户通过网
+页进行注册登记开始，其中销售企业在系统中发布
+稻米收购需求，认定为信息发布者，将该需求通过
+P2P 网络对整个系统进行广播，相关企业获取到需
+求信息后，经过系统审核，并参与此次业务。本次业
+务正式开始，参与企业通过智能合约对数据进行实
+时上链，然后监管部门进入系统对此次业务进行监
+管，参与人员申请参与稻米供应的查验。查验人员
+以及监管人员达成 PBFT 共识，在获取相关环节数
+据后，分别形成 Eci、Ei 以及 Eci，并将其存储到区块
+链网络，系统调用智能合约，在服务器端对报告进行
+处理，整理出可信/违规监管列表、可信/违规查验列
+表，并对其信用积分进行相应的奖励以及惩罚，并依
+据这些列表数据以及采集数据，系统形成可信监管
+模型、可信查验模型、可信标准环节地区模型以及辅
+验模型。在业务迭代过程中，形成 4 个模型的数据
+9
+7
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第11页】
+图 5
+系统运行流程示意图
+Fig． 5
+Schematic of system operation process
+库。整个系统的数据调用与传输采用非对称加密传
+输的形式，即公钥加密、私钥解密或私钥加密、公钥
+解密，因此数据的安全性得到保证。
+图 6
+系统界面
+Fig． 6
+System interface diagrams
+4. 2
+结果分析
+通过对东北地区某批次稻米供应链进行调研，
+该批次稻米环节数据记录详细且保存完整。本文利
+用该批次稻米数据对稻米供应链监管系统进行分析
+验证。并在某监管单位的帮助下，对本系统的实用
+性进行测试。系统 Web 端登录界面如图 6a 所示。
+不同的用户可选择相应的所属类别进行登陆。拥有
+管理权限的监管机构登录系统后的主页如图 6b 所
+示。系统分为 9 个管理模块，其中在主页界面，系统
+采取可视化方式对当天业务数量、本月监管合格率、
+报告数量、本月监管违规次数进行展示，并采取图表
+的形式对系统完成业务批次信息进行公示。监管机
+构可以实时把控稻米供应链系统的监管情况。监管
+部门通过监管业务模块可以查看查验完成情况以及
+监管完成情况。其中查验情况如图 6c 所示，包括查
+验人员、联系方式、数据获取情况、报告发布情况、是
+否可信以及参与人数等。监管情况如图 6d 所示，包
+0
+8
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+
+
+【第12页】
+括监管人员、联系方式、数据获取情况、认证环节数
+量、信用积分是否更新完毕等。此设计使监管机构
+对监管情况更好地把控，及时对监管人员违规情况
+进行处理，从而保证监管的可信度，提高稻米质量
+安全。
+本系统通过定制化设计多业务智能合约来实现
+稻米全供应链的动态监管，通过实例验证，本系统能
+够实现发布企业对稻米需求的及时公布，并通过合
+约及时确定参与此次业务的人员，并进行任务分配。
+参与企业在获取稻米需求信息后能够实时将生产、
+加工、运输等数据及时上传到区块链网络，系统通过
+智能合约能够实时对所采集的信息进行智能挖掘，
+并进行分析，从而对数据进行监管以及监管行为进
+行监督。且系统能够提供可信数据来源库，在业务
+迭代过程中可信数据库中人员的可信度以及数量将
+会不断增加，因此，本原型系统处理业务的效率也随
+时间不断增加。
+本文对系统的业务能力进行仿真，初试条件
+设为业务数量不限，模型融合数量随时间的增加
+情况 如 图 7a 所 示。本 文 仿 真 了 24 h 内 TSM、
+StepCi、FY 以及 TL 模型的融合数量随着时间的增
+加而进行动态变化的过程。随着时间的增加，每
+小时融合形成的 4 个模型数量呈近似线性增加，
+并且当仿真时间达到 12 h 时，每小时融合形成的 4
+个模型的数量增长速度大幅增加，可以得出本文
+设计的原型系统随着融合的可信模型数量的增
+加，处理业务的速度得到了相应的提高。系统处
+理业务数量随时间的变化情况如图 7b 所示。本
+文将原型系统测试时间延长至 35 d，可以更加明
+显地看出原型系统处理业务的数量随时间的增加
+不断变快，例如，系统在第 5 天时，处理的业务数
+量达到 1 500 个左右，当第 10 天时，处理的业务数
+量达到了 3 500 个左右，当第 15 天时，处理的业务
+数量达到了 6 200 个左右。本系统在随着运行时
+间的增加，业务能力得到不断增强。
+5
+结论
+( 1) 分析了稻米供应链全生命周期复杂数据并
+以此为基础构建了稻米供应链动态监管模型，以模
+图 7
+业务能力测试
+Fig． 7
+Prototype system business capability test
+型为框架，定制化设计多业务监管智能合约。最后
+结合模型以及智能合约构建了稻米供应链监管原型
+系统，实现了稻米供应链全链数据动态监管。
+( 2) 主要结合区块链智能合约技术对稻米供应
+链进行研究。首先，对稻米供应链进行分析，提炼出
+稻米供应链各环节需上传的稻米供应链关键信息，
+并对稻米全供应链参与者归为企业、监管机构以及
+消费者 3 类，并对其主要数据进行整理。其次，结合
+区块链智能合约的方法构建稻米全供应链监管模型
+框架。通过设计相互调用与监督的智能合约，实现
+稻米供应链全生命周期复杂数据的动态监管以及可
+信人员数据模型的融合，最后，依据稻米全供应链监
+管模型，提出稻米全供应链监管原型系统设计方案，
+并结合某批次稻米对该系统进行验证和分析。
+( 3) 实现了稻米供应链复杂数据的动态监管，
+解决了监管人员的可信监管行为实时监督问题，并
+提供了无需验证的可信人员库以及稻米数据信息
+库，为加快我国粮食行业产业数字化转型，增强粮食
+作物监管能力，保障粮食安全提供了一种可行务实
+的应用解决思路。
+参
+考
+文
+献
+［1］ 欧阳丽炜，王帅，袁勇，等． 智能合约: 架构及进展［J］． 自动化学报，2019，45( 3) : 445 － 457．
+OUYANG Liwei，WANG Shuai，YUAN Yong，et al．
+Smart contracts:
+architecture and research progresses［J］．
+Acta
+Automatica Sinica，2019，45( 3) : 445 － 457． ( in Chinese)
+［2］ OUYANG Liwei，YUAN Yong，WANG Feiyue． Learning markets: an AI collaboration framework based on blockchain and smart
+contracts［J］． IEEE Internet of Things Journal，2020，15( 12) : 6367 － 6378．
+［3］ 许继平，孙鹏程，张新，等． 基于区块链的粮油食品全供应链信息安全管理原型系统［J］． 农业机械学报，2020，51( 2) : 341 －349．
+XU Jiping，SUN Pengcheng，ZHANG Xin，et al． Prototype system of information security management of cereal and oil food whole
+1
+8
+3
+第 1 期
+张新 等: 基于区块链智能合约的稻米供应链动态监管模型
+
+
+【第13页】
+supply chain based on blockchain［J］． Transactions of the Chinese Society for Agricultural Machinery，2020，51( 2) : 341 － 349．
+( in Chinese)
+［4］ SON N M，NGUYEN T L，HUONG P T，et al． Novel system using blockchain for origin traceability of agricultural products
+［J］． Sensors and Materials，2021，33( 2) : 601 － 613．
+［5］ GＲIGGS K N，OLYA O，KPHLIOS C P，et al． Healthcare blockchain system using smart contracts for secure automated remote
+patient monitoring［J］． Journal of Medical Systems，2018，42( 7) : 130．
+［6］ 章家恩． 我国水稻安全生产存在的问题及对策探讨［J］． 北方水稻，2007( 4) : 1 － 7．
+ZHANG Jiaen． The issues and countermeasures for safe production of rice in China［J］． North Ｒice，2007 ( 4) : 1 － 7． ( in
+Chinese)
+［7］ 孙传恒，于华竟，徐大明，等． 农产品供应链区块链追溯技术研究进展与展望［J］． 农业机械学报，2021，52( 1) : 1 － 13．
+SUN Chuanheng，YU Huajing，XU Daming，et al． Ｒeview and prospect of agri-products supply chain traceability based on
+blockchain technology［J］． Transactions of the Chinese Society for Agricultural Machinery，2021，52( 1) : 1 － 13． ( in Chinese)
+［8］ KSHETＲI N，DEFＲANCO J F． The economics behind food supply blockchains［J］． Computer，2020，53( 12) : 106 － 110．
+［9］ KATSIKOULI P，WILDE A S，DＲAGONI N，et al． On the benefits and challenges of blockchains for managing food supply
+chains［J］． Journal of the Science of Food and Agriculture，2020，101( 6) : 2175 － 2181．
+［10］ COＲALLO A，LATINO M E，MENEGOLI M，et al． The awareness assessment of the Italian agri-food industry regarding food
+traceability systems［J］． Trends in Food Science ＆ Technology，2020，101: 28 － 37．
+［11］ MEHAＲG A A，NOＲTON G J，DEACON C，et al． Variation in rice cadmium related to human exposure［J］． Environmental
+Science and Technology，2013，47( 11) : 5613 － 5618．
+［12］ 许继平，王健，张新，等． 区块链驱动的稻米供应链信息监管模型研究［J］． 农业机械学报，2021，52( 5) : 202 － 211，101．
+XU Jiping，WANG Jian，ZHANG Xin，et al． Information supervision modeling of rice supply chain driven by blockchain［J］．
+Transactions of the Chinese Society for Agricultural Machinery，2021，52( 5) : 202 － 211，101． ( in Chinese)
+［13］ LIU Y，MA X，SHU L，et al． From Industry 4. 0 to Agriculture 4. 0: current status，enabling technologies，and research
+challenges［J］． IEEE Transactions on Industrial Informatics，2020，17( 6) : 4322 － 4334．
+［14］ YADAV S，LUTHＲA S，GAＲG D． Modelling Internet of things ( IoT) -driven global sustainability in multi-tier agri-food
+supply chain under natural epidemic outbreaks［J］． Environmental Science and Pollution Ｒesearch，2021，28( 2) : 1 － 22．
+［15］ SAAD M，QIN Z，ＲEN K，et al． e-PoS: making proof-of-stake decentralized and fair［J］． IEEE Transactions on Parallel and
+Distributed Systems，2021，32( 8) : 1961 － 1973．
+［16］ SHAYAN M，FUNG C，YOON C，et al． Biscotti: a blockchain system for private and secure federated learning［J］． IEEE
+Transactions on Parallel and Distributed Systems，2021，32( 7) : 1513 － 1525．
+［17］ LI Wenyu，FENG Chenglin，ZHANG Lei，et al．
+A scalable multi-layer PBFT consensus for blockchain［J］．
+IEEE
+Transactions on Parallel and Distributed Systems，2021，32( 5) : 1146 － 1160．
+［18］ 于合龙，陈邦越，徐大明，等． 基于区块链的水稻供应链溯源信息保护模型研究［J］． 农业机械学报，2020，51( 8) : 328 －335．
+YU Helong，CHEN Bangyue，XU Daming，et al． Modeling of rice supply chain traceability information protection based on block
+chain［J］． Transactions of the Chinese Society for Agricultural Machinery，2020，51( 8) : 328 － 335． ( in Chinese)
+［19］ LI Xiaochun，HUANG Dan． Ｒesearch on value integration mode of agricultural e-commerce industry chain based on Internet of
+things and blockchain technology［J］． Wireless Communications and Mobile Computing，2020( Special Issue) : 8889148．
+［20］ 袁勇，欧阳丽炜，王晓，等． 基于区块链的智能组件: 一种分布式人工智能研究新范式［J］． 数据与计算发展前沿，2021，
+3( 1) : 1 － 14．
+YUAN Yong，OUYANG Liwei，WANG Xiao，et al． Blockchain-based intelligent-ware: a novel paradigm for distributed artificial
+intelligence research［J］． Frontiers of Data and Computing，2021，3( 1) : 1 － 14． ( in Chinese)
+［21］ ASTILL J，DAＲA Ｒ A，CAMPBELL M，et al． Transparency in food supply chains: a review of enabling technology solutions
+［J］． Trends in Food Science ＆ Technology，2019，91( 3) : 240 － 247．
+［22］ SUN W，WANG L，WANG P，et al． Collaborative blockchain for space-air-ground integrated networks［J］． IEEE Wireless
+Communications，2020，27( 6) : 82 － 89．
+［23］ 董云峰，张新，许继平，等． 基于区块链的粮油食品全供应链可信追溯模型［J］． 食品科学，2020，41( 9) : 30 － 36．
+DONG Yunfeng，ZHANG Xin，XU Jiping，et al． Blockchain-based traceability model for grains and oils whole supply chain
+［J］． Food Sciense，2020，41( 9) : 30 － 36． ( in Chinese)
+［24］ MACHADO T B，ＲICCIAＲDI L，OLIVEIＲA M． Blockchain technology for the management of food sciences researches［J］．
+Trends in Food Science ＆ Technology，2020，102: 261 － 270．
+［25］ ANTONUCCI F，FIGOＲILLI S，COSTA C，et al． A review on blockchain applications in the agri-food sector［J］． Journal of
+the Science of Food and Agriculture，2019，99( 14) : 6129 － 6138．
+［26］ ＲEN Yanjun，LIN Meng，LIU Qingming，et al． Contamination assessment，health risk evaluation，and source identification of
+heavy metals in the soil-rice system of typical agricultural regions on the southeast coast of China［J］． Environmental Science
+and Pollution Ｒesearch，2021，28: 12870 － 12880．
+［27］ 葛艳，黄朝良，陈明，等． 基于区块链的 HACCP 质量溯源模型与系统实现［J］． 农业机械学报，2021，52( 6) : 369 － 375．
+GE Yan，HUANG Chaoliang，CHEN Ming，et al． HACCP quality traceability model and system implementation based on
+blockchain［J］． Transactions of the Chinese Society for Agricultural Machinery，2021，52( 6) : 369 － 375． ( in Chinese)
+［28］ WEI Lijuan，ZHANG Jing，WANG Chunlei，et al． Ｒecent progress in the knowledge on the alleviating effect of nitric oxide on
+heavy metal stress in plants［J］． Plant Physiology and Biochemistry，2020，147: 161 － 171．
+［29］ WEI Xiong，LI Xiong． Anti-collusion data auction mechanism based on smart contract［J］． Information Sciences，2021，555:
+386 － 409．
+［30］ ZHANG Xin，SUN Pengcheng，XU Jiping，et al． Blockchain-based safety management system for the grain supply chain［J］．
+IEEE Access，2020，8: 36398 － 36410．
+2
+8
+3
+农
+业
+机
+械
+学
+报
+2 0 2 2 年
+

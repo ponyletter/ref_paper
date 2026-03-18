@@ -1,0 +1,651 @@
+来源文件：15FoodSQRBlock Digitizing food production and the supply chain with blockchain and QR code in the cloud.pdf
+============================================================
+
+【第1页】
+sustainability
+Article
+FoodSQRBlock: Digitizing Food Production and the Supply
+Chain with Blockchain and QR Code in the Cloud
+Somdip Dey 1,2,*,†
+, Suman Saha 2, Amit Kumar Singh 1 and Klaus McDonald-Maier 1
+����������
+�������
+Citation: Dey, S.; Saha, S.; Singh,
+A.K.; McDonald-Maier, K.
+FoodSQRBlock: Digitizing Food
+Production and the Supply Chain
+with Blockchain and QR Code in the
+Cloud. Sustainability 2021, 13, 3486.
+https://doi.org/10.3390/su13063486
+Academic Editor: Antonino Galati
+Received: 26 December 2020
+Accepted: 8 March 2021
+Published: 22 March 2021
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright: © 2021 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed
+under
+the
+terms
+and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+1
+School of Computer Science and Electronic Engineering, Essex University, Colchester CO4 3SQ, UK;
+a.k.singh@essex.ac.uk (A.K.S.); kdm@essex.ac.uk (K.M.-M.)
+2
+Nosh Technologies, Colchester CO4 3SL, UK; suman.saha@nosh.tech
+*
+Correspondence: somdip.dey@essex.ac.uk or dey@nosh.tech
+†
+Current address: Wivenhoe Park, University of Essex, Colchester CO4 3SQ, UK.
+Abstract: Food safety is an important issue in today’s world. The traditional agri-food production
+system does not offer easy traceability of the produce at any point of the supply chain, and hence,
+during a food-borne outbreak, it is very difﬁcult to sift through food production data to track produce
+and the origin of the outbreak. In recent years, the blockchain based food production system has
+resolved this challenge; however, none of the proposed methodologies makes the food production
+data easily accessible, traceable and veriﬁable by consumers or producers using mobile/edge devices.
+In this paper, we propose FoodSQRBlock (Food Safety Quick Response Block), a blockchain technol-
+ogy based framework that digitises the food production information and makes it easily accessible,
+traceable and veriﬁable by the consumers and producers by using QR codes. We also propose a
+large-scale integration of FoodSQRBlock in the cloud to show the feasibility and scalability of the
+framework, as well as give an experimental evaluation to prove this.
+Keywords: food production; supply chain; blockchain; QR code; cloud computing; food safety;
+barcode; traceability system; agri-food; agriculture
+1. Introduction
+Over the decades, the food production system—the way to get food from farm to
+table—has evolved to a complex network. Today’s food production system provides
+the consumers more variety and convenient, economical and healthier sources of food;
+however, such a system comes with its own challenges, such as the case where ingredients
+produced by one producer could end up in thousands of other products distributed in
+many different shops [1,2]. This challenge is an issue of food safety, which is potentially
+detrimental to consumers’ health and seriously damages the consumer’s trust of the
+food market. For example, some immoral food producer could use trench oil to produce
+cooking oil, which is then distributed to thousands of shops, which is retrospectively
+bought and consumed by the consumer, making them sick in the process. Several cases
+of such accidents or food safety scandals such as the “horse meat scandal”, “Sudan red”,
+“clenbuterol”, “Sanlu toxic milk powder” and “trench oil” [3] have happened all over
+the world. These scandals do not just harm the economy of the food market, but at
+the same time threaten the safety and stability of society as well. Although there are
+standards available such as the General Food Law in the EU [4] and the Food Safety
+Modernization Act (FSMA) in the U.S. [5], which try to standardize the traceability of the
+digital information of food production in some of the stages of the food supply chain, these
+standards are regional, and currently, there is no holistic standardization of the tracking
+and recording data for food traceability purposes in all stages of the food supply chain
+across the globe. Therefore, in order to deal with such a challenge related to food safety,
+Blockchain Technology (BT) [6,7] may play a vital role in the traceability of food ingredients
+Sustainability 2021, 13, 3486. https://doi.org/10.3390/su13063486
+https://www.mdpi.com/journal/sustainability
+
+
+【第2页】
+Sustainability 2021, 13, 3486
+2 of 11
+in recent times such that consumers can trace the source of the food ingredients that they
+are buying/consuming.
+Traditionally, many producers still record the data of their production on paper,
+whereas some producers digitise the production data, which does not enable interaction
+with other parties in the food system. Moreover, traditional food production systems
+are centralized in nature and could result in a trust problem, such as fraud, corruption,
+tampering and falsifying information. During a food-borne outbreak, sifting through
+thousands of documents (digital or paper) to trace food ingredients could be slow and
+complicated. In recent times, several methodologies [2,3,8,9] based on BT have been
+proposed to solve the challenge of food traceability for food safety purposes. The key
+strengths of utilizing BT is its decentralized, distributed and trusted nature, which could be
+advantageously used for food traceability and transparency for consumers at any point of
+the food production system. However, all the proposed BT frameworks [2,3,8,9] only deal
+with the effective traceability of food supply chains, but not with technical solutions to
+make the food traceability more accessible to consumers such that they can verify and track
+their bought food items, may be with an easy-to-access device such as a mobile phone.
+On the other hand, a popular way to store food data digitally is by using 1D barcodes
+such as the Universal Product Code (UPC) barcode [10,11]. The UPC barcode consists of
+12 numeric digits that are uniquely assigned to each trade/food item. Every region or
+country maintains a database that holds the record of these trade/food items along with
+the unique UPC, which are capable of storing the following data: the type of product,
+size, manufacturer and country of origin of the food item. Therefore, if a consumer wants
+to know more about the bought food item, he/she has to use a barcode reader (using a
+mobile phone application), which will fetch the unique UPC from the barcode and then
+fetch the information from an online database using the UPC. Although the information
+is fetched from an online database, the amount of information available on the item is
+limited to the type of product, size, manufacturer and country of origin based on the type
+of database. Therefore, no accurate traceability of the item throughout the supply chain is
+available for the consumer to verify. For example, Figure 1a represents a typical 1D barcode,
+which accompanies Tropicana juice’s product label [12] and only reﬂects the following
+information (see Figure 1b) about the product: UPC number, European Article Number
+(EAN), Amazon Standard Identiﬁcation Number (ASIN) product category, brand, model
+and, last, scan date-time, as fetched from BarcodeSpider.com (accessed on 21 March 2021).
+It should be kept in mind that the 1D barcode in Figure 1a only allows storing the 12 digit
+UPC and no other information; therefore, if the correct database is not used to fetch the
+information on the product using the UPC, then the information might not get retrieved
+at all. Moreover, if the consumer is not connected to the Internet, she/he might not even
+retrieve any information based on the UPC by scanning the traditional 1D barcode since a
+lookup of the online database using the UPC is necessary.
+Another issue is that many food products have a shorter shelf life such as fresh
+vegetables and fruits, which should be consumed within a few weeks of being produced,
+and the expiry/best before date are printed on the label of the food item during the
+packaging and, hence, are not available in the UPC barcode information. Many food
+management applications [13,14] are now being offered to remind the consumer of the
+expiry/best before dates of the food products to reduce food waste in the household.
+In these applications (apps), a consumer can record the bought food items along with their
+expiry/best before dates, to create a reminder to consume the items before they expire.
+These applications offer barcode scanning to automatically enter the bought food items
+into the apps; however, given the lack of information stored in the barcode, the consumer
+still has to enter the expiry/best before date of each item individually. Therefore, this calls
+for a technology that enables the consumer not just to be able to verify the source of the
+bought food items throughout the supply chain for food traceability purposes, but also
+automatically fetch the respective expiry/best before date.
+
+
+【第3页】
+Sustainability 2021, 13, 3486
+3 of 11
+(a) UPC barcode
+(b) Details of the corresponding UPC
+Figure 1. UPC barcode for Tropicana Trop50 Blackberry Cherry juice as fetched from BarcodeSpider.com [12] (accessed on
+21 March 2021). EAN, European Article Number; ASIN, Amazon Standard Identiﬁcation Number.
+To resolve these challenges, we propose FoodSQRBlock (Food Safety Quick Response
+Block), a BT based framework that digitises the food production information such that the
+consumers and producers can trace the food produce at any point of the food production
+system and make the information easily accessible using the Quick Response code (QR
+code) such that the information can be retrieved and veriﬁed easily by the consumers
+and producers. In this paper, we also provide a proposal for a large-scale integration of
+FoodSQRBlock in the cloud such that the framework could be adopted easily given the
+improvement and accessibility of cloud technology. To this extent, the main contributions
+of this paper are as follows:
+1.
+We propose FoodSQRBlock, a BT and QR code based framework to digitise food
+production information and retrieval;
+2.
+A large-scale integration of FoodSQRBlock in the cloud and related experimental
+evaluational in the Google Cloud Platform.;
+3.
+The analysis and limitations of the large-scale integration of FoodSQRBlock in the cloud.
+2. Preliminaries
+2.1. Blockchain Technology
+When Satoshi Nakamoto [7] released the technology named Bitcoin, he revolutionised
+the industry not because he had invented a new currency system, which does not require
+the intervention of an institutional mediator while transferring money from one entity to
+another, but because he had gifted one of the most disruptive technologies that has come to
+life in decades. With the introduction of Bitcoin, blockchain was introduced to the world,
+which is a digital ledger in which all transactions are recorded chronologically and publicly.
+Therefore, the application of blockchain is not just limited to crypto-currencies [15,16] such
+as Bitcoin and has proven to be useful in tracking ownership, provenance of documents,
+digital assets, physical assets, voting rights, etc. The blockchain network is traditionally of
+three types as follows:
+1.
+Public: In this network, everyone can check and verify the transaction made. The net-
+work is also open to anyone who wants to participate in the consensus process.
+2.
+Private: In this type of network, strict restrictions are applied on data access, and
+the nodes (user/entity) have restricted access to speciﬁc block chains, which are
+monitored by a governing body.
+3.
+Consortium: Nodes in this type of network can form a partnership with businesses
+or other authorities. This type of network may be public or private, and hence, this
+could be seen as a hybrid approach as it is partly decentralized.
+
+
+【第4页】
+Sustainability 2021, 13, 3486
+4 of 11
+Blockchain technology is popular because of its design features, which are composed
+of six key elements as follows:
+1.
+Decentralized: Blockchain data can be recorded, stored, updated and distributed
+without dependence on a central authority or node.
+2.
+Transparency: Data recorded and stored are transparent and visible, therefore lever-
+aging trust among its users.
+3.
+Open source: The source code, as well as most of the blockchain dependent systems
+are open to view, free to use and provide the ease of extension to other applications.
+4.
+Autonomous: Blockchain updates are consensus based, and thus, data can be updated
+securely from a single user to the whole system. This feature provides autonomy to
+the system to update data securely.
+5.
+Immutability: All data in the blockchain are reserved forever.
+6.
+Anonymity: Blockchain also provides anonymity to its users and makes the system
+more trustworthy by only using the users’ blockchain addresses instead of their
+personal information.
+2.2. QR Code
+The QR code [17–19] is an effective information transmission medium, which is
+widely used in product traceability, advertising, mobile payment, passport veriﬁcation
+and other ﬁelds. The QR code is deﬁned as 40 symbol versions (to carry various data
+payloads) and four user-selectable Error Correction Levels (ECLs): L, M, Q and H, which
+can correct up to 7%, 15%, 25% and 30% of the error codewords respectively when attacked
+by defacement. The larger QR version can offer higher data payload where the QR code
+can hold a maximum capacity of 2956 bytes for a 40 code version. The error correction
+capability of the QR code is one of the key features of this type of barcode introduced
+by the QR code standard and allows the barcode reader to retrieve the data correctly
+if portions of the barcode are damaged. The QR code utilizes the Reed–Solomon error
+correction algorithm to realize this fault tolerance, where the error correction codewords
+would be generated by the Reed–Solomon algorithm and added to the tail of QR code
+data codewords [20–23]. Usually, two error correction codewords can be used to correct
+codeword data error. Obviously, the larger the QR code version and the error correction
+level, the more it can offer higher data payload and reliability. Figure 2 represents a QR
+code in which a simple, “Hello, World!” message is embedded.
+Figure 2. Representational QR code with the “Hello, World!” message embedded.
+2.3. Cloud Computing
+Cloud computing (cloud) [24,25] is a model to enable ubiquitous, convenient, on-
+demand network access to a shared pool of conﬁgurable computing resources such as
+networks, servers, storage, applications and services, which can be rapidly provisioned and
+released with minimal management effort or service provider interaction [26]. The essential
+characteristics of cloud computing are summarized as follows:
+
+
+【第5页】
+Sustainability 2021, 13, 3486
+5 of 11
+1.
+On-demand self-service: For cloud computing, capabilities can be provided automat-
+ically when needed, without requiring any human interaction between the consumer
+and the service provider.
+2.
+Broad network access: In this type of service, computing capabilities are available
+over the network and accessible through several mechanisms disposable for a wide
+range of consumer platforms such as workstations, laptops and smartphones.
+3.
+Resource pooling: In the cloud, computing resources are pooled to accommodate
+multiple consumers, hence dynamically allocating and deallocating them according to
+the consumers’ demand. Moreover, the provider resources are location independent,
+i.e., the consumer does not have any knowledge or control of their exact location.
+4.
+Rapid elasticity: In the cloud, the computing capabilities can be provided ﬂexibly
+and released to scale in and out according to the consumer’s demand. Therefore,
+the consumer has the perception of unlimited, and always adequate, computing
+capabilities.
+5.
+Measured service: In the cloud, resource usage can be monitored and reported
+according to the type of service being offered. This is particularly relevant in pay-
+per-use or pay-per-user services because it grants great transparency between the
+provider and the consumer of such services.
+Cloud services can be provided to consumers in a variety of ways, and one such service
+is Software as a Service (SaaS) [27], where the software and its related data are centrally
+hosted in the cloud computing environment such that the software can be provided to
+numerous consumers.
+3. Related Work
+Agri-food production and supply chains [2,3,8,9] have been studied extensively.
+Li et al. [28] developed a dynamic planning method for the agri-food supply chain. This
+methodology minimizes the losses of agri-food products while simultaneously maximizing
+the proﬁts for agri-food supply chain members. In 2015, Foroglou et al. [29] produced a
+study on the applications of blockchain, which included an electronic cash system. In the
+same study, Foroglou et al. also showed the applications of blockchain in different domains
+in the future such as contracts, voting, intellectual property rights, smart property and
+ﬁnance. In 2016, Tian [3] proposed an agri-food blockchain framework using RFID technol-
+ogy to implement data acquisition, circulation and sharing in the production, processing,
+warehousing, distribution and sales links of the agri-food supply chain. In [2], Zhao et al.
+foresaw the storage capacity of BT being one of the most pressing challenges for apply-
+ing BT to the agri-food supply chain. Another challenge for implementing BT, pointed
+out in [2], is the demanding computational power of utilizing such a framework. In [8],
+Astill et al. mentioned the use of the Internet of Things (IoT) (by using sensors embedded
+in different stages of food production) for data acquisition of food production and the
+supply chain and utilizing BT to create transparency for such data.
+In [30], Bogner et al. proposed a decentralized application to share everyday ob-
+jects/devices based on a smart contract using the Ethereum blockchain and QR code.
+In this application [30], a smart contract hosted on the blockchain, the local Ethereum client
+and a web app are used to identify each object or device based on the QR code, which is
+unique to each device. Although this approach utilizes the QR code and BT together to
+share devices in a decentralized manner, the logistics of the food supply chain are much
+more complex and hierarchical, which requires a more holistic approach speciﬁc to the
+agri-industry. In [31], Kumar et al. proposed an approach to stop counterfeit products in
+the medicine supply chain using BT and an encrypted QR code such that the consumer
+can trace each active ingredient in the medicine. In this approach, each ingredient is traced
+using BT and then embedded as encrypted data in the QR code for further veriﬁcation by
+the consumer. The approach in this method [31] is complex in terms of the implementation
+in the agri-industry, especially given the distributed nature of the food supply-chain. More-
+over, tracking each ingredient in the product also means additional storage memory usage
+
+
+【第6页】
+Sustainability 2021, 13, 3486
+6 of 11
+to trace the ingredients. On the other hand, in [32], Baralla et al. proposed an approach to
+trace the European food supply chain by using BT and the QR code; however, the approach
+utilizes Hyperledger Sawtooth, which is suitable for enterprises while discouraging indi-
+vidual and small farmers with small production capacity from utilizing such a technology.
+Additionally, this approach does not encourage recovery and veriﬁcation of data such as
+the expiry date of the food product during the shopping phase of the food supply chain.
+The multi-level system architecture proposed in [32] also generates the QR code at every
+step of the supply chain, which also makes the QR codes more redundant and unnecessary.
+From the published aforementioned studies, two important challenges arise from
+using BT in the food production system:
+1.
+Improving the storage capacity of blockchain data while not increasing the computa-
+tional power requirement.
+2.
+Making the BT based food production framework more accessible to consumers such
+that the food items can be veriﬁed easily at any point in the supply chain.
+In this paper, we propose, FoodSQRBlock, a BT based framework to make food
+production data more traceable and then make them available/accessible to the consumers
+using the QR code. Since, the whole framework is implemented at a large scale in the
+cloud, which offers ﬂexible scalability as per the consumer’s demand, the challenge faced
+due to storage capacity is not an issue.
+4. Proposed Framework: FoodSQRBlock
+In order to design the BT based framework to make food production data more
+traceable and accessible, ﬁrst, we have to analyse the different phases and activities present
+within a generic food supply chain. In our proposed framework, we focus our research on
+the farm-to-fork supply chain, which has ﬁve main phases [32] characterizing a generic
+food supply chain as follows.
+•
+Production: This is the primary production phase, which represents all the activities
+related to agriculture within the farm.
+•
+Processing: In this phase, harvesting the produce and turning it into products are
+performed. The preparation and packaging of the produce is also performed in this
+phase, where each package is uniquely identiﬁed trough a production batch code.
+•
+Distribution: In this phase, once the product is packaged and labelled, it is released for
+distribution to different warehouses and other distribution centres for product storage.
+•
+Retailing: In this phase, the products are delivered to the retailers, who sell the
+products to the consumers, from the distribution centres.
+•
+Consumption: The consumer is the end user of the food supply chain, where she/he
+buys the product, requires the quality standards verifying the traceability and accesses
+other relevant data about the product such as the expiry date.
+In our proposed framework, FoodSQRBlock, we focus on digitizing data from the
+ﬁrst four phases (production, processing, distribution and retailing) and then use these
+data in BT for traceability and accessibility by the consumer in the consumption phase. All
+digital data regarding the ﬁrst four phases are recorded and maintained in the blockchain
+in the cloud.
+System architecture: To design our BT framework, we propose a multilevel system,
+whose architecture is represented in Figure 3. Our system has three layers as follows.
+•
+Physical layer: This layers consists of different food products from different farmers
+and producers within the supply chain.
+•
+Digital data layer: This layer includes are digital data associated with the produce
+belonging to the physical layer, which will be used for traceability and accessibility.
+One example of the data of the produce could be the expiry date of the food product.
+•
+Cloud layer: In this layer, the digital data are processed in the cloud using BT, which
+is used for traceability and accessibility.
+
+
+【第7页】
+Sustainability 2021, 13, 3486
+7 of 11
+Cloud
+Digital data
+Physical
+Production
+Processing
+Distribution
+Retailing
+Consumption
+QR Code
+Trace 
+& 
+access 
+data
+Figure 3. Overview of the system architecture of Food Safety Quick Response Block (FoodSQRBlock) based on the
+farm-to-fork supply chain.
+Now, we introduce our FoodSQRBlock framework with an example to digitise the
+food production data in the four different phases (production, processing, distribution and
+retailing) of the supply chain and make the data available and accessible to consumers
+(consumption) for veriﬁcation purposes using the QR code. Figure 4 shows the exemplar
+conceptual FoodSQRBlock framework of an agri-food supply chain traceability system.
+For this exemplar supply chain, we considered the production and processing phases to
+happen at the farm, whereas the warehouse represents the distribution phase and the shops
+the retail phase. In Figure 4, the food item is produced and processed at a farm, where the
+relevant information is digitised and stored in a block (genesis block/Block 0), and then,
+the item is transported to a warehouse/distribution centre, from which the item is ﬁnally
+transported to a shop for consumers to buy. In each step/phase of this supply chain, a new
+block is created that stores the hash of the previous block such that at any point the item
+(produce) could be tracked and traced. We utilize the SHA256 algorithm [33], which is
+very popular in BT currently, for the hash function to generate the hash of the previous
+block. In our FoodSQRBlock, we utilize SHA256 for the hash function since it provides
+the required security for the associated computational cost on the cloud. If we utilize a
+different hashing algorithm such as SHA512, it is computationally more expensive and
+takes longer to compute on the cloud, which ultimately increases the computational cost,
+especially if thousands of digital data of the produce are processed on the cloud every day.
+Figure 4. Conceptual FoodSQRBlock framework of an agri-food supply chain traceability system based on the QR code and
+blockchain technology.
+
+
+【第8页】
+Sustainability 2021, 13, 3486
+8 of 11
+Within the FoodSQRBlock, we have two modules: Encoding and Decoding. The Encod-
+ing module digitises the produce information, generates the blocks and also generates the
+QR code holding the information. The Decodemodule, which is an open source software
+(algorithm), enables the consumers to fetch and verify the information about the produce.
+The program source code for the Encoding and Decoding modules is provided in Section 7.
+Encoding module: If we consider fi as the ith instance of the food item being pro-
+duced at a farm or manufacturing plant, then the following information (in f o( fi)) about
+the produce: produce name (pi), type (ti), farm/manufacturing plant id (f armi), size of
+produce (si), production date (pdatei) and expiry/best before date (edatei), can be digitised
+such that this information can be passed along with the block for traceability and veriﬁca-
+tion purposes by the consumer. Therefore, the digitised information can be represented
+as follows:
+in f o( fi) = {pi, ti, f armi, si, pdatei, edatei}
+(1)
+In in f o( fi), the unique farm id (f armi) is stored, which correlates with the farm data
+(farm name, geo-location of the farm), stored in a database maintaining records of all the
+farms/manufacturing plants. Here, the unique farm id is also generated using the hash
+function on the stored details of the farm/manufacturing plant, hence ensuring that the
+farm id is unique for each farm. In the genesis block (Block 0), in f o( fi) is stored. Whenever
+the produce is transported or processed by an entity in the supply chain, a new block is
+generated, which holds the original in f o( fi), as well as the hash of the previous block. The
+QR code could be generated at any point in the supply chain, and it holds the information
+passed in the block (in f o( fi) and the hash of the previous block). Figure 5a shows the QR
+code generated at the shop when the produced milk is transported to the shop (from farm
+to warehouse/distribution centre to shop).
+(a) QR code
+(b) Output of the decode module
+Figure 5. QR code holding the information of a dairy product, which is produced at Boydells Dairy Farm in the U.K.,
+generated by FoodSQRBlock.
+Decoding module: In this module, the information (in f o( fi)) and the hash of the
+previous block are fetched using a QR code scanner (smartphone) from the QR code.
+Since, the information of the previous block is made available online for the consumers to
+verify, the Decode module performs a hash function on the information from the previous
+block and compares the value with the hash value fetched from the QR code. If the hash
+values match, then it means the information about the produce is authentic (leveraging
+
+
+【第9页】
+Sustainability 2021, 13, 3486
+9 of 11
+the immutability characteristic of BT). A reverse search on the unique farm id fetched
+from the QR code is performed to fetch the details of the farm/manufacturing plant
+where the produce originated, and the information is displayed to the consumer along
+with other information about the produce (pi, ti, si, pdatei, edatei). Since the details of the
+farm/manufacturing plant are stored in a database, a reverse search on the database can be
+performed using the unique farm id. Figure 5b shows the decoded information about the
+dairy product, fetched from the QR code in Figure 5a.
+Note: Given the storage capacity of QR codes, more information could be stored/
+embedded in the QR code in the Encoding module. As a proof of concept and to test run
+the FoodSQRBlock framework, we found in f o( fi) embedding pi, ti, f armi, si, pdatei, edatei
+is most suitable for our purposes.
+5. Experimental Evaluation: Case Study and Large-Scale Integration of FoodSQRBlock
+In order to implement and evaluate FoodSQRBlock in the cloud, we chose Google
+Cloud Platform’s (GCP) [34] Compute Engine service, which is a virtual machine consisting
+of 8 vCPUs, 16 GB RAM memory and 500 GB disk memory space, to setup our cloud server.
+The Compute Engine was running on Debian GNU OS (Linux) Version 10 (code name
+“buster”). We chose the following two food items to test run our implementation: milk and
+pumpkin. Milk is sourced from a local farm (Boydells Dairy Farm in Essex, U.K.), and
+pumpkin is also sourced locally (Foxes Farm Produce in Essex, U.K.). The milk is sourced
+from the farm and then sold directly at the farmer’s market, whereas, the pumpkins are
+moved to a warehouse distributing facility after being sourced from the farm and then
+are sold at the farmer’s market. We implemented the FoodSQRBlock as a web service
+(SaaS) on the GCP Compute Engine server to process the blocks and generate the QR
+codes, containing all the relevant information, for individual produce. We simulated the
+production in the aforementioned farms (Boydells Dairy Farm and Foxes Farm Produce) in
+the cloud platform to replicate the scenario of a real-world food production system. For a
+batch of milk being sourced around the same time, it is accumulated into the same block
+and blockchain consisting of two blocks (genesis block and hash of genesis block) generated
+for each individual batch. For pumpkins, every one hundred pumpkins are accumulated
+into the same block, and since each batch of pumpkin made it to the farmer’s market (shop)
+via the distribution centre, each batch was processed to consist of three blocks in the chain
+(genesis block, the hash of genesis block when it went to the distribution centre and the
+hash of the block from the distribution centre after making it to the farmer’s market).
+5.1. Experimental Evaluation
+In GCP’s Compute Engine, the web service of FoodSQRBlock processed (generated
+the hash of the block along with the stored information as mentioned in the Encoding
+module in Section 4) different numbers of produce to ﬁnd the time taken for processing
+such information. Figure 6 shows the processing time in seconds for 1, 10, 100, 1000, 10,000
+and 100,000 items of produce on GCP’s Compute Engine.
+Figure 6. Time taken to process different number of items (using FoodSQRBlock) in Google Cloud
+Platform’s Compute Engine.
+
+
+【第10页】
+Sustainability 2021, 13, 3486
+10 of 11
+5.2. Analysis and Discussion
+From Section 5.1, it is evident that given the resources of GCP’s Compute Engine,
+ten-thousand items could be processed easily under 80 min. However, if a farm or man-
+ufacturing plant produces more than 10,000 items in a day, then a more computationally
+powerful cloud server is required to be able to process the items within a reasonable time.
+Because GCP allows ﬂexible ad-hoc computation resources for its Compute Engine, it is
+easy for us to scale up or down based on the number of items to be processed, therefore
+solving the storage capacity issue of BT, as mentioned in Section 3.
+It should also be kept in mind that currently, there are no standards or regulations
+on standardising the traceability of the digital information of food production across the
+globe, and therefore, the implementation of the proposed FoodSQRBlock would require
+collaboration across regions.
+6. Conclusions
+In this paper, we propose FoodSQRBlock, a blockchain technology based framework,
+which digitises the food production information and makes it easily accessible, traceable
+and veriﬁable by the consumers and producers by using QR codes to embed the information.
+We also implement FoodSQRBlock in Google Cloud Platform to replicate a real-life food
+production scenario using milk and pumpkins as produce examples from real farms in the
+U.K. Experimental evaluation proves the feasibility and scalability of the FoodSQRBlock
+implementation in the cloud.
+7. Code Availability
+The program source code to implement the FoodSQRBlock (Encoding and Decoding
+modules) can be accessed from https://github.com/somdipdey/FoodSQRBlock-Digitizing-
+Food-Supply-Chain-Using-Blockchain-And-QR-Code (accessed on 21 March 2021).
+Author Contributions: Conceptualization, S.D.; methodology, S.D.; software, S.D.; validation, S.D.
+and S.S.; formal analysis, S.D.; investigation, S.D.; resources, S.D. and S.S.; data curation, S.D.;
+writing—original draft preparation, S.D.; writing—review and editing, S.D., S.S., A.K.S. and K.M.-M.;
+visualization, S.D.; supervision, S.D. and A.K.S.; project administration, S.D.; funding acquisition,
+S.D. All authors read and agreed to the published version of the manuscript.
+Funding: This work is supported by Nosh Technologies under Grant nosh/agri-tech-000002 and by
+the U.K. Engineering and Physical Sciences Research Council (EPSRC) under Grant EP/R02572X/1
+and Grant EP/P017487/1.
+Institutional Review Board Statement: Not applicable for this study as it did not involve humans
+or animals.
+Informed Consent Statement: Not applicable for this study as it did not involve humans.
+Data Availability Statement: Not applicable.
+Conﬂicts of Interest: This research was pursued such that part of the proposed methodology could be
+implemented as a feature in the commercial mobile application named nosh-Food Stock Management
+https://nosh.tech (accessed on 21 March 2021).
+References
+1.
+Yiannas, F. A new era of food transparency powered by blockchain. Innov. Technol. Gov. Glob. 2018, 12, 46–56. [CrossRef]
+2.
+Zhao, G.; Liu, S.; Lopez, C.; Lu, H.; Elgueta, S.; Chen, H.; Boshkoska, B.M. Blockchain technology in agri-food value chain
+management: A synthesis of applications, challenges and future research directions. Comput. Ind. 2019, 109, 83–99. [CrossRef]
+3.
+Tian, F. An agri-food supply chain traceability system for China based on RFID & blockchain technology. In Proceedings of the
+2016 13th International Conference on Service Systems and Service Management (ICSSSM), Kunming, China, 24–26 June 2016;
+pp. 1–6.
+4.
+General Food Law. Available online: https://ec.europa.eu/food/safety/general_food_law_en (accessed on 26 June 2020).
+5.
+Food Safety Modernization Act (FSMA). Available online: https://www.fda.gov/food/guidance-regulation-food-and-dietary-
+supplements/food-safety-modernization-act-fsma (accessed on 26 June 2020).
+
+
+【第11页】
+Sustainability 2021, 13, 3486
+11 of 11
+6.
+Dey, S. A Proof of Work: Securing Majority-Attack in Blockchain Using Machine Learning and Algorithmic Game Theory. Int. J.
+Wirel. Microw. Technol. 2018, 8, 1–9. [CrossRef]
+7.
+Dey, S. Securing majority-attack in blockchain using machine learning and algorithmic game theory: A proof of work. In
+Proceedings of the 2018 10th Computer Science and Electronic Engineering (CEEC), Colchester, UK, 19–21 September 2018;
+pp. 7–10.
+8.
+Astill, J.; Dara, R.A.; Campbell, M.; Farber, J.M.; Fraser, E.D.; Sharif, S.; Yada, R.Y. Transparency in food supply chains: A review
+of enabling technology solutions. Trends Food Sci. Technol. 2019, 91, 240–247. [CrossRef]
+9.
+Kamble, S.S.; Gunasekaran, A.; Sharma, R. Modeling the blockchain enabled traceability in agriculture supply chain. Int. J. Inf.
+Manag. 2020, 52, 101967. [CrossRef]
+10.
+Teach ICT—Barcodes. Available online: https://biturl.top/QJzuYz (accessed on 7 July 2020).
+11.
+Drobnik, O. Barcodes with iOS: Bringing Together the Digital and Physical Worlds; Manning: Shelter Island, NY, USA, 2015.
+12.
+UPC 704660784002 Lookup. Available online: https://www.barcodespider.com/704660784002 (accessed on 7 July 2020).
+13.
+nosh—Food Stock Management. Available online: https://nosh.tech (accessed on 7 July 2020).
+14.
+NoWaste—Food Inventory List. Available online: https://www.nowasteapp.com (accessed on 7 July 2020).
+15.
+Blockchain Is Useful for a Lot More than Bitcoin. Available online: http://theconversation.com/blockchain-is-useful-fora-lot-
+more-than-just-bitcoin-58921 (accessed on 7 July 2020).
+16.
+How Could Blockchain Be Used in the Enterprise. Available online: https://www.computerworlduk.com/galleries/security/
+how-could-blockchain-be-used-the-enterprise3628558/ (accessed on 7 July 2020).
+17.
+Dey, S.; Mondal, K.; Nath, J.; Nath, A. Advanced Steganography Algorithm Using Randomized Intermediate QR Host Embedded
+With Any Encrypted Secret Message: ASA_QR Algorithm. Int. J. Mod. Educ. Comput. Sci. 2012, 4, 59. [CrossRef]
+18.
+Huang, P.C.; Chang, C.C.; Li, Y.H.; Liu, Y. Efﬁcient QR code secret embedding mechanism based on Hamming code. IEEE Access
+2020, 8, 86706–86714. [CrossRef]
+19.
+Dey, S. Sd-eqr: A new technique to use qr codestm in cryptography. arXiv 2012, arXiv:1205.4829.
+20.
+Dey, S.; Agarwal, S.; Nath, A. Conﬁdential encrypted data hiding and retrieval using qr authentication system. In Proceedings
+of the 2013 International Conference on Communication Systems and Network Technologies, Gwalior, India, 6–8 April 2013;
+pp. 512–517.
+21.
+Dey, A.S.; Nath, B.J.; Nath, C.A. A New Technique to Hide Encrypted Data in QR Codes (TM). In Proceedings of the International
+Conference on Internet Computing (ICOMP), Las Vegas, NV, USA, 16–19 July 2012; p. 1.
+22.
+Lin, P.Y. Distributed secret sharing approach with cheater prevention based on QR code. IEEE Trans. Ind. Inform. 2016, 12, 384–392.
+[CrossRef]
+23.
+Dey, S. New generation of digital academic-transcripts using encrypted QR code™: Use of encrypted QR code™ in mark-sheets
+(academic transcripts). In Proceedings of the 2013 International Mutli-Conference on Automation, Computing, Communication,
+Control and Compressed Sensing (iMac4s), Kottayam, India, 22–23 March 2013; pp. 313–317.
+24.
+De Donno, M.; Tange, K.; Dragoni, N. Foundations and evolution of modern computing paradigms: Cloud, iot, edge, and fog.
+IEEE Access 2019, 7, 150936–150948. [CrossRef]
+25.
+Qi, Q.; Tao, F. A smart manufacturing service system based on edge computing, fog computing, and cloud computing. IEEE
+Access 2019, 7, 86769–86777. [CrossRef]
+26.
+Bohn, R.B.; Messina, J.; Liu, F.; Tong, J.; Mao, J. NIST cloud computing reference architecture. In Proceedings of the 2011 IEEE
+World Congress on Services, Washington, DC, USA, 4–9 July 2011; pp. 594–596.
+27.
+Ali, A.Q.; Sultan, A.B.M.; Abd Ghani, A.A.; Zulzalil, H. A Systematic Mapping Study on the Customization Solutions of Software
+as a Service Applications. IEEE Access 2019, 7, 88196–88217. [CrossRef]
+28.
+Li, D.; Kehoe, D.; Drake, P. Dynamic planning with a wireless product identiﬁcation technology in food supply chains. Int. J. Adv.
+Manuf. Technol. 2006, 30, 938–944. [CrossRef]
+29.
+Foroglou, G.; Tsilidou, A.L. Further applications of the blockchain. In Proceedings of the 12th Student Conference on Managerial
+Science and Technology, Athens, Greece, 14 May 2015; pp. 1–8.
+30.
+Bogner, A.; Chanson, M.; Meeuw, A. A decentralised sharing app running a smart contract on the ethereum blockchain. In
+Proceedings of the 6th International Conference on the Internet of Things, Stuttgart, Germany, 7–9 November 2016; pp. 177–178.
+31.
+Kumar, R.; Tripathi, R. Traceability of counterfeit medicine supply chain through Blockchain.
+In Proceedings of the 2019
+11th International Conference on Communication Systems & Networks (COMSNETS), Bengaluru, India, 7–11 January 2019;
+pp. 568–570.
+32.
+Baralla, G. Ensure traceability in European food supply chain by using a blockchain system.
+In Proceedings of the 2019
+IEEE/ACM 2nd International Workshop on Emerging Trends in Software Engineering for Blockchain (WETSEB), Montreal, QC,
+Canada, 27 May 2019.
+33.
+Irving, G.; Holden, J. How blockchain-timestamped protocols could improve the trustworthiness of medical science. F1000Research
+2016, 5, 222. [CrossRef] [PubMed]
+34.
+Krishnan, S.; Gonzalez, J.L.U. Building Your Next Big Thing with Google Cloud Platform: A Guide for Developers and Enterprise
+Architects; Springer: Berlin/Heidelberg, Germany, 2015.
+

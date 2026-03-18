@@ -1,0 +1,5 @@
+
+[2]Stach C ,Gritti C ,Litou I .Special Issue on Security and Privacy in Blockchains and the IoT—3rd Edition[J].Future Internet,2026,18(2):90-90.DOI:10.3390/FI18020090.
+
+[4]Lu J H ,Juanatas A R ,Abisado B M .Enhancing security in instant messaging systems with a hybrid SM2, SM3, and SM4 encryption framework.[J].PloS one,2025,20(9):e0332665.DOI:10.1371/JOURNAL.PONE.0332665.
+[5]Kumar R D ,Pratap M Y ,Surbhit A , et al.Data secure application: an application that allows developers to store user data securely using blockchain and IPFS[J].Multimedia Tools and Applications,2023,83(15):45491-45517.DOI:10.1007/S11042-023-17204-W.

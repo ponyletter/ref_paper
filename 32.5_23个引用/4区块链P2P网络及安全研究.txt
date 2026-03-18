@@ -1,0 +1,1439 @@
+来源文件：4区块链P2P网络及安全研究.pdf
+============================================================
+
+【第1页】
+2024，60（5）
+区块链P2P网络及安全研究
+倪雪莉
+1，2，马
+卓
+1，王
+群
+1
+1.江苏警官学院 计算机信息与网络安全系，南京 210031
+2.南京信息工程大学 计算机学院 网络空间安全学院，南京 210044
+摘
+要：区块链作为一种分布式账本、密码学、共识算法、P2P（peer-to-peer）网络等多技术创新融合的技术，在一个节
+点之间互不信任的开放环境中实现了去中心化、防篡改、可溯源等功能，改变了一直困扰传统中心化服务架构的信
+任建立、安全管理与隐私保护等难题，引起了社会各领域的广泛关注。其中，P2P网络通过共识算法实现了分布式账
+本的最终一致性，并利用各种协议协调各节点提供的服务，其应用功能随着区块链技术的每一次迭代不断丰富和完
+善，从而形成了相对独立的区块链 P2P 网络，成为区块链研究的重点。较为系统地介绍了 P2P 网络的特征和关键技
+术，尤其对影响着区块链的 P2P覆盖网络、资源查询和网络抖动等技术进行了深入分析；结合典型区块链应用场景，
+从体系结构和协议实现入手分析了区块链 P2P 网络的工作机制和运行特点；介绍了区块链 P2P 网络存在的安全风
+险，讨论了典型攻击的实施过程及防范方法。最后，总结探索了区块链网络及其安全面临的挑战和主要技术应对。
+关键词：区块链；对等网络；网络安全；网络体系结构；网络协议
+文献标志码：A
+中图分类号：TP391
+doi：10.3778/j.issn.1002-8331.2307-0218
+Research on Blockchain P2P Network and Its Security
+NI Xueli
+1，2, MA Zhuo
+1, WANG Qun
+1
+1.Department of Computer Information and Cybersecurity, Jiangsu Police Institute, Nanjing 210031, China
+2.School of Computer Science, Nanjing University of Information Science and Technology, Nanjing 210044, China
+Abstract：Blockchain is proposed as a technology integrating various technological innovations such as distributed led-
+ger, cryptography, consensus algorithm and P2P (peer-to-peer) network. It realizes decentralization, traceability and tam-
+per resistance in an open environment with mutual distrust nodes. Blockchain has solved the problems of trust establish-
+ment, security management and privacy protection that have been plaguing the traditional centralized service architecture,
+and has been drawing broad attention from various fields of society. Among them, P2P network realizes the final consis-
+tency of distributed ledger through consensus algorithm, and utilizes various protocols to coordinate the services provided
+by each node. Its functionalities are continuously enriched and improved with each technological iteration of blockchain,
+thus forming a relatively independent blockchain P2P network, which has become the focus of blockchain research. Firstly,
+this paper systematically introduces the characteristics and key technologies of P2P network, especially the overlay net-
+work, resource query and jitter of P2P network. Secondly, the typical blockchain application scenarios are used to analyze
+the working mechanism and operation characteristics of blockchain P2P network from the perspective of architecture and
+protocol implementation. Then, the paper introduces the security risks of blockchain P2P network, and discusses the imple-
+mentation process and prevention methods of typical attacks. Finally, the summary is given by exploring the security chal-
+lenges and key technical responses in blockchain networks.
+Key words：blockchain; peer-to-peer; network security; network architecture; network protocol
+基金项目：国家自然科学基金（62272203）；江苏省高校自然科学研究重大项目（20KJA520004）；江苏省高校优秀科技创新团队；
+公安技术、网络空间安全“十四五”江苏省重点学科。
+作者简介：倪雪莉（1990—），女，博士研究生，讲师，研究方向为信息安全、区块链技术，E-mail：nixueli@jspi.edu.cn；马卓（1993—），
+女，博士，讲师，主要研究方向为网络空间安全；王群（1971—），男，博士，教授，CCF 会员，主要研究方向为网络空间安
+全治理、网络体系结构与协议。
+收稿日期：2023-07-17
+修回日期：2023-10-18
+文章编号：1002-8331（2024）05-0017-13
+Computer Engineering and Applications计算机工程与应用
+17
+
+
+【第2页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+体系结构和通信协议是网络研究中普遍关注的两
+大核心要素，针对区块链技术的研究也是如此。区块链
+系统作为一个构建在数据通信网络基础上的新型应用
+系统，以其去中心化、防篡改、匿名性、自治性、开放性等
+特征，正在以创新模式影响和改变着传统网络的应用，
+同时也对传统网络基础设施从通信层面提出了新的要
+求，在应用拓展和安全性等方面面临新的挑战
+[1-2]。
+在区块链基础架构模型中，网络层位于数据层与共
+识层之间，主要封装了区块链系统的组网方式、消息传
+输协议和数据验证机制等内容。具体讲，用户端程序生
+成交易初始数据，在成功验证目的节点地址后，再经用
+户的私钥签名后通过区块链网络发送给矿工，矿工首先
+对接收到的交易数据进行验证，验证无误后暂时保存在
+内存中，等待通过共识算法打包进区块；矿工节点通过
+共识算法竞争系统的记账权，当其中的矿工挖出一个新
+区块后，为了将区块链接到主链上以便获得系统的奖
+励，则需要将经签名的区块尽快通过区块链网络广播给
+其他矿工，其他矿工在验证了新区块的合法性和正确性
+后，立即将该区块链接到区块链上，并在该区块的基础
+上继续挖下一个区块
+[3]。由此可以看出，一笔新交易或
+一个新区块产生后，都需要通过区块链网络进行广播，
+以便于实现新交易的打包和新区块的上链操作。区块
+链网络的性能在很大程度上决定着交易被打包进区块
+的效率以及矿工的竞争优势，区块链网络的安全性也在
+不同程度上影响着区块链挖矿的安全性。
+P2P（peer-to-peer，点对点）网络是区块链系统的核
+心，为区块链系统中的价值转移与信息交换提供基础保
+障。目前，针对区块链 P2P 网络及其安全性的研究动因
+主要体现在以下几个方面：（1）P2P 网络作为区块链架
+构中网络层的重点组成部分，为交易和区块数据的传输
+提供了保障，为上层共识结果的最终达成、激励机制的
+实现、脚本或智能合约的正常运行以及各类应用系统的
+开发提供了底层技术支撑，所以对区块链 P2P 网络的研
+究具有基础性。
+（2）P2P 网络是构建在传统互联网基础
+上的一类覆盖网络，在资源管理、节点接入与退出、网络
+抖动等方面具有其特殊性。另外，随着区块链应用领域
+的不断扩展，比特币、以太坊、超级账本等典型区块链项
+目分别对 P2P 网络在功能实现上提出了新的要求，从而
+形成了具有独特功能的区块链 P2P 网络。为此，有必要
+针对区块链技术和应用发展，对区块链 P2P 网络进行深
+入研究。
+（3）近年来，随着以以太坊为代表的区块链 2.0
+时代的出现，智能合约技术催生了大量区块链应用，同
+时区块链技术向着加密数字货币之外的其他领域快速
+渗透。在区块链应用显现出百花齐放之时，区块链安全
+问题成为影响区块链应用发展的关键因素。其中，在众
+多的安全领域，因区块链 P2P 网络在区块链架构中所处
+的重要位置以及传统互联网安全问题对区块链 P2P 网
+络带来的威胁，所以针对区块链 P2P 网络安全的研究更
+加重要和紧迫。
+本文重点对 P2P 网络进行研究，在系统阐述 P2P 网
+络的工作机理和关键技术的基础上，重点讨论区块链
+P2P 网络的实现机制和特征，在此基础上进一步分析区
+块链P2P网络安全问题。
+1
+P2P网络
+P2P 网络是传统互联网发展过程中由应用需求促
+动产生的一种网络层服务，最早主要用于解决多媒体服
+务和管理，后来在比特币原型系统中将 P2P 网络作为底
+层的网络通信协议并一直应用至今。区块链系统采用
+了 P2P 网络来传输交易和区块等数据，全面系统研究
+P2P 网络对进一步研究区块链技术及应用起着至关重
+要的作用。
+1.1
+P2P网络特征
+作为一个分布式应用体系架构，P2P 网络的设计初
+衷和思想是通过节点之间的协同来提供一种新型网络
+服务能力，以适应互联网发展过程中出现的应用需求
+[4]。
+P2P 网络打破了传统 C/S（client/server，客户端/服务器）
+架构模式，节点在一个去中心化环境中主动将自身的算
+力、网络和存储资源提供给其他节点使用，每个节点既
+是资源的提供者（服务器），也是资源的访问者（客户
+端），根据不同节点之间的通信需要，任一节点只需要与
+相邻的一部分节点之间建立连接。由于 P2P 网络具有
+可扩展性强、利于实现负载均衡、网络的健壮性和可用
+性较高，同时提供了较好的通信匿名性等特点，所以
+P2P 网络在流媒体、算力共享、分布式存储等领域得到
+了普遍应用
+[5]。
+网络架构描述的是分布式系统中各计算节点之间
+的物理或逻辑关系，是确定系统通信模式的重要依据。
+P2P 网络通常是指构建在物理拓扑之上的虚拟覆盖网
+络，在应用层节点通过相应的索引和节点发现算法建立
+逻辑拓扑，数据传输仍然采用底层的 TCP/IP 结构，一般
+采用 UDP 发送控制信息，采用 TCP 来传输数据。根据
+网络中节点之间的连接方式以及资源的定位和索引方
+式的不同，P2P 网络一般可以分为非结构化对等网络、
+结构化对等网络和混合式对等网络 3 种类型，不同类型
+的功能描述及主要性能比较如表1所示。
+1.2
+P2P网络的关键技术
+P2P 网络涉及的技术较多，本节重点对覆盖网络、
+资源查询和网络抖动等关键技术进行讨论。
+1.2.1
+P2P覆盖网络
+覆盖网络（overlay network）
+[6]是指节点之间通过构
+建在底层物理链路之上的逻辑链路进行通信，为大规模
+P2P 应用提供基于应用层的自组织通信基础设施，已成
+为当前网络的重要组成部分。覆盖网络由于没有集中
+18
+
+
+【第3页】
+2024，60（5）
+的组织或控制机制，因此需要一定的资源查询功能来查
+找网络中的共享资源。目前，针对 P2P 覆盖网络的典型
+应用和研究主要集中在非结构化对等网络和结构化对
+等网络两个方面，其中在非结构化对等网络（如Guntella）
+中节点通过向邻居节点泛洪（flooding）资源查询信息来
+搜索资源，而在结构化对等网络中节点利用覆盖网络的
+逻辑拓扑（如 Chord使用环型拓扑
+[7]，而 Kademlia使用树
+型拓扑
+[8]）来管理资源。
+结构化对等网络采用分布式哈希表（distributed
+Hash table，DHT）实现 P2P 网络中元数据的有效共享。
+由于 DHT 具有良好的可扩展性、自组织性以及自适应
+性等特点，所以可以利用 DHT 来组织和管理覆盖网络
+中的资源并形成相对稳定的共享路径。动态维护和消
+息路由是 DHT 拓扑构建技术的核心，其中动态维护是
+指在节点动态变化（加入或离开）的不稳定网络环境中，
+通过分布式算法建立节点之间的逻辑拓扑；而消息路由
+是指根据目标地址，将消息从源节点路由到目标节点。
+具体讲，P2P网络利用 DHT以文件形式将用户需要共享
+的资源映射成一系列的<key，value>对后存储到本地路
+由表中，每一个节点 ID 通常由 160 bit 的哈希值组成。
+其中，键值为 k 的数据存放在 ID 同样为 k 的节点上，如
+果 ID 为 k 的节点不存在时，将存放在其值与 k 靠近的
+节点上。在 P2P网络中，DHT一般通过 KAD（Kademlia）
+协议
+[9-10]实现，由 KAD 协议为上层应用提供 API。但是，
+在结构化对等网络中由于每个节点 ID 是随机产生的，
+该节点 ID 的生成与物理网络之间没有任何关联，从而
+使构建在物理网络之上的覆盖网络并未与物理网络之
+间建立内在的联系，在物理上相邻的节点有可能在逻辑
+上相距甚远，而在物理上分布很远的节点有可能成为逻
+辑上的邻居。这种物理与逻辑上不相吻合的现象通常
+称之为失配（mismatching）。为了有效解决失配问题，一
+般可使节点在学习到物理网络拓扑信息的基础上，再利
+用该底层拓扑信息构建拓扑相关（topology-aware）的覆
+盖网络
+[11]。其中，物理网络拓扑信息可通过 IP地址划分
+方法或节点之间传输时延分析法等策略获得。当学习
+到足够的物理拓扑信息后，就可以利用这些信息构建或
+优化覆盖网络
+[12]。另外，对于非结构化对等网络，由于
+缺乏固定、统一的拓扑结构，其覆盖网络的形成也具有
+不确定性。
+1.2.2
+资源查询
+在对等网络中，每个节点维护着有限的邻居节点信
+息，从而形成一个应用层的覆盖网络。由于节点之间状
+态的不稳定性，在 P2P 网络中很难形成类似 C/S 模式的
+资源访问方式，而需要采取相应措施有针对性地在动态
+环境中发现和定位资源。
+在结构化对等网络中，通过遍历节点可以搜索要查
+询信息所在的位置。当存在 n 个节点时，资源查询操作
+步数为 O(logn) 。这种方法虽然操作简单，但效率较低，
+而且网络开销较大。为了提高结构化对等网络中资源
+的查询性能，目前采用的方法主要有
+[13]：一是在搜集邻
+居信息的基础上进行节点信息的交换；二是通过复制大
+量的副本信息来提高搜索的命中率。其中，对于访问频
+率较高的资源来说，可以通过数据复制技术将资源存放
+在更多节点上，以便于节点的快速查询。但是，数据复
+制技术将会带来存储空间和网络带宽的额外开销。
+非结构化对等网络一般通过转发查询消息来匹配
+本地存储进而实现资源定位，网络中当存在 n 个节点时
+资源查询操作步数为 O(n) 。当采用泛洪模式时，节点
+将查询消息广播给邻居节点，并用一个 TTL（time to
+live，生存时间）值来控制该查询消息的转发次数。例
+如，由于无法确定查询数据的位置，所以可以将 TTL 设
+置为一个动态变化的值，搜索者先使用一个较小的 TTL
+值利用泛洪方式进行查询，在查询失败后逐步增加 TTL
+的值，直到查询成功为止
+[14]。
+另外，在混合式对等网络中，由于存在专门负责资
+源目录服务和管理的节点，所以查询操作只需要 O(1) 步。
+1.2.3
+网络抖动
+在 P2P 网络中，Churn（抖动）特指节点频繁加入和
+退出的现象
+[15-16]。Churn反映的是 P2P网络的动态特征，
+描述的是网络整体的不稳定性。Churn 现象的存在对
+P2P网络产生了严重影响：
+（1）导致网络拓扑不稳定。由于节点的频繁加入和
+退出，使节点的邻居节点随之发生变化。由于节点中邻
+居信息的更新具有一定滞后性，部分邻居节点的退出
+网络类型
+非结构化
+对等网络
+结构化对
+等网络
+混合式对
+等网络
+功能描述
+无固定网络结构，结构简单且易于组建，
+节点地址没有统一标准
+有固定网络结构，一般采用分布式哈希
+表（Distributed Hash Table，DHT）将节点
+及其分享的资源映射成<key，value>对
+共享文件索引和查询时使用 C/S模式，而
+文件传输使用P2P模式
+优点
+大量节点加入或离开时
+对网络性能的影响不大
+覆盖网络结构，节点可以
+高效地搜索到资源，具有
+良好的可扩展性
+简单高效的索引和查询
+机制以及易维护性
+缺点
+搜索查询机制占用资源
+多且效率低
+相邻列表的建立和维护
+占用资源多，哈希表自身
+容量限制了节点数量
+安全性差、效率低、可扩
+展性较差等问题
+典型应用
+Gnutella、Gossip、Kazaa、比特币
+Chord、Pastry、BitTorrent、eDonkey、
+以太坊
+Napster、Spotify、Hyperledger Fabric
+表1
+P2P网络的3种类型及主要性能比较
+Table 1
+Comparison of three types and main performance of P2P networks
+倪雪莉，等：区块链P2P网络及安全研究
+19
+
+
+【第4页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+（失效或下线）和加入，会使节点中保存的邻居信息与实
+际连接的邻居节点不相符。节点的退出将会导致发送
+到该节点的信息不可达，新节点的加入因为需要向邻居
+节点广播自身地址会占用额外的网络资源。
+（2）导致网络性能下降。由于节点的频繁加入和退
+出，使得节点中维护的路由表始终处于非稳定的收敛过
+程，这时，在路由传递过程中可能会出现网络不可达现
+象，资源查询可能会因节点的失效而无法找到或因资源
+的重新定位而产生较大延时，数据的传输可能会因不断
+选择路径而降低效率。以上现象，都会在不同程度上导
+致网络性能的下降。
+（3）导致网络的可靠性降低。网络的可靠性定义为
+在给定条件下网络以预设性能完成预定功能的能力。
+网络不可达、数据传输延时、资源无法正确定位等都是
+可靠性降低的表现。另外，Churn 还会使覆盖网络中的
+某些节点被隔离，从而产生网络分区问题，尤其是结构
+化对等网络更容易产生网络分区。
+针对 Churn 对 P2P 网络带来的危害，近年来研究人
+员从节点邻居选择、失效节点恢复、数据复制、链路生命
+周期（link lifetime）等方面提出了一些优化方案
+[17]，以减
+小其影响。另外，近年来随着人工智能技术应用的不断
+深入，将机器学习方式用于 P2P 网络来替代传统的策
+略，进一步优化 P2P 网络环境
+[18]。与此同时，P2P 网络模
+型以其具有的可靠性、鲁棒性和可扩展性等特性，与可
+信计算、边缘计算、人工智能等技术结合，开始从传统的
+互联网进入智能电网、智能交通等生产型网络
+[19-20]。
+2
+区块链P2P网络
+区块链系统通过内嵌的经济激励机制将大量分布
+式节点组织起来实现共同记账功能，并维护系统的安全
+性以及账本的一致性和不可篡改性。在区块链系统中，
+每个参与共识的“矿工”节点具有独立的算力和存储空
+间，不同节点之间通过网络实现互操作性。为此，通常
+情况下将区块链定义为具有共同记账功能的分布式系
+统
+[21]。考虑到区块链网络研究的完整性，本节在重点讨
+论区块链 P2P 网络的基础上，对区块链系统中实现数据
+同步和复制的Gossip协议进行了介绍。
+2.1
+区块链P2P网络中的节点类型
+由于 P2P 网络是构建在众多物理节点之上的覆盖
+网络，节点的性能以及扮演的角色对研究区块链系统具
+有重要意义。P2P 网络是区块链系统的核心组成部分，
+根据应用需要，节点上运行有钱包、挖矿、完整区块链账
+本和路由等部分或全部功能，并利用账本数据来验证交
+易记录
+[22]。以比特币系统为例，每个节点能够提供的服
+务功能一般包括网络路由（network route）、完整区块链
+（full blockchain）、矿工（miner）和钱包（wallet）共 4 种类
+型，每个节点除具有网络路由功能外，还可能根据需要
+担负其他的功能（如图 1 所示）。根据提供功能的不同，
+可以将区块链系统中的常见节点分为核心客户端、完成
+区块链节点、独立矿工和轻量级钱包 4 种类型，不同类
+型的功能描述及提供的主要服务如表2所示。
+对交易进行验证是区块链中的一项核心服务功
+能。根据应用环境的不同，区块链系统中提供验证功
+能 的 节 点 主 要 分 为 全 节 点 和 轻 量 级 SPV（simplified
+payment verification，简易支付验证）
+[23]节点两种类型。
+其中，全节点中维护着最新、最完整（最长链）的区块链
+数据，能够对交易独立地完成验证操作；而轻量级 SPV
+节点中只存储区块链的头部数据，可以在节点没有存储
+完整区块链账本数据的前提下实现对交易存在性的验
+证。另外，在比特币、以太坊等基于PoW（proof of work，
+工作量证明）共识机制的中还提供了用于矿池挖矿的
+矿池协议服务器、与矿池对应的挖矿节点以及轻量级
+Stratum 钱包等节点
+[24-25]，因这些节点仅存在于特定的环
+境而且数量有限，故在此不再详述。
+2.2
+区块链P2P网络中的协议
+P2P 网络是一个分布式应用体系架构，其实现原理
+和设计思想是把路由选择、交易和区块数据验证、区块
+数据传播、新节点发现等众多功能分散到网络中不同节
+网络类型
+核心客户端
+完整区块链节点
+独立矿工
+轻量级钱包
+主要特征
+拥有所有的服务功能
+提供完整的区块链数据和网络路由功能，但不参与挖矿
+提供完整的区块链数据，并参与挖矿以及路由
+提供钱包和网络路由功能，并为全网节点提供轻量级SPV
+服务内容
+网络路由、完整区块链、矿工、钱包
+网络路由、完整区块链
+网络路由、完整区块链、矿工
+网络路由、钱包
+表2
+区块链P2P网络的节点类型及提供的主要功能
+Table 2
+Node types of blockchain P2P networks and main functions provided
+网络路由 完整区块链
+矿工
+钱包
+图1
+区块链P2P网络
+Fig.1
+Blockchain P2P network
+20
+
+
+【第5页】
+2024，60（5）
+点上，让每个参与节点平等地分担任务和负载。区块链
+P2P 网络在继承了传统 P2P 网络功能优势的基础上，通
+过对节点之间数据同步、节点标识、资源定位等机制的
+优化，在共识算法的配合下实现了所有节点中账本数据
+的一致性。体系结构与协议是组成网络的关键，为此，
+本节重点从协议实现过程分析区块链 P2P 网络的工作
+机理。首先讨论区块链 P2P 网络中的数据传输协议的
+工作过程，然后分析应用于超级账本的Gossip协议。
+2.2.1
+区块链P2P网络的数据传输协议
+在其论文“Bitcoin：a peer-to-peer electronic cash
+system”
+[26]中使用非结构化对等网络来传输交易和区块
+数据，节点可以自由地加入或退出网络，通过 PoW 共识
+算法实现各节点中账本的一致性，通过基于公钥密钥的
+身份管理机制实现交易信息的匿名化，开创了加密数字
+货币的先河；以太坊（Ethereum）
+[27]采用结构化对等网
+络，将利用ECDSA-secp256k1算法生成的公钥经一系列
+哈希变换后再通过 Base58编码生成 64 Byte的字符串作
+为节点 ID，统一的编址方案实现了资源的快速定位；超
+级账本（hyperledger）
+[28]采用混合式对等网络，所有节点
+都是 committer（记账节点），部分节点会根据网络运行
+和管理需要担负 endorser（背书节点）、leader（领导节点）
+和 anchor（锚节点）的职责。本节选择比特币 P2P 网络
+进行具体分析。
+比特币 P2P 网络中的每一个节点都会维护一个节
+点列表（peer list），该列表中存储着可供连接的邻居节
+点 ID，该列表通过基于 UDP 协议的节点发现机制建立
+和更新，当节点之间需要传输数据时，节点通过采用
+TCP协议与其他对等节点进行交互。下面，基于区块链
+系统的典型运行场景，较为系统地分析 P2P 网络的工作
+机制，其中 version 和 verack 消息用于节点之间建立连
+接，addr 和 getaddr 消息用于邻居节点之间交换路由信
+息，getblocks、inv 和 getdata 消息用于节点之间的数据传
+输，tx消息用于发送交易数据。主要操作过程如下
+[29]：
+（1）新节点加入。当区块链系统中有新节点加入
+时，可以通过类似 TCP三次握手机制建立与相邻节点之
+间的连接。如图 2（a）所示，新加入节点 A 广播 version
+消息，邻居节点 B 在接收到该消息后检查消息内容，如
+果与自己软件版本相兼容，则向节点A回复verack消息，
+经进一步交互后新节点A将建立与节点B之间的连接。
+（2）地址告知与获取。一旦新节点加入后，新节点
+便向邻居节点广播自己的地址 addr 消息。邻居节点在
+接收到 addr消息后继续将其向前广播，从而使更多节点
+学习到节点 A 的地址，进而知道网络中有新节点加入。
+新节点除将自己的地址广播给其他节点外，还可根据地
+址维护需要通过 getaddr 消息来获取邻居节点上保存的
+地址列表信息，具体交互方式如图2（b）所示。
+（3）区块数据同步。由于新加入节点只知道内置的
+创世区块（genesis block），所以为了实现账本数据的一
+致性，需要同步区块高度值最大的区块数据。如图 2（c）
+所示，当新节点加入后，与邻居节点之间分别通过 get-
+blocks 消息交换各自的区块高度值，其中高度值大的一
+方将向高度值小的一方发送仅包含区块清单的 inv 消
+息。区块高度值大的一方在接收到区块高度值小的一
+方的 getdata 请求消息后，将通过 block 消息向对方推送
+区块数据，最终实现两节点中区块数据的完全一致。
+需要说明的是：轻量级 SPV节点之间不需要同步完
+整的区块链数据，只需要同步区块头部数据，具体使用
+getheaders 和 headers 消息实现，消息交互过程如图 2（d）
+所示。
+（4）交易数据的广播。当某一节点生成一笔交易
+时，为了尽快将该笔交易打包进区块从而得到确认，需
+要经私钥签名后再封装在 inv 消息中广播给邻居节点。
+邻居节点通过 getdata 响应消息请求对方发送完整的交
+易数据，交易生成节点在接收到getdata响应消息后将使
+用 tx发送交易数据，邻居节点在接收到交易数据后利用
+公钥对交易数据的合法性进行验证，通过验证的合法交
+易数据存储在节点的内存中。此操作将会持续下去，接
+收到交易数据的节点使用相同的方式转发交易数据，直
+到转发给所有节点。其中，当节点为矿工时，将会把交
+易打包进区块，再通过 PoW 共识算法基于节点的算力
+竞争记账权。
+节点A
+节点B
+时间
+getdata
+getblock
+getblock
+block
+…
+inv
+block
+节点A
+节点B
+时间
+getaddr
+addr
+addr
+addr
+…
+节点A
+节点B
+时间
+version
+verack
+verack
+version
+节点A
+节点B
+时间
+headers
+getheaders
+getheaders
+headers
+（a）新节点加入
+（b）地址告知与获取
+（c）区块数据同步
+（d）SPV节点同步
+图2
+区块链P2P网络协议工作示意图
+Fig.2
+Blockchain P2P network protocol working diagram
+倪雪莉，等：区块链P2P网络及安全研究
+21
+
+
+【第6页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+（5）探测节点是否处于存活状态。节点会定期向邻
+居节点发送 ping 消息来探测是否处于存活状态。如果
+接收到邻居节点返回的 pong 响应消息，则说明该邻居
+节点处于存活状态。默认情况下，在 20 min内未对 ping
+消息作出响应的节点被认为已经下线。
+2.2.2
+Gossip协议
+Gossip协议
+[30]也称为流行病协议（epidemic protocol）
+或流言算法、疫情传播算法等，主要用于分布式数据库
+系统不同节点之间副本数据的同步。在分布式数据库
+中，不同节点组成一个非结构化对等网络，Gossip 协议
+实现了在限定时间范围内同一数据在所有节点上的最
+终一致性。目前，Gossip 协议已应用在比特币系统和
+Fabric等项目中，Facebook开发的Cassandra
+[31]通过Gossip
+协议实现了分布式结构化数据存储。在区块链超级账
+本（hyperledger Fabric）中，通过 Gossip 协议实现对节点
+发现、节点检测以及节点上路由列表信息的更新等功能。
+Gossip 协议的实现方式非常多，每一种应用场景都
+可以根据具体要求对协议的具体实现进行优化或“定
+制”。通常情况下，Gossip 协议在执行时是由种子节点
+发起，当某一个种子节点在自身状态发生变化后需要向
+其他节点告知时，会随机选择邻居节点进行广播，收到
+该广播消息的节点在更新自己的节点列表信息的同时，
+也会将收到的消息继续广播出去。后续节点重复该广
+播过程，直至网络中所有的节点接收到该消息。Gossip
+协议的消息传播方式分为反熵（anti-entropy）传播和谣
+言（rumor-mongering）传播，其中反熵以确定的周期随机
+选取某个节点，然后通过互相交换数据的方式实现两个
+节点数据的一致性；谣言传播是指某个节点有了新消息
+后立即转换到活跃状态，并周期性地将该消息发送给随
+机选取的未被感染的节点（首次感染），被感染的节点将
+接收到的消息发送给其他未被感染的节点（二次感染），
+直至所有的节点接收到该消息。反熵传播方式主要用
+于新加入节点的数据初始化过程，而谣言传播方式适用
+于分布式系统中的数据同步。以谣言传播方式为例，如
+图 3 所示为 Gossip 协议执行的示意图。首先，源节点周
+期性地广播 Gossip 消息；然后，接收节点（被感染节点）
+随机选择 k 个尚未感染的邻居节点继续广播该消息
+（图 4中每次选择的邻居节点数为 3）。收到消息的节点
+不再将该消息广播给发送节点，即消息的广播有单向
+的；经过一段时间后，网络中的所有节点都将收到该消
+息，数据同步结束。
+Gossip 协议支持节点频繁地加入和退出操作，具有
+良好的分布式容错特性和健壮性，能够以完全去中心化
+方式实现系统状态的最终一致性。Gossip 协议对消息
+的传播支持推（push）、拉（pull）和推/拉（push/pull）3种类
+型。在一个通信周期内，每种类型所需要的交互次数和
+收敛时间不同，应用效果也不一样，但目的都要实现数
+据的最终一致性。但是，Gossip 协议会产生消息传播的
+延时和对网络带宽的占用，不适合要求对消息实时传播
+的应用场景。另外，同一节点可能会多次接收到相同的
+消息，存在消息传播冗余的现象。
+2.3
+典型应用场景中的区块链P2P网络
+对于任一区块链系统（公有链、联盟链或私有链）来
+说，节点发现是节点加入网络的第一个环节。根据节点
+是否为全新节点，将区块链 P2P 网络中的节点分为初始
+节点和重启节点两种类型。其中，重启节点可以利用前
+期已有的地址信息建立与其他可用节点之间的连接，而
+初始节点需要通过完整的消息交互建立与邻居节点之
+间的联系。下面，分别结合比特币、以太坊和超级账本
+等应用场景，分析区块链 P2P 网络的工作机理和应用特
+点。结合比特币、以太坊和超级账本 3 类典型应用场
+景，本节分别介绍 P2P 网络在每一类场景中的功能实现
+和应用特点。
+2.3.1
+比特币系统中的P2P网络
+中本聪在设计比特币系统原型时就采用了 P2P 方
+式来组织和管理不同的节点，并为去中心化思想的实现
+提供了安全保障。同时，比特币系统中的 P2P 网络更加
+接近传统 P2P 网络的特征，尤其是 P2P 网络中节点的随
+机加入和离开机制为比特币系统的开放性奠定了基
+础。借鉴了传统 P2P 网络的工作机制，在比特币系统
+中，初始节点发现一般通过种子节点（seed node）来实
+现。根据实现方式的不同，比特币系统中的种子节点通
+常分为 DNS 种子节点和硬编码（hard code）两种方式。
+其中，DNS种子是由比特币社区维护的一个中心化域名
+查询系统，如 seed.bitcoin.sipa.be；而硬编码方式是将一
+些地址（这些地址称之为“种子”）以代码形式写入一些
+稳定的节点，由这些稳定节点为新节点的加入提供地址
+发现服务。
+比特币系统将一些长期在线的稳定节点配置为种
+N1
+N2
+N3
+N4
+N5
+N6
+N7
+N8
+N9
+N10
+N11
+N12
+N13
+N14
+N15
+N16
+图3
+Gossip协议消息传播模型示意图
+Fig.3
+Schematic diagram of Gossip protocol message
+propagation model
+22
+
+
+【第7页】
+2024，60（5）
+子节点，种子节点通过硬编码方式保存有完整的区块链
+网络地址列表，可以为新加入节点提供优质的节点发现
+和路由列表服务。例如，比特币系统的种子节点可以定
+期通过 Net.AdvertiseLocal（）方式将本地地址列表以广
+播方式主动推送给其他节点，以使其他节点及时更新地
+址列表。另外，比特币系统中节点将地址以 LevelDB
+[32]
+格式存储在 peer.dat 数据库系统中。LevelDB 数据库是
+一个“键/值”
+（Key/Value）数据库，主要用于存储和管理
+关联性数组，具有良好的读写性能，非常适合对比特币
+系统中节点地址的管理要求。
+2.3.2
+以太坊系统中的P2P网络
+与比特币相比较，以太坊的功能更加强大，应用场
+景更加丰富，相应地对节点的组织管理方式更加灵活和
+高效。以太坊系统中的 P2P 网络在借鉴了比特币系统
+中 P2P 网络应用特点的基础上，结合以太坊功能实现进
+行了一些改进和优化：
+（1）采用结构化对等网络模式。通过 DHT 方式实
+现其结构化功能，任一节点都拥有全网唯一的哈希列表
+中的位置ID，以便于其他节点精准定位。
+（2）具体使用 KAD 协议。为了更好地适应网络中
+节点频繁加入和退出的需要，以太坊中使用了 KAD 协
+议。KAD 协议是一种对 DHT 的具体实现，是第三代
+P2P 网络中节点动态管理和路由的协议，与其前两代协
+议（如 Chord
+[33]、CAN
+[34]、Pastry
+[35]）相比，KAD 以全局唯一
+ID 标记对等网络节点，以节点 ID 异或（XOR）值度量节
+点之间的距离，即 Dis(M,N) = XOR(M,N) 。
+（3）种子节点。与比特币系统一样，以太坊系统同
+样将稳定的节点配置为种子节点，以便为其他节点提供
+更优质的节点列表服务。与比特币系统一样，种子节点
+的引入，在方便了对新节点管理的同时，在一定程度上
+弱化了P2P网络的去中心化特征，影响了网络的安全性。
+（4）地址数据库。以太坊系统采用与比特币系统相
+同的LevelDB格式数据库来保存地址信息。
+（5）地址查询。由于以太坊节点使用全网唯一的结
+构化编址方案，所以可以根据 KAD 表结构快速定位到
+待查询节点ID的具体位置。
+随着以太坊应用范围的不断扩展，研究人员对以太
+坊系统中 P2P 网络的节点管理方式进行了进一步分析
+和优化。例如，通过对以太坊的网络测量，发现网络中
+可能影响正常路由的节点
+[36]，以及矿工的节点位置对挖
+矿结果的影响
+[37]。
+2.3.3
+超级账本中的P2P网络
+比特币创造了区块链技术应用的神话，以太坊以图
+灵完备和智能合约使区块技术走出数字加密货币，广泛
+服务于金融、医疗、公共服务、供应链、智能制造、保险、
+游戏等众多领域。比特币和以太坊系统是公有链应用
+的典型，而超级账本为联盟链应用提供了一个开源技术
+架构。目前，主流的超级账本项目有 Monax 和 Intel 的
+Hyperledge Burrow
+[38]、Soramitsu 的 Hyperledge Iroha
+[39]、
+IBM和Digital Asset的Hyperledge Fabric
+[40]等，其中Fabric
+是目前主流的开源联盟链产品之一，主要有 Fabric 0.6
+和Fabric 1.0两个版本。
+Fabric 1.0 采用半中心化模式，根据企业级应用的
+具体需要，基于网络中扮演的角色不同，将节点分为 NP
+（validating peer，验证节点）、NVP（nove validating peer，
+非验证节点）以及成员管理（membership services）节点
+3种类型。其中，成员管理服务为了适应企业级应用，借
+鉴了传统身份管理的功能，实现成员注册、身份管理、交
+易审计等功能，以确保平台应用的安全性；VP 节点负责
+共识达成、验证和确认交易以及维护账本数据的一致
+性；NVP 节点主要对从客户端接收到的交易进行验证，
+并将验证通过的合法交易转发给 VP节点，由 VP节点通
+过共识算法写入区块。Fabric 0.6 中 VP 和 NVP 节点之
+间的关系如图4（a）所示。
+Fabric 1.0中没有了VP和NVP节点，而是由Orderer
+（排序）、Endorser（背书）和 Committer（记账）节点替代，
+具体如图 4（b）所示。其中，作为企业级的应用，客户端
+首先需要向管理成员节点（一般为企业 CA）申请一个入
+VP0
+VP1
+VP2
+VP3
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+C
+E
+E
+E
+C
+C
+E
+E
+O
+O
+O
+O
+Orderer
+NVP
+非验证节点
+VP
+验证节点
+E
+背书节点
+C
+记账节点
+O
+排序节点
+（a）Fabric 0.6区块链P2P网络
+（b）Fabric 1.0区块链P2P网络
+VP0
+VP1
+VP2
+VP3
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+NVP
+C
+E
+E
+E
+C
+C
+E
+E
+O
+O
+O
+O
+Orderer
+NVP
+非验证节点
+VP
+验证节点
+E
+背书节点
+C
+记账节点
+O
+排序节点
+（a）Fabric 0.6区块链P2P网络
+（b）Fabric 1.0区块链P2P网络
+（a）Fabric 0.6区块链P2P网络
+（b）Fabric 1.0区块链P2P网络
+图4
+Fabric区块链P2P网络
+Fig.4
+Fabric blockchain P2P network
+倪雪莉，等：区块链P2P网络及安全研究
+23
+
+
+【第8页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+网证书用于身份验证和对交易进行签名。客户端生成
+一个提案（proposal）后发送到背书节点，背书节点对通
+过验证的提案交由链码 chaincode 进行模拟执行，并将
+经过背书的结果返回给客户端；随之，客户端在接收到
+背书节点的提案响应（proposal response）消息后，将其
+封装成一笔交易发送给排序节点进行排序操作，将创建
+一个新的有序交易的区块，然后将新区块发送给记账节
+点；每个记账节点在收到新区块之后会对其验证（包括
+签名、背书策略以及读写集的校验等），在通过验证后将
+区块链接到主链的尾部。
+另外，Fabric 种子节点并没有采用比特币和以太坊
+中的硬编码方案，而是通过配置文件加载方式实现对节
+点地址的动态获取与管理。具体讲，Fabric 采用了近年
+来广受欢迎的开源配置解决方案 Viper
+[41]，不但可以动
+态获取本地地址参数，而且可以获得远端节点的配置文
+件消息。节点通过 Viper获取到的信息可以在无需重启
+系统的情况下自动生效。另外，Fabric 采用 Gossip 协议
+实现P2P网络中节点之间的数据交互与最终一致性。
+3
+区块链P2P网络的安全
+3.1
+区块链P2P网络的主要安全问题
+P2P 网络为区块链节点的安全接入以及节点之间
+的通信提供基本保障，具体包括节点之间的组网模式、
+通信模式及通信管理等。区块链系统采用不依赖于第
+三方的 P2P 组网通信方式，在全网范围内的不同节点之
+间建立联系并实现路由选择和资源查询等服务功能。
+P2P 网络的安全问题必然导致区块链应用的安全风险，
+总体来看，区块链 P2P 网络的安全问题主要反映在漏洞
+威胁、网络分区和隐私威胁三个方面
+[42-43]。
+3.1.1
+漏洞威胁
+漏洞的存在是安全问题产生的主要根源，目前大量
+网络攻击行为的实施都是借助漏洞来实现的。然而，漏
+洞的存在是不可避免的，只能在发现后进行修复。对于
+攻击者来说，任何已存在但未修复的漏洞都具有利用的
+价值。区块链 P2P 网络是一种典型的覆盖网络，用于为
+区块链节点之间提供一种分布式的自组织连接方式。
+但是，由于 P2P 网络中的节点接入和退出自由，而且不
+存在身份认证和数据验证（正常通信情况下，不涉及到
+挖矿操作）等管理机制，所以存在较大的安全风险：
+（1）易遭受恶意攻击。攻击节点可以恶意传播病
+毒、木马、蠕虫等恶意代码，破坏正常的网络运行机制。
+也可以对一些重要节点（如矿工节点、矿池节点等）发起
+DDoS（distributed denial of service，分布式拒绝服务）
+攻击
+[44]，或对指向特定节点的路由实施路由攻击。
+（2）攻击行为难以检测。传统的基于边界安全的防
+火墙和入侵检测技术无法对 P2P 流量进行有效管理，而
+且针对 P2P 网络节点的攻击源较难进行溯源和实施阻
+断。虽然零信任技术
+[45]从理论上可以解决这一问题，但
+是零信任网络的大规模部署目前尚存在较大的困难。
+（3）节点间存在资源和权限的差异性。任何网络都
+存在物理和逻辑上的边界，区块链 P2P 网络也是如此。
+区块链 P2P 网络中，节点会因为在网络中的具体位置以
+及加入网络的时间先后，存在对资源占有的不平衡性。
+一般情况下，位于网络中心位置以及较早加入网络且运
+行稳定（长期在线）的节点占有资源较多，如果这些重要
+节点被恶意控制后，就可能会限制其他节点享有数据资
+源，或对其他节点的路由及资源查询进行误导。在区块
+链系统中，当轻量级 SPV节点需要访问全节点中的账本
+数据时，更容易被全节点限制访问。
+（4）智能合约安全漏洞的利用。智能合约以其具有
+的部署灵活、公开透明、调用便捷等特点，丰富了区块链
+的应用功能。与此同时，智能合约存在的合约安全和隐
+私安全等问题已严重影响着区块链应用的进一步发
+展
+[46]。由于合约部署在公开节点上，这些节点自身的安
+全以及防范外界攻击的能力对提升 P2P 网络的安全性
+显得极为重要。
+针对区块链 P2P 网络安全漏洞的产生原因较为复
+杂，目前的研究主要集中于协议设计缺陷和软件实现中
+存在的漏洞两个方面，其目标是在提升 P2P 网络运行性
+能的同时，加强对以 P2P 网络为重点的漏洞检测技术的
+研究。
+3.1.2
+网络分区
+网络分区的概念较早出现在分布式系统中，是分布
+式系统的一种故障类型
+[47]。在分布式集群中，受网络通
+信质量的影响，部分节点之间会因为无法建立连接从而
+使集群中的节点形成不同的子集，且不同子集之间相互
+隔离。
+区块链基于 P2P 网络在共识算法的作用下实现不
+同节点上账本的一致性。区块链系统中一旦出现网络
+分区，不同分区形成不同节点子集，每个子集分别维护
+各自的账本，破坏了网络中共识算法的一致性。在区块
+链网络中，全节点上存储着完整的账本数据，而轻量级
+SPV 节点只保存有区块头数据和交易相关的细节信息，
+轻量级 SPV 节点需要通过全节点上的数据来更新自身
+节点的数据。另外，当轻量级 SPV节点需要对某一笔交
+易是否真实存在进行验证时，需要借助周边的全节点来
+完成。区块链系统的这种工作方式，很容易被攻击后形
+成网络分区。攻击节点通过主动探测或被动监听方式
+在获取到网络拓扑信息后，就可以确定被攻击的目标节
+点，再控制目标节点周围的邻居节点从而形成网络分
+区，进一步控制网络路由和资源查询。
+目前的比特币和以太坊系统都没有提供有效的防
+范网络分区的功能，更没有研究网络分区时的共识算法
+优化机制
+[48]。未来研究仍然集中于 P2P 网络协议优化
+和开发适应网络分区环境的区块链共识协议两个方面。
+24
+
+
+【第9页】
+2024，60（5）
+3.1.3
+隐私威胁
+隐私专指用户不想公开的个人信息，数据安全是实
+现隐私保护的前提
+[49]，用户不愿意公开的姓名、年龄、家
+庭住址等信息，都属于隐私的范畴。隐私的确定并非一
+成不变的，它会根据不同的时间和知悉对象发生变化，
+即隐私具有针对性和时限性。
+区块链系统中的大部分隐私与交易相关
+[50]。如图 5
+所示的是从 blockchain.info网站公开显示的比特系统的
+一笔交易信息，主要包括交易输入（From）、交易输出
+（To）和元数据三部分内容，详细描述了本笔交易的来源
+和去向以及相互之间的关系。
+从图 5 中可以看出，比特币系统中与交易相关的信
+息都是公开的。虽然这些与用户身份相关的公开信息
+（如交易地址、输入与输出地址之间的关系等）都以假名
+机制经过了匿名化处理，但由于账本数据的公开性以及
+交易之间的关联性，攻击者仍然可能会窥探到用户隐
+私。目前，已有大量研究表明，通过对比特币账本数据
+的分析，再借助互联网节点对应的IP地址及其他公开信
+息，可以确定交易者的身份。
+隐私保护是目前区块链研究的重点
+[51-52]，未来研究
+将主要针对区块链中的数据隐私泄露问题，加强针对
+P2P 网络通信隐私以及针对网络节点隐私的研究，同时
+结合区块链的跨链操作需要，对跨链操作中产生的隐私
+泄露风险进行分析。在此基础上，基于系统思维方式，
+加强区块链技术（如智能合约、侧链等）和应用过程中的
+隐私保护研究。
+表 3 从安全威胁的主要表现、安全威胁的主要产生
+原因以及安全威胁程度等方面，对漏洞威胁、网络分区
+和隐私威胁进行了比较分析。
+3.2
+典型攻击与防范方法
+针对前文分析的区块链 P2P 网络安全问题，并通过
+对近年来发生的区块链安全事件的分析，本节重点对区
+块链 P2P网络中的 DDoS攻击、Sybil攻击和 Eclipse攻击
+的实现原理和防范思路进行讨论。
+3.2.1
+DDoS攻击
+DDoS 攻 击
+[53]是 指 位 于 不 同 地 点 的 多 个 攻 击 者
+（attacker）联合起来向受害主机（victim）同时发起攻击，
+或攻击者在控制了多台主机（傀儡主机）后再借助这些
+受控主机向受害主机实施攻击。DDoS攻击是一种基于
+分布式系统的具有协同功能的大规模攻击方式。随着
+P2P 网络的流行，DDoS 攻击方式与 P2P 网络开始走向
+融合，出现了专门针对P2P网络的DDoS攻击方式
+[54]。
+如图 6 所示的是区块链 P2P 网络中 DDoS 攻击的实
+现方式。攻击者在实施 P2P 网络攻击时，一般情况下，
+不需要像传统 DDoS 攻击那样利用已经发现的漏洞向
+傀儡机植入木马，然后利用构建的僵尸网络向受害主机
+发起攻击，而是基于 P2P 覆盖网络的特点，在应用层通
+过构建攻击报文并利用反射式攻击方式发起攻击。具
+体讲，攻击者将受害主机的IP地址和端口写入到攻击报
+文的应用层消息中，以此将 P2P 网络的节点流量引向受
+害主机。用此方式，可以实现利用较小的请求报文来触
+发较大的响应报文，进而生成巨大的攻击数据流；同时，
+攻击者还可以通过修改 P2P 网络的路由信息，将攻击数
+据流指向受害主机；另外，攻击者还可以修改 P2P 网络
+中的资源查询方式，形成汇聚到受害主机的攻击流量。
+借助 P2P 网络中节点间的通信方式，可以将 P2P 网
+络中的 DDoS 攻击分为主动攻击和被动攻击两种类
+型。其中，主动攻击是指攻击者利用 P2P 协议的推
+（push）机制，主动向网络中发送大量虚假信息，使得针
+对这些虚假信息的后续访问都指向受害主机；而被动攻
+图5
+比特币系统中的单笔交易信息
+Fig.5
+Information about individual transactions
+in Bitcoin system
+安全威胁
+漏洞威胁
+网络分区
+隐私威胁
+主要表现
+漏洞利用、恶意攻击、节点资源分配不均、攻击行为复杂且难以预测
+破坏P2P网络的整体性、重要节点被隔离、破坏共识机制的一致性
+泄漏交易者的真实身份信息、对特定交易进行溯源攻击
+主要产生原因
+协议设计缺陷、软件实现中存在的漏洞
+节点间的通信质量、重要目标节点被攻击
+区块链账本的公开透明性、P2P网络的开放性
+威胁程度
+强
+强
+中
+表3
+针对区块链P2P网络主要安全威胁的比较
+Table 3
+Comparison of major security threats to blockchain P2P networks
+Peer
+Peer
+Peer
+Peer
+Peer
+Attacker
+Victim
+图6
+P2P网络中DDoS攻击示意图
+Fig.6
+Diagram of DDoS attacks on P2P network
+倪雪莉，等：区块链P2P网络及安全研究
+25
+
+
+【第10页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+击是指攻击者利用 P2P 协议的拉（pull）机制，被动地等
+待其他节点来访问虚构的攻击资源，再利用信息放大措
+施产生攻击数据流并进一步增强攻击效果。相对来讲，
+主动攻击具有可控性强、控制面广、放大效应明显等特
+点，攻击效果要比被动攻击好。
+针对 P2P网络中 DDoS攻击的防范方法主要有建立
+邻居节点之间的信任机制、对产生较大流量的节点身份
+进行验证，以及加强对重要节点的保护等。当然，这些
+方法中部分功能的实现与区块链的去中心化、去信任等
+机制相悖，这也是在追求安全过程中需要付出的代价。
+3.2.2
+Sybil攻击
+Sybil（女巫）来自于一个故事中的女主角，她患有多
+重人格障碍症，不同时刻会扮演不同的角色。在 P2P 网
+络中，Sybil 攻击
+[55]是指单一节点具有多个身份，而且网
+络中的其他节点对其每一个身份及其行为都认为是合
+法合规的。
+在区块链 P2P网络中，Sybil攻击主要针对采用拜占
+庭容错（Byzantine fault tolerance，BFT）共识算法的区
+块链系统
+[56]。由于 BFT 协议要求系统中错误节点数要
+小于节点总数的 1/3 才能达成最终的一致性，为此，在
+Sybil攻击中，攻击者借助 P2P网络中节点自由加入的和
+离开特点，通过创建多个拥有不同身份信息的节点，以
+此来破坏区块链系统的共识算法中的投票机制，从而产
+生错误的最终提案，具体操作过程如图7所示。
+针对 Sybil攻击的防范方法主要是优化区块链系统
+共识算法，在算法中增加挖矿节点的身份识别和验证机
+制，确保挖矿节点的可信性，防止恶意节点假扮成矿工
+进行共识挖矿。
+3.2.3
+Eclipse攻击
+Eclipse（日蚀）攻击
+[57]主要出现在网络分区中，是攻
+击者在获取到网络拓扑信息后，再利用该拓扑信息实现
+网络分区的一种典型的攻击方式。攻击者首先获取到
+网络拓扑信息，然后确定受害节点在网络中的具体位置
+信息，接着通过限制外界与受害节点之间的通信，甚至
+使受害节点完全与外界隔离，使受害节点无法接收到外
+部节点的信息，致使受害节点所在网络中节点存储的区
+块链账本数据与外界不一致，破坏了区块链分布式节点
+中数据的一致性。与此同时，攻击者还可以有目的地控
+制受害节点所在的子网络，使该子网络从整个网络中隔
+离，形成网络分区。攻击者通过有效隔离受害节点，控
+制甚至征用受害节点的算力，为进一步实施双花攻击或
+自私挖矿（selfish mining）
+[58]提供条件。
+在区块链 P2P 网络中，完整的路由信息是实现全网
+不同节点之间信息交互的基础。而在 Eclipse 攻击中，
+攻击者不断向受害节点的邻居节点（傀儡节点）发送经
+事先伪造的虚假路由更新信息，使邻居节点中充斥着大
+量无效路由信息。当邻居节点逐个变成傀儡节点时，形
+成一个以受害节点为中心的网络分区，外界与受害节点
+之间的信息交互（路由查询、资源搜索等）被攻击者掌
+控。如图 8 显示了区块链 P2P 网络中 Eclipse 攻击的基
+本实现原理。
+区块链系统中，针对 Eclipse 攻击的防范方法主要
+是修改节点路由信息的更新规则，对单位时间内更新的
+路由条目进行必要的限制，防止大量虚假路由信息的更
+新。同时，采用相应策略，当进行路由信息更新时，对新
+加入路由信息的有效性进行测试。还有，限制从单一节
+点（一般为攻击者节点）接收需要频繁更新的路由信息。
+为便于对三类典型攻击方式的理解，表 4 分别从主
+要攻击对象、主要攻击目的、主要防范方法、关联攻击方
+式和实施难易度等方面对其进行了比较分析。
+傀儡节点
+矿工
+赞成
+反对
+共识挖矿
+反对
+(错误提案)
+提交提案
+攻击者
+区块链P2P网络
+图7
+P2P网络中Sybil攻击示意图
+Fig.7
+Diagram of Sybil attack in P2P network
+Peer
+Peer
+Peer
+Peer
+Peer
+Victim
+Zombie
+Zombie
+Zombie
+攻击者
+网络分区
+图8
+P2P网络中Eclipse攻击示意图
+Fig.8
+Eclipse attack diagram in P2P network
+攻击方式
+DDoS攻击
+Sybil攻击
+Eclipse攻击
+主要攻击对象
+P2P网络
+FTP和PBFT协议
+P2P网络节点
+主要攻击目的
+无法提供正常服务
+影响共识机制
+将目标节点隔离
+关联攻击方式
+木马劫持、远程控制
+密钥窃取、日蚀攻击
+女巫攻击、BGP劫持攻击、51%攻击
+主要防范方法
+节点间信任、节点身份验证
+优化共识算法
+优化节点路由更新规则
+实施难易度
+较难
+较易
+难
+表4
+针对区块链P2P网络的三类典型攻击方式的比较
+Table 4
+Comparison of 3 types of typical attacks against blockchain P2P networks
+26
+
+
+【第11页】
+2024，60（5）
+4
+总结与展望
+区块链系统中使用的共识机制、公钥密钥算法、P2P
+网络、经济激励和博弈论等理论与技术都不是专门针对
+区块链而开发的，只是在区块链技术中重新找到了自己
+的价值，并在应用迭代中进一步优化和完善。P2P 网络
+最初也是应用在音乐、视频等多媒体服务（如目前互联
+网中拥有巨大用户量的 PPS、PPLive 网络电视等），在中
+本聪的区块链技术以及基于该技术开发的比特币系统
+原型中选择了 P2P 网络作为底层通信协议。后来，随着
+区块链技术在加密数字货币中应用的深入以及向其他
+领域的扩展，P2P 网络技术得到了进一步发展和完善。
+与此同时，区块链 P2P 技术自身以及 P2P 网络的安全性
+也在一定程度上影响着区块链的发展。目前，针对区块
+链 P2P 网络和安全问题的研究，主要在以下几个方面存
+在一定的挑战：
+（1）针对区块链 P2P 网络的流量分析。区块链作为
+一项实现去中心化应用的底层技术，并非所有应用在全
+球都是合法的，例如，中国政府就严厉打击比特币挖矿
+和交易行为。然而，从技术层面并不能因为禁止挖矿就
+全面禁止其他的区块链应用，反而应通过区块链应用创
+新来促进经济社会高质量发展。为此，需要通过综合运
+用深度学习、大语言模型等技术和方法，加强对互联网
+流量特征的动态识别和分析，从技术层面限制非法应
+用，保护合法网络流量。
+（2）技术研究与应用创新。区块链是一项继承和综
+合了多项成熟技术的创新应用，强化单一技术的研究和
+多技术之间深度融合是推动区块链技术发展的关键。
+针对区块链 P2P 网络，需要对覆盖网络路由及不同节点
+信息的一致性进行优化，对 P2P 网络尤其是非结构化对
+等网络中的信息检索机制进行优化，对大型 P2P 网络中
+因节点频繁加入和退出对网络产生的抖动特性进行研
+究，对 P2P 网络分区问题产生的机理和应对策略进行系
+统分析，对基于 DHT 的 P2P 网络中数据的冗余机制和
+高可用性进行研究等。与此同时，需要坚持问题导向，
+在工程实践中加强不同技术之间的协同和应用优化，并
+确保其安全性。
+（3）区块链网络安全。安全是一个基础问题，也是
+一个谋长远的问题，区块链网络安全更是如此。一方
+面，区块链 P2P 网络自身持有其安全特质，如利用 P2P
+网络的分布式存储和处理特征防止单一节点攻击，利用
+数据存储的多副本特征提升系统的容错能力，利用 P2P
+网络的拓扑特征增强系统的兼容性和可扩展性等。另
+一方面，区块链 P2P 网络因其具有的网络开放性、节点
+加入与退出的随意性、单一节点对整个网络信息了解的
+有限性等特点，在安全方面存在一定的挑战。针对这些
+区块链 P2P 网络的安全问题，需要从信任认证、恶意节
+点检测、攻击容忍、攻击限制、矿池挖矿规则和算法优化
+等方面进行系统研究，尽可能避免区块链网络安全中木
+桶效应现象的出现。
+另外，针对区块链网络的用户隐私保护也是一个重
+要的研究领域，随着区块链技术的不断发展和应用的不
+断普及，以及人们对隐私保护意识的不断增强，针对区
+块链 P2P 网络及隐私保护研究的意义和价值将会进一
+步突显。同时，无线 Mesh 网络
+[59]在区块链系统中的应
+用也是一个应用和研究热点。
+参考文献：
+[1] NASIR M H, ARSHAD J, KHAN M M, et al. Scalable block-
+chains—a systematic review[J]. Future Generation Computer
+Systems, 2022, 126(1): 136-162.
+[2] QASSE I A, TALIB M A, NASIR Q M. Inter blockchain
+communication: a survey[C]//Proceedings of the ArabWIC
+6th Annual International Conference Research Trac, Rabat
+Morocco, March 7-9, 2019. New York: ACM Press, 2019: 1-6.
+[3] 王群, 李馥娟, 倪雪莉, 等. 区块链共识算法及应用研究[J].
+计算机科学与探索, 2022, 16(6): 1214-1242.
+WANG Q, LI F J, NI X L, et al. Survey on blockchain con-
+sensus algorithms and application[J]. Journal of Frontiers of
+Computer Science and Technology, 2022, 16(6): 1214-1242.
+[4] BRITANNICA. P2P[EB/OL]. [2023-05-06]. https://www.bri-
+tannica.com/technology/P2P.
+[5] Federal Trade Commission. Peer-to-Peer file sharing: a guide
+for business[EB/OL]. [2023-05-07]. https://www.ftc.gov/busi-
+ness-guidance/resources/peer-peer-file-sharing-guide-business.
+[6] BERNS A. Network scaffolding for efficient stabilization of
+the chord overlay network[J]. arXiv:2109.14126,2021.
+[7] STOICA I, MORRIS R, KARGER D, et al. Chord: a scal-
+able peer-to-peer lookup protocol for Internet applications
+[J]. ACM SIGCOMM Computer Communication Review,
+2001, 31(4): 149-160.
+[8] MAYMOUNKOV P, MAZIERES D. Kademlia: a peer- to-
+peer information system based on the XOR metric[C]//Pro-
+ceedings of the First International Workshop (IPTPS 2002),
+Cambridge, March 7-8, 2002. Berlin, Heidelberg: Springer,
+2002: 53-65.
+[9] STEINER M, EN-NAJJARY T, BIERSACK E W. A global
+view of kad[C]//Proceedings of the 7th ACM SIGCOMM
+Conference on Internet Measurement, San Diego, October
+24-26, 2007. New York: ACM Press, 2007: 117-122.
+[10] ASSANZADEH-NAZARABADI Y, TAHERI-BOSHROOYEH
+S, OTOUM S, et al. DHT- based communications survey:
+architectures and use cases[J]. arXiv:2109.10787,2021.
+[11] XU Z, TANG C, ZHANG Z. Building topology-aware over-
+lays using global soft-state[C]//Proceedings of the 23rd Inter-
+national Conference on Distributed Computing Systems,
+Providence, May 19-22, 2003. Piscataway: IEEE, 2003: 500-508.
+[12] KUSHWAHA R, KULKARNI S, SINGH Y N. Generalized
+倪雪莉，等：区块链P2P网络及安全研究
+27
+
+
+【第12页】
+Computer Engineering and Applications计算机工程与应用
+2024，60（5）
+distance metric for different DHT routing algorithms in
+peer-to-peer networks[J]. arXiv:2303.13965,2023.
+[13] 邱彤庆, 陈贵海. 一种令 P2P 覆盖网络拓扑相关的通用方
+法[J]. 软件学报, 2007, 18(2): 381-390.
+QIU T Q, CHEN G H. A generic approach to making P2P
+overlay network topology-aware[J]. Journal of Software, 2007,
+18(2): 381-390.
+[14] JIANG S, GUO L, ZHANG X D, et al. LightFlood: mini-
+mizing redundant messages and maximizing scope of peer-
+to- peer search[J]. IEEE Transactions on Parallel and Dis-
+tributed Systems, 2008, 19(5): 601-614.
+[15] JACOBS T, PANDURANGAN G. Stochastic analysis of a
+churn- tolerant structured peer- to- peer scheme[J]. Peer to
+Peer Networking & Applications, 2013, 6: 1-14.
+[16] STUTZBACH D, REJAIE R. Understanding churn in peer-
+to- peer networks[C]//Proceedings of the 6th ACM SIG-
+COMM conference on Internet measurement, Rio de Janeriro,
+Brazi, October 25-27, 2006. New York: ACM Press, 2006:
+189-202.
+[17] TANG W Z, KIFFER L, FANTI G, et al. Strategic latency
+reduction in blockchain peer- to- peer networks[J]. arXiv:
+2205.06837,2022.
+[18] REN Y Y, ZENG Z W, WANG T, et al. A trust-based mini-
+mum cost and quality aware data collection scheme in P2P
+network[J]. Peer-to-Peer Networking and Applications, 2020,
+13: 2300-2323.
+[19] HOU W J, JIANG Y X, LEI W X, et al. A P2P network
+based edge computing smart grid model for efficient resources
+coordination[J]. Peer-to-Peer Networking and Applications,
+2020, 13: 1026-1037.
+[20] FRAHAT R T, MONOWAR M M, BUHARI S M. Secure
+and scalable trust management model for IoT P2P network
+[C]//Proceedings of the 2nd International Conference on
+Computer Applications & Information Security (ICCAIS),
+Riyadh, Saudi Arabia, May 01-03, 2019. Piscataway: IEEE,
+2019: 1-6.
+[21] KLEPPMANN M. Distributed systems[EB/OL]. [2023-05-
+03]. https://www.cl.cam.ac.uk/teaching/2021/ConcDisSys/dist-
+sys-slides.pdf.
+[22] The bitcoin network[EB/OL]. [2023-05-03]. https://learn.
+saylor.org/mod/book/view.php?id=36307&chapterid=18897.
+[23] BUNZ B, KIFFER L, LUU L, et al. FlyClient: super-light
+clients for cryptocurrencies[C]//Proceedings of the IEEE
+Symposium on Security and Privacy (SP), San Francisco,
+May 18-21, 2020. Piscataway: IEEE, 2020: 928-946.
+[24] EYAL I. The miner’s dilemma[J]. arXiv:1411.7099,2014.
+[25] LUU L, VELNER Y, TEUTSCH J, et al. SMARTPOOL:
+practical decentralized pooled mining[C]//Proceedings of
+the 26th USENIX Security Symposium, Vancouver, August
+16-18, 2017. Berkeley: USENIX Association, 2017: 1409-1426.
+[26] NAKAMOTO S. Bitcoin: a peer-to-peer electronic cash sys-
+tem[EB/OL]. (2018-06-10)[2023-06-13]. https://bitcoin.org/
+bitcoin.pdf.
+[27] Decentralized identity[EB/OL].[2023-06-15]. https://ethereum.
+org/en/decentralized-identity/.
+[28] ANDROULAKI E, BARGER A, BORTNIKOV V, et al.
+Hyperledger Fabric: a distributed operating system for per-
+missioned blockchains[J]. arXiv:1801.10228,2018.
+[29] ANTONOPOULOS A M. Mastering bitcoin: programming
+the open blockchain[M]. CA: O'Reilly Media, Inc, 2017.
+[30] DEMERS A, GREENE D, HOUSER C, et al. Epidemic algo-
+rithms for replicated database maintenance[J]. ACM SIGOPS
+Operating Systems Review, 1988, 22(1): 8-32.
+[31] LAKSHMAN A, MALIK P. Cassandra: a decentralized struc-
+tured storage system[J]. ACM SIGOPS Operating Systems
+Review, 2010, 44(2): 35-40.
+[32] GitHub. Leveldb[EB/OL]. [2023-06-20]. https://github.com/
+google/leveldb.
+[33] LIOYD W. Distributed Hash tables & chord[EB/OL]. [2023-
+06-26]. https://www.cs.princeton.edu/courses/archive/fall22/
+cos418/docs/L9-dht-chord.pdf.
+[34] SAHIN O D, AGRAWAL D, ABBADI E. Techniques for
+efficient routing and load balancing in content-addressable
+networks[C]//Proceedings of the Fifth IEEE International
+Conference on Peer-to-Peer Computing, Konstanz, December
+31-September 02, 2005. Piscataway: IEEE, 2005: 67-74.
+[35] DUONG H T. A Survey of three DHT systems: CAN, pastry,
+and chord[ENB/OL]. [2026-06-26]. https://www.sci.utah.
+edu/~duong/papers/chord.pdf.
+[36] GAO Y, SHI J Q, WANG X B, et al. Topology measure-
+ment and analysis on ethereum P2P network[C]//Proceed-
+ings of the IEEE Symposium on Computers and Communi-
+cations (ISCC), Barcelona, June 29- July 03, 2019. Piscat-
+away: IEEE, 2019: 1-6.
+[37] KIFFER L, SALMAN A, LEVIN D, et al. Under the hood
+of the ethereum gossip protocol[C]//Proceedings of the Finan-
+cial Cryptography and Data Security, Virtual Event, March
+1-5, 2021. Berlin, Heidelberg: Springer, 2021: 437-456.
+[38] PUNATHUMKANDI S, SUNDARAM V M, PRABHA-
+VATHY. A deep dive into hyperledger[EB/OL]. [2023-06-
+27]. https://www.researchgate.net/publication/347825518_
+A_deep_dive_into_Hyperledger.
+[39] Hyperledger Iroha[EB/OL]. (2022-10-15)[2023-06-27]. https://
+wiki.hyperledger. org/display/iroha.
+[40] CACHIN C. Architecture of the hyperledger Blockchain fab-
+ric[EB/OL]. (2016-01-01)[2023-06-16]. https://www.zurich.
+ibm.com/dccl/papers/cachin_dccl.pdf.
+[41] Spf13. Viper[EB/OL]. [2023-06-22]. https://github.com/spf13/
+viper.
+[42] WASHBOURNE L. A survey of P2P network security[J].
+28
+
+
+【第13页】
+2024，60（5）
+arXiv:1504.01358,2015.
+[43] WANG T T, ZHAO C H, YANG Q, et al. Ethna: analyzing
+the underlying peer-to-peer network of ethereum blockchain
+[J]. IEEE Transactions on Network Science and Engineering,
+2021, 3(1): 2131-2146.
+[44] SUN X, TORRES R, RAO S. Preventing DDoS attacks on
+internet servers exploiting P2P systems[J]. Computer Net-
+works, 2010, 54(15): 2756-2774.
+[45] 诸葛程晨, 王群, 刘家银, 等. 零信任网络综述[J]. 计算机
+工程与应用, 2022, 58(22): 12-29.
+ZHUGE C C, WNAG Q, LIU J Y, et al. Survey of zero trust
+network[J]. Computer Engineering and Applications, 2022,
+58(22): 12-29.
+[46] 胡甜媛, 李泽成, 李必信, 等. 智能合约的合约安全和隐私
+安全研究综述[J]. 计算机学报, 2021, 44(12): 2485-2514.
+HU T Y, LI Z C, LI B X, et al. Contractual security and pri-
+vacy security of smart contract: a system mapping study[J].
+Chinese Journal of Computers, 2021, 44(12): 2485-2514.
+[47] 赵季红, 蔡田杰, 曲桦, 等. SDN中应用网络分区的控制器
+部署策略[J]. 计算机工程, 2019, 45(1): 73-77.
+ZHAO J H, CAI T J, QU H, et al. Controller deployment
+strategy for applying network partition in SDN[J]. Computer
+Engineering, 2019, 45(1): 73-77.
+[48] KUPERBERG M. Towards an analysis of network partition-
+ing prevention for distributed ledgers and blockchains[C]//
+Proceedings of the IEEE International Conference on Decen-
+tralized Applications and Infrastructures (DAPPS), Oxford,
+August 03-06, 2020. Piscataway: IEEE, 2020: 94-99.
+[49] 王群, 李馥娟, 倪雪莉, 等. 区块链隐私保护机制研究[J].
+计算机工程, 2023, 49(4): 1-13.
+WANG Q, LI F J, NI X L, et al. Research on blockchain pri-
+vacy protection mechanism[J]. Computer Engineering, 2023,
+49(4): 1-13.
+[50] 张思亮, 凌捷, 陈家辉. 可追踪的区块链账本隐私保护方
+案[J]. 计算机工程与应用, 2020, 56(23): 31-37.
+ZHANG S L, LING J, CHEN J H. Traceable blockchain
+ledger privacy protection scheme[J]. Computer Engineering
+and Applications, 2020, 56(23): 31-37.
+[51] BERNABE J B, CANOVAS J L, HERNANDEZ-RAMOS J L,
+et al. Privacy-preserving solutions for blockchain: review and
+challenges[J]. IEEE Access, 2019, 7: 164908-164940.
+[52] LI P, WEI F, ZHENG Y, et al. Privacy preservation in per-
+missionless blockchain: a survey[J]. Digital Communica-
+tions and Networks, 2021, 7(3): 295-307.
+[53] NAFTALY H, MINSK Y. Discriminating defense against
+DDoS attacks; a novel approach[J]. arXiv:2201.12439,2022.
+[54] TAPSELL J, AKRAM R N, MARKANTONAKIS K. An
+evaluation of the security of the Bitcoin Peer-to-Peer Net-
+work[J]. arXiv:1805.10259,2018.
+[55] GUNTURN R. Survey of sybil attacks in social networks
+[J]. arXiv:1504.05522,2015.
+[56] 魏松杰, 吕伟龙, 李莎莎. 区块链公链应用的典型安全问
+题综述[J]. 软件学报, 2022, 33(1): 324-355.
+WEI S J, LYU W L, LI S S. Overview on typical security
+problems in public blockchain applications[J]. Journal of
+Software, 2022, 33(1): 324-355.
+[57] LOPEZ-FUENTES F A, EUGUI-DE-ALBA I, ORTIZ-RUIZ
+O M. Evaluating P2P networks against eclipse attacks[J].
+Procedia Technology, 2012, 3(2): 61-68.
+[58] EYAL I, SIRER E G. Majority is not enough: bitcoin min-
+ing is vulnerable[J]. Communications of the ACM, 2018, 61
+(7): 95-102.
+[59] SELIMI M, KABBINALE A R, ALI A, et al. towards block-
+chain-enabled wireless mesh networks[J]. arXiv:1804.00561,
+2018.
+倪雪莉，等：区块链P2P网络及安全研究
+29
+

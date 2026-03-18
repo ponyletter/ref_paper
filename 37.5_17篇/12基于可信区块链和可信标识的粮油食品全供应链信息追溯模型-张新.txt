@@ -1,0 +1,1089 @@
+来源文件：12基于可信区块链和可信标识的粮油食品全供应链信息追溯模型-张新.pdf
+============================================================
+
+【第1页】
+第 4 卷
+第 1 期
+2022 年 3 月
+Vol.4，No.1
+Mar. 2022
+农 业 大 数 据 学 报
+Journal of Agricultural Big Data
+基于可信区块链和可信标识的粮油食品全供应链信息
+追溯模型
+张
+新 1，2，3
+彭祥贞 1，2，3
+李
+悦 1，2，3
+王小艺 1，2，3
+赵峙尧 1，2，3
+许继平 1，2，3*
+（1.北京工商大学人工智能学院，北京 100048；
+2.北京工商大学北京市食品安全大数据技术重点实验室，北京 100048；
+3.北京工商大学中国轻工业工业互联网与大数据重点实验室，北京 100048）
+摘
+要：粮油食品全供应链结构复杂、周转周期长、利益相关方众多，维护整个粮油食品供应链的安全具有挑战性，
+实现粮油食品全供应链信息安全可信溯源，有助于提高粮油食品质量安全，进而提升人民生活水平。本文
+以可信区块链和可信标识为驱动，构建粮油食品全供应链信息追溯模型，并进行合约化实现与实例验证。
+首先，在对粮油食品全供应链调研与分析的基础上，设计了适用于粮油食品的全供应链信息追溯模型框架。
+其次，分别设计了可信标识机制、多模存储机制和可信追溯机制。可信标识机制用于粮油食品全供应链的
+数据信息跟踪；多模存储机制用于解决粮油全供应链环节众多导致的信息繁多冗杂问题；可信追溯机制用
+于实现的粮油食品全供应链各环节信息采集、存储、传输的可信。最后，基于数据流转过程，进行了模型
+运行流程分析，并基于信息追溯模型，以超级账本 Fabirc 开源框架设计并研发了粮油食品可信追溯系统，
+通过案例对系统进行了实例验证。结果表明，本文构建的模型及系统解决了传统追溯机制及系统中存在的
+数据安全性低和共享性差的问题，实现了粮油食品供应链全生命周期多源异构信息的可信上链、存储、处
+理和追溯，提高了粮油食品追溯的细粒度和准确性，为粮食战略安全提供了一定的支撑。
+关键词：粮油食品全供应链；信息追溯模型；可信区块链；可信标识；超级账本；食品安全；区块链；农产品供应链
+中图分类号：F511.41
+文献标识码：A
+文章编号：2096-6369 （2022） 01-0035-14
+引用格式：张新,彭祥贞,李悦,等 . 基于可信区块链和可信标识的粮油食品全供应链信息追溯模型[J]. 农业大数据学报,2022,04(01):
+35-48.
+Zhang Xin,Peng Xiangzhen,Li Yue,et al.Information Traceability Model for the Grain and Oil Food Supply Chain Based on
+Trusted Identification and Trusted Blockchain[J].Journal of Agricultural Big Data,2022,04(01):35-48.
+Information Traceability Model for the Grain
+and Oil Food Supply Chain Based on Trusted
+Identification and Trusted Blockchain
+Zhang Xin1,2,3
+Peng Xiangzhen1,2,3
+Li Yue1,2,3
+Wang Xiaoyi1,2,3
+Zhao Zhiyao1,2,3
+Xu Jiping1,2,3*
+(1. School of Artificial Intelligence, Beijing Technology and Business University, Beijing 100048, China;
+2. Beijing Key Laboratory of Big Data Technology for Food Safety, Beijing Technology and Business University, Beijing
+DOI：10.19788/j.issn.2096-6369.220103
+收稿日期：2022⁃01⁃20
+基金项目：国家重点研发计划项目（2019YFC1605306、2017YFC1600605）和北京自然科学基金项目（4222042）
+作者简介：张新，男，博士，副教授，研究方向：区块与AI融合应用，E-mail: zhangxin@btbu.edu.cn
+通讯作者：许继平 ，男，博士，副教授，研究方向：复杂系统建模与实现，E-mail: xujiping@ 139.com
+
+
+【第2页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+100048, China;
+3. Key Laboratory of Internet and Big Data for China Light Industry, Beijing Technology and Business University, Beijing
+100048,China)
+Abstract: The grain and oil food supply chain has a complex structure, long turnover cycles, and many stakeholders, so it’s
+challenging to maintain the security of this supply chain. A reliable traceability system for the whole grain and oil
+food supply chain will help to improve the quality and safety of these products, thus enhancing people’s living
+standards. Driven by the trusted blockchain and trusted identity concepts, this paper constructs an information
+traceability model for the whole grain and oil food supply chain, and describes how contract implementation and
+example verification are performed. First, an information traceability model framework of the whole grain and oil
+food supply chain is established based on the survey and analysis of grain and oil food supply chain. Second, trust‐
+ed identification, multi-mode storage, and trusted traceability mechanisms are designed. The trusted identification
+mechanism is used to track the data information of the whole grain and oil food supply chain. The multimode stor‐
+age mechanism solves the problem of miscellaneous information caused by many links in the whole grain and oil
+supply chain, while the credible traceability mechanism ensures the credibility of information collection, storage,
+and transmission. Finally, based on the data flow, the model operation process is analyzed. Using the information
+traceability model, the grain and oil food trusted traceability system is designed and developed with the Hy‐
+perledger Fabric open-source framework, and a case study is conducted to verify the system. The results show that
+the model and system constructed in this study solve the problems of low data security and poor sharing, which ex‐
+ist widely in the traditional traceability mechanism, and enable the trusted uplink, storage, processing, and trace‐
+ability of multi-source heterogeneous information in the lifecycle of the whole grain and oil food supply chain.
+The proposed system improves the granularity and accuracy of grain and oil food traceability, and provides sup‐
+port for the strategic security of grain stocks.
+Keywords: supply chain of grain and oil food; information traceability model; trusted blockchain; trusted identification; Hy‐
+perledger Fabric; food safety; blockchain; agricultural product supply chain
+1
+引言
+粮油食品包括原粮、成品粮和食用油等，是国民
+生活的必需品[1]。保障粮油食品供应的安全，对国民
+生命健康、社会和谐发展具有重要意义。粮油食品供
+应链包含生产、加工、仓储、运输、销售等多个参与环
+节[2]，供应链循环周期较长，且每个环节中威胁粮油
+食品安全的因素较多。粮油食品供应链目前存在生
+产环节农药化肥过量、加工环节添加剂不明、储运环
+节信息缺失以及销售环节假冒伪劣等诸多问题[3]，对
+公众健康构成严重威胁。因此，亟待建立安全有效的
+粮油食品全供应链可信追溯平台，以提高全供应链各
+环节的参与透明度和可靠性，同时，能够有效保障消
+费者权益以及提升监管的高效性。
+传统的粮油食品溯源系统多为中心化的模式，由
+部分核心企业集中采集管理供应链环节的数据，并将
+数据存储到中心化的服务器，但中心化的管理模式安
+全性较低，易受篡改攻击等缺陷。尽管部分企业采用
+二维码、RFID（Radio Frequency Identification）等标识
+技术进行供应链环节数据的追踪，但其并不能保障数
+据的透明度与可靠性[4]。因此，传统溯源模式并未消
+除消费者对粮油食品安全可靠方面的疑虑。
+区块链是一种去中心化的分布式账本技术，它通
+过加密、共识等机制保证上链的数据不可篡改和伪
+造[5]。近年来，区块链的应用从以比特币为代表的加
+密数字货币逐渐渗透到金融、医疗、政务、司法、公益、
+商品防伪和食品安全等各个领域[6]。区块链的去中
+心化架构以及数据不可篡改和伪造的技术特性[7]为
+解决粮油食品全供应链可信追溯提供了一种行之有
+效的解决方案[8]。
+本文基于可信区块链和可信标识，设计了一套粮
+油食品全供应链的可信追溯模型，提供从生产环节到
+最终消费者手中整个过程的信息，并保证数据安全可
+靠。在发生食品安全事故时，食品溯源系统可以快速
+准确高效地定位问题发生的环节，并找到问题的根
+源、追踪问题产品去向，明确责任企业并追究责任，降
+36
+
+
+【第3页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+低食品安全事故造成的不良影响，对解决食品安全问
+题具有十分重要的意义。
+2
+相关工作
+2.1 可信区块链
+区块链是由分布式数据存储、点对点网络传输、
+加密算法、共识机制等计算机技术支持的分布式账本
+技术，本质上是分布式数据库[9]。由于近年来区块链
+的安全性能不断提升，区块链已被广大研究学者称为
+可信区块链。可信区块链中的每个数据块包括一个
+区块头和一个区块体。区块头由当前区块块版本、当
+前哈希值、前一个区块块哈希值、时间戳和一个随机
+数组成[10]。区块体由数据结构组成，其中包含区块
+经过验证的、区块创建过程中生成的所有交易记录。
+这种由加密算法加密的链状数据结构确保可信区块
+链中的数据不会被篡改，从而保证整个供应链中所有
+环节的数据安全。同时，通过共识机制，可信区块链
+网络中的所有节点都参与了数据认证过程[11]。可信
+区块链保证了链上数据的一致性和真实性，解决了传
+统集中式系统存在的“信息孤岛”、数据不透明等问
+题[12]。部署在可信区块链网络中的智能合约在达到
+一定的触发条件时，可以自动执行由所有节点联合验
+证的预设程序码。由于执行过程和结果对整个网络
+中的所有节点都是公开透明的，可信区块链可以有效
+地解决所有节点之间的信任问题[13]。因此，它可以
+帮助增加整个供应链的生产、加工、仓储、运输、销售
+和最终消费各参与环节之间的信任，并且确保整个粮
+油食品供应链可追溯数据的安全性和可靠性。
+近年来，由于区块链2.0时代的到来，涌现出众多
+学者利用区块链与粮食供应链溯源系统相结合，进而
+设计出安全、可靠、高效的溯源方案。Salah[14]等人提
+出了一种基于以太坊智能合约技术以及星际文件系
+统的大豆供应链溯源解决方案，有效提升了大豆供应
+链溯源系统的信息透明度及可追溯性。Tao[15]等人提
+出了一种基于区块链智能合约的综合评价模型，自动
+地对食品产业链进行食品质量检测及预警，提高了食
+品产业链的安全性与可信度。毛典辉[16]等人提出了
+一种基于区块链智能合约的信用评估系统，提升了对
+食品供应链监管的有效性。Lin[17]等人提出了一种基
+于区块链和 EPC 信息服务的食品安全追溯原型系
+统，并通过以太坊智能合约避免了信息交互过程中可
+能发生的数据篡改及敏感信息泄露等问题。
+2.2 可信标识
+标识技术作为一种直接有效的承载信息的重要
+手段，对于粮油食品全供应链中信息追踪与溯源的重
+要性不言而喻[18]。近年来，如何有效利用标识技术
+跟踪和追溯粮油食品全供应链中生产、加工、仓储、运
+输、销售等各个参与环节产生的数据，并确保溯源系
+统中数据的实时、安全和可靠性成为溯源行业的一大
+研究热点。目前在溯源行业广泛采用的标识技术包
+括条码、RFID、NFC（Near Field Communication）、EPC
+（Electronic Product Code）以及其他基于物联网的电
+子标识技术[19]。其中，条码技术包含一维条码和二
+维码。一维条码受限于其存储容量较低多用于结合
+传统的中心化数据库进行简单的产品编号，不适用于
+数据信息繁多、冗杂的应用场景。二维码因其信息密
+度较高、容量大、容错能力强、成本较低、使用方便灵
+活的特点，能够更好的适用于基于区块链的粮油食品
+全供应链溯源的场景[20]。无线射频识别（RFID）技术
+作为一种非接触式的射频识别技术[21]，通过读写器
+对附着在产品上的 RFID 电子标签进行读写操作[22]，
+也正得到越来越多食品供应链溯源领域研究者的关
+注，但因RFID标签的成本以及安全性等问题，其在未
+来大规模商用之前仍面临着挑战[23][24] 。
+基于条码[25]、RFID[26]等技术的食品供应链溯源
+系统研究由来已久[27][28]，钱建平[29]等人设计开发了
+一种基于二维码和 RFID 技术的小麦面粉可追溯系
+统，该系统的应用保证了小麦面粉的质量与安全，同
+时有效降低了召回成本。Caro[30]等人提出了 Agri‐
+BlockIoT，一种基于物联网和区块链的农产品溯源解
+决方案，并且支持扩展物联网传感器设备，保证了数
+据的透明、容错以及不可篡改等。TSANG[31]等人提
+出了一种基于区块链和物联网技术的食品溯源系统
+（BIFTS）,对食品的全生命周期质量追溯管理提供了
+支持。Saikat[32]等人设计了一种基于物联网技术的
+食品供应链实时质量监控架构，供应链各环节通过扫
+描 RFID 标签更新区块链中的数据，提高了各环节数
+据的透明度，保障了食品质量以及发生食品质量安全
+事故时的高效召回。
+本文基于可信区块链和可信标识进行粮油食品
+全供应链的信息追溯。利用区块链去中心化、透明度
+37
+
+
+【第4页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+高、数据不可篡改和伪造等特性结合条码等标识技
+术，对粮油食品全供应链生产、加工、仓储、运输、销售
+等各环节数据进行跟踪和追溯，能够有效提高粮油食
+品全供应链环节信息的透明度与可靠性。对于形成
+安全、可信、高效的粮油食品供应体系具有重要意义。
+3
+粮油食品全供应链信息追溯模型
+在对可信区块链和可信标识调研与最新研究成
+果分析的基础上，本节首先对粮油食品全供应链进行
+信息解析，在此基础上，利用可信区块链与可信标识
+设计了粮油食品全供应链信息追溯模型框架。
+3.1 粮油食品供应链分析
+粮油食品供应链循环周期较长且参与方较多，且
+每个环节几乎都嵌套有其他的环节，例如在生产环节
+中包含仓储、运输过程甚至是简单的粗加工过程，加
+工、销售等环节也离不开基础的运输、仓储等环节，其
+复杂性和风险因素不可控等性质决定了传统的溯源
+方案效率较低且可信度较差[33]。本节基于对粮油食
+品全供应链各参与环节的剖析，抽象出了粮油食品全
+供应链参与环节中最为典型的五个环节，即生产环
+节、加工环节、仓储环节、运输环节和销售环节。由这
+五个典型环节组成的粮油食品全供应链抽象模型对
+于不同的粮油食品供应链具有较高的适配性和灵活
+性，可根据不同的粮油食品供应链实际情况进行扩展
+适配。本文提出的粮油食品全供应链典型环节如图
+1所示，后续的研究工作也将基于此典型环节展开。
+粮油食品全供应链典型环节的数据信息主要为
+供应链上各个环节通过物联网设备及人工所采集的
+数据信息。供应链中每个参与环节采集的信息经过
+验证之后进入基于可信区块链构建的追溯系统，从而
+实现对某一批次产品的整个供应链环节信息进行高
+效地跟踪和追溯。
+3.2 模型总体框架
+基于可信区块链和可信标识的粮油食品全供应
+链信息追溯模型框架由采集端、客户端以及存储模块
+组成。采集端包含生产、加工、仓储、运输以及销售五
+个供应链典型环节以及相应的采集设备；客户端包含
+五个典型环节所对应的企业用户、监管部门和消费
+者,三者可通过溯源系统对数据信息进行验证与查
+询，除此之外，每个客户端内部嵌有标识生成模块；存
+储模块由区块链以及云端数据库组成。模型各个部
+分由定制化的智能合约直接相互调用实现互联互通。
+本模型基于区块链原理，结合智能合约技术和标识解
+析技术，设计了粮油食品可信追溯模型，模型框架示
+意图如图 2所示。
+4
+模型机制设计
+在粮油食品可信追溯模型框架基础上，本研究设
+计符合该模型的基于可信区块链的可信标识机制、多
+模存储机制、可信追溯机制 3 种运行机制。3 种机制
+能有效契合粮油食品供应链形成可信追溯，从而提高
+粮油食品的质量安全。可信标识机制实现了粮油信
+息的高效、可信追溯；多模存储机制解决了粮油食品
+冗杂的数据存储，分担了区块链链上数据的存储压
+力；可信追溯机制实现了粮油食品全供应链信息在各
+环节之间的可信流转，保证了溯源信息从采集到销售
+的可信性。并且定制化设计智能合约，实现了可信标
+识机制、多模存储机制以及可信追溯机制的内部运行
+逻辑封装，确保模型运行的流畅性。
+生产
+仓储
+加工
+运输
+销售
+ 
+图 1
+粮油食品全供应链典型环节
+Fig. 1
+Typical links in the whole supply chain of grain and oil food
+38
+
+
+【第5页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+4.1 可信标识机制
+基于“可信区块链+可信标识”所设计的可信标
+识机制用于在整个供应链中跟踪数据信息。该机制
+包含了客户端系统内嵌的标识生成模块具体的样式、
+生成标识的具体流程、标识的设计等。
+可信标识机制首先在粮油食品供应链的各个环
+节对相关数据进行验证和调整，并通过智能合约记录
+在区块链系统中，通过相关设备收集数据后自动执
+行。在供应链的生产环节中，粮食作物生产信息首先
+由相关人员通过客户端录入系统，然后通过智能合约
+进行验证和标准化后进入可信区块链网络，并且通过
+智能合约反馈验证供应链中的相关身份信息。
+该机制在加工过程中打印相应的标识码，用于后
+续产品的识别。所生成的标识码通过嵌入区块链系
+统中的智能合约进行验证，使用区块链的智能合约技
+术可以使身份机制变得可信。在加工环节中，由于应
+用标识码查询该环节数据会降低实际工作的时效性，
+故采用当下较为便捷的二维码技术将标识码中信息
+与加工环节信息存入二维码，以便于工作人员通过扫
+码枪查询信息。同时将相关产品信息添加到系统中，
+经过智能合约的验证和标准化后进入区块链网络，进
+而实现包含标识码的二维码信息识别的可信度。在
+产品生产加工的最后阶段，由于产品在供应链中循
+环，产品的二维码被印在产品的外包装上，作为后续
+识别和验证的依据。产品识别机制在仓储、运输、销
+售环节的操作原理和流程相似，只是没有新的实体二
+维码生成，只有其区块链系统中的内容更新，故在此
+不在阐述。图 3 显示了基于可信区块链的可信标识
+机制的组成及其工作原理。标识码技术通过结合区
+块链智能合约技术实现了粮油食品在供应链中信息
+流转的透明、安全和可信。
+在打印识别码过程中，通过嵌入式标识码生成模
+块根据所上传的信息生成相应的标识码，具体编码如
+图 4 所示，其中包含了首部与后缀两部分，首部包括
+了种类代码、公司代码、行业代码、国家代码；后缀包
+括了信息代码、流程代码、环节代码。
+4.2 多模存储机制
+由于粮油食品全供应链是食品供应链中最繁多、
+冗杂的，加之其供应链涉及环节较多，从生产到销售
+需要采集、记录、上传的全部数据量十分庞大且复杂，
+如果全供应链各环节的数据全部存储在区块链上会
+出现成本高、负担大、效率低等问题。因此本机制设
+计了基于区块链和云数据库的多模存储机制，即将庞
+大的产品在供应链中流转的基础数据存入云数据库，
+再将云数据库中的基础数据与区块链节点中产品标
+签信息等标签数据一同进行哈希运算得到的哈希值
+存入区块链中，从而保证区块链系统运行的成本与效
+检查并更新
+生产
+仓储
+加工
+运输
+销售
+  
+数据采集终端
+企业用户
+存储数据智能合
+约
+存储数据智能合
+约
+云数据库
+验证数据智能合
+约
+区块链网络
+监管部门
+消费者
+88.109.125278/12.252.03.258
+标识码生成模块
+首部
+后缀
+溯源系统
+ 
+图 2
+模型框架示意图
+Fig. 2
+Schematic diagram of the model frame
+39
+
+
+【第6页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+率。图 5 展示的是基于区块链和云存储的粮油食品
+全供应链多模存储机制。
+粮油食品全供应链各环节上传到区块链上的数
+据要遵循智能合约的约束，只有满足智能合约条件要
+求的数据才能上传成功。同时，智能合约会对供应链
+不同节点上传的数据进行格式的统一，然后通过数字
+签名技术对数据进行验证并上传存储至云数据库。
+全供应链各环节产生的大量基础数据上传至云数据
+库的具体过程为：对产品的大量基础数据进行哈希运
+算来获得数据摘要，系统通过非对称加密技术来生成
+公钥和私钥，数据摘要由私钥加密如公式 1 所示，其
+中 skp 为私钥，D 为标准化后的数据，Ds 为数据摘要。
+加密后的数据摘要作为签名值与基础数据一起上传
+到云数据库后，云数据库将使用公钥对接收到的加密
+数据摘要(签名值)进行解密，如公式 2 所示，其中 pkp
+为公钥，RDS为云数据库。解密完成后的数据摘要与
+对基础数据用同样哈希运算方法获得的数据摘要进
+行对比，若对比结果一致则证明数据真实可靠未经篡
+改，大量基础数据顺利存入云数据库中；若结果不一
+致说明数据经过了篡改则不能通过验证，无法存入数
+据库。通过数字签名技术，各个企业节点存入云数据
+库的数据均有效可信，因此云数据库中大量基础数据
+的真实性得到保证。同时，由于区块链网络中仅存储
+由云数据库中的基础数据与产品标签数据经哈希运
+算后产生的数据摘要，因此，保证了粮油食品全供应
+链信息溯源系统的效率和性能。
+Send(D) = file(D、Ds) skp
+(1)
+Accept(Ds) = file(RDS(Ds) pkp )
+(2)
+在多模存储机制的基础上，本研究设计了 SDSC
+（Storage Data smart contract）和 VDSC（Verify Data
+88.109.125278.12.252.03.258
+信息代码
+流程代码
+环节代码
+种类代码
+公司代码
+行业代码
+国家代码
+首部
+后缀
+ 
+图 4
+编码示意图
+Fig. 4
+Coding Diagram
+生产
+仓储
+加工
+运输
+销售
+区块 1
+区块 2
+区块 3
+· · ·
+区块 4
+区块 5
+· · ·
+输入信息
+消费者浏览
+打印识别码1
+编码 1
+识别码 2
+编码 2
+编码 2
+编码 2
+智能合约
+智能合约
+智能合约
+智能合约
+智能合约
+ 
+图 3
+基于区块链的可信标识机制
+Fig. 3
+Trusted identity mechanism based on blockchain
+40
+
+
+【第7页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+smart contract）两种智能合约来封装多模存储机制的
+逻辑规则，SDSC如算法 1所示，VDSC如算法 2所示。
+其中 H(i)为用户唯一身份哈希，Data为采集到的初始
+数据，D 为标准化后的数据，Ds 为数据摘要，RDS 为
+云数据库，R为交互记录。
+算法1：SDSC
+Input：H(i); Data; D; Ds
+Authority()//授权模板
+{
+Verify(H(i))//验证用户唯一哈希值
+}
+Standardization()//数据标准化模块
+{
+Arrange(Data)//数据匹配、排列，产生D
+}
+Summary()//数据表处理模块
+{
+Hash(D)//获取D哈希
+}
+Storage()//存储模块
+{
+Encryption(Ds)//摘要加密
+Chain(D、Ds)//D、Ds上链
+}
+算法2：VDSC
+Input：RDS; D
+Obtain()//获取数据模块
+{
+D←RDS//获取云数据库中D
+Hash(D)//获取D哈希值进行对比验证
+}
+Judgment()//判断模块
+{
+Decrypt(Ds)//解密Ds
+Verify(Ds)//验证Ds
+}
+Storage()//存储模块
+{
+Chain(R)//R实时上链
+}
+数据多模存储机制通过可信区块链、数字加密技
+术、智能合约等技术将供应链上企业各个环节数据安
+全、可靠的存储在云数据库中，从而保证了云数据库
+中大量数据的真实性。同时，由于区块链网络只将基
+生产
+仓储
+加工
+运输
+销售
+区块1
+区块2
+区块3
+· · ·
+· · ·
+存储数据
+智能合约
+验证数据
+智能合约
+云数据库
+ 
+图 5
+基于区块链和云数据库的数据多模存储机制
+Fig. 5
+Data dual-mechanism storage model based on blockchain and cloud database
+41
+
+
+【第8页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+础数据和产品标签数据散列生成的数据摘要存储在
+云数据库中，从而保证了高效的供应链绩效。
+4.3 可信追溯机制
+基于粮油食品全供应链典型环节，在可信标识机
+制和多模存储机制的基础上，本文所设计的粮油食品
+全供应链信息可信追溯机制如图 6所示，通过可信区
+块链和可信标识结合实现的粮油食品全供应链各环
+节信息采集、存储、传输的可信。
+粮油食品供应链每个环节产品标签信息与云数
+据库中基础数据经过哈希运算得到哈希值，并由独自
+维护的区块链节点将数据摘要发送到区块链上，随后
+广播至全网，全网所有节点通过共识过程验证后存入
+最新的数据区块，由此产生粮油食品全供应链可信追
+溯区块链。终端消费者或者监管机构通过客户端扫
+描商品二维码或在追溯系统输入待查询批次的产品
+代码进行粮油食品全供应链信息的追溯，产品代码直
+接定位到包含本产品信息的特定区块头，调出本产品
+所有流通环节数据进行产品追溯。通过对二维码设
+置不同权限，可实现消费者、监管者等不同追溯场景
+的应用，监管者通过客户端扫描商品二维码可实现对
+商品全供应链各环节所有信息的追溯，极大提升了对
+粮油食品监管的有效性，同时在发生粮油食品安全事
+生产
+仓储
+加工
+运输
+Retailer
+编码 2
+编码 2
+编码 2
+编码 2
+产品及流通信息
+智能合约
+赋予数据哈希值
+共识机制验证
+上一区块
+当前区块
+下一区块
+  种植周期、收获日期、收割信
+息等。
+  产品编号、机器编号、加工程
+序、处理器、加工时间、添加剂
+信息等.
+  包装信息、仓库信息、清洁信
+息、规格等。
+  物流公司、运输方式、车辆数
+量、运输环境、收发时间等。
+ 销售信息、时间、地点、业务
+员等
+数据上传流程
+信息追溯流程
+···
+···
+编码 1
+区块链网络
+ 
+图 6
+粮油食品全供应链可信溯源机制
+Fig. 6
+Credible traceability mechanism of the whole supply chain of grain and oil food
+42
+
+
+【第9页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+故时也能高效追踪，准确定位问题环节。消费者的权
+限则仅限于一般商品信息及流转信息，对于生产加工
+过程中的企业敏感信息则不会展示给普通消费者，从
+而在一定程度上实现对环节参与者的保护。
+与此同时，本机制设计了标识解析智能合约
+LRSC（Logo resolution smart contract）来实现可信追
+溯机制的逻辑封装，如算法 3 所示，其中 code 为标识
+码，Dc 为标识码中信息，Dd 为本环节数据。标识增
+添信息如公式 3 所示,其中，Ds 为数据摘要。标识信
+息增添完成后，合约将现在的 Ds作为新的数据摘要，
+进而生成新的标识随商品流转至下一环节。
+Ds = ∑
+i = 1
+n
+Dsi
+(3)
+算法3：LRSC
+Input：code; Dc; Dd;
+Obtain()//获取标识码信息模块
+{
+Get(code)→Dc//获取到Dc
+}
+Check()//查验模块
+{
+Get(Ds)//获取Ds
+Verity(Dc)//验证Dc
+}
+Renew()//更新标识码信息模块
+{
+Addition(Dd)//增加本环节数据，更新二维码信息
+}
+Storage()//存储模块
+{
+Transfer(SDSC、VDSC)//调用 SDSC、VDSC 进行
+数据上传
+}
+本节设计的上述粮油食品全供应链信息追溯机
+制，通过运用可信区块链和可信标识实现了粮油食品
+全供应链信息的可信追溯，同时，区块链与云数据库
+相结合的存储模式改善了追溯过程的效率和成本，二
+维码标识不同权限的设计保护了粮油食品全供应各
+环节的参与者，提高了追溯系统可接受程度的同时也
+有效保证了粮油食品全供应链信息追溯的透明度、可
+信度以及监管的高效性。
+5
+结果与分析
+在粮油食品全供应链可信追溯模型和 3 种机制
+基础上，本节对粮油食品全供应链信息追溯模型进行
+了运行流程分析，并基于 Hyperledger Fabric 建立了
+粮油食品可信追溯系统，通过实例对系统运行进行了
+实用性验证。
+5.1 模型运行流程分析
+基于粮油食品全供应链环节可信追溯模型，当用
+户或监管部门通过溯源系统发起溯源请求时，贯穿于
+追溯系统中的数据流可分为数据上传与信息追溯两
+个过程。数据上传过程主要包含粮油食品全供应链
+环节的数据上传过程及区块链系统中数据的运行流
+程溯源，信息追溯过程主要为用户通过终端扫描溯源
+标识码发起溯源请求。系统模型运行流程示意图如
+图 7所示。
+系统中数据具体流程描述如下：
+（1）在粮油食品的生产环节，生产者通过客户端
+将粮食谷物等的种植、收获及批次等相关数据信息经
+过哈希运算以及加密后上传至可信区块链系统，产品
+收获后，可信区块链系统根据产品批次信息生成溯源
+标识码；
+（2）在粮油食品的加工环节，加工企业首先通过
+扫描来自生产环节基础产品的标识码获取产品批次
+信息，并通过可信区块链系统进行验证，验证通过后
+加工企业将产品的干燥、去壳等处理以及相应的加工
+处理环节的信息经过哈希运算加密后上传至可信区
+块链系统；
+（3）在粮油食品的仓储环节，仓储企业首先通过
+扫描上游加工产品的溯源标识码获取产品的批次、加
+工环节等信息，并通过溯源可信区块链系统进行验
+证，验证通过后仓储企业将产品相应的仓储信息，如
+仓库、出入库时间等经过哈希运算并加密后上传至可
+信区块链系统；
+（4）在粮油食品的运输环节，运输企业通过扫描
+产品的溯源标识码获取产品批次、仓储等信息并通过
+可信区块链系统进行验证，通过验证后将产品的运输
+车辆、人员、路线等运输信息经哈希运算并加密后上
+传至可信区块链系统；
+（5）在粮油食品的销售环节，销售企业通过扫描
+43
+
+
+【第10页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+产品的溯源标识码获取产品批次及运输信息并与可
+信区块链系统进行验证，通过验证后将产品的相应销
+售信息，如销售时间、地点、人员等经哈希运算加密后
+上传至可信区块链系统；
+（6）最终消费者或监管部门等用户通过追溯系
+统客户端扫描产品的溯源标识码，追溯系统通过识别
+溯源标识码中的产品批次信息，定位到溯源系统中相
+应批次的产品，从而发起溯源请求，可信区块链溯源
+系统可将粮油食品的全供应链环节的信息反馈给消
+费者或监管部门。
+5.2 系统化实现
+本文基于粮油食品供应链信息追溯模型建立了
+粮油食品可信追溯系统原型系统。该原型系统使用
+的 Linux 版本为 16.0.0，Ubuntu 版本为 20.04.1。在此
+基础上，使用 Hyperledger Fabric 2.1 开源框架进行搭
+建 ，其 中 docker 版 本 为 20.10.7，Go 语 言 版 本 为
+1.17.2。系统采用 Kafka共识机制，对于 5大经典环节
+以及监管机构本文设置了 5 个组织、10 个节点以及 3
+个排序节点进行原型系统搭建，系统界面图如图 8
+所示。
+图 8(a)展示的为系统的登录界面，用户选择相应
+的类别登录系统从而获取权限；图 8(b)展示的为系统
+的主界面，主界面由两部门组成，上方为商家广告轮
+播图，下方为近期系统的登录次数展示以及近期受到
+攻击的稻米批次数量；图 8(c)展示的为企业上传相关
+数据界面，其中包含粮油种类、批次、环节、企业名称、
+时间、数据摘要等信息；当扫描某个环节的二维码时，
+显示产品对应供应链环节的可追溯性信息（图 8(d)）。
+可靠的可追溯性系统根据二维码的产品编号定位有
+关产品批次、时间和其他供应链环节的特定信息。监
+管机构和管理员等高级人员可以通过产品二维码追
+踪产品在整个供应链中的流通情况。普通用户（如消
+费者）只能查询产品的基本非敏感信息。
+5.3 系统运行结果分析
+为了实现对粮油食品全供应链的信息溯源，保证
+供应链全流程信息的透明，需要对粮油食品全供应链
+各个环节信息的采集、传输以及存储可能面临的安全
+因素进行分析。
+采集安全方面，由于粮油食品全供应链环节较
+多，各环节数据较多且复杂，此外各环节参与人员素
+生产
+加工
+仓储
+运输
+销售
+溯源
+扫码
+数据
+反馈
+解析
+生成标识码
+扫码
+验证
+扫码
+扫码
+扫码
+验证
+验证
+验证
+本环节数据
+本环节数据
+本环节数据
+本环节数据
+更新
+更新
+更新
+更新
+区块链网络
+上链用户
+标识码
+数据
+ 
+图 7
+系统模型运行流程示意图
+Fig. 7
+Schematic diagram of the operation process of the system model
+44
+
+
+【第11页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+质参差不齐，因此粮油食品全供应链信息追溯模型中
+的信息采集不可避免的面临较大的安全风险。如在
+生产环节，农户或生产企业可能由于信息化水平较
+低，对粮油作物等的信息采集不够及时准确；加工环
+节中加工企业的实际加工工序、添加剂等信息也无法
+保证其真实性；粮油食品全供应链环节中信息采集过
+程的复杂性决定了任何溯源模型均无法保证采集数
+据的绝对安全。
+传输安全方面，粮油食品全供应链中各环节的数
+据传输时通过智能合约判断数据是否符合要求，只有
+在当前企业或农户等参与者采集上传的数据符合区
+块链系统中智能合约的预置条件时数据才能上传并
+继续进行验证。不符合区块链系统中智能合约预置
+条件的数据则通过重新处理并上传验证。因此，对于
+粮油食品全供应链中各环节的信息传输，智能合约的
+应用能够有效保证数据传输的安全性。
+存储安全方面，由于粮油食品全供应链可信追溯
+模型基于区块链架构进行设计，供应链各环节中的存
+储节点属于相关企业或个人掌握，因此各节点数据的
+存储具有一定安全性风险。但任一环节中存储数据
+的人为修改均无法通过可信区块链系统的共识验证，
+供应链各环节中任何数据篡改行为都会被检测到，因
+此其分布式存储架构保证了粮油食品全供应链各个
+环节的数据具有较高的存储安全性。
+为进一步确保本研究的安全性能，本研究针对设
+计的粮油食品供应链可信追溯系统进行了安全性测
+试，本文以稻米为测试对象，针对东北地区某时间段
+的稻米进行溯源查询，当扫描某个环节的 QR 码时
+（图 9（a）），显示产品对应供应链环节的可追溯性信
+息（图9（b））。
+该时间段内涉及稻米批次共 1568 次，溯源信息
+准确率为 100%，该结果表明本系统能有效做到可信
+溯源。除此之外，本研究对某稻米加工企业进行标识
+码信息验证统计，统计图如图 10 所示。选取测试时
+间为 2021 年第一季度，受全球新冠影响，该加工企业
+的产量逐渐恢复。从图中可以看出，在第一个月测试
+数量为 45,000 批左右，第 2 个月 46,200 批左右，第三
+个月 47,500 批左右，其篡改数量近乎为 0，结果表明，
+该系统能够依据环节的递进对标识码进行实时验证，
+实现标识码的安全传递，从而保证粮油食品的可信
+溯源。
+(a)
+(c)
+(b)
+(d)
+图 8
+原型系统界面示意图
+Fig. 8
+Schematic diagram of the prototype system interface
+45
+
+
+【第12页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+6
+结论与未来展望
+本文基于可信区块链和可信标识设计了粮油食
+品全供应链可信溯源模型，实现了对粮油食品生产、
+加工、仓储、运输及销售等全供应链环节信息进行追
+溯，能够为消费者或监管部门便捷的提供产品全供应
+链各环节的具体信息，并通过区块链、智能合约的应
+用，在一定程度上保证溯源信息的安全可靠。溯源模
+型能够规范粮油食品相应企业生产过程及保证产品
+质量，对解决粮油食品安全问题具有重要意义。
+但是，本文所提出的溯源模型并不等于防伪，由
+于粮油食品供应链各环节进入区块链系统前数据采
+集的真实性无法保证，此外溯源追踪的本质并非商
+品，仅为作为商品标识的二维码，虽然二维码中包含
+了产品的唯一标识码，但仍无法保证流转过程中的商
+品品质真实性问题，因此这也成为制约区块链溯源体
+系落地的一大痛点，源头上通过权威的中心化机构认
+证可减小虚假信息被认证并上链流转的危害。
+后续的研究将重点围绕上链前源头数据采集真
+实性保障方面，结合物联网节点设备进行数据自动采
+集，减少或避免人为的干预，同时，配合监督与惩罚机
+制，以提升数据采集的真实性与安全性。此外，尝试
+建立可兼容不同企业追溯子系统的溯源模型，同时提
+高供应链各环节溯源的模块化水平，以提升粮油食品
+(a)
+溯源信息
+编号
+名称
+属性
+编号
+名称
+属性
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+区块ID
+123
+区块哈希
+ads5da5f876sad626158465s
+da6f46a4c
+数据哈希
+Ds5c89asd334as8casad5
+32ca5c5d86
+证书哈希
+Sda8sac29csadc845sd4c4a9s
+das5c1csa
+交易ID
+5648941218654
+制造商MSP
+LyMSP
+初始地编码
+52361692155369
+104110362021603
+目的地编码
+生产日期
+2022.02.11
+保质期限
+2024.02.11
+产品类型
+谷物
+产品质量
+优质
+产品成分
+蛋白质、脂肪、矿物
+质  
+人员信息
+张三  
+上一页
+下一页
+ 
+(b)
+图 9
+溯源信息查询图
+Fig. 9
+Traceability information query diagram
+ 
+44000
+44500
+45000
+45500
+46000
+46500
+47000
+47500
+48000
+一月
+二月
+三月
+2021年第一季度测试图 （单位：批次）
+总数
+未被篡改数
+图 10
+标识码验证统计图
+Fig. 10
+Identification code verification statistics
+46
+
+
+【第13页】
+第 1 期
+张新等：基于可信区块链和可信标识的粮油食品全供应链信息追溯模型
+全供应链信息追溯模型的开放性与灵活性。
+参考文献
+[1] 姜侯,杨雅萍,孙九林 .农业大数据研究与应用[J].农业大数
+据 学 报 , 2019, 1(01): 5-15. DOI: 10.19788/j. issn. 2096-
+6369.190101.
+Jiang H, Yang Y P, Sun J L. Research and Application of Ag‐
+ricultural Big Data [J]. Journal of Agricultural Big Data,
+2019, 1(01): 5-15. DOI: 10.19788/j.issn.2096-6369.190101.
+[2] 钱建平,吴文斌,杨鹏 . 新一代信息技术对农产品追溯系统
+智能化影响的综述[J].农业工程学报,2020,36(05):182-191.
+Qian J P, Wu W B, Yang P. A review of the impact of a new
+generation of information technology on the intelligence of
+agricultural product traceability systems [J]. Chinese Journal
+of Agricultural Engineering, 2020, 36(05): 182-191.
+[3] 王杕,陈松 .我国食品安全突发事件应急管理体系研究及环
+境污染案例分析[J].食品科学,2016,37(05):283-289.
+Wang H, Chen S. Research on emergency management sys‐
+tem for food safety emergencies in my country and case anal‐
+ysis of environmental pollution [J]. Food Science, 2016, 37
+(05): 283-289.
+[4] Wang S.; Li D.; Zhang Y. Smart contract-based product trace‐
+ability system in the supply chain scenario[J]. IEEE Access
+2019, 7,115122-115133.、
+[5] 袁勇,王飞跃 .区块链发展现状与展望[J].自动化学报,2016,
+42(04):481-494.DOI:10.16383/j.aas.2016.c160158.
+Yuan Y, Wang F Y. The current situation and prospect of
+blockchain technology development [J]. Journal of Automa‐
+tion, 2016, 42(04): 481-494. DOI: 10.16383/j. aas. 2016.
+c160158.
+[6] Olsen P.; Borit M. The components of a food traceability sys‐
+tem[J]. Trends in food science & technology, 2018, 77,
+143-149.
+[7] Verbeke W. Agriculture and the food industry in the informa‐
+tion age[J]. Social Science Electronic Publishing, 2005, 32
+(3),347-368.
+[8] Creydt M.; Fischer M. Blockchain and more-Algorithm driv‐
+en food traceability[J]. Food Control, 2019.
+[9] Perboli G.; Musso S.; Rosano M. Blockchain in logistics and
+supply chain: A lean approach for designing real-world use
+cases[J]. IEEE Access, 2018, 6, 62018-62028.
+[10] Gatteschi V.; Lamberti F.; Demartini C. Blockchain and
+smart contracts for insurance: Is the technology mature
+enough? [J]. Future Internet, 2018, 10(2), 20.
+[11] Hou B.; Hou J.; Wu L. Consumer Preferences for Traceable
+Food with Different Functions of Safety Information Attri‐
+butes: Evidence from a Menu-Based Choice Experiment in
+China[J]. International Journal of Environmental Research
+and Public Health, 2020, 17(1), 146.
+[12] 陈玥婧,周爱莲,谢能付等 .基于区块链和物联网的农产品
+质量安全追溯系统[J]. 农业大数据学报,2020,2(03):61-67.
+DOI:10.19788/j.issn.2096-6369.200307.
+Chen Y J Zhou A L, Xie N F et. based on blockchain and In‐
+ternet of things agricultural product quality and safety trace‐
+ability system [J]. Journal of Agricultural Big Data, 2020, 2
+(03): 61-67. DOI: 10.19788/ j.issn.2096-6369.200307.
+[13] Opara L. U. Traceability in agriculture and food supply
+chain: a review of basic concepts, technological implica‐
+tions, and future prospects[J]. Journal of Food Agriculture
+and Environment, 2003, 1,101-106.
+[14] Salah K.; Nizamuddin N.; Jayaraman R. Blockchain-based
+soybean traceability in agricultural supply chain[J]. IEEE
+Access, 2019, 7, 73295-73305.
+[15] Tao Q.; Cui X.; Huang X. Food Safety Supervision System
+Based on Hierarchical Multi-Domain Blockchain Network
+[J]. IEEE Access, 2019, 7, 51817-51826.
+[16] Mao D.; Wang F.; Hao Z. Credit evaluation system based
+on blockchain for multiple stakeholders in the food supply
+chain[J]. International journal of environmental research
+and public health, 2018, 15(8), 1627.
+[17] Lin Q.; Wang H.; Pei X. Food safety traceability system
+based on blockchain and EPCIS[J]. IEEE Access, 2019, 7,
+20698-20707.
+[18] Casado-Vara R.; Prieto J.; De la Prieta F. How blockchain
+improves the supply chain: case study alimentary supply
+chain[J]. Procedia computer science, 2018, 134, 393-398.
+[19] Olsen P.; Aschan M. Reference method for analyzing mate‐
+rial flow, information flow and information loss in food sup‐
+ply chains[J]. Trends in food science & technology, 2010,
+21(6), 313-320.
+[20] Xu L.; Yang X.; Wu L. Consumers’Willingness to Pay for
+Food with Information on Animal Welfare, Lean Meat Es‐
+sence Detection, and Traceability[J]. International Journal
+of Environmental Research and Public Health, 2019, 16(19),
+3616.
+[21] Zhao G.; Liu S.; Lopez C. Blockchain technology in agri-
+food value chain management: A synthesis of applications,
+challenges and future research directions[J]. Computers in
+Industry, 2019, 109, 83-99.
+[22] Peck, M.E. Blockchains : How they work and why they'll
+change the world. IEEE spectrum 2017, 54(10), 26-35.
+[23] 詹晶,刘滨,陈鸣 .全球性重大突发公共卫生事件对我国粮
+食安全的影响及其防范[J/OL]. 中国农业科技导报:1-9
+47
+
+
+【第14页】
+农业大数据学报：专题——农产品冷链物流智能管控与大数据
+第 4 卷
+第 1 期
+[2022-01-26].DOI:10.13304/j.nykjdb.2021.0006.
+Zhan J, Liu B, Chen M. The impact of major global public
+health emergencies on my country's food security and its
+prevention [J/OL]. China Agricultural Science and Technol‐
+ogy
+Herald:
+1-9
+[2022-01-26]
+.
+DOI:
+10.13304/j.
+nykjdb.2021.0006.
+[24] Tseng J.H.; Liao Y.C.; Chong B. Governance on the drug
+supply chain via gcoin blockchain. International journal of
+environmental research and public health 2018, 15(6), 1055.
+[25] Landt, J. The history of RFID. IEEE potentials 2005, 24(4),
+8-11.
+[26] Badia-Melis R.; Mishra P.; Ruiz-García L. Food traceabili‐
+ty: New trends and recent advances. A review. Food control
+2015, 57, 393-401.
+[27] 钱建平,余强毅,史云 .基于区块链的农业投入品智能管控
+平 台 设 计 [J]. 农 业 大 数 据 学 报 , 2020, 2(02): 38-46. DOI:
+10.19788/j.issn.2096-6369.200204.
+Qian J P, Yu Q Y, Shi Y,. Design of intelligent management
+and control platform for agricultural inputs based on block‐
+chain [J]. Journal of Agricultural Big Data, 2020, 2(02): 38-
+46. DOI: 10.19788/j .issn.2096-6369.200204.
+[28] Qian J.P.; Yang X.T.; Wu X.M. A traceability system incor‐
+porating 2D barcode and RFID technology for wheat flour
+mills. Computers and electronics in agriculture 2012, 89,
+76-85.
+[29] Qian J.; Du X.; Zhang B. Optimization of QR code readabil‐
+ity in movement state using response surface methodology
+for implementing continuous chain traceability. Computers
+and Electronics in Agriculture, 2017, 139, 56-64.
+[30] Caro M. P.; Ali M. S.; Vecchio M. Blockchain-based trace‐
+ability in Agri-Food supply chain management: A practical
+implementation. 2018 IoT Vertical and Topical Summit on
+Agriculture-Tuscany (IOT Tuscany), IEEE, 2018; 1-4.
+[31] Tsang Y.P.; Choy K.L.; Wu C.H. Blockchain-driven IoT for
+food traceability with an integrated consensus mechanism.
+IEEE Access 2019, 7, 129000-129017.
+[32] Saikat Sen ,Raja Chakraborty ,Biplab De ,N Devanna .An
+ethnobotanical survey of medicinal plants used by ethnic
+people in West and South district of Tripura, India[J].Jour‐
+nal of Forestry Research,2011,22(03):417-426.
+[33] Galvez J.F.; Mejuto J.C.; Simal-Gandara J. Future challeng‐
+es on the use of blockchain for food traceability analysis.
+TrAC Trends in Analytical Chemistry 2018, 107, 222-232.
+48
+

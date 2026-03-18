@@ -1,0 +1,1077 @@
+来源文件：18Blockchain and edge computing technology enabling organic agricultural supply chain A framework solution to trust crisis.pdf
+============================================================
+
+【第1页】
+Computers & Industrial Engineering 153 (2021) 107079
+Available online 26 December 2020
+0360-8352/© 2020 Elsevier Ltd. All rights reserved.
+Blockchain and edge computing technology enabling organic agricultural 
+supply chain: A framework solution to trust crisis 
+Sensen Hu a,b,c, Shan Huang c, Jing Huang d,*, Jiafu Su b,c 
+a Collaborative Innovation Center for Chongqing Modern Trade Logistics and Supply Chain, Chongqing Technology and Business University, Chongqing 400067, China 
+b School of Management and Economics, University of Electronic Science and Technology of China, Chengdu 611731, China 
+c National Research Base of Intelligent Manufacturing Service, Chongqing Technology and Business University, Chongqing 400067, China 
+d School of Foreign Studies, Yangtze University, Jingzhou 434023, China   
+A R T I C L E  I N F O   
+Keywords: 
+Blockchain 
+Organic agricultural supply chain (OASC) 
+Edge computing 
+Traceability 
+Trust 
+A B S T R A C T   
+The credibility of information on organic agri-products has always blocked the participation of small and 
+medium-sized farms in high value-added agriculture. However, the inherent characteristics of the organic 
+agricultural supply chain (OASC)–such as centralization, monopoly, and asymmetry–have repeatedly plunged 
+OASC into the predicament of information non-transparency. Ultimately, it results in a severe trust crisis of 
+consumers. Fortunately, the emerging blockchain and edge computing technology probably raise an opportunity 
+to improve this issue. Despite the overwhelming advantage (such as tamper-resistant, trust-free, transparent, 
+decentralized, and immutable), this technology has to overcome the imperfection of cost and efficiency before it 
+can be employed by OASC, particularly for geographically dispersed small and medium-sized farms in remote 
+areas. 
+In this paper, we first leverage the immutability of blockchain and the paradigm of edge computing to 
+construct an OASC’s trust framework, which has a much better trade-off between cost and efficiency. Further, 
+according to the scenarios of OASC, we divide all the stakeholders into four roles, proposing a novel consensus 
+mechanism to manage the information flow. The evaluation results demonstrate that our proposal can signifi-
+cantly achieve the performance improvement as well as the cost decline compared to the traditional approach. 
+This framework will also make affordable traceability solutions for those in developing countries at a low cost in 
+the future.   
+1. Introduction 
+Organic agricultural supply chains (OASCs) have long been a focus 
+both in academic and agricultural fields. As the carrier of the circulation 
+of agricultural products (Leng, Bi, Jing, Fu, & Nieuwenhuyse, 2018), 
+OASCs are quite complex systems which are in charge of the whole 
+process of production, storage, transportation, marketing and con-
+sumption. Fig. 1 depicts the existing product and information flows in 
+OASCs, identifying the organization and their corresponding actions. 
+With the rapid popularization of computer technologies, it enables 
+data acquisition and processing better among each link in OASCs. 
+Despite all this, the OASCs still fall into the predicament of information 
+sharing and transparency (Saberi, Kouhizadeh, Sarkis, & Shen, 2019). 
+According to the US Food and Drug Administration (FDA), dozens of 
+food supply chain breach incidents have occurred only in the first half of 
+2019 (the U.S. FDA, 2019), including organic bean sprouts infected with 
+Listeria. Due to asymmetry information, the incident of food fraud oc-
+curs occasionally, leading to a greater crisis of confidence and trust 
+shortage in the conventional food products (Yang et al., 2019). Con-
+sumers are more sensitive to the mismanagement of some of those crises 
+as well as to the uncertainty of food safety (Azzurra, Massimiliano, & 
+Angela, 2019). Therefore, to enhance public confidence, trust in such 
+products remain one of the most significant. 
+Current OASCs mainly rely on distributed database system and 
+centralized processing that are isolated from each other (Saberi et al., 
+2019). In such a way, tracing and tracking information, such as paper 
+certificates or food labelling system (Aung & Chang, 2014; Chen, Ding, 
+Hao, Li, & Qu, 2020; Costa et al., 2013), is maintained by the agri-
+business itself. Whether paper certificates or food labelling system, they 
+have a common defect, i.e., traceable information can easily be lost or 
+* Corresponding author. 
+E-mail addresses: sensenhu@ctbu.edu.cn (S. Hu), hjfish00@sina.com (J. Huang), jiafu.su@cqu.edu.cn (J. Su).  
+Contents lists available at ScienceDirect 
+Computers & Industrial Engineering 
+journal homepage: www.elsevier.com/locate/caie 
+https://doi.org/10.1016/j.cie.2020.107079 
+Received 13 June 2020; Received in revised form 26 November 2020; Accepted 18 December 2020   
+
+
+【第2页】
+Computers & Industrial Engineering 153 (2021) 107079
+2
+tampered with. Hence, the stand-alone information is hard to get public 
+recognition. In other words, these sensitive and valuable data need to be 
+stored by an eligible broker for trust. 
+The solution to these complicated issues probably is the emerging 
+blockchain technology (Azzi, Chamoun, & Sokhn, 2019). The block-
+chain employs a distributed ledger technology (DLT) (Abeyratne & 
+Monfared, 2016), which is governed and maintained without any cen-
+tral organizations (Kshetri, 2018; Pearson et al., 2019; Saberi et al., 
+2019). Visions of trust-free, transparent, decentralized and immutable 
+logs announce a more reliable and authentic ecosystem, which has a 
+promising implementation in OASCs. In consequence, the concept of 
+“trust machine” (Notheisen, Cholewa, & Shanmugam, 2017) is turning 
+into reality. 
+For one thing, a new computing paradigm are needed for OASCs to 
+achieve trust and consensus in a decentralized blockchain system; for 
+another, similar to other potentially disruptive technology, blockchain 
+requires a trade-off between cost and performance to overcome a couple 
+of issues in adoption and implementation by OASCs at an early stage. 
+Aiming at the above problems, this paper proposes an information 
+management framework for OASCs based on blockchain and edge 
+computing technology, which has a much better tradeoff between cost 
+and dependability to build trust in OASCs. Our proposal has the 
+following contributions:  
+• First, we divide four critical roles in the management of OASCs and 
+assign their responsibilities so as to reach the consensus among the 
+diverse OASC entities.  
+• Second, we propose a data sharing model using by blockchain to 
+support an untampered record, as a result, making make OASCs more 
+transparent, authentic and trustworthy.  
+• Third, by introducing edge computing that has not yet been exploited 
+in organic agriculture, we transform the data platform from cloud- 
+based to local-domain, hence, decreasing the cost of data process 
+and increasing the average response time. 
+The remaining paper is organized as follows: Section 2 analyzes the 
+trust issue in OASC; Section 3 discusses the emerging blockchain’s 
+limitations and gives the problem description. In Section 4, we propose a 
+high-level architecture of OASC to resolve the trust crisis. Section 5 
+presents and evaluates the improved consensus mechanism in detail. 
+Section 6 concludes the paper and present our future works. 
+2. Trust analysis and literature review 
+2.1. Trust in OASCs 
+Trust has been widely investigated in different disciplines (Canavari, 
+Pignatti, & Spadoni, 2006; Crowder & Reganold, 2015), hence, lots of 
+definitions have been given in previous studies. Gambetta argued that 
+trust (or distrust) is a particular level of the subjective probability with 
+which an agent assesses that another agent or group of agents will 
+perform a particular action, both before he can monitor such action (or 
+independently of his capacity ever to be able to monitor it) and in a 
+context in which it affects his own action (Gambetta, 1990). Supply 
+chain networks are inherently complex adaptive network, many of 
+which simply emerge without any purposely controlling of the process 
+(Pathak, Day, Nair, Sawaya, & Kristal, 2007). In OASCs, to achieve 
+dependable interaction between entities, stakeholders and services in a 
+distributed IoT environment, trust acts as a fundamental factor. Many 
+efforts (Kochovski, Gec, Stankovski, Bajec, & Drobintsev, 2019; 
+Notheisen et al., 2017) have done to formalise trust, particularly to 
+facilitate cooperation among autonomous agents. 
+Lots of studies suggest that consumers tend to be suspicious of 
+organic product claims (Nuttavuthisit & Thøgersen, 2017; Thogersen, 
+2011; Vega-Zamora, Torres-Ruiz, & Parras-Rosa, 2019). According to 
+the above Lemon market analysis, more than one kind of trust is likely 
+relevant. In the context of our paper, with the operative purpose of 
+increasing the transparency of organic products, we consider that trust 
+must be built in two different dimensions: “system” and “technology”. 
+2.2. System perspective 
+Alrawais et al. suggested that a trusted system has to maintain reli-
+able service, prevent incidental failures and handle misbehaviour issues 
+(Alrawais, Alhothaily, Hu, & Cheng, 2017). System trust is dis-
+embedded, universalistic, and rooted in institutions. For example, 
+organic certification is a basic governmental measure to guarantee the 
+authenticity of the product, instead of integrity. Daugbjerg, Smed, 
+Andersen, and Schvartzman (2014) considered that certification pro-
+cesses, certification bodies, labelling and sales controls consist of the 
+integrity of products. Thus, it is a notable system trust. A large number of 
+previous studies (Fernqvist & Ekelund, 2014; Janssen & Hamm, 2012; 
+Thogersen, 2011) focus on trust in labeling and certification processes of 
+OASCs. However, the vast majority of those engaged in organic agri-
+culture are small businesses and small farmers. 
+Without being dominated by a large scale agribusiness, the dispersed 
+and small-scale farm can not afford the agricultural traceability plat-
+forms due to lack of funds, technology and knowledge. Also, the agri-
+cultural traceability platform maintained by an unofficial agribusiness 
+faces the risk of tampering/hidden records, leading to a crisis of the 
+“system” trust. 
+On the other hand, it is quite difficult for consumers to identify due to 
+little transparency between on-farm practices and product appearance 
+in retail (Crowder & Reganold, 2015). The majority of consumers ex-
+pectations regarding organic food products target the production pro-
+cess rather than the end product (Rahmann et al., 2017; Vega-Zamora 
+et al., 2019). Within OASCs, even though each entity who enjoy long- 
+term strategic cooperation, mutual trust potentially take place among 
+them. In such a scenario, trust plays a fundamental prerequisite for these 
+interactions both in producer-consumer and every OASCs’s entities. 
+Fig. 1. Existing product and information flows in organic supply chains, which rely on distributed database system and centralized processing.  
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第3页】
+Computers & Industrial Engineering 153 (2021) 107079
+3
+Lack of transparency in OASCs will prevent supply chain entities and 
+customers from verifying and validating the true value of products. 
+Therefore, building “system” trust is very important to enable the in-
+teractions and relationships in the context of peer-to-peer (“P2P”) 
+marketplaces and services (Hawlitschek, Notheisen, & Teubner, 2018). 
+The rise of online agricultural traceability platforms paved the way 
+for large-scale marketing interactions between individuals and products. 
+For example, a “P2P” platform is a recent emerging information system 
+based on end-to-end trust. In consequence, such trust is delivered by 
+trusting in the traceability of the platform. In all this, the platform 
+supports not only the information infrastructure including each step of 
+the process but also services such as reputation systems, thus under-
+taking a pivotal role in constructing and maintaining trust among con-
+sumers (Katz, 2015). In the passive perspective, traceability affords 
+visibility to where organic food is and their disposition at all times. 
+Whereas in an active perspective, the online tracking information ex-
+tends the boundary of the supply chain management system by means of 
+keeping historical records, instead of only optimize and control the 
+process. 
+2.3. Technology perspective 
+The system trust has to extend to the technology trust with additional 
+related concepts including dependability, security, and reliability. Many 
+OASC systems have been proposed using various information technol-
+ogies, such as RFID, internet of things (IoT), cloud-based platform, 
+artificial intelligence (AI) (Karim, Mahmoud, Nasser, & Khan, 2014; 
+Tzounis, Katsoulas, Bartzanas, & Kittas, 2017). RFID tags combined with 
+diverse sensors have been deployed for almost ten years in farm moni-
+toring, irrigation, specialty crops and food traceability control (Alfian 
+et al., 2017; Costa et al., 2013; Durresi, 2016; Ruiz-Garcia & Lunadei, 
+2011). At present, organic agriculture tends to be a very information- 
+intensive management system, or what has been called a “software- 
+based” innovation (Fountas et al., 2015; Wolfert, Ge, Verdouw, & 
+Bogaardt, 2017). Correspondingly, OASCs’s trust management involves 
+a hybrid of two distinct hardware and software which respond to the 
+production, processing, stores, and marketing. 
+Wireless sensor networks (WSN) combined with IoT (Ruiz-Garcia & 
+Lunadei, 2011) is one of the greatest innovations over the past decade in 
+agriculture management. Recently, image and sound sensors are 
+increasingly deployed for precision farm management. With the 
+advantage of low-cost and wireless, various WSN devices can be widely 
+spread out over farms and upload crop’s data (Karim et al., 2014) using 
+standardized protocols (e.g. IEEE 802.15.4, IEEE 802.11, IEEE 802.15.1, 
+LoRa®, 3G/4G/5G, SigFox) in real-time. Large volumes of agricultural 
+data have to be transmitted to a remote cloud for analysis (Morais et al., 
+2019), leading to data-driven and data-enabled. As such, the sequence of 
+activities from data capture, to data storage, to data transfer, and to data 
+analysis (Wolfert et al., 2017) constructs a data flow. In such a manner, it 
+forms the agricultural IoT paradigm, i.e., a real ubiquitous access 
+(anywhere and anytime) to data and services. Accordingly, trust is also 
+associated with a specific quality of service (QoS). Trust management 
+requirements depend on the system’s performance and quality attri-
+butes, involving availability, credibility, privacy, response time, 
+throughput, security, transparency, traceability (Kochovski et al., 2019). 
+2.4. Positioning of the present work 
+The conventional centralized cloud computing wins through the 
+economies of scale in operations and system administration (Lopez et al., 
+2015; Pan & McElhannon, 2018). However, there also exists one 
+obstacle not to convince the consumers in the technique aspect. For one 
+thing, despite cryptography-based security mechanisms, trusting the 
+data flow is not wise in the autonomous, unattended and distributed 
+environment of WSNs due to internal attacks and fraud behaviors. For 
+another, such a centralized model inevitably leads to an information- 
+monopoly, ossification, and opaque of the supply chain, as well to 
+inhibit trust. Hence, a notable trust management solution is to improve 
+the authenticity of data flow while maintaining satisfactory QoS. 
+Various researches have explored trust management from diverse ar-
+chitectures and computing models. Shi, Pallis, and Xu (2019) proposed 
+the classic model of edge computing model which is divided into three 
+tiers of IoT devices, edge devices, and clouds (see Fig. 2). Kochovski 
+et al. (2019) presented a trust management architecture “DECENTER” 
+that relies on blockchain and Fog computing. They proposed to certify 
+the entities and stakeholders (users and providers, IoT data sources, 
+software components, Fog nodes, Cloud storage), and independently 
+monitor their status through independent blockchain based services. 
+Morais et al. (2019) proposed “mySense” that builds over a 4-layer 
+technological structure: sensor and sensor nodes, crop field and sensor 
+networks, cloud services. Helo and Hao (2019) designed a reference 
+implementation based on Ethereum and demonstrated the technical 
+architecture of the blockchain-based logistics monitoring system. Fig-
+orilli et al. (2018) implemented a blockchain architecture within the 
+wood chain electronic traceability. Their architecture integrates the 
+information related to the product quality with those related to the 
+traceability within an online information system. 
+The blockchain-based trust model can offer a trusted data flow. 
+Meanwhile, edge computing can provide satisfactory QoS. Our proposal 
+complements the above efforts by combining blockchain with edge 
+computing on trust management. In the following section, we will pro-
+pose a novel computing paradigm based on the aforementioned view-
+point, and present the architecture and its internal mechanism in detail. 
+3. Technology limitations and problem description 
+In this section, we first present blockchain and edge computing 
+fundamental, respectively. Subsequently, we point out their disadvan-
+tages and limitations so that to implement the trust concern. 
+3.1. Blockchain fundamental and data structure 
+Blockchain has a chained data structure, in which each block refer-
+ences the hash of the previous block as shown in Fig. 3. This creates a 
+link between the blocks. Each block consists of a header and a body. The 
+header part includes various fields, such as a block version, a hash value 
+to the previous block, timestamp. The body part contains details of 
+transactions. 
+The hash value of any ith block is calculated as depicted in Eq. 1. 
+Hi = Hash(inputi, IDi, Timestampi, Hi−1)
+(1)  
+where inputi is the packaged transaction data, IDi is the digital identifier 
+associated with the data producer, Timestampi is the current timestamp 
+Fig. 2. Three tier edge computing model (Shi et al., 2019).  
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第4页】
+Computers & Industrial Engineering 153 (2021) 107079
+4
+value, and Hi and Hi−1 are the hashes value of current and previous 
+blocks, respectively. 
+Blockchain skillfully combines cryptography, distributed system 
+technology, P2P technology (Azzi et al., 2019), which leverage a 
+mathematical algorithm to reach a consensus so as to realize coordina-
+tion and cooperation among various nodes. The consensus is the key 
+feature of a blockchain, which refers to consistent views and agreement 
+among participants of the blockchain. 
+In essential, blockchain is a collectively maintained distributed led-
+ger (Abeyratne & Monfared, 2016; Reyna, Martín, Chen, Soler, & Díaz, 
+2018) that records each transaction in the chronological order in terms 
+of consensus mechanism. In such a manner, blockchain has inherent 
+benefits summarised as follows.  
+• Trust-less and no intermediary. P2P networks mean each node in the 
+distribution system is logically equivalent. Hence, the blockchain 
+system can automatically trigger actions between nodes without 
+third parties (a central node).  
+• Tamper-resistant. All transaction has a time-stamp that can not be 
+altered once being recorded in the block, thus establishing trust.  
+• Transparency. The information can be witnessed by all participants 
+and to be recorded in the chain according to the consensus 
+mechanism.  
+• Security. Distribution and cryptography nature ensure integrity, 
+authenticity, immutability and non-repudiation, thus excluding 
+malicious action of an even authenticated node. 
+3.2. Technical constraints and limitations 
+As the blockchain is introduced into OASCs, the above benefits can 
+be regarded as transparency, authenticity, trust, and security (Pearson 
+et al., 2019; Wang, Singgih, Wang, & Rit, 2019), enabling extremely 
+robust and real-time traceability of organic food. As a result, it is raising 
+an organizational and technological innovation for agricultural infor-
+mation management. However, to establish the potential of blockchain 
+technology for an organic food traceability system, it is significant to 
+realize its technical constraints and limitations.  
+• Efficiency. The transaction rate is lower, as the original blockchain 
+design (Bitcoin1) limits the processing rate to 7 transactions per 
+second and a new block to every 10 min. Similarly, Ethereum2 just 
+has a capability of 17 s for each transaction. Hence, the processing 
+capability is far away from the milliseconds’ databases achieved so 
+far.  
+• Storage cost. The basic size of a block is limited to 1 MB. With the 
+explosive growth data from diverse sensors, it implies that various 
+transactions are increasing. Thus, blockchain becomes ‘bulky’, in 
+which each block has to store all previous transactions. On the other 
+hand, on account of limited block size, it is impossible to store the 
+entire farm-to-table information into blockchain, especially image 
+information.  
+• Computing model. Almost all kinds of farm electrical/electronic 
+devices tend to part of IoT, producing volume raw data. Moreover, 
+these data have to be transmitted to the cloud, causing heavy 
+bandwidth and high energy consumption (Shi, Jie, Quan, Li, & Xu, 
+2016). Hence, the conventional cloud computing model is not effi-
+cient enough to handle all these data when it comes to data mining in 
+the blockchain environment. In this scenario, the consensus mech-
+anism needs to be reconsidered to ensure shorter response time, 
+more efficient processing and smaller network pressure. 
+3.3. Edge computing and blockchain integration 
+Edge computing is a computing paradigm that allows computation to 
+be performed at the edge of a network (Lopez et al., 2015; Shi et al., 
+2016). As well as known, in the conventional cloud computing, down-
+stream data is on behalf of cloud services, while upstream data is IoT 
+services. Shi et al. (2016) proposed the ‘edge’ refers to any computing 
+and network resources along the path between data sources and cloud 
+data centers. According to the rationale of edge computing, computing 
+tends to occur at the proximity of data sources. Compared to cloud 
+computing, the edge computing paradigm have several potential bene-
+fits. First, it reduces the response time by moving computation from 
+cloud to edge (Yi, Hao, Qin, & Li, 2015). Second, the energy consump-
+tion could be reduced by 30%-40% as well (Chun, Ihm, Maniatis, Naik, 
+& Patti, 2011; Pan & McElhannon, 2018). 
+In our opinion, blockchain as an open infrastructure can shift the 
+paradigm of agriculture IoT in coordination with the edge computing. 
+First, the computing model urge to be re-deployed to full use of local/ 
+cloud resource. The blockchain system that executes large amounts of 
+data mining should be deployed in the cloud, whereas the data gener-
+ated by the edge devices should be preprocessed in local and then be 
+uploaded to the cloud as possible as a small volume. Second, the IoT 
+devices can offload their tasks to the edge to improve the load capa-
+bilities. Third, the blockchain running in the cloud raises an opportunity 
+that all stakeholders can access the open platform at low cost, especially 
+small farms. Such an open environment will ensure trust in OASCs. 
+Overall, these are our unique contributions. 
+4. High-level architecture of our proposal 
+Having presented the background, the technological pros and cons, 
+and their requirements for trust management, we propose a novel 
+computing paradigm, which has a decentralized and cooperative char-
+acteristic by combining agricultural IoT ecosystem with the emerging 
+blockchain and edge computing. Fig. 4 depicts a multi-level architecture 
+Fig. 3. Blockchain’s chain structure.  
+1 https://bitcoin.org/bitcoin.pdf.  
+2 http://ethereum.org/. 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第5页】
+Computers & Industrial Engineering 153 (2021) 107079
+5
+of the computing paradigm that follows interoperability standards set by 
+Cloud Native Computing Foundation (CNCF),3 and Edge Computing 
+Consortium Europe (ECCE).4 Our framework of computing paradigm 
+comprises two closely interrelated elements: planes and layers. The 
+planes are technique activities that link various interfaces. The layers are 
+data links by which the business processes are integrated and managed 
+across the data flow. Each layer takes charge of a different stage of the 
+data stream processing and is described in the following. The planes and 
+the layers increase versatility in the deployment of the solution, mean-
+while, connectivity performances with the data links are met. 
+Fig. 4. The overall architecture of the blockchain-edge computing paradigm. The application, cloud, edge and IoT planes are separated by rectangles. The hybrid of 
+edge computing/blockchain module is instantiated as blockchain-as-a-service elements, allowing for uploading only on-chain data along the network path, from the 
+organic crop to the cloud. 
+3 https://www.cncf.io/.  
+4 https://ecconsortium.eu/. 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第6页】
+Computers & Industrial Engineering 153 (2021) 107079
+6
+4.1. Architecture planes 
+The overall cloud/edge/blockchain paradigm of the solution pre-
+sented to cover trust management needs is depicted in Fig. 4. It is 
+essentially distributed into four key planes: IoT data, edge computing, 
+cloud computing and application.  
+• IoT data plane. The IoT data plane includes various kinds of IoT 
+devices, such as cameras, smart sensors (pressure, thermometer, 
+hygrometer, pluviometer, anemometer, and moisture sensor), GPS. 
+These sensors are used for data collection, which mainly collects 
+farm or field data on soil types, weather, spraying, planting, yields, 
+images, and other practices. Subsequently, the raw data is trans-
+ferred to the edge computing layer after preprocessing. The plane 
+and the edge computing plane are coupled together to some extent 
+due to virtualized computing paths and nodes.  
+• edge computing plane. In organic farms, a variety of smart field 
+devices is scattered throughout the farm. These heterogeneous de-
+vices come from manufacturers that support diverse hardware, 
+protocols, and algorithms, leading a fundamental problem of in-
+compatibility data formats. Fortunately, the edge computing plane 
+can be regarded as a middleware to convert data from one format to 
+another, which mitigates various data dimensions. The edge 
+computing plane consists of two layers, i.e., smart contract layer and 
+edge data layer. A set of virtualized control modules (for example 
+edge node) is instantiated along the network path from smart devices 
+to the cloud plane. Moreover, after being cleaned, analyzed and 
+processed, the data are divided into off-chain and on-chain two parts. 
+The former is stored in the localhost, whereas the latter forwards the 
+cloud-end to further process. This manner increases versatility in 
+cloud-edge computing when it comes to blockchain. Meanwhile, the 
+performance of storage and response time is met in this computing 
+paradigm proposed.  
+• cloud computing plane. The cloud computing plane is designed to be 
+deployed at remote data servers. Compute-intensive program or task 
+that requires a global resource are undertaken at the elements 
+deployed into the cloud plane. Therefore, the cloud plane has to be 
+virtualized in high-end servers. In our framework, the blockchain 
+deploys in this plane, providing blockchain-as-a-service (BAAS).  
+• application plane. The application plane is a front end in which the 
+users can acquire their information or seek services from a service 
+provider by diverse apps, application program interfaces (APIs), and 
+smart terminals. In the present the traceable system of OASC, the 
+application plane is tasked with providing the farm-to-table infor-
+mation services to stakeholders or consumers in a secure manner. 
+Meanwhile, such plane provides a platform to all the stakeholders for 
+dissipating asymmetry information so as to enable data sharing. 
+4.2. Architecture layers 
+Our proposal consists of five layers: physical layer, edge data layer, 
+smart contract layer, cloud/blockchain layer, and user layer. This 
+perspective is from the view of data flow.  
+• physical layer. This layer consists of various sensors, actuators, 
+controllers, gateways, and IoT devices in which a smart contract is 
+deployed. These devices either are encapsulated the smart contract’s 
+address of their blockchain client or are found out by a discovery 
+service. Moreover, various wireless protocols, such as WIFI, zigBee, 
+LoRa or SigFox, are normally applied in such an IoT environment of 
+organic farms.  
+• edge data layer. The edge data layer is composed of infrastructures 
+(edge nodes) for the deployment of containerized microservices and 
+data, QoS monitoring of the infrastructures and IoT devices. The 
+edge data layer acquires the data from the physical layer and then 
+process, compress, transform them, moreover, separates the data 
+into edge data (local) and cloud data as needed. This layer first 
+completes the data rights, that is, the identification of the data pro-
+ducer. In turn, this layer supports off-chain to verify trace/track in-
+formation from the blockchain resided in the cloud. The edge nodes 
+continuously monitor and gather the related information, while the 
+local servers are responsible for storage off-chain data. Such off- 
+chain verification resolves the issue of the blockchain implementa-
+tion, such as privacy, communication bandwidth, energy consump-
+tion, latency.  
+• smart contract layer. The smart contract layer assembles a cluster of 
+smart contracts. Smart contracts are self-executing scripts that build 
+on the basic blockchain structure in advance, which allows for 
+proper, distributed, heavily automated workflows of OASCs. In this 
+layer, the cluster of smart contracts involves smart law contracts, 
+decentralized autonomous organization (DAO), and application logic 
+contracts, which go beyond the transfer of simple monetary values. 
+The law contracts define strict legal recourse to prevent parties 
+involved in the contract from performing their transactions. DAO is a 
+community that can define a set of rules on the blockchain, which are 
+embodied in smart contracts code. Each participant is then subject to 
+these rules, and its task is to execute and obtain recourse in the event 
+of program interruption. In our design, the participants consist of not 
+only the stakeholders of OASCs but also the four roles corresponding 
+to four parties (see Section 5) of consensus mechanism.  
+• cloud/blockchain layer. The cloud/blockchain layer consists of a 
+cloud storage repository and a blockchain-like ledger, supporting 
+three kinds of blockchains, namely, public chain, alliance chain, and 
+private chain. Considering the inefficiency of the public chain, we 
+exploit the alliance chain to involve all stakeholders in OASCs. The 
+alliance chain is a blockchain design between the public chain and 
+the private chain, which takes into account crypto-related use cases 
+and custody-type of use cases. In this layer, we introduce an inter-
+planetary file system (IPFS)5 and BigchainDB.6 IPFS is an emerging 
+standard for content-addressable storage. That is, the same file has 
+the same name on each computer, and changing the contents of the 
+file will result in a change in the file name. Due to the severe limi-
+tations on data capacity, we just store the hash value of the file 
+content in the blockchain resided in cloud, while the file itself is 
+stored at the edge. In order to meet the query requirements of files, 
+we also introduced BigChainDB which is data storage and search 
+engine. As such, our proposal are best-suited for value chain re-
+lationships between different agricultural enterprises to share in-
+formation via the alliance chain infrastructure.  
+• user layer. The user Layer is the entry point for the stakeholder that 
+wants to trace or track organic food and even to manage the OASCs. 
+This layer is connected to the blockchain ecosystem via the block-
+chain bridge, which looks like an Ethereum bridge Metamask who is 
+enabled as a browser add-on. Meanwhile, this layer also provides 
+various APIs with the third party developer that customize data and 
+software. 
+4.3. Collaboration capability of cloud-edge and blockchain 
+The major factor that we are interested in blockchain is that its 
+distributed ledger can be easily added to the present OASC’s workflows 
+and the whole data processing. In the long run, with this consideration 
+and perspective, it is probably to innovate an entirely new business 
+model or technical ecosystem. 
+As for the concern of the technical ecosystem, Fig. 5 depicts the 
+collaboration capability of the cloud-edge and blockchain service for 
+OASCs. As shown in Fig. 5, we summarize six diverse collaboration in 
+corresponding to service level. 
+5 https://ipfs.io/.  
+6 https://www.bigchaindb.com/. 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第7页】
+Computers & Industrial Engineering 153 (2021) 107079
+7
+• resource collaboration. The edge nodes (for example, smart agri-
+cultural sensor) provide calculation, storage, network, and virtuali-
+zation infrastructure with OASCs. For raw data from the farm, it is 
+not private-sensitive so that it can be fully shared with all stake-
+holders, which has a lower demand for business isolation. However, 
+for the participating entities of OASCs, the virtualization technique is 
+the potential to isolate the calculation and storage resource. 
+• data collaboration. The edge nodes collect data from various termi-
+nals and wireless sensors via rich protocols, ports, and interfaces. The 
+majority of the private data of the OASC entities are processed in 
+edge devices, while the non-confidential data are processed in the 
+public cloud. Besides, various data interacts with converging, 
+sensing, and autonomy to form AI-based edge and cloud intelligence 
+infrastructure, further serving high-level business collaboration.  
+• storage collaboration. On the cloud side, a file system (IPFS) and a 
+database (BigchainDB) are deployed. On the edge side, an off-chain 
+database is used for storing the key transaction from OASC’s busi-
+ness flow. IPFS, a key-value storage system, undertakes the function 
+that each on-chain hashed data digest maps a unique off-chain file. 
+Meanwhile, BigchainDB stores all the transformed hash value from 
+source data and support to retrieve for users. In such a manner, we 
+only upload a 256-bit hash value to the cloud bolckchain system 
+while the majority of data resides on the edge side or local, which 
+further isolates the private data and protects the privacy. Due to this 
+collaboration, the cost of storage, network bandwidth and response 
+time are all reduced as well.  
+• smart collaboration. The edge nodes provide the cloud’s blockchains 
+with rich data input. Services with higher real-time requirements or 
+larger bandwidth are allocated to edge nodes. On the edge and the 
+cloud both sides, some artificial intelligence models and distributed 
+agents can be enabled. According to the characteristics of organic 
+agriculture, the AI model of various business scenarios of farm-to- 
+table can be formed. The training of the AI model is carried out in 
+the cloud and then is dispatched to the agent of the edge to execute. 
+For instance, the cloud side engages in the supply chain model 
+optimization of organic products, order management, and logistics 
+optimization. On the other hand, the edge side predicts information 
+such as the crop’s yield, quality, and specifications in terms of the 
+light, water, fertilizer, and other growth adjustments.  
+• application management collaboration. The edge nodes provide the 
+application deployment and run-time environment, such as field 
+management, production service. The cloud implements the entire 
+lifetime management of the application. Moreover, the privacy- 
+sensitive applications are mostly deployed on the edge side while 
+the non-privacy-sensitive ones mostly in the cloud.  
+• business collaboration. The edge nodes provide edge application 
+instances, while cloud deployments apply business capabilities. 
+Various App programs and API calls consist of the business appli-
+cations ecosystem, which is activated by executing sets of operations 
+or by the third-party developer. These authorization entities on the 
+cloud side build lots of smart contracts to collaborate with physical 
+smart devices on the edge side, extracting or transferring information 
+from blockchain to carry out data process. 
+5. Improved consensus mechanism of blockchain 
+In our proposal, trust is always highly desirable. The blockchain 
+enables a trustless traceability system because the consensus mechanism 
+can faster reconcile between transacting parties even though they do not 
+trust each other. In this section, based on the above mentioned high- 
+level architecture, we first target the division of the roles, namely data 
+producer, data maintenance and management, data right verification, 
+and data consumer party. Around these four primary participating roles, 
+we present our novel consensus mechanism, storage model and 
+consensus network in detail, which constitutes the core blockchain 
+system and ensures trust in the OASCs for all stakeholders. 
+5.1. Four parties of consensus mechanism  
+• Data producer party. From the perspective of data flow, the data 
+producer locates the source of the data stream or the business flow, 
+which is the producer or provider of the data. In our OASCs system, 
+various wireless sensors and IoT devices in the field are producers of 
+data during the planting stage. In the processing stage, each quality 
+testing instrument of the product is the producer of the data. In the 
+logistics stage, each transfer station that is responsible for the relay 
+forwarding of organic agricultural products is the producer of the 
+data. In general, there exist three categories of data producer: 
+Fig. 5. The cloud-edge service for organic agriculture supply chain collaborates with blockchain technology.  
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第8页】
+Computers & Industrial Engineering 153 (2021) 107079
+8
+process-mediated (PM), machine-generated (MG) and human- 
+sourced (HS). Currently, data production is almost automatically 
+implemented through smart devices or terminals, which increases 
+the cost of data fraud from the source. As long as data from data 
+producer parties is real, the traceability of organic foods makes 
+sense.  
+• Data right verification party. The data right verification is not only to 
+confirm the ownership, use rights and access rights of the data but 
+also to control subsequent use and information dissemination. Ulti-
+mately, the need for data validation is due to the fact that data can be 
+free replicated. Blockchain is a distributed ledger that everyone has a 
+piece of data. After everyone knows the data (e.g. transaction), the 
+consensus reaches. Therefore, the blockchain ensures integrity at the 
+expense of confidentiality. Our data right verification employ smart 
+contracts to achieve bookkeeping rather than the previous method 
+that is preemptive data right verification and then upload data on- 
+chain. In other words, the parties make bookkeeping of the data to 
+concern the identity of the owner and the user.  
+• Data consumer party. The data consumer party is the visitor or user 
+of the data, which is authorized to manipulate data. Because of the 
+existence of data consumers, data can eventually be shared and 
+flowed. By data consumption, the consumer can also reconfigure 
+knowledge acquisition and integrate the data flow infrastructure into 
+data analysis.  
+• Data maintenance and management party. The data maintenance 
+and management party are responsible for the technical and business 
+planning of the edge clusters and the cloud, which fully utilizes the 
+existing resource scheduling system technically. Among their re-
+sponsibility, the most important is the novel data processing frame-
+work, involving the database (blockchain), search engine 
+(BigchainDB), file system (IPFS). Compared with traditional system 
+maintenance, the key point of our proposed framework is the auto-
+mation of the data platform and the tamper-resistance of data. 
+Moreover, our solution is a new parallel-oriented data processing 
+framework, which means that the database and search engine are not 
+on the same system. Therefore, the processing of data in our para-
+digm becomes more diverse and complicated because all processes 
+are data-driven. 
+5.2. Business processes of consensus mechanism 
+Achieving consensus in public networks is costly and often requires 
+economic incentives for miners, for example, the bitcoin employs proof 
+of work (POW) to reach a consensus. However, small and medium-sized 
+OASCs are desperate for a controlled, regulated higher throughput 
+environment, which is not available in public networks. To prevent 
+chaos and to reach a common global view (i.e., consensus) in this 
+distributed environment, the blockchain system needs to build certain 
+rules that each database transaction should follow. The comprehensive 
+sequence diagram among the above four parties is depicted in Fig. 6. 
+These scenarios aim at assuring trusted data access as shown in Fig. 6. 
+The data process starts when the producer sends a request (right_-
+verification_request()) to the right_verification party. The right_-
+verification service acknowledges the request of the producer party and 
+triggers the bookkeeping of the maintenance party through the function 
+addBlockchain(). The function addBlockchain calculates the hash value of 
+the transaction information resided on the edge side and then writes the 
+hash value to the cloud blockchain. Subsequently, the data producer 
+stores the corresponding information in a local edge database. Such 
+mechanism provides on-chain and off-chain data validation for the same 
+transaction record, which reduces the cost of traceability and improves 
+the efficiency of the cloud blockchain. 
+Similar to the above scenario is the scenario for data consumption. As 
+the data consumption occurs, the request of the consumer party (con-
+sumption_request()) is first sent to the maintenance party. Afterward, the 
+request is forwarded to the right_verification party to confirm the 
+authorization of the data request by the function verify_right(). After 
+receiving the request, the right_verification party sends an ACK signal to 
+the maintenance party and forwards the message to the producer party 
+via the function notify(). Subsequently, any transaction of manipulating 
+the data is recorded in the blockchain. Meanwhile, the off-chain data are 
+also changed accordingly. 
+From the above scenarios, our proposed four-party strategy effec-
+tively regulates the generation, confirmation, maintenance, and con-
+sumption of data, thus ensuring the trust of the entire data flow. In such 
+a manner, it promotes the credibility of the organic agricultural trace-
+able system and raises the management level of OASCs, which ulti-
+mately facilitates the opening and sharing of the data market. 
+5.3. Storage model 
+According to the aforementioned four-party strategy, we improve the 
+hierarchy storage structure of the blockchain to suit the consensus 
+mechanism, as shown in Fig. 7. 
+Unlike a traditional block structure that includes several trans-
+actions, we construct a two-level hierarchical blockchain in which each 
+transaction in the block corresponds to an item table, and the trans-
+action field only is filled by the hash value of the item table. Moreover, 
+each member of the item consists of the data owner’s public key (PK), 
+metadata, and data digest. 
+The top level’s hash value of any ith block is calculated as shown in 
+Eq. 2. 
+Fig. 6. Sequence diagram of communication among data producer party, data maintenance & management party, data right verification party, and data con-
+sumer party. 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第9页】
+Computers & Industrial Engineering 153 (2021) 107079
+9
+Hi = Hash(
+∑
+n
+i=1
+itemhashi, IDi, Timestampi, Hi−1)
+(2)  
+where itemhashi is the hash value of the corresponding packaged second 
+level’s data, IDi is the digital identifier associated with the block num-
+ber, Timestampi is the current timestamp value, and Hi and Hi−1 are the 
+hashes value of current and previous blocks, respectively. 
+The itemhashi is computed by Eq. 3. 
+itemhashi = Hash
+( ∑
+m
+i=1
+PKi,
+∑
+m
+i=1
+Metadatai,
+Timestampi,
+∑
+m
+i=1
+datadigesti
+)
+(3)  
+where datadigesti is the value of each data digest in the item list. For the 
+local data, the data digest field stores a hash value of the data while the 
+field directly stores the records for the information of data confirmation 
+and data operations. 
+In this way, we achieve the isolation of cloud-edge computing, i.e., 
+the first level is running on the cloud side as an index of data. The second 
+level is stored on the edge side, allowing the user further to search for 
+data and access rights through the public key. 
+5.4. OASCs’s consensus network 
+In this subsection, we first present the blockchain consensus network 
+from a high-level perspective in response to the trust concern in OASCs. 
+According to the critical characteristic of the above mentioned four 
+roles, we abstract the consensus network of the blockchain as depicted in 
+Fig. 8. 
+This consensus network is a WK-recursive topology, whose number 
+of processing nodes increases with the power of four at each stage. Every 
+node is connected to its three neighbors. First, we give a formalized 
+description of our consensus network topology as follows. 
+Definition 1.
+Given a WK-recursive topology with rk (k ≥ 0) nodes (r 
+denotes radix, here r = 4), the participant node’s ID is encoded in 
+Sequence pkpk−1…p2p1, where pi∈{1, 2,…, r} (1⩽i⩽k) is the cluster 
+number containing the node after partition at leveli and the value of pi 
+means the position of the cluster. Fig. 8 shows a 4-radix topology 
+network as k = 1, k = 2, k = 3, respectively. 
+For k = 1, it shows a basic 4-radix WK-recursive topology in which 
+each node corresponds to one party of the above mentioned four parties. 
+With IoT devices and participants increasing, the topology is rising with 
+the power of four and is keeping four nodes in each cluster so as to 
+partition autonomous networks (k = 2,3…). 
+Therefore, each data from any consensus participant can be pro-
+cessed in a local cluster to reach a consensus rather than network-wide 
+broadcasting. By exploiting the flavor of hierarchical and full intercon-
+nection topology, our consensus mechanism achieves more efficient 
+locality and lower latency over other ones in complex scientific com-
+putations. Such a recursive clustering structure is particularly suitable 
+for being deployed in small organic farms with a wide geographic dis-
+tribution. The consensus participants of one or more farms constitute a 
+basic cluster network, which then gradually expands to form higher- 
+level clusters. 
+Fig. 7. improved data storage hierarchy structure of the blockchain.  
+Fig. 8. The abstract consensus network of the blockchain among four roles, i.e., data producer party, data maintenance & management party, data right verification 
+party, and data consumer party. 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第10页】
+Computers & Industrial Engineering 153 (2021) 107079
+10
+5.5. Evaluation 
+We are deploying our solution on an organic citrus farm in Zhejiang 
+Province, China, as shown in Fig.Fig. 9. From the actual situation, the 
+operating cost of the blockchain system includes three parts: computing 
+power, network overhead, and consensus mechanism. 
+With regard to computing power, we have divided various stake-
+holder roles so that data storage is realized by consensus nodes, avoiding 
+waste of computing resources (unlike POW algorithms). With regard to 
+network overhead, TPS refers to system throughput, which also repre-
+sents the amount of system processing per second. In the case of 4 
+consensus nodes +1 synchronization node, the peak value can reach 
+6212TPS and the average value is 5838.3TPS. In the case of 30 
+consensus nodes, the peak value can reach 2800TPS and the average 
+value is 2086.8TPS. It proves that this system has the capacity to support 
+high concurrency services and good network scalability. Regarding 
+consensus mechanism, we compare the major static characteristics of 
+two 4-radix network topologies, i.e., 2D-mesh and WK-recursive, as 
+shown in Table 1. The 2D-mesh topology is a popular network that 
+widely employs in the field device of farms. The total links (l), the 
+network diameter (d) and l*d are commonly used to measure and 
+compare the network performance of a system. Therefore, the evalua-
+tion criteria follow these three criteria. The total links are a measure that 
+shows the number of edges connected within a network topology. The 
+network diameter is a measure that shows how well the network’s scale. 
+The smaller the diameter of a network, the less time it takes to reach a 
+consensus across the network. l*d represents the network cost. 
+Fig. 10 depicts the performance of the WK-recursive consensus 
+network compared to the 2D-mesh network under three indicators, 
+namely total links (l), network diameter (d), and l*d. For simplicity, all 
+the results are normalized to the 2D-mesh network. Under the same 
+number of nodes, the WK-recursive consensus network has a smaller 
+number of network diameter compared to the traditional 2D-mesh to-
+pology, which means it takes less time to transfer a message and to 
+approve of the transaction in the whole network. Also, the WK-recursive 
+consensus network has a smaller l*d so that it appears capacity of lower 
+network cost. Moreover, with the increasing of nodes, both network’s 
+link tends to be the same. Therefore, it proves our proposal can reduce 
+network latency and consensus cost so as to improve the performance of 
+OASC’s traceability. 
+6. Conclusions and future works 
+The credibility of information on organic agri-products has always 
+blocked the participation of small and medium-sized farms in high 
+value-added agriculture. As a potentially disruptive technology, block-
+chain technology is transforming OASCs’ activities. Recently, re-
+searchers have focused on implementing such emerging technology in 
+the traceability of organic agricultural supply chain to promote the 
+consumer’s trust in high-end organic foods and improve the value-added 
+of agri-products. Ultimately, a virtuous circle is expecting. 
+Despite the overwhelming advantage (such as tamper-resistant, 
+trust-free, transparent, decentralized, and immutable), this technology 
+has to overcome the imperfection of cost and efficiency before it can be 
+employed by agricultural supply chain, particularly for geographically 
+dispersed small and medium-sized farms in remote areas. For these 
+considerations, we reform the blockchain and proposal a framework 
+solution to suit organic farm environments according to application 
+practice. To our best knowledge, we are the first to attempt to construct 
+a technique model to resolve the trust issue of organic agriculture by 
+combining the blockchain and edge computing. In our proposed solu-
+tion, we leverage the immutability of blockchain’s DLT and the para-
+digm of edge computing to reduce the blockchain expenditure. 
+Further, we propose a consensus mechanism in which our proposal 
+refines four critical roles from all the stakeholders. The evaluation re-
+sults demonstrate that our proposal can significantly achieve the per-
+formance improvement as well as the cost decline compared to the 
+traditional consensus network. 
+In the future, we will take on general standards and protocols for 
+various portable devices to provide better service under our framework. 
+Meanwhile, we will leverage the principle of the framework to guide the 
+design of agriculture traceability systems as well. For another significant 
+implementation, we are dedicating to deploy our framework in the 
+countryside of western China and making affordable traceability solu-
+tions for those in developing countries at a low cost. 
+Fig. 9. IoT node and sensors deployed in the organic citrus farm.  
+Table 1 
+various 4-radix network topologies for comparison.  
+Topology 
+Links 
+Diameter 
+Bisection Width 
+WK-recursive 
+2(n-1) 
+2logn
+4 −1  
+4 
+2D-Mesh 
+2(n-
+̅̅̅n
+√ )  
+2(
+̅̅̅n
+√ -1)  
+̅̅̅n
+√
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第11页】
+Computers & Industrial Engineering 153 (2021) 107079
+11
+CRediT authorship contribution statement 
+Sensen Hu: Conceptualization, Methodology, Software. Shan 
+Huang: Writing-review & editing. Jing Huang: Investigation, Formal 
+analysis. Jiafu Su: Software, Validation. 
+Acknowledgements 
+This research is supported in part by National Social Science Foun-
+dation of China (No. 18BGL100 and No. 16XGL009). Also, this work is 
+supported by the Chongqing Social Science Planning Project, under 
+Grant 2017QNGL61. 
+References 
+Abeyratne, S., & Monfared, R. (2016). Blockchain ready manufacturing supply chain 
+using distributed ledger. International Journal of Research in Engineering and 
+Technology, 5, 1–10. https://doi.org/10.15623/ijret.2016.0509001 
+Alfian, G., Rhee, J., Ahn, H., Lee, J., Farooq, U., Ijaz, M. F., & Syaekhoni, M. A. (2017). 
+Integration of rfid, wireless sensor networks, and data mining in an e-pedigree food 
+traceability system. Journal of Food Engineering, 212, 65–75. https://doi.org/ 
+10.1016/j.jfoodeng.2017.05.008 
+Alrawais, A., Alhothaily, A., Hu, C., & Cheng, X. (2017). Fog computing for the internet 
+of things: Security and privacy issues. IEEE Internet Computing, 21, 34–42. 
+Aung, M. M., & Chang, Y. S. (2014). Traceability in a food supply chain: Safety and 
+quality perspectives. Food Control, 39, 172–184. https://doi.org/10.1016/j. 
+foodcont.2013.11.007 
+Azzi, R., Chamoun, R. K., & Sokhn, M. (2019). The power of a blockchain-based supply 
+chain. Computers & Industrial Engineering, 135, 582–592. https://doi.org/10.1016/j. 
+cie.2019.06.042 
+Azzurra, A., Massimiliano, A., & Angela, M. (2019). Measuring sustainable food 
+consumption: A case study on organic food. Sustainable Production and Consumption, 
+17, 95–107. https://doi.org/10.1016/j.spc.2018.09.007 
+Canavari, M., Pignatti, E., & Spadoni, R. (2006). Trust within the organic food supply 
+chain: The role of the certification bodies (p. 11). URL http://ageconsearch.umn. 
+edu/record/7736. 
+Chen, T., Ding, K., Hao, S., Li, G., & Qu, J. (2020). Batch-based traceability for pork: A 
+mobile solution with 2d barcode technology. Food Control, 107, 106770. https://doi. 
+org/10.1016/j.foodcont.2019.106770 
+Chun, B.-G., Ihm, S., Maniatis, P., Naik, M., & Patti, A. (2011). Clonecloud: Elastic 
+execution between mobile device and cloud. In Proceedings of the Sixth Conference on 
+Computer Systems EuroSys ’11 (pp. 301–314). New York, NY, USA: ACM. https://doi. 
+org/10.1145/1966445.1966473.  
+Costa, C., Antonucci, F., Pallottino, F., Aguzzi, J., Sarri´a, D., & Menesatti, P. (2013). 
+A review on agri-food supply chain traceability by means of rfid technology. Food & 
+Bioprocess Technology, 6, 353–366. https://doi.org/10.1007/s11947-012-0958-7 
+Crowder, D. W., & Reganold, J. P. (2015). Financial competitiveness of organic 
+agriculture on a global scale. Proceedings of the National Academy of Sciences of the 
+United States of America, 112, 7611–7616. 
+Daugbjerg, C., Smed, S., Andersen, L. M., & Schvartzman, Y. (2014). Improving eco- 
+labelling as an environmental policy instrument: Knowledge, trust and organic 
+consumption. Journal of Environmental Policy & Planning, 16, 559–575. https://doi. 
+org/10.1080/1523908X.2013.879038 
+Durresi, M. (2016). Chapter 14 - (bio)sensor integration with ict tools for supplying chain 
+management and traceability in agriculture. In V. Scognamiglio, G. Rea, F. Arduini, 
+& G. Palleschi (Eds.), Biosensors for Sustainable Food - New Opportunities and Technical 
+Challenges (Vol. 74, pp. 389–413). Elsevier. Comprehensive Analytical Chemistry. 
+doi: 10.1016/bs.coac.2016.06.001. 
+Fernqvist, F., & Ekelund, L. (2014). Credence and the effect on consumer liking of food – 
+A review. Food Quality & Preference, 32, 340–353. 
+Figorilli, S., Antonucci, F., Costa, C., Pallottino, F., Raso, L., Castiglione, M., … 
+Menesatti, P. (2018). A blockchain implementation prototype for the electronic open 
+source traceability of wood along the whole supply chain. Sensors, 18, 3133. https:// 
+doi.org/10.3390/s18093133 
+Fountas, S., Carli, G., Sørensen, C., Tsiropoulos, Z., Cavalaris, C., Vatsanidou, A., … 
+Tisserye, B. (2015). Farm management information systems: Current situation and 
+future perspectives. Computers and Electronics in Agriculture, 115, 40–50. https://doi. 
+org/10.1016/j.compag.2015.05.011 
+Gambetta, D. (1990). Can we trust trust? Trust: Making and breaking cooperative relations. 
+Basil Blackwell.  
+Garcia Lopez, P., Montresor, A., Epema, D., Datta, A., Higashino, T., Iamnitchi, A., … 
+Riviere, E. (2015). Edge-centric computing: Vision and challenges. SIGCOMM 
+Computer Communication Review, 45, 37–42. https://doi.org/10.1145/ 
+2831347.2831354 
+Hawlitschek, F., Notheisen, B., & Teubner, T. (2018). The limits of trust-free systems: A 
+literature review on blockchain technology and trust in the sharing economy. 
+Electronic Commerce Research and Applications, 29, 50–63. https://doi.org/10.1016/j. 
+elerap.2018.03.005 
+Helo, P., & Hao, Y. (2019). Blockchains in operations and supply chains: A model and 
+reference implementation. Computers & Industrial Engineering, 136, 242–251. 
+Janssen, M., & Hamm, U. (2012). Product labelling in the market for organic food: 
+Consumer preferences and willingness-to-pay for different organic certification 
+logos. Food Quality and Preference, 25, 9–22. 
+Karim, L., Mahmoud, Q. H., Nasser, N., & Khan, N. (2014). An integrated framework for 
+wireless sensor network management. Wireless Communications & Mobile Computing, 
+14, 1143–1159. https://doi.org/10.1002/wcm.2260 
+Katz, V. (2015). Regulating the sharing economy. Berkeley Technology Law Journal, 30, 
+1067–1126. https://doi.org/10.15779/Z38HG45 
+Kochovski, P., Gec, S., Stankovski, V., Bajec, M., & Drobintsev, P. D. (2019). Trust 
+management in a blockchain based fog computing platform with trustless smart 
+oracles. Future Generation Computer Systems, 101, 747–759. https://doi.org/ 
+10.1016/j.future.2019.07.030 
+Kshetri, N. (2018). 1 blockchain’s roles in meeting key supply chain management 
+objectives. International Journal of Information Management, 39, 80–89. https://doi. 
+org/10.1016/j.ijinfomgt.2017.12.005 
+Leng, K., Bi, Y., Jing, L., Fu, H.-C., & Nieuwenhuyse, I. V. (2018). Research on 
+agricultural supply chain system with double chain architecture based on blockchain 
+technology. Future Generation Computer Systems, 86, 641–649. https://doi.org/ 
+10.1016/j.future.2018.04.061 
+Morais, R., Silva, N., Mendes, J., Ad˜ao, T., P´adua, L., L´opez-Riquelme, J., … Peres, E. 
+(2019). mysense: A comprehensive data management environment to improve 
+precision agriculture practices. Computers and Electronics in Agriculture, 162, 
+882–894. https://doi.org/10.1016/j.compag.2019.05.028 
+Notheisen, B., Cholewa, J. B., & Shanmugam, A. P. (2017). Trading real-world assets on 
+blockchain. Business & Information Systems Engineering, 59, 1–16. https://doi.org/ 
+10.1007/s12599-017-0499-8 
+Fig. 10. The performance of WK-recursive consensus network compared to 2D-mesh network about three main aspect, namely, total links (l), network diameter (d) 
+and l*d. (All the results are normalized to 2D-mesh network.) 
+S. Hu et al.                                                                                                                                                                                                                                       
+
+
+【第12页】
+Computers & Industrial Engineering 153 (2021) 107079
+12
+Nuttavuthisit, K., & Thøgersen, J. (2017). The importance of consumer trust for the 
+emergence of a market for green products: The case of organic food. Journal of 
+Business Ethics, 140, 1–15. 
+Pan, J., & McElhannon, J. (2018). Future edge cloud and edge computing for internet of 
+things applications. IEEE Internet of Things Journal, 5, 439–449. https://doi.org/ 
+10.1109/JIOT.2017.2767608 
+Pathak, S. D., Day, J. M., Nair, A., Sawaya, W. J., & Kristal, M. M. (2007). Complexity and 
+adaptivity in supply networks: Building supply network theory using a complex 
+adaptive systems perspective. Decision Sciences, 38, 547–580. 
+Pearson, S., May, D., Leontidis, G., Swainson, M., Brewer, S., Bidaut, L., … Zisman, A. 
+(2019). Are distributed ledger technologies the panacea for food traceability? Global 
+Food Security, 20, 145–149. https://doi.org/10.1016/j.gfs.2019.02.002 
+Rahmann, G., Ardakani, M. R., B`arberi, P., Boehm, H., Canali, S., Chander, M., … Galvis- 
+Martinez, A. C. (2017). Organic agriculture 3.0 is innovation with research. Organic 
+Agriculture, 7, 1–29. 
+Reyna, A., Martín, C., Chen, J., Soler, E., & Díaz, M. (2018). On blockchain and its 
+integration with iot. challenges and opportunities. Future Generation Computer 
+Systems, 88, 173–190. 
+Ruiz-Garcia, L., & Lunadei, L. (2011). The role of rfid in agriculture: Applications, 
+limitations and challenges. Computers and Electronics in Agriculture, 79, 42–50. 
+https://doi.org/10.1016/j.compag.2011.08.010 
+Saberi, S., Kouhizadeh, M., Sarkis, J., & Shen, L. (2019). Blockchain technology and its 
+relationships to sustainable supply chain management. International Journal of 
+Production Research, 57, 2117–2135. https://doi.org/10.1080/ 
+00207543.2018.1533261 
+Shi, W., Jie, C., Quan, Z., Li, Y., & Xu, L. (2016). Edge computing: Vision and challenges. 
+IEEE Internet of Things Journal, 3, 637–646. 
+Shi, W., Pallis, G., & Xu, Z. (2019). Edge computing [scanning the issue]. Proceedings of 
+the IEEE, 107, 1474–1481. https://doi.org/10.1109/JPROC.2019.2928287 
+Thogersen, J. (2011). Country differences in sustainable consumption: The case of 
+organic food. Social Science Electronic Publishing, 30, 171–185. 
+Tzounis, A., Katsoulas, N., Bartzanas, T., & Kittas, C. (2017). Internet of things in 
+agriculture, recent advances and future challenges. Biosystems Engineering, 164, 
+31–48. https://doi.org/10.1016/j.biosystemseng.2017.09.007 
+the U.S. FDA (2019). Recalls, market withdrawals, & safety alerts. u.s. food & drug 
+administration. https://www.fda.gov/Safety/Recalls/default.htm. Accessed March 
+2019. 
+Vega-Zamora, M., Torres-Ruiz, F. J., & Parras-Rosa, M. (2019). Towards sustainable 
+consumption: Keys to communication for improving trust in organic foods. Journal of 
+Cleaner Production, 216, 511–519. https://doi.org/10.1016/j.jclepro.2018.12.129 
+Wang, Y., Singgih, M., Wang, J., & Rit, M. (2019). Making sense of blockchain 
+technology: How will it transform supply chains? International Journal of Production 
+Economics, 211, 221–236. https://doi.org/10.1016/j.ijpe.2019.02.002 
+Wolfert, S., Ge, L., Verdouw, C., & Bogaardt, M.-J. (2017). Big data in smart farming – A 
+review. Agricultural Systems, 153, 69–80. https://doi.org/10.1016/j. 
+agsy.2017.01.023 
+Yang, Y., Huisman, W., Hettinga, K., Liu, N., Heck, J., Schrijver, G., … van Ruth, S. 
+(2019). Fraud vulnerability in the dutch milk supply chain: Assessments of farmers, 
+processors and retailers. Food Control, 95, 308–317. https://doi.org/10.1016/j. 
+foodcont.2018.08.019 
+Yi, S., Hao, Z., Qin, Z., & Li, Q. (2015). Fog computing: Platform and applications. In 
+Third IEEE Workshop on Hot Topics in Web Systems and Technologies. 
+Sensen Hu was born Jingzhou, Hubei, China in 1979. He received his Ph.D. degree from 
+Beijing Institute of Technology in 2017. In 2014, he earned the financial support from 
+china scholarship council (CSC) to Delft University of Technology as a joint Ph.D. student. 
+Currently, he as an associate professor is working at Collaborative Innovation Center for 
+Chongqing Modern Trade Logistics and Supply Chain, Chongqing Technology and Busi-
+ness University, China. His research interests include organic agricultural supply chain, 
+blockchain and edge computing technology, and agricultural internet of things (IoT). 
+Shan Huang was born in 1997. She is a postgraduate student of Chongqing Key Laboratory 
+of Electronic Commerce & Supply Chain System, Chongqing Technology and Business 
+University. 
+Jing Huang was born in Jingzhou, Hubei, China, in 1980. She received the B.S. degree 
+from Yangtze University, China, in 2003, and the M.S. degree from the University of 
+Wisconsin Platteville, WI, USA, in 2010. She is currently an Assistant Professor with 
+Yangtze University. Her research interests include blockchain and edge computing tech-
+nology, and agricultural internet of things (IoT). 
+Jiafu Su was born in Cangzhou, Hebei, China in 1987. He received the B.S. degree in 
+college of mechanical engineering from the North University of China, Shanxi, China, in 
+2010 and the Ph.D. degree in school of mechanical engineering from Chongqing Univer-
+sity, Chongqing, China, in 2017. He has been an Assistant Professor at the Chongqing Key 
+Laboratory of Electronic Commerce & Supply Chain System, Chongqing Technology and 
+Business University since 2017. He has published over 20 papers in international or do-
+mestic journals, including Kybernetes, Knowledge Management Practice and Research, 
+Journal of Simulation and Sustainability. His research interests cover innovation man-
+agement, knowledge management and supply chain management. 
+S. Hu et al.                                                                                                                                                                                                                                       
+

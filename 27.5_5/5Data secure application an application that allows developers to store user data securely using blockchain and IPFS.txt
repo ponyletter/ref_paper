@@ -1,0 +1,1324 @@
+来源文件：5Data secure application an application that allows developers to store user data securely using blockchain and IPFS.pdf
+============================================================
+
+【第1页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+https://doi.org/10.1007/s11042-023-17204-w
+Data secure application: an application that allows
+developers to store user data securely using blockchain
+and IPFS
+Rupesh Kumar Dewang1 · Mahendra Pratap Yadav2 · Surbhit Awasthi1 · Om Raj1 ·
+Arvind Mewada1 · Kamlakant Laxman Bawankule1
+Received: 11 April 2023 / Revised: 1 September 2023 / Accepted: 15 September 2023 /
+Published online: 23 October 2023
+© The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature 2023
+Abstract
+Due to the COVID-19 pandemic, the use of software applications has increased by end
+users, which is an issue regarding user data privacy. Numerous apps are collecting sensitive
+data like user location and phone number, which are becoming hotspots for cyber-attacks.
+A cyberattack breaches your data, attacking your information, thereby losing data integrity,
+conﬁdentiality, and availability. Cyberattack refers to the unauthorized intrusion of external
+personnel into a user’s private digital space. We have proposed a solution to provide secure
+data storage in third-party applications and leverage the power of Blockchain and Interplan-
+etary File Systems. The proposed approach offers reliable role-based access to control data
+storage service that maintains data integrity, availability, and conﬁdentiality. The proposed
+model uses the aforementioned technologies because they provide a distributed and decen-
+tralized nature of data storage and add-on support to data immutability. Traditionally the
+technologies used for such services are centralized and provide a single point of attack for
+the attacker. It puts conﬁdential user data in jeopardy. The proposed solutions store encrypted
+data distributed to reduce reliance on big tech giants for data storage support and uproot the
+fear of collapsing systems due to a single point of failure.
+Keywords Blockchain · Interplanetary ﬁle system · Cryptocurrency · Ethereum
+1 Introduction
+In the current digital age, due to the Industrial Revolution 4.0, the number of Internet user’s
+increases rapidly with a tremendous boom in the rise of online accesses the data and services
+in a cloud environment. Users can access different services, namely Software as a Service,
+Platform as a Service, and Infrastructure as a Service, through different cloud environments,
+namely private clouds, public clouds, hybrid clouds, and multi-clouds [1, 2]. In the public
+B Mahendra Pratap Yadav
+mahendra@iiitp.ac.in
+Extended author information available on the last page of the article
+123
+
+
+【第2页】
+45492
+Multimedia Tools and Applications (2024) 83:45491–45517
+cloud, the main concern is user data privacy because all users share their private data in
+the public domain. Store the user’s data in a cloud storage environment has become an
+essential aspect of the business model in the end user’s daily life. In a cloud environment, it
+provides different data storage services for enterprises and individuals. It enables end users
+to access and share the stored data anywhere and anytime. It has dramatically improved the
+convenience of human lives [2]. Such cloud storage systems have been highly effective. They
+are becoming increasingly popular because they solely rely on a single, large corporation with
+a substantial amount of storage for data transmission and storage. The large company views
+itself as a trusted third party; they inadvertently inherit the single point of failure downside of
+using third-party services [3, 4]. Although cloud storage systems are substantiated for data
+availability, cloud storage service providers may still be affected by some forces Majeure
+(such as governmental censorship) that prevent customers from accessing their data [5, 6].
+The price of storage devices has also decreased signiﬁcantly with the advancement of storage
+technology.
+The cost of centralized cloud storage services will be more expensive. According to the
+perspective mentioned above, providing data storage and sharing services to the public in
+the future requires decentralized storage architecture [7]. It is not necessary to rely on the
+integrity of other parties to transmit and store data on our behalf, nor is it essential to be
+concerned about data being unavailable. Fortunately, with the rise of Bitcoin, technology
+such as Blockchain can implement a decentralized storage system. We can now connect P2P
+cryptocurrency to storage space, bandwidth, CPU power, and other resources. The advent and
+development of Blockchain improved the power of storing data in a decentralized manner.
+Thanks to the development of the Blockchain. They are assuming the possibility of receiving
+a return on cryptocurrencies [8, 9] while renting out free additional hard drive space online.
+Users do not need to be concerned that they will not be able to access their data because the
+availability of data will be there by smart contracts implemented on the Blockchain, and they
+only need to pay a regular charge for the data they have stored.
+In conventional cloud storage systems, a technology requires to achieve access control
+over data that can only be read and decrypted by a single user for users to exchange data stored
+in a third-party cloud server covertly. The need led to the proposal and quick development
+of the attribute-based encryption method (ABE) [10]. Using this technique, the data owner
+can establish ﬁne-grained access control over the data by deﬁning the data access policy
+based on the user’s identity and attributes. The establishment of the system and distribution
+of the corresponding secret key for users are required by almost all ABE encryption methods
+(PKGs) [11]. Such a method has plenty of issues. In truth, it is challenging to locate a reliable
+PKG to start. Second, a system like this has a problem with key abuse because users’ data
+ownership is not under their control. The PKG can decrypt all of the data on the server, and
+the PKG may release user information due to political censorship or other concerns. When
+the data owner loses his secret key, he can no longer decode his own data, but PKG can still
+do so. In real-world scenarios, the data owner must be able to manage their data and provide
+secret keys to users. For instance, a data manager in a hospital should be able to give a secret
+key to his physicians and other staff members so that they can access different levels of data
+per their position.
+Undoubtedly, the digital age has brought the world closer, yet it has also exposed us to
+risks. With increased internet usage, cyberattacks have risen alarmingly. Preserving user data
+conﬁdentiality, integrity, and availability is paramount. In the era of application proliferation,
+developers must prioritize user data security. Centralized data stores, often targeted in such
+attacks, present a single point of failure. Compromising this data store jeopardizes the entire
+system/application and the user’s data, causing simultaneous loss of availability and integrity.
+123
+
+
+【第3页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45493
+Conﬁdentiality may persist if data is encrypted. These centralized systems rely heavily on tech
+giants for storage [37], which are regarded as trusted third-party data repositories. However,
+this reliance ampliﬁes the risk of political intervention and censorship. For instance, if a
+country bans Amazon Web Services (due to strained relations with the USA), a signiﬁcant
+portion of that country’s internet services would collapse since they depend on AWS. Another
+major demerit of a centralized data store is the cost of data storage. The cost of centralized
+data stores is high because of the data center’s rent, employee salary, and legal work, deemed
+an increasing function of time. Due to these factors, data storage in centralized data stores
+becomes complex and less secure daily. So, it required a decentralized and distributed data
+storage system that does not rely on any central authority like a company or government.
+With the arrival of Bitcoin and its underlying technology, Blockchain can build such a storage
+service now, which is decentralized, distributed, immutable, and secure. The novelty of
+paper is the proposed solution provides secure data storage in third-party applications and
+leverages the power of Blockchain and Interplanetary File Systems. The proposed approach
+offers reliable role-based access to control data storage service that maintains data integrity,
+availability, and conﬁdentiality. The proposed model uses the aforementioned technologies
+because they provide a distributed and decentralized nature of data storage and add-on support
+to data immutability.
+The subsequent sections of the paper are structured as follows: Section 2 elucidates the
+motivation behind the proposed work, Section 3 provides an overview of the background
+and related technologies, Section 4 presents a summary of related work, Section 5 intro-
+duces the proposed work, while the experimental setup and result analysis are discussed in
+Section 6. Finally, the paper concludes with the presentation of ﬁndings and future directions
+in Section 7.
+2 Motivation
+In response to the onset of COVID-19 in our nation, numerous individuals are rallying to
+combat the novel coronavirus by harnessing technology, developing applications, websites,
+and trackers. Despite their noble intentions, these developers grapple with an ongoing chal-
+lenge of privacy breaches, leading to the alarming disclosure of private user information on
+a massive scale. With COVID-19 necessitating stringent measures such as social distancing
+and lockdowns, users’ personal data is susceptible to being collected by numerous appli-
+cations, thereby becoming vulnerable to potential attacks and hacks by malicious actors.
+Recognizing the urgent need to prioritize data security and privacy in this critical time, we
+aspire to construct a system that safeguards users’ privacy and signiﬁcantly enhances data
+security for any application that seeks to utilize proposed system for data storage. To fulﬁll
+this objective, we intend to leverage the capabilities of Blockchain and IPFS (Interplanetary
+File System) technology.
+3 Background and related technology
+The primary aim is to comprehend how Blockchain and Interplanetary File Systems (IPFS)
+can effectively contribute to the secure storage and access of user data. Subsequently, we
+intend to devise a role-based access control model, leveraging the aforementioned technolo-
+gies, to establish a secure data storage service. Ultimately, the goal is to develop a service
+123
+
+
+【第4页】
+45494
+Multimedia Tools and Applications (2024) 83:45491–45517
+that facilitates a transition from existing centralized storage systems to a fully decentralized
+and secure storage framework. This transition is guided by a commitment to enhance the
+three essential pillars of security: conﬁdentiality, integrity, and availability.
+This section offers a foundational understanding of Blockchain and IPFS, key components
+employed in the proposed work.
+3.1 Blockchain technology
+A Blockchain [12] is essentially a sequence of blocks that holds valuable information. This
+concept was initially conceptualized by a group of researchers in 1991. Its original purpose
+was to afﬁx timestamps to digital documents, thereby preventing any manipulation or back-
+dating, much akin to a notary’s function. Despite its initial introduction, the technology lay
+dormant until 2009 when Satoshi Nakamoto [13] employed it to craft the digital cryptocur-
+rency “Bitcoin.” A blockchain constitutes a decentralized ledger accessible to all interested
+parties.
+Blockchainspossessacaptivatingcharacteristic:oncedataisrecordedwithinablockchain,
+altering it becomes an intricate task. To comprehend this, let’s delve deeper into their mechan-
+ics. At its core, a block, as depicted in Fig. 1, essentially comprises data, the hash of preceding
+blocks, and the hash of the current block. The nature of data stored within a block varies
+based on the type of Blockchain [14] being utilized. For instance, the Bitcoin blockchain
+stores transaction details within its blocks. In this study, the Ethereum blockchain serves as
+the reference point.
+As a block comes into existence, a hash is computed. This hash, comparable to a unique
+human ﬁngerprint, serves to unequivocally identify the block and its contents. Any alteration
+within the block subsequently leads to a change in its hash. Therefore, hashes prove invaluable
+in detecting modiﬁcations within a block. The chaining effect between blocks arises from
+the hash of the previous block. This linking is pivotal for the security of the Blockchain. For
+instance, let’s consider a chain consisting of three blocks: “A” (initial block or genesis block),
+“B,” and “C.” Here, the hash of “A” (Ha) is “ABC,” the previous hash of A (PHa) is “000,”
+the hash of “B” (Hb) is “XYZ,” the previous hash of B (PHb) is “ABC,” the hash of “C” (Hc)
+is “123,” and the previous hash of C (PHc) is “XYZ.” Every block refers to the one before it,
+except the ﬁrst block that lacks a predecessor. Now, if an individual manipulates the second
+block, the hash of block “B” (Hb) alters, becoming a new hash like “a1a.” Consequently,
+Fig. 1 A Blockchain and its major components [14]
+123
+
+
+【第5页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45495
+block “C” and all subsequent blocks become invalid because they no longer possess a valid
+hash linking them to the previous block. Thus, modifying a single block renders all ensuing
+blocks invalid. This inherent hash-based mechanism ensures the immutability of data within
+the Blockchain.
+1. Proof of Work (PoW) and Mining: The cryptographic hashing method mentioned
+earlier is not entirely sufﬁcient to thwart tampering attempts. In today’s high-speed sys-
+tems, hundreds of thousands of hashes can be computed per second, potentially allowing
+manipulation of a block and recalculating hashes for all other blocks to restore validity to
+the Blockchain. To counteract this, the Blockchain employs a concept known as “Proof
+of Work” (PoW). PoW operates as a mechanism that deliberately slows down the cre-
+ation of new blocks. For instance, in the case of Bitcoin, approximately 10 minutes are
+needed to compute the requisite proof of work and integrate a new block into the chain.
+This mechanism substantially deters block tampering, as altering a single block would
+necessitate recalculating the PoW for all subsequent blocks. The calculation procedure
+for PoW is termed mining. PoW is calculated using a variable referred to as the “nonce,”
+contained within the block. During the mining process, miners strive to identify a nonce
+that leads to the ﬁrst “N” bits of the block’s hash commencing with zeros. The value
+of “N” is dynamically determined within the network, usually around 32. Once a miner
+discovers such a nonce, they broadcast the block to the network, and other nodes within
+the network verify both the accuracy of the block and the transactions it encompasses.
+Upon successful veriﬁcation, the block is integrated into the Blockchain, conclusively
+solidifying the Blockchain’s immutability [15].
+2. Ethereum: Ethereum operates as a blockchain network, akin to Bitcoin, yet it features
+a decentralized application referred to as the Ethereum Virtual Machine [16], designed
+for executing smart contracts. Ethereum is recognized as a programmable blockchain,
+incorporating its programming language, Solidity. In an analogy, Solidity performs a
+similar role for smart contracts as JavaScript does for HTML web pages in the context
+of the World Wide Web. This means that Ethereum enables users to transact data on
+its blockchain and orchestrate how that data is manipulated-a capacity that extends well
+beyond the basic mathematical functions provided by the Bitcoin blockchain. Within the
+Ethereum framework, you possess the capability to draft code that governs digital value,
+executes exactly as intended, and remains accessible across the globe. Consequently,
+Ethereum serves as a platform for decentralized blockchain applications, with its utility
+extending beyond the conﬁnes of cryptocurrency.
+3. Smart Contracts: The concept of a smart contract was initially introduced by Nick
+Szabo in 1997, predating the creation of Bitcoin and Ethereum. A smart contract is a
+compact computer program embedded within a blockchain. Operating on the blockchain
+network, a smart contract functions as an actual real-world contract, serving as a mecha-
+nism to uphold trust among various individuals engaging in signing or transacting through
+it. Due to their execution within a blockchain environment, smart contracts operate
+autonomously without necessitating human intervention, thereby eliminating intermedi-
+aries from transactions conducted between different parties. As a result of the immutable
+nature of blockchains, the source code of a smart contract remains inviolable. Essen-
+tially, a smart contract is a program capable of executing all facets of a conventional
+real-world contract. These smart contracts are deployed on the Ethereum blockchain,
+speciﬁcally on the Ethereum Virtual Machine (EVM). Following deployment, a con-
+tract establishes a distinct contract address and an application binary interface (ABI).
+This contract address, also known as a contract account, along with the ABI, facilitates
+123
+
+
+【第6页】
+45496
+Multimedia Tools and Applications (2024) 83:45491–45517
+interaction with the deployed contract through remote procedure calls. In our context, the
+contract encompasses an implementation of a role-based access control model, enabling
+access to data related to other duly veriﬁed and authorized users [17]. Only upon the
+occurrence of a successful transaction on the contract is the associated transaction fee
+deducted. The details of the contract’s content are outlined within Ethereum Accounts.
+4. Ethereum Accounts: Within the Ethereum framework, a user effectively embodies an
+account within the network. This account is accompanied by a pair of private and public
+keys, ensuring exclusive access to its associated address. Similar to an ATM pin for a
+Debit/Credit Card, a private key grants exclusive control over a speciﬁc account. Just as
+a unique pin corresponds to a distinct card, a private key is tied to a speciﬁc account.
+The Ethereum blockchain accommodates two distinct types of accounts: External Owned
+Accounts (EOA) and Contract Accounts. These accounts are identiﬁed through a 160-
+bit long hexadecimal string, like 0x6bAbcd1c5A89590cC10508e93dD59041ebF3f0B0.
+Notably, the private key is solely generated for External Owned Accounts, allowing them
+to perform transactions, invoke contracts, and possess balances and nonces associated
+with them. On the other hand, a deployed smart contract governs the behavior of a contract
+address. It encompasses dedicated storage space for code, as well as attributes such as
+nonce and balance. This research speciﬁcally utilizes the code storage space to store
+user information, including details such as name, role (pertaining to role-based access
+control), and the AES user’s key. Additionally, the contract maintains a mapping of users
+to the individuals they’ve granted access to. Lastly, the research stores a mapping of users
+to ﬁle details, encompassing attributes like ﬁlename and a unique ﬁle identiﬁer linked to
+IPFS, referencing an individual’s ﬁle [18].
+5. Ether and Gas: Ether functions as the designated currency within the Ethereum
+blockchain, serving as the medium of exchange for any transaction conducted on the
+platform. Transactions encompass a variety of actions, including executing the code of
+a contract, transferring funds across the blockchain, or any operation leading to perma-
+nent modiﬁcations in the blockchain’s data structure. For instance, the activation of code
+within a smart contract is initiated through a transaction. Should the transaction involve
+merely reading data from the blockchain, Ether is not expended; however, a fee applies.
+This fee, referred to as a transaction fee, is directed towards miners who undertake the
+veriﬁcation of transactions. These miners execute the requested contract code, perform
+calculations, store data within the blockchain, and communicate the alterations across the
+network. The fee extended to miners is denominated in Gas, a unit that can be procured
+using Ether [18]. When initiating a transaction, the sender is accountable for providing
+the Ether necessary for the intended operation. Thus, the transaction cost in Ether can be
+calculated as Transaction Cost (Eth) = Gas Used × Gas Price.
+6. Ethereum Transaction: An Ethereum Transaction is a collection of the following enti-
+ties:
+(a) From:- Address (160 bits hexadecimal string) of the sender of the transaction.
+(b) Account Nonce:- The nonce value related to the sender’s address (EOA/Contract
+Address)
+(c) To:- represent the address (160 bits hexadecimal string) of the receiver for the trans-
+action. It can be another user (EOA) or a contract.
+(d) Value:- The amount of Wei 1018 = 1 Ether to be transferred from “From Address”
+to “To Address” if “To” is EOA; if “To” is a contract address, it is passed to deploy
+the contract.
+123
+
+
+【第7页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45497
+Fig. 2 Interplanetary File System
+[26]
+(e) Gas Price and Gas Limit:- The gas price signiﬁes the quantity of Wei allocated
+to each unit of Gas. Conversely, the Gas Limit represents the upper threshold of
+Gas Units the transaction sender is willing to expend on the transaction. Ethereum
+operates such that each assembly instruction, derived from the compilation of the
+smart contract to assembly, necessitates a speciﬁc, ﬁxed quantity of Gas units. For
+instance, an instruction like “Sload” mandates 20 units of Gas.
+Ethereum Transactions are a signed (signed by sender’s private key) packet of data [19–
+22].
+3.2 Interplanetary file system (IPFS)
+The InterPlanetary File System, as depicted in Fig. 2, functions as a peer-to-peer hyper-
+media protocol [9]. Its primary objective revolves around transitioning from a centralized
+storage environment to a decentralized peer-to-peer storage ecosystem. This shift stems
+from the recognition that placing complete reliance on third-party data storage systems
+poses risks to data security. Moreover, the centralization of data storage is associated with
+censorship concerns, enabling governments and ISPs to readily impose internet access restric-
+tions. The IPFS draws inspiration from the BitTorrent swarm concept, conceptualizing the
+entire peer-to-peer network as an extensive collective of users, each harboring ﬁles. To over-
+come challenges linked to location-based addressing, IPFS adopts an intricate content-based
+addressing approach, thus accommodating versioned ﬁle systems. By embracing such mech-
+anisms, IPFS aims to provide solutions to address these concerns and intricacies [9].
+IPFS employs various internal technologies, including a distributed hash table, an incen-
+tivized block exchange, and a self-certifying namespace. Just like Blockchain, IPFS boasts a
+decentralized structure that eliminates the presence of a single point of failure. Consequently,
+when any ﬁle is uploaded to IPFS, it is assigned a unique ﬁle identiﬁer, enabling efﬁcient
+location of the ﬁle within the network. Whenever someone within the network possesses
+the ﬁle, they can provide it to the requester. The utilization of distinct ﬁle identiﬁers offers
+several advantages, including preventing duplication (as identical ﬁles carry the same unique
+identiﬁer), enabling self-veriﬁcation of received ﬁles (through comparing unique identiﬁers),
+and enforcing access restrictions (requiring knowledge of the unique identiﬁer to access the
+ﬁle).
+For real-world applications, Blockchain is unsuitable for storing large ﬁles such as videos
+or audios due to the high transaction fees associated. Thus, our research strategy involves
+storing encrypted ﬁles on IPFS, accompanied by their respective unique ﬁle identiﬁers and
+AES keys stored on the Blockchain. This approach facilitates ﬁle retrieval and decryption
+exclusively when a transaction adheres to a speciﬁc user’s role-based access control policy.
+Consequently, ﬁles can be retrieved, decrypted, and employed further in accordance with the
+stipulated access permissions [18].
+123
+
+
+【第8页】
+45498
+Multimedia Tools and Applications (2024) 83:45491–45517
+4 Related work
+In the present landscape, decentralized cryptocurrencies like Bitcoin [13], Zcash [19], and
+Ethereum [16] have emerged as prominent areas of research, with blockchain technology
+serving as the foundational framework for these digital currencies. This technology has
+garnered signiﬁcant attention not only from the academic community but also from industry
+experts. Moreover, blockchain technology has demonstrated its importance in the ﬁnancial
+sector [21] and has gained traction in various non-ﬁnancial domains, including identity-based
+PKI [23], decentralized supply chains [22], decentralized proof of document existence [10],
+and decentralized storage [9].
+In a study by Zyskind et al. [24], an approach was proposed to enhance personal data
+management by enabling data owners to exercise control over their personal data through
+the utilization of blockchain technology. This solution utilizes blockchain in conjunction
+with off-chain storage methods, ensuring better privacy and protection for end-user data.
+Similarly, in [25], authors tackled data privacy challenges within the realm of IoT systems
+using a blockchain-based architecture. Their proposed approach leverages attribute-based
+encryption (ABE) technology to provide robust data access control. Another study [26]
+presented a framework that addresses security and privacy issues associated with big data,
+utilizing a blockchain-based access control mechanism.
+Decentralized storage systems such as IPFS [27], Sia [28], and Storj [29] have gained
+popularity. They operate without reliance on centralized service providers, allowing users
+to store ﬁles on storage nodes that provide available storage space. Our proposed system
+adopts the foundational structure of blockchain technology. IPFS employs Filecoin [30] to
+offer retrieval and storage services through a content-address-based decentralized storage
+mechanism. However, it’s worth noting that IPFS may lack a robust privacy cryptographic
+algorithm interface for end-users of uploaded ﬁles. On the other hand, the Storj platform
+employs an end-to-end encryption mechanism, storing cryptographic hash ﬁngerprints of
+ﬁles through the blockchain to enable ﬁle integrity veriﬁcation.
+The Sia platform divides uploaded ﬁles into multiple segments, encrypting each segment
+using a combination of blockchain technology and a peer-to-peer storage network. These
+encrypted segments can be sent to nodes providing storage services through smart contracts,
+with users paying using Siacoin. Storage nodes periodically submit proofs of storage to
+prevent the deletion of stored ﬁles.
+Numerous security-focused methods have been developed to address privacy issues con-
+cerning personal data. Techniques such as data anonymization ensure k-anonymity, where
+sensitive information is distinct from at least k-1 other records in a dataset [31]. Extensions
+like l-diversity and t-closeness ensure diverse representation and distribution of sensitive data
+[32, 33]. However, recent studies have revealed potential de-anonymization vulnerabilities
+even with limited data [34]. Additional privacy-preserving approaches include differential
+privacy, involving the introduction of noise to shared data, and encryption protocols that
+allow computations on encrypted data. Fully homomorphic encryption (FHE) [35] permits
+computations over encrypted data, although its efﬁciency remains a challenge.
+Given the surge in the utilization of Bitcoin and Blockchain as its underlying technology,
+blockchain is now being adopted in ﬁnancial sectors [21] and non-ﬁnancial realms [22]. Stor-
+ing data on the Ethereum blockchain is notably expensive, necessitating careful consideration
+of which data should be placed on-chain and which should remain off-chain. Zyskind et al.
+[24] introduced a decentralized platform that facilitates personal data collection and control,
+combining blockchain with off-chain storage to maintain data integrity and conﬁdentiality.
+123
+
+
+【第9页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45499
+Various decentralized data storage solutions, including IPFS [27] and Storj [29], operate off-
+chain, using peer-to-peer networks to ensure data security and availability. However, these
+solutions often lack robust access control mechanisms.
+Wang et al. [36] proposed a blockchain-based framework for data sharing with access
+control within decentralized storage systems. By integrating the Ethereum blockchain with
+IPFS, this framework offers comprehensive data management, access control, and encryption
+techniques to safeguard data. This paper highlights the drawbacks of traditional cloud storage
+systems, such as single points of failure, government interventions, and centralized authority
+overpricing. The proposed solution promotes the adoption of decentralized data storage to
+enhance data privacy and reduce reliance on third parties for data security.
+5 Proposed methodology
+In Fig. 3, we illustrate the proposed service architecture and its utilization of a role-based
+access control technique. The central idea behind this research is to offer application devel-
+opers the opportunity to leverage the proposed architecture for storage services. Similar
+to contemporary practices where developers rent storage systems from cloud providers like
+“Amazon Web Services” or “Google Cloud Platform,” developers can now request an instance
+of our service. Each new instance of our service results in the establishment of an isolated
+network of users within the Blockchain framework. An admin user within this network holds
+Fig. 3 Proposed architecture of data secure application
+123
+
+
+【第10页】
+45500
+Multimedia Tools and Applications (2024) 83:45491–45517
+the capability to add users to this network. The speciﬁc details of this network, along with the
+endpoints required for access, are provided to application developers through an application
+programming interface (API), speciﬁcally implemented using Web3.py Functions and the
+IPFS Manager.
+To demonstrate the functionality of our proposed service, we’ve developed a prototype of
+a medical data storage system. This prototype serves as a third-party application that utilizes
+our storage service. Let’s delve into the internal workings of our service.
+5.1 Role-based access control (RBAC)
+We have introduced a role-based access control model that operates at the blockchain level,
+employing the OpenZeppelin library [14] for its implementation. This system encompasses
+three distinct roles: User role, Privileged User role, and Admin role, each assigned with
+speciﬁc functionalities as outlined below:
+1. Admin Role:-This category of user is granted access to the blockchain network solely
+for the purpose of adding users to the application network. These added users can either
+be of the User or Privileged User type. However, this type of user does not possess access
+to the data storage aspect of the service. The admin role is designated to a single indi-
+vidual within the entire network ID during the service request. The requester includes
+the user’s address they wish to assign as the network’s admin. For instance, in our sce-
+nario, the managing director or board of directors of a hospital could be designated as
+the system admin, while an application such as “ArogyaSetu,” under the Ministry of
+Health and Family Welfare, could be another admin. With each addition of a new user
+to the blockchain network, the following user details are recorded on the Blockchain: -
+Username, - User’s AES key (a random key generated for each user using their address),
+- User’s role (distinct for each user, categorizable as “User” or “Privileged User”).
+2. User Role:- Users possessing this role have the capability to upload their data to the
+system. The data that is uploaded undergoes encryption using the user’s AES key, after
+which it is stored within the IPFS network. Simultaneously, metadata such as the ﬁlename
+and the unique IPFS identiﬁer of the ﬁle are recorded in the Blockchain. Users of this type
+have the privilege to access their data whenever they desire. Moreover, they also hold the
+authority to grant or revoke permission to other users within the network. These other
+users can belong to either the “User” or “Privileged User” category. It’s important to note
+that only users who have been granted access to another user’s data can indeed access that
+data. This control mechanism is embedded within the smart contract, which provides the
+user with the exclusive ﬁle identiﬁer of the data they intend to access. The smart contract
+ensures that any unauthorized access to the data recorded in the Blockchain is prevented.
+This is achievable because, with the creation of each new system, an isolated blockchain
+network is established, permitting solely the users added to this network to interact with
+it. Additionally, users with this role can also view the data of other users who have granted
+them access to their data.
+3. Privileged User:- This user category inherits all the attributes of the “User” type while
+introducing one additional capability unique to itself. This kind of user has the ability
+to operate like a “User” and also upload data on behalf of any other user within the
+network. This feature addresses a speciﬁc use case where third-party applications process
+data that has been uploaded by a user and subsequently store this data in connection to
+that speciﬁc user. For instance, consider a doctor who falls under the “Privileged User”
+category. It’s plausible that the doctor might wish to upload patient test reports on behalf
+123
+
+
+【第11页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45501
+of the patients, enabling them to access and view these reports. Similarly, applications
+such as “ArogyaSetu” can utilize this feature to provide safety reports and health status
+updates back to the user by uploading relevant information in correspondence with the
+designated user. Internally, a role is represented as an enumerable collection of addresses,
+each corresponding to a user within that speciﬁc role. Alongside the list of addresses,
+a role also includes the speciﬁcation of its administrative role. This designation deﬁnes
+which entity possesses the authority to modify or update the contents of this enumerable
+list.
+5.2 Ethereum network and EVM
+We have utilized an Ethereum test network known as “Rinkeby” [15]. The Rinkeby test
+network operates as an Ethereum-like test environment, complete with a corresponding
+Ethereum Virtual Machine that executes the deployed smart contract. Whenever a user
+requests access to the service, a fresh contract is deployed, providing them with the network
+speciﬁcs and the application programming interface. This practice establishes an isolated
+environment on the Blockchain, as only users registered with this contract can interact with
+the data stored within the contract on the Blockchain. During contract deployment, the admin
+address is linked to the contract. The smart contract responsible for managing role-based
+access control over the Blockchain is referred to as the “SecureData” contract.
+The “SecureData” contract encompasses the subsequent data members and member func-
+tions:
+• The “admin” variable of type “address” stores the address of the contract’s admin.
+• The “PRIV ROLE” variable of type “bytes32” stores the role classiﬁcation for a “Privi-
+leged User.”
+• The struct userDetails holds the particulars concerning a new user, including:
+– The “username” variable of type “string” stores the user’s name.
+– The “key” variable of type “string” holds the encoded AES key speciﬁc to the user,
+generated randomly using their address.
+– The “roleName” variable of type “bytes32” denotes the user’s role, which is distinc-
+tive and can be either “User” or “Privileged User.”
+– The “adminRoleName” variable of type “bytes32” identiﬁes the admin of this user’s
+role (the role contained in “roleName”). It is utilized to ensure that only an individual
+is authorized to grant or revoke access for that particular “roleName.”
+• The struct fileDetails encapsulates metadata associated with a ﬁle:
+– The “ﬁlename” variable of type “string” stores the name of the ﬁle.
+– The “ﬁleIPFSHash” variable of type “string” holds the unique IPFS identiﬁer for the
+ﬁle.
+• The “userDetailsMapping” variable is a mapping where the user’s address serves as the
+key, and the corresponding value is an instance of the “userDetails” structure.
+• The “userFilesDetailMapping” variable is another mapping where the user’s address
+serves as the key, and the associated value is an array of instances of the “ﬁleDetails”
+struct.
+The contract also encompasses the following member functions:
+123
+
+
+【第12页】
+45502
+Multimedia Tools and Applications (2024) 83:45491–45517
+Algorithm 1 addNewUser.
+1: procedure addNewUser(user Address, username, key, isDoc)
+2:
+// If admin does not sign Transaction, then
+3:
+if admin does not sign Transaction then
+4:
+throw error
+5:
+Initialize a bytes type array b of length 21
+▷ convert user Address to bytes array
+6:
+for i in 0 to 19 do
+7:
+convert the i-th character of user Address to the i-th element in b array
+8:
+assign 0 to the last index of array b
+9:
+user Role ← calculated hash of b using keccak256 hash function
+10:
+assign 1 to the last index of array b
+11:
+user AdminRole ← calculated hash of b using keccak256 hash function
+12:
+set user AdminRole as admin of role user Role
+13:
+add user Address to both roles user AdminRole and user Role
+14:
+update userDetailsMapping with user Address as the key and an instance of userDetails
+struct containing username, key, user Role, user AdminRole
+15:
+if isDoc is true then
+16:
+add user Address to PRIV ROLE
+Algorithm 2 getKeyForPrivUser.
+1: procedure getKeyForPrivUser(user Address)
+2:
+// If a user with PRIV ROLE does not sign the transaction, then
+3:
+if a user with PRIV ROLE does not sign the transaction then
+4:
+throw error
+5:
+return userUserDetailsMapping[userAddress].key
+Algorithm 3 getKeyForUser.
+1: procedure getKeyForUser
+2:
+// If a user does not sign the transaction in the network, or they are not authorized to access the key of
+this role, then
+3:
+if a user does not sign the transaction in the network, or they are not authorized to access the key of this
+role then
+4:
+throw error
+5:
+assign a variable tmp with the caller’s address
+6:
+return userUserDetailsMapping[tmp].key
+• The “addNewUser(userAddress, username, key, isDoc)” function can only be executed
+by the admin. This function veriﬁes whether the caller has the admin’s authorization. It is
+used to create a new user and include them in the network. The function returns nothing
+upon successful execution and an error in case of failure (Algorithm 1).
+• The function “getKeyForPrivUser(userAddress)” can only be executed by a user with
+the role “Privileged User.” Each time this function is called for the ﬁrst time, it checks
+whether the caller has the “Privileged User” role. The function returns the encoded AES
+key for the speciﬁed userAddress as outlined in Algorithm 2.
+• The getKeyForUser() function can be executed by any user to retrieve their encoded
+AES key. Prior to its execution, the function veriﬁes whether the caller is within the
+network and possesses the necessary authorization to access the AES key for their role.
+Upon successful execution, this function returns the encoded AES key associated with
+the calling address (see Algorithm 3).
+• The addFile(filename, fileIPFSHash) function enables any user to store
+their ﬁle’s metadata in the Blockchain. Before executing the function, it is validated
+whether the caller is part of the network and possesses the required permissions to add
+123
+
+
+【第13页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45503
+Algorithm 4 Add ﬁle.
+1: function addFile(ﬁlename, ﬁleIPFSHash)
+2:
+Require A user to sign the transaction in the network and be authorized.
+▷ Veriﬁcation of user and
+authorization
+3:
+Get caller’s address callerAddress
+4:
+Retrieve ﬁleDetailsArray from userFilesDetailMapping[caller Address]
+▷ Retrieve the ﬁle details
+array for the caller’s address
+5:
+Append ﬁlename and ﬁleIPFSHash to ﬁleDetailsArray ▷ Add ﬁlename and ﬁleIPFSHash to the array
+ﬁle metadata to their respective role. Upon successful execution, this function does not
+return any value. In case of failure, it returns an error, as illustrated in Algorithm 4.
+Algorithm 5 addFileByPrivUser.
+Require: user Address, privUser Address
+Ensure: null
+1: // Step 1
+2: if Transaction by privUser Address is not signed by a user with PRIV ROLE then
+3:
+throw error
+4: // Step 2
+5: Update
+the
+f ileDetails
+array
+(corresponding
+to
+the
+address
+user Address
+using
+user FilesDetailMapping) by adding f ilename and f ileI P FSHash.
+• addFileByPrivUser(userAddress,privUserAddress,ﬁlename,ﬁleIPFSHash):Thisfunc-
+tion can only be executed by a user with the “Privileged User” role. Each time this
+function is called, it is ﬁrst checked whether the caller has the “Privileged User” role.
+This function enables a privileged user to add ﬁle metadata for other users. Upon suc-
+cessful execution, this function returns no value, and in case of an error, it returns an
+error status, as shown in Algorithm 5.
+• grantPermission(externalUserAddress): Any user can execute this function to grant
+permission to other external users for viewing their ﬁles/data. Each time this function
+is called, it is checked whether the caller is on the network and whether they have the
+authority to grant permission based on their corresponding role. This function returns
+nothing upon successful execution and returns an error if the execution is unsuccessful,
+as outlined in Algorithm 6.
+• The revokePermission(externalUserAddress) function can be executed by any user to
+revoke permission from other external users who were previously granted permission.
+This action ensures that those users can no longer access the user’s ﬁles or data. Whenever
+this function is invoked, it undergoes a veriﬁcation process to determine whether the caller
+is part of the network and possesses the necessary authority to revoke permissions from
+Algorithm 6 Grant permission.
+Require: externalUserAddress
+Ensure: null
+1: if A user does not sign the transaction in the network, or they are not authorized to grant permission to the
+role then
+2:
+throw error
+3: Assign a variable tmp with the caller’s address
+4: Access userUserDetailsMapping[tmp].roleName and add externalUserAddress to this role’s enumerable
+list
+123
+
+
+【第14页】
+45504
+Multimedia Tools and Applications (2024) 83:45491–45517
+their associated role. Successful execution of this function yields no return value, while
+unsuccessful attempts result in an error message (refer to Algorithm 7).
+Algorithm 7 Revoke permission.
+Require: externalUserAddress
+Ensure: null
+1: if A user does not sign the transaction in the network, or they are not authorized to revoke permission from
+the role then
+2:
+throw error
+3: Assign a variable tmp with the caller’s address
+4: Access userUserDetailsMapping[tmp].roleName and remove externalUserAddress from this role’s enu-
+merable list
+• “The getNumberOfFiles(userAddress) function is accessible to any user who has been
+granted permission to access ﬁle details for the speciﬁed user address. Initially, the
+function veriﬁes whether the caller is authorized to view the ﬁle details. If the caller
+possesses the required authorization, the function proceeds to provide the count of ﬁles
+associated with the given userAddress. In the event that the caller lacks authorization,
+the function returns the maximum value of uint256. Refer to Algorithm 8 for the outlined
+process.
+Algorithm 8 Get number of ﬁles.
+Require: userAddress
+Ensure: integer
+1: if An authorized user of the network does not sign the transaction then
+2:
+return maximum value of uint256
+3: return userFilesDetailMapping[userAddress].length
+• The viewFileOfAParticularUser(userAddress, id) function is available for execution
+by any user who has been granted permission to access ﬁle details for the speciﬁed
+userAddress. This function returns the ﬁlename and ﬁleIPFSHash associated with the
+userAddress and indexed at id, given that the calling user holds the necessary authoriza-
+tion. In the event that the calling user lacks authorization, the function returns an error
+as indicated in Algorithm 9.
+Algorithm 9 View ﬁle of a particular user.
+Require: userAddress, id
+Ensure: ﬁlename, ﬁleIPFSHash
+1: if An authorized user of the network does not sign the transaction then
+2:
+throw error
+3: _ f ilename ← userFilesDetailMapping[userAddress][id].ﬁlename
+4: _ f ileI P FSHash ← userFilesDetailMapping[userAddress][id].ﬁleIPFSHash
+5: return _ f ilename, _ f ileI P FSHash
+• The getCountOfMembersInMyRole() function is accessible to any user for obtaining
+a count of members within their role. Whenever this function is invoked, it undergoes a
+veriﬁcation process to ascertain the caller’s presence within the network and their autho-
+rization to access role-related details. If the calling user holds the requisite authorization,
+123
+
+
+【第15页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45505
+the function returns the count of members within the caller’s role. In instances where the
+caller lacks authorization, Algorithm 10 returns the maximum value of uint256.
+Algorithm 10 Get count of members in MyRole.
+Require: null
+Ensure: integer
+1: if A user does not sign transaction in the network, or they are not authorized to act then
+2:
+return maximum value of uint256
+3: Assign a variable tmp with the caller’s address
+4: return the length of the enumerable list: userUserDetailsMapping[tmp].roleName
+• The getMemberOfMyRoleById(id) function is accessible to any user for retrieving
+details of a speciﬁc member within their role. Whenever this function is invoked, it
+ﬁrst undergoes a veriﬁcation process to determine the caller’s presence within the net-
+work and their authorization to access role-related details. If the calling user possesses
+the necessary authorization, the function returns the userAddress and username of the
+member corresponding to the provided id. In cases where the caller lacks authorization,
+Algorithm 11 returns an error.
+Algorithm 11 Get member of MyRole by Id.
+Require: id
+Ensure: userAddress, username
+1: if A user does not sign the transaction in the network, or they are not authorized to act then
+2:
+throw error
+3: user Address ← get user address from the enumerable list userUserDetailsMapping[msg.sender].roleName
+at index id
+4: username ← userUserDetailsMapping[userAddress].username
+5: return user Address, username
+5.3 Web3.py functions
+Web3.py offers remote procedure calls that enable communication with our deployed con-
+tract. This Python library facilitates interactions with the Ethereum blockchain. When a
+requester obtains the application programming interface (API) of our storage service, the
+API comes pre-conﬁgured with the contract address and the contract’s application binary
+interface. These conﬁgurations are necessary for seamless communication with the deployed
+contract. Subsequently, the requester can initiate the development of their application using
+the endpoints/functions furnished in the Web3.py Functions section of the application pro-
+gramming interface. These endpoints/functions are received upon registering for the data
+secure storage service. The speciﬁc details pertaining to the endpoints/functions provided by
+Web3.py Functions are outlined as follows:
+• add new user(admin address, patient address, patient name, is doc): This function inter-
+nally calls the addNewUser function of the contract, and it creates the encoded random
+AES key for a user by using the user’s account address (Firstly, the user address is jumbled
+randomly. Secondly, the SHA256 of this jumbled string of 42 characters is calculated.
+Thirdly, the string is encoded in base64 to make it storable in the Blockchain). It returns
+True on successful execution and False on unsuccessful execution.
+123
+
+
+【第16页】
+45506
+Multimedia Tools and Applications (2024) 83:45491–45517
+• The grant permission in bc(granted by, granted to) function internally calls the grantPer-
+mission function of the contract. It returns True on successful execution and False on
+unsuccessful execution. Revoke permission in bc(revoked by, revoked for): This func-
+tion internally calls the revokePermission function of the contract. It returns True on
+successful execution and False on unsuccessful execution.
+• The add ﬁle hash to bc(address, ﬁlename, ﬁleIPFSHash): This function internally calls
+the addFile function of the contract. It returns True on successful execution and False on
+unsuccessful execution.
+• The add ﬁle hash to bc by doc(doctor address, patient address, ﬁlename, ﬁleIPF- SHash):
+This function internally calls the addFileByDoctor function of the contract. It returns
+True on successful execution and False on unsuccessful execution.
+• The get list of users with my permission(address) function internally calls the get-
+CountOfMembersInMyRole and getMemberOfMyRoleById functions of the contract.
+This function returns a list of dictionaries of members present in the user’s role having
+address as address. The format for the list is: [‘name’:‘Mat,’ ‘address’: ‘0x53DE8E1..’]
+Upon successful execution, it returns a tuple: (list of members, True) and (empty list,
+False) is returned if something went wrong.
+• The get list of user ﬁles(person accessing, whose ﬁle it is) functions internally calls the
+getNumberOfFiles and viewFileOfAParticularUser functions of the contract. This func-
+tion returns a list of dictionaries of all ﬁles uploaded by the address passed. The format for
+the list is:[‘ﬁlename’:‘f1.jpg’,‘ﬁleIPFSHash’:‘Qmd8Ynugd3…] Upon successful execu-
+tion returns a tuple: (list of ﬁles, True) and (empty list, False) is returned if something
+went wrong.
+• The get balance(address): This function returns the balance of the address account in
+“Eth” rounded off to 4 decimal places.
+• The get ﬁle count(address) function internally calls the getNumberOfFiles function of
+the contract. It returns an integer representing the number of address ﬁles on successful
+execution and the “Err!” string value on unsuccessful execution.
+5.4 IPFS network
+We utilize the ‘Infura’ network to provide us with a node-as-a-service. The IPFS network
+operates as a peer-to-peer network, and running a standalone node from a device can be
+resource-intensive. As a result, we opted to leverage the Infura IPFS node within our service.
+This node seamlessly connects to the extensive IPFS swarm, effectively integrating our data
+security service client into the IPFS network. This enables us to store and retrieve encrypted
+data within the network. Our decision to use IPFS is rooted in its ability to counteract
+censorship effectively and enhance internet resilience through its distributed architecture.
+5.5 IPFS manager
+Within the application programming interface of our service, we offer an additional com-
+ponent known as the IPFS Manager. This component works in tandem with the Web3.py
+Functions to facilitate the comprehensive secure storage of user data. The IPFS Manager takes
+charge of both data uploading and downloading operations from the IPFS network. Moreover,
+it oversees the crucial tasks of data encryption and decryption. Our service employs the AES
+(Advanced Encryption Standard) as the encryption standard. Users’ AES keys consist of 256
+bits, and AES encryption/decryption occurs in the CBC (Cipher Block Chaining) mode.
+123
+
+
+【第17页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45507
+Algorithm 12 Add_ﬁle.
+Require: ﬁlepath, user address, doctor address
+Ensure: dictionary, bool
+1: if ﬁlepath exists then
+2:
+if doctor address is populated then
+3:
+key 256 bit = call getKeyForPrivUser function of the contract to get the key of the user whose ﬁle is
+to be uploaded
+4:
+else
+5:
+key 256 bit = call getKeyForUser function of the contract to get the key of the user whose ﬁle is to
+be uploaded
+6:
+encrypt the ﬁle at ﬁlepath with key 256 bit using AES in CBC mode
+7:
+Initialize ﬁleDetailDictionary
+8:
+try
+9:
+upload the encrypted ﬁle to IPFS and store details in ﬁleDetailDictionary
+10:
+return (ﬁleDetailDictionary, True)
+11:
+catch Exception:
+12:
+return (ﬁleDetailDictionary, False)
+13:
+end try
+14: else
+15:
+return (ﬁleDetailDictionary, False)
+The IPFS Manager, complemented by the role-based access control model implemented
+over the Blockchain, ensures the secure access of user data. This integration assists in safe-
+guarding user data effectively. The IPFS Manager exposes two distinct endpoints/functions
+for interacting with and storing data over the IPFS network: ‘Add a File’ as described in
+Algorithm 12 and ‘Get the File’ as outlined in Algorithm 13.
+Algorithm 13 Get File.
+Require: ﬁlename, user address, the person accessing address, location
+Ensure: string
+1: // calling get the list of user ﬁles to function from web3.py
+2: data authorized = get the list of user_ﬁles(person accessing address, user address)
+3: if not authorized then
+4:
+// Access Forbidden
+5:
+return ‘403’
+6: else
+7:
+for Each ﬁle details in data do
+8:
+if ﬁle details[‘ﬁlename’] == ﬁlename then
+9:
+// Initialize _le hash with ﬁle details[‘ﬁleIPFSHash’]
+10:
+File_path, err = retrieve the ﬁle from IPFS with the help of ﬁle_hash
+11:
+if not err then
+12:
+// Internal Server Error
+13:
+return ‘500’
+14:
+move the _le to the intended location
+15:
+// default value of the location is already set
+16:
+key 256 bit = call getKeyForUser function of contract to get the key of user whose _le is to being
+retrieved
+17:
+if key 256 bit == ‘Err!’ then
+18:
+// Internal Server Error
+19:
+return ‘500’
+20:
+decrypted _le path = decrypt the _le at _le path with help of key 256 bit
+21:
+return decrypted _le path
+22:
+// File Not Found
+23:
+return ‘404’
+123
+
+
+【第18页】
+45508
+Multimedia Tools and Applications (2024) 83:45491–45517
+5.6 Third-party application
+To demonstrate the operational prototype of our secure data storage service, we formulated a
+prominent use case application centered around the imperative need for secure data storage
+- the ‘Medical Record Storage System.’ This system serves as our foundational third-party
+application model, harmoniously integrating with our ‘Data Secure Application.’ Within this
+system, three distinct user roles are established: doctors designated as ‘Privileged Users,’
+patients assigned the role of ‘Users,’ and the hospital encompassing the ‘Admin’ position.
+Our third-party application encompasses a database that securely stores login credentials and
+proﬁle data for both registered patients and doctors within the hospital’s purview.
+The third-party application facilitates secure, distributed data storage on IPFS and
+facilitates retrieval for the respective user through the role-based access control mecha-
+nism elucidated previously. In this context, the administrator can include users - doctors
+and patients - within the system. Patients are empowered to upload and download their
+ﬁles/medical reports, bestow access permissions to other users and doctors, search for
+ﬁles/medical reports from users who’ve granted them access, and manage permission revoca-
+tions. Additionally, the patient’s account transactions and proﬁle particulars can be reviewed
+on the third-party application’s dashboard and proﬁle page, respectively. The interactive
+third-party application dashboard provides a user-friendly interface for patients to carry out
+the aforementioned functions.
+For doctors, the system enables the viewing of ﬁles and medical reports of users who have
+granted access, as well as the capacity to assume the patient role. Notably, doctors can store
+reports pertinent to different patients within their individual accounts. This feature proves
+invaluable when speciﬁc patient pathology test results necessitate uploading for viewing.
+This leverages the ‘Privileged User’ functionality to add data on behalf of any other user in
+the system. Similar to the patient’s experience, the third-party application dashboard offers
+doctors an interactive platform to execute all these functions.
+6 Experimental setup and result analysis
+6.1 Architecture flow
+6.1.1 Login ﬂow
+The application’s execution initiates as system users log in to their designated dashboards
+(depicted in Figs. 4, 5 and 6). Internally, these dashboards retrieve the users’ account par-
+ticulars through the utilization of Web3.py Functions. The hospital administration furnishes
+distinct login credentials to patients and doctors, ensuring authentication through the third-
+party application’s maintained database. Additionally, system users have the capability to
+access and review their proﬁles (as showcased in Fig. 7). The third-party application encom-
+passes all fundamental functionalities requisite for a medical record storage system.
+6.1.2 Admin dashboard
+Intheproposedservicecommenceswiththeadministrativelogin.Theadministratorholdstwo
+pivotal responsibilities: the inclusion of general users and privileged users, thereby enabling
+their engagement with our service.
+123
+
+
+【第19页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45509
+Fig. 4 The user Files View details as a hash value in Authorized Doctor Panel
+Fig. 5 If doctor not Authorized can’t see user Files view
+123
+
+
+【第20页】
+45510
+Multimedia Tools and Applications (2024) 83:45491–45517
+Fig. 6 Patient panel
+Fig. 7 Patient and doctor Proﬁle
+123
+
+
+【第21页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45511
+Within the proposed framework, the general user assumes the role of a patient, while the
+privileged user embodies that of a doctor. Upon successful authentication, the administrator
+gains access to the admin dashboard (depicted in Fig. 8), where the aforementioned tasks can
+be executed. Speciﬁcally, the administrator conﬁgures users’ login credentials and orches-
+trates their initial network inclusion. Notably, the administrative role is distinct from the data
+storage facet of the service, with no direct involvement therein.
+6.1.3 Doctor dashboard (privileged user)
+In our application, the ’Privileged User’ is vested with the ability to access other users’ ﬁles
+(provided access has been granted) and to upload ﬁles on behalf of different users. This
+role encompasses all the functions associated with the ’User’ type. The doctor’s interaction
+begins with authentication within the system. Subsequent to a successful authentication, the
+doctor gains access to a search functionality available at the top of their dashboard (depicted
+in Fig. 4). By employing this search feature, the doctor can locate user ﬁles. In the event that
+the doctor is granted permission to view a speciﬁc user’s ﬁles, these ﬁles become visible in
+Fig. 4. Conversely, an error message (Fig. 5) is displayed should the doctor lack the requisite
+authorization. The doctor dashboard effectively employs Web3.py Functions and the IPFS
+Manager to deliver the aforementioned functionality.
+6.1.4 Patient dashboard (user)
+Thepatient’sengagementcommenceswithauthenticationwithinthesystem.Uponsuccessful
+authentication, the patient is directed to their personalized dashboard (depicted in Fig. 6).
+Within this dashboard, the patient is empowered to execute several actions. Speciﬁcally,
+the patient can upload ﬁles, access and view ﬁles they’ve uploaded, as well as manage the
+authorization status of other users to view their data. This functionality is all facilitated
+through the dashboard interface. Additionally, the dashboard offers insight into user account
+transactions, providing comprehensive visibility into account-related activities.
+Fig. 8 Admin panel
+123
+
+
+【第22页】
+45512
+Multimedia Tools and Applications (2024) 83:45491–45517
+6.1.5 Access control ﬂow
+Both doctors and patients utilize Web3.py Functions and IPFS Manager internally to access
+user data while adhering to the role-based access control system. The Web3.py Functions
+interface with the smart contract deployed on the Rinkeby network, while the IPFS Manager
+oversees the ﬁle storage process on the IPFS network through the utilization of Infura. This
+coherent process operates in alignment with the established access control framework.”
+Please note that the provided text seemed to be repeated. I’ve corrected it to make sure it
+conveys the intended meaning clearly
+6.2 Discussion and results analysis
+This section delves into the outcomes of our data secure application concerning performance,
+security, and economic feasibility. The application effectively delivered the envisaged func-
+tionalities, and the ensuing Figs. 9 and 10 and Tables 1, 2 and 3 encapsulate the outcomes. The
+security assurances furnished by our service become apparent through our adept management
+of data conﬁdentiality, integrity, and availability.
+• Conﬁdentiality: It is a paramount requirement for retrieving any ﬁle from the IPFS
+network. The requesting node must possess the unique ﬁle identiﬁer, which, crucially,
+remains concealed from the user in our use case. Even if a user on the network somehow
+gains access to the unique ﬁle identiﬁer of another user’s ﬁle, the ﬁle itself remains
+encrypted. Users’ keys are securely stored within the Blockchain, safeguarded by a role-
+based access control scheme. Thus, the viewing of another user’s ﬁles is contingent
+upon explicit authorization by valid entities. This dual-layered mechanism ensures data
+conﬁdentiality, precluding any breach of private user data.
+• Integrity: It is guaranteed by the inherent characteristics of transactions within the
+blockchain network. Each transaction is implicitly signed by its sender, allowing for
+the swift identiﬁcation of unauthorized actions carried out by malicious users on others’
+data. Additionally, the role-based access control scheme veriﬁes the validity of trans-
+actions for the designated user. Thus, the combination of transaction signatures and the
+Fig. 9 Variation of Blockchain transaction cost with ﬁle size on uploading ﬁle
+123
+
+
+【第23页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45513
+Fig. 10 Variation of Blockchain transaction cost with ﬁlename length on uploading ﬁle
+role-based access control scheme preserves data integrity. Over the IPFS network, the
+unique ﬁle identiﬁer further reinforces data integrity, as any alteration to the data triggers
+a change in this identiﬁer.
+• Availability: It is ensured due to the distributed and decentralized nature of the underlying
+technologies - Blockchain and IPFS. Data remains consistently accessible, devoid of
+single points of authority or failure. Blockchain users maintain copies of all blocks, and
+IPFS operates on a peer-to-peer network akin to BitTorrent. This inherent design sustains
+availability.
+Results from the experimental analysis yielded several noteworthy insights, including:
+• Granting certain users the permission to write data for other users, offering a potential
+avenue for application programmers to enhance functionality.
+Table 1 Smart contract function call cost (Gas Limit: 3000000, Gas Price: 1 gwei = 10−9 eth = 0.00001767[9])
+Functions
+Gas Used
+Actual Price (Eth)
+In Rupees
+addNewUser: User
+306369
+0.000306369
+5.47
+addNewUser: Priv. User
+371522
+0.000371522
+6.64
+getKeyForPrivUser
+0
+0
+0
+getKeyForUser
+0
+0
+0
+addFile
+114417
+0.000114417
+2.06
+addFileByPrivUser
+114457
+0.000114457
+2.07
+grantPermission
+76857
+0.000076857
+1.38
+revokePermission
+25566
+0.000025566
+0.64
+getNumberOfFiles
+0
+0
+0
+viewFileOfAParticularUser
+0
+0
+0
+getCountOfMembersInMyRole
+0
+0
+0
+getMemberOfMyRoleById
+0
+0
+0
+*Filename’s length for addFile and addFileByPrivUser functions is 15 characters
+123
+
+
+【第24页】
+45514
+Multimedia Tools and Applications (2024) 83:45491–45517
+Table 2 Break up of time taken by different ﬁle sizes to upload
+File Size
+Encryption Time
+Mining Time
+IPFS Storage Time
+Total Time
+1 MB
+0.02s
+9.55s
+0.88s
+10.45s
+5 MB
+0.06s
+15.85s
+1.42s
+17.33s
+10 MB
+0.05s
+6.05s
+2.29s
+8.39s
+15 MB
+0.07s
+12.79s
+2.96s
+15.82s
+20 MB
+0.11s
+16.22s
+4.24s
+20.57s
+• Initial access to ﬁles uploaded to the Interplanetary File System may incur some delay
+due to the initiation of the Bitswap algorithm [13], which orchestrates the formation of
+ﬁle blocks.
+• Financial implications necessitate consideration, as certain actions entail user expendi-
+tures.
+• In IPFS, if a user is ofﬂine, their ﬁles become inaccessible. However, content-based
+addressing permits replication of ﬁles to users who have previously accessed them, main-
+taining ﬁle availability.
+• IPFS introduced “Filecoin” [3] as a solution, incentivizing ﬁle preservation by offering
+monetary rewards.
+• The pricing for storage in Blockchain, contingent upon ﬁlename length, renders econom-
+ical storage of substantial ﬁles compared to centralized cloud-based storage services.
+In outcomes, we have successfully achieved the proposed objective: to restrict user access
+to other users’ data without explicit permission, ensuring secure data storage. The pro-
+posed prototype data storage system embodies attributes of distribution, decentralization,
+immutability, and security. Through this system, we have effectively addressed the chal-
+lenges posed by centralized storage solutions.
+7 Conclusion and future work
+In the current global landscape, it is inspiring to witness the collective effort in safeguarding
+individuals from the dire impact of COVID-19. A common underpinning concern among
+Table 3 Break up of Time taken by Different File Sizes to Download
+Speciﬁc
+AWS S3: Standard
+Service cost
+Our
+Service
+cost
+Storage of First 50 TB / Month
+1.88 per GB
+0
+Storage of Next 450 TB / Month
+1.81 per GB
+0
+Storage of Next 450 TB / Month
+1.73 per GB
+0
+Adding Data
+0
+2.06 per ﬁle
+Fetching Data
+4.52 per GB
+0
+Granting Permission
+NA
+1.36
+Revoking Permission
+NA
+0.46
+Contract Deployment Cost (One Time)
+NA
+41.44
+123
+
+
+【第25页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45515
+developers is the secure storage of user data within their applications. Often, developers
+resort to conventional cloud-based storage solutions, which can introduce vulnerabilities.
+The critical issue lies in the centralization of these solutions, resulting in a single point of
+failure susceptible to targeted attacks or external pressures, including government interven-
+tions. Such circumstances endanger the availability, integrity, and conﬁdentiality of user data,
+potentially rendering applications futile and prone to data breaches. The proposed decen-
+tralized storage service addresses the challenge of single points of failure by prioritizing
+the availability, integrity, and conﬁdentiality of data through a peer-to-peer network. This
+approach harnesses the principles of role-based access control and encryption, serving as the
+pillars for data conﬁdentiality and integrity. Availability, on the other hand, is reinforced by
+the inherently decentralized and distributed nature of Blockchain and IPFS. This obviates the
+need for a trusted cloud provider. The research’s overarching goal was to ensure the privacy
+and security of user data in third-party applications. Moving forward, the research could
+be extended by incorporating role-based access control at the ﬁle level. This would allow
+users to grant selective access to speciﬁc ﬁles rather than their entire dataset. Additionally,
+we intend to deploy an application programming interface built with Web3.js, facilitating
+seamless integration with web applications. Furthermore, we envision transforming the IPFS
+Manager from Python to JavaScript. This transition aims to alleviate the load on third-party
+application servers, catering to both novice developers and testing scenarios. Additionally,
+providing users the capability to set Gas Limit and Gas Price should be considered, as the
+current values of 3000000 and 1GWei = 10−9Eth = 0.00001767 are ﬁxed.
+Availability of Data and Materials Data sharing not applicable to this article as no datasets were generated or
+analyzed during the current study’.
+Declarations
+Funding and/or Conﬂicts of interests/Competing interests This work has not any funding support, it has not
+any conﬁcts of interests or competing interests.
+References
+1. Zhang Q, Cheng L, Boutaba R (2010) Cloud computing: state-of-the-art and research challenges. J Int
+Serv Appl 1:7–18
+2. Pratap Yadav M, Pal N, Kumar Yadav D (2021) A formal approach for docker container deployment.
+Concurr Comput Pract Exp 33(20):e6364
+3. Wang S, Zhang Y, Zhang Y (2018) A blockchain-based framework for data sharing with ﬁne-grained
+access control in decentralized storage systems. Ieee Access 6:38437–38450
+4. Ahmad S, Mehfuz S, Mebarek-Oudina F, Beg J (2022) Rsm analysis based cloud access security broker:
+a systematic literature review. Cluster Comput 25(5):3733–3763
+5. Rao RV, Selvamani K (2015) Data security challenges and its solutions in cloud computing. Proced
+Comput Sci 48:204–209
+6. Yang P, Xiong N, Ren J (2020) Data security and privacy protection for cloud storage: A survey. IEEE
+Access 8:131723–131740
+7. Raﬁque A, Van Landuyt D, Beni EH, Lagaisse B, Joosen W (2021) Cryptdice: Distributed data protection
+system for secure cloud data storage and computation. Inf Syst 96:101671
+8. Gray C (2014) Storj vs. dropbox: Why decentralized storage is the future. On line at: https://
+bitcoinmagazine.com/articles/storjvs-dropboxdecentralized-storage-future, 1408177107
+9. Benet J (2014) Ipfs-content addressed, versioned, p2p ﬁle system. arXiv:1407.3561
+10. Nyo MT, Mebarek-Oudina F, Hlaing SS, Khan NA (2022) Otsu’s thresholding technique for mri image
+brain tumor segmentation. Multimed Tools Appl 81(30):43837–43849
+123
+
+
+【第26页】
+45516
+Multimedia Tools and Applications (2024) 83:45491–45517
+11. Zhang J, Wang XA, Ma J (2015) Data owner based attribute based encryption. In 2015 international
+conference on intelligent networking and collaborative systems. IEEE, pp 144–148
+12. Zarrin J, Wen Phang H, Babu Saheer L, Zarrin B (2021) Blockchain for decentralization of internet:
+prospects, trends, and challenges. Cluster Comput 24(4):2841–2866
+13. Nakamoto S (2008) Bitcoin: A peer-to-peer electronic cash system. Decentral Bus Rev
+14. Decuyper X (2020) How does a blockchain work - simply explained. https://www.youtube.com/watch?
+v=SSo_EIwHSd4. Accessed 01 June 2020
+15. Prakash R, Anoop VS, Asharaf S (2022) Blockchain technology for cybersecurity: A text mining literature
+analysis. Int J Inf Manag Data Ins 2(2):100112
+16. Casino F, Dasaklis TK, Patsakis C (2019) A systematic literature review of blockchain-based applications:
+Current status, classiﬁcation and open issues. Telemat Inf 36:55–81
+17. Khan SN, Loukil F, Ghedira-Guegan C, Benkhelifa E, Bani-Hani A (2021) Blockchain smart contracts:
+Applications, challenges, and future trends. Peer-to-peer Netw Appl 14:2901–2925
+18. Laurent A, Brotcorne L, Fortz B (2022) Transaction fees optimization in the ethereum blockchain.
+Blockchain Res Appl 3(3):100074
+19. Etherscan API. https://etherscan.io/apis. Accessed 02 June 2020
+20. Gwei to INR (Gwei to Indian Rupee). https://www.cryps.info/en/Gwei_to_INR/. Accessed 03 June 2020
+21. Blockchain for ﬁnancial services. https://ibm.com/blockchain/industries/ﬁnancial-services. Accessed 29
+May 2020
+22. Blockchain for the supply chain. https://www.ibm.com/blockchain/industries/supply-chain. Accessed 29
+May 2020
+23. Fromknecht C, Velicanu D, Yakoubov S (2014) A decentralized public key infrastructure with identity
+retention. Cryptol ePrint Archive
+24. Zyskind G, Nathan O et al (2015) Decentralizing privacy: Using blockchain to protect personal data. In:
+2015 IEEE security and privacy workshops. IEEE, pp 180–184
+25. Rahulamathavan Y, Phan RC-W, Rajarajan M, Misra S, Kondoz A (2017) Privacy-preserving blockchain
+based iot ecosystem using attribute-based encryption. In 2017 IEEE international conference on advanced
+networks and telecommunications systems (ANTS). IEEE, pp 1–6
+26. Es-Samaali H, Outchakoucht A, Leroy JP (2017) A blockchain-based access control for big data. Int J
+Comput Netw Commun Secur 5(7):137
+27. IPFS powers the distributed Web. https://ipfs.io/. Accessed 29 May 2020
+28. Vorick D, Champine L (2014) Sia: Simple decentralized storage. Retriev May 8:2018
+29. Storj Labs I (2018) Storj: A decentralized cloud storage network framework
+30. Labs P (2017) Filecoin: A decentralized storage network
+31. Sweeney L (2002) k-anonymity: a model for protecting privacy. Int J Uncert Fuzz Knowl-based Syst
+10(5):557–570
+32. Li N, Li T, Venkatasubramanian S (2006) t-closeness: Privacy beyond k-anonymity and l-diversity. In:
+2007 IEEE 23rd international conference on data engineering. IEEE, pp 106–115
+33. Machanavajjhala A, Kifer D, Gehrke J, Venkitasubramaniam M (2007) l-diversity: Privacy beyond k-
+anonymity. ACM Trans Knowl Disc Data (TKDD) 1(1):3–es
+34. Narayanan A, Shmatikov V (2006) How to break anonymity of the netﬂix prize dataset. arXiv:cs/0610105
+35. Gentry C (2009) Fully homomorphic encryption using ideal lattices. In: Proceedings of the forty-ﬁrst
+annual ACM symposium on theory of computing. pp 169–178
+36. Wang S, Zhang Y, Zhang Y (2018) A blockchain-based framework for data sharing with ﬁne-grained
+access control in decentralized storage systems. IEEE Access 6:38437–38450
+37. Benet J, Greco N (2018) Filecoin: a decentralized storage network. Protocol Labs
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps and
+institutional afﬁliations.
+Springer Nature or its licensor (e.g. a society or other partner) holds exclusive rights to this article under
+a publishing agreement with the author(s) or other rightsholder(s); author self-archiving of the accepted
+manuscript version of this article is solely governed by the terms of such publishing agreement and applicable
+law.
+123
+
+
+【第27页】
+Multimedia Tools and Applications (2024) 83:45491–45517
+45517
+Authors and Aﬃliations
+Rupesh Kumar Dewang1 · Mahendra Pratap Yadav2 · Surbhit Awasthi1 · Om Raj1 ·
+Arvind Mewada1 · Kamlakant Laxman Bawankule1
+Rupesh Kumar Dewang
+rupeshdewang@mnnit.ac.in
+Surbhit Awasthi
+Surbhitaawasthi@gmail.com
+Om Raj
+omraj@gmail.com
+Arvind Mewada
+mewadabpl@gmail.com
+Kamlakant Laxman Bawankule
+kamalakant.bawankule@gmail.com
+1
+Motilal Nehru National Institute of Technology Allahabad, Prayagraj 211004, India
+2
+Computer Science and Engineering Department, Indian Institute of Information Technology Pune,
+Pune Maharshtra, 411041, India
+123
+

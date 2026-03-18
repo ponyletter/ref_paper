@@ -1,0 +1,10 @@
+[1]Angelo M ,Orazio T . A Blockchain-Based System for Agri-Food Supply Chain Traceability Management[J].SN Computer Science,2022,3(4):DOI:10.1007/S42979-022-01148-3.
+[2]Lixing W ,Yulin H ,Zhenning W .Design of a Blockchain-Enabled Traceability System Framework for Food Supply Chains[J].Foods,2022,11(5):744-744.DOI:10.3390/FOODS11050744.
+[3]	Qi Y ,Huajun Z .Improving Agricultural Product Traceability Using Blockchain[J].Sensors,2022,22(9):3388-3388.DOI:10.3390/S22093388.
+[4]	Yue L ,Xin Z ,Zhiyao Z , et al.Research on Grain Food Blockchain Traceability Information Management Model Based on Master-Slave Multichain[J].Computational Intelligence and Neuroscience,2022,2022DOI:10.1155/2022/7498025.
+[5]	Babu S ,Devarajan H .Agro-Food Supply Chain Traceability using Blockchain and IPFS[J].International Journal of Advanced Computer Science and Applications (IJACSA),2023,14(1):DOI:10.14569/IJACSA.2023.0140142.
+[6]	Wang S ,Luo N ,Xing B , et al.Blockchain-based proxy re-encryption access control method for biological risk privacy protection of agricultural products[J].Scientific Reports,2024,14(1):20048-20048.DOI:10.1038/S41598-024-70533-0.
+[7]	Li L ,Tian P ,Dai J , et al.Design of agricultural product traceability system based on blockchain and RFID.[J].Scientific reports,2024,14(1):23599.DOI:10.1038/S41598-024-73711-2.
+[8]	Guo H ,Xu W ,Lin M , et al.Design of a Blockchain-Enabled Traceability System for Pleurotus ostreatus Supply Chains[J].Foods,2025,14(22):3959-3959.DOI:10.3390/FOODS14223959.
+
+

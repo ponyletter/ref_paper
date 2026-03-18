@@ -1,0 +1,357 @@
+来源文件：20基于Fisco-Bcos联盟链技术的农产品溯源系统设计与实现研究.pdf
+============================================================
+
+【第1页】
+ 
+ 
+                           
+收稿日期: 2023-07-12 
+基金项目: 合肥师范学院高层次人才科研资助基金项目（2023rcjj14），安徽省博士后研究人员科研活动经费资助项目
+（2023B677），安徽省教育厅重点项目（2023AH051303），安徽省教育厅重大项目（2022AH040122），茶树生物
+学与资源利用国家重点实验室开放基金（SKLTOF20230127），安徽省社会科学创新发展研究课题（2021CX194），
+横向项目（安徽省技术合同认定登记号 2022340101002858）和 安徽省科技计划项目 （2022MKS12）共同资助。 
+作者简介: 高琪娟，博士，讲师。E-mail：gaoqijuan@hotmail.com 
+* 通信作者: 桂利权，农艺师。 E-mail：929067677@qq.com  
+安徽农业大学学报, 2024, 51(3): 530-536 
+Journal of Anhui Agricultural University 
+[DOI] 10.13610/j.cnki.1672-352x.20240710.013  网络出版时间：2024-07-15 11:17:21 
+[URL] https://link.cnki.net/urlid/34.1162.s.20240710.1035.025 
+基于 Fisco-Bcos 联盟链技术的农产品溯源系统设计与实现研究 
+ 
+高琪娟 1,2,4，蒋道臻 2，乐 阳 2, 王广顺 2，张友华 3，丁文清 5，陈煜霖 1，桂利权 1* 
+(1. 谢裕大茶叶股份有限公司博士后科研工作站，合肥 230036；2. 合肥师范学院计算机与人工智能学院，合肥 230061；     
+3. 安徽农业大学安徽省北斗精准农业信息工程研究中心，合肥 230036；4. 安徽农业大学茶树生物学与资源利用国家重点实
+验室，合肥 230036；5. 安徽农业大学林学与园林学院，合肥 230036) 
+ 
+摘  要：随着消费者对农产品质量要求的不断提升，有效的质量安全监管成为现代农业亟需解决的问题。农产
+品溯源系统作为一种有效的解决方案，能够提升信息的透明度和操作的可靠性。本研究利用 Fisco-Bcos 联盟链技术，
+构建了一个新型的农产品溯源系统。通过即时将农产品质量相关的图片信息上传到区块链上，本系统提升了数据的
+可信性，强化了消费者的监管能力及知情权。结果表明该系统显著提高了溯源信息的真实性和整体的信任度。此外，
+本研究系统通过仅上传关键的质量认证图片，而非全部溯源节点信息，不仅加强了消费者的知情权和监管能力，同
+时也进一步有效减轻了区块链节点的存储压力。 
+关键词：溯源系统；农产品；Fisco-Bcos；区块链 
+中图分类号：TP311；F322         文献标识码：A           文章编号：1672352X (2024)03053007 
+ 
+Research on the design and implementation of an agricultural product traceability 
+system based on Fisco-Bcos consortium blockchain technology 
+ 
+GAO Qijuan1,2,4, JIANG Daozhen2, YUE Yang2, WANG Guangshun2, 
+ZHANG Youhua3, DING Wenqing5, CHEN Yulin1, GUI Liquan1 
+(1. Postdoctoral Research Station of Xieyuda Tea Co., Ltd., Hefei 230036; 2. School of Computer Science and Artificial Intelligence, 
+Hefei Normal University, Hefei 230061; 3. Anhui Beidou Precision Agriculture Information Engineering Research Center, Anhui 
+Agricultural University, Hefei 230036; 4. State Key Laboratory of Tea Plant Biology and Utilization, Anhui Agricultural University, 
+Hefei 230036; 5. School of Forestry and Landscape Architecture, Anhui Agricultural University, Hefei 230036) 
+ 
+Abstract: With the growing expectations for the quality of agricultural products, the need for robust quality 
+and safety regulations has become a critical concern in modern agriculture. To address this issue, a traceability 
+system for agricultural products has been identified as a viable solution, as it can improve the transparency of in-
+formation and the reliability of operations. In this study, a novel traceability system for agricultural products was 
+constructed by Fisco-Bcos consortium blockchain technology, which system enhanced data integrity by immedi-
+ately uploading images pertinent to the quality of agricultural products onto the blockchain, and in turn fortified 
+consumer supervision and the right to be informed. The results indicated that the system significantly enhanced 
+the authenticity of traceability information and overall trustworthiness. Furthermore, the system was designed to 
+upload only essential quality certification images, rather than information on every traceability node. The result 
+not only further strengthens consumer's rights to information and oversight but also effectively reduces the storage 
+burden on blockchain nodes. 
+Key words: traceability system; agricultural products; Fisco-Bcos; blockchain 
+ 
+
+
+【第2页】
+51 卷 3 期 
+高琪娟等: 基于 Fisco-Bcos 联盟链技术的农产品溯源系统设计与实现研究 
+531 
+ 
+ 
+随着社会对食品质量安全的重视日益提升，尤
+其是在农产品领域，消费者的需求已经驱动了溯源
+系统的探索和实施。在数字化乡村振兴的背景下，
+“区块链+”的应用被认为是提升农产品品质并扩
+大种植面积的有效途径。然而，现存的农产品质量
+安全监管体系存在数据不可信、信息不对称和监管
+机制的缺失等问题，这些都是对消费者权益的保护
+产生了挑战。 
+目前已有不少国内外专家学者开展基于区块链
+技术的应用研究和实践。例如，在国外，有专家提
+出了基于区块链技术实现粮食供应链可追溯性，并
+优化了区块链存储[1-2]。此外，有学者通过区块链的
+智能合约技术追溯稻米供应链的交易信息，以辅助
+决策[3]。在国内，专家提出将区块链技术应用到水稻
+供应链溯源系统中，以确保水稻相关的敏感数据和
+隐私安全[4]。还有研究者利用 Fisco-Bcos 块链开源框
+架，结合签名技术实现用户身份信息保护[5-6]。这些
+研究表明区块链技术应用到农产品溯源系统可行
+性，能为农产品溯源体系建设提供技术支撑，从而
+提高农产品产业的标准化程度和品牌价值，加强监
+管力度，保障消费者的权益。 
+尽管区块链技术近年来已经被应用到农产品溯
+源系统，但我国有机及绿色农产品企业面临的一个
+主要挑战是，多数企业仍依赖自主管理，缺乏有效
+的监督机制，因此无法保证销售的农产品品质[7-8]。
+此外，还有大部分区域的乡镇级以上农产品质量工
+作机构（包括监管、检测、执法等机构）还在探索
+如何进行质量安全信息的采集、归集和共享[9]。目
+前，生产批次的二维码及其溯源和防篡改功能，还
+需要进一步研究和优化。此外，尽管早期研究围绕
+主体生产档案，建立投入品使用记录、生产记录、
+产品流通、农产品检测等信息的溯源平台，但溯源
+各环节信息主要依靠人工输入，因此数据的可信性
+受到质疑 [10]；全溯源数据上链会对服务器的存储造
+成压力，并产生了冗余性。这些问题都限制了农产
+品行业的发展和消费者对农产品产品的信任，使得
+溯源体系的作用大打折扣[11]。 
+为了实现对农产品质量的关键信息溯源，本项
+目基于 Fisco-Bcos 区块链技术构建了农产品溯源系
+统，系统通过关键阶段（种植、加工、流通、销售）
+的图片信息上链，使数据不可修改，简化了数据流
+程，让农产品溯源变得简单透明，做到来历可查、
+去向可追、职责可究，从而实现产品全过程“身份”
+管理、品质把控。同时，满足了政府监管、企业经
+营和公众查询。 
+1  农产品可追溯总体架构和功能模块 
+1.1  关键技术 
+区块链平台是基于 Web3.0 技术进行开发，并
+结合使用了 WeBase 平台构建（图 1），系统搭建流
+程如下：首先，安装并部署 WeBase，并将区块链节
+点管理信息添加到 WeBase 平台中，以便实现
+WeBase 与节点的通信；接下来，添加所需信息，包
+含节点信息和用户私钥到生成；随后，通过智能合
+约 IDE 开发并部署智能合约，并记录合约地址等关
+键信息；最后，进入运行管理阶段，在应用层发布
+后，系统将持续进行交易，用户通过 WeBase 管理
+平台进行数据概览，节点监控，查看交易解析以及
+交易审计等多项管理功能。 
+ 
+ 
+ 
+图 1  农产品可追溯平台技术架构 
+Figure 1  Technical architecture of agricultural product 
+traceability platform 
+ 
+此外，区块链技术的应用使得农产品供应链中
+的所有使用者可以共享数据，实现信息的互通与共
+享（图 2）。这种技术提升了供应链的透明度和可追
+溯性，使每个环节的信息都能够被清晰记录和监控，
+从而提高整体供应链的效率和信任度。 
+1.2  农产品可追溯总体架构 
+该溯源系统主要采集的数据主要包括农产品种
+植、采集、加工、销售和物流。针对农产品种植环
+节，信息包括产品类型、名称、投入品名称、使用
+量等。通过扫描二维码，消费者能查询农产品溯源
+信息，并对发现的问题进行反馈。本设计主要采用
+基于溯源技术对农产品质量进行管控，通过对农产
+品从生产到流通各环节的信息进行管理，并实施农
+产品质量的追溯，从而构建一个完整的农产品溯源
+体系。 
+该系统采用分层架构设计，包括用户层、表示
+层、共识和网络层、数据层、作业层组成。如图 3 
+
+
+【第3页】
+532 
+安 徽 农 业 大 学 学 报 
+2024 年 
+ 
+ 
+ 
+图 2  区块链的供应链追溯信息 
+Figure 2  Traceability information of blockchain 
+ 
+ 
+图 3  农产品可追溯体系总体架构 
+Figure 3  Architecture of agricultural product traceability system 
+ 
+所示，系统服务于农业经营主体、销售者、运输者
+和消费者等多种用户，使他们能够通过系统进行互
+动。表示层主要使用户能通过构建的平台获取搜索
+的溯源信息。共识及网络层基于 Fisco-Bcos 开源平
+台，处理各个节点之间的网络连接和传输，同时运
+用分布式算法和加密签名等技术实现区块链的验证
+机制。数据层既实现溯源数据的存储、验证、共享、
+分析和交易，一部分数据存储至传统的关系型数据
+
+
+【第4页】
+51 卷 3 期 
+高琪娟等: 基于 Fisco-Bcos 联盟链技术的农产品溯源系统设计与实现研究 
+533 
+ 
+ 
+库中，另一部分图片数据通过数据摘要、非对称加
+密、哈希算法和证书，将一段时间内接收到的交易
+数据和代码封装到一个带有时间戳的数据区块中，
+并链接到当前最长的主区块链上，形成最新的区块。
+数据的作业层主要涉及农产品溯源过程中的几个重
+要环节，比如种植、采集、加工、销售和物流等信
+息。该架构设计充分体现了从用户到数据处理的全
+流程覆盖，旨在为消费者和农业产业链的其他相关
+方提供一个安全、可靠和易于访问的溯源平台。 
+1.3  农产品可追溯系统的设计 
+农产品质量安全追溯体系贯穿于农产品种植、
+采集、加工和销售环节，该平台包括基础信息管理、
+种植过程管理、加工过程管理、流通过程管理和防
+伪溯源信息等功能（图 4）。它可以记录农产品生产、
+加工和销售的全过程数据，并提供查询和分析功能。 
+ 
+图 4  农产品可追溯平台功能模块 
+Figure 4  Functional module of agricultural product traceability platform 
+ 
+2  实现基于 Fisco-Bcos 联盟链构建农产品
+溯源平台 
+2.1  Fisco-Bcos 联盟链搭建 
+本农产品质量溯源系统采用 Fisco-Bcos 作为基
+础的联盟链技术，通过 WeBase 平台进行开发与管
+理。系统重点关注标识农产品，从种植到销售到每
+个关键环节，并确保这些节点信息准确性，通过上
+传农产品信息，如类型、生长过程、销售信息及相
+关图片到 WeBase 数据服务器，达到了信息的完整
+性和可追溯性。 
+以茶叶为例，系统通过区块链技术实现了茶园
+认证、营业执照、检测报告以及产品标准（三品一
+标）等信息的数字化和上链，以确保每一份记录都
+是可验证的。此过程不仅保障了信息的透明度，而
+且通过 WeBase 与区块链节的交互，能够为用户生
+成专属的私钥，以保障交易和信息的安全性，如图
+5 所示，展现了从数据上链到私钥生成的全过程。 
+此外，用户可以利用智能合约集成开发环境
+（IDE）部署合约，并能获取合约地址和相关信息。
+当应用层部署完毕，系统将自动持续发送交易。用
+户可以通过 WeBase 管理平台进行监控和管理，该
+平台提供了包括数据概览、节点状态，交易详情解
+析以及交易审计等多种功能。 
+2.2  利用 Fisco-Bcos 联盟链存证图片 
+通过已搭建 Fisco-Bcos 联盟链，消费者在前端
+
+
+【第5页】
+534 
+安 徽 农 业 大 学 学 报 
+2024 年 
+ 
+ 
+查询农产品的溯源信息时，可以通过产品名称和批
+次号获取溯源码，这个溯源码可以用来在区块链数
+据库中检索和获取相关信息，通过对比区块链的数
+据库和本地数据的信息，消费者可以验证产品真实
+性和质量。 
+在该项目中，企业上链的信息涵盖了多个方面，
+包括企业注册信息、财务报表、供应链信息、知识
+产权等多种方面的图片信息，这些信息的上链能确
+保数据可靠性，提升企业的信誉度和市场竞争力。 
+ 
+ 
+ 
+图 5  节点和私钥信息 
+Figure 5  Node and private key information 
+ 
+图 6  通过 WeBase 平台查看区块链上产品上链信息 
+Figure 6   Review products on the blockchain information through the WeBase platform 
+
+
+【第6页】
+51 卷 3 期 
+高琪娟等: 基于 Fisco-Bcos 联盟链技术的农产品溯源系统设计与实现研究 
+535 
+ 
+ 
+同时，企业可以利用区块链技术将自己的产品
+上链，这一举措可以使企业和消费者清晰地了解到
+产品的来源、制造过程、运输过程等细节信息，从
+而建立更加透明、可信的供应链体系。通过区块链
+的应用，产品的信息记录得到了有效保障。提升消
+费者对产品的信任度。 
+此外，通过 WeBase 平台，用户还可以方便查
+看区块链上链的产品信息，这些信息有产品的交易
+记录。因此，借助于该平台，用户能直接查看到区
+块链上的上链产品信息（图 6）。 
+2.3  农产品溯源平台的应用实例 
+平台还使用区块链技术实现了农产品基础信息
+管理、种植过程管理、加工过程管理、流通过程管
+理、防伪溯源信息和存证系统等功能数据（图 7）。
+此外，该平台基础信息管理包括农产品的种类、生
+产地点、生产时间等信息的记录和管理数据。 
+ 
+图 7  数据的查询和分析 
+Figure 7  Data query and analysis 
+ 
+图 8  有机认证图片上链存证应用 
+Figure 8  Application of organic certification image on chain 
+
+
+【第7页】
+536 
+安 徽 农 业 大 学 学 报 
+2024 年 
+ 
+ 
+该平台主要将溯源过程中的关键图片节点信息
+上传区块链，例如，在产品认证模块中，当农业主
+体上传了绿色有机认证的证书图片后，该图片信息
+就不可篡改，通过查询有机认证，能查看到有机认
+证的有效期（图 8）。 
+鉴于此，此平台能辅助验证生产经营主体存在、
+经营和产出的真实性，从而帮助农产品企业进一步
+提升产品质量，扩大品牌知名度，增强客户黏度从
+而提供农产品产品质量安全溯源的数据依据。 
+3  结论 
+以 Fisco Bcos 区块链为技术核心，针对农产品
+产业中长期存在的质量安全难题，利用 Fisco Bcos
+区块链作为技术核心构建了农产品溯源系统。包括
+企业基础信息、农产品种植、农产品加工过程、农
+产品流通过程、防伪溯源信息等。其中，将农产品
+基本信息、种植过程记录、流通环节的关键溯源数
+据上传到区块链系统，实现了信息的共享和去中心
+化管理，打破了信息孤岛现象。 
+这一系统能够实现农产品从种植到进入消费者
+手中的全过程可追溯，形成了农业全产业链的集成
+效应，深度融合了“生态链+产业链”的理念，从而提
+升了农业全要素生产率。通过区块链技术实现的安
+全溯源，消费者可通过手机扫描二维码迅速查询到
+产品的溯源信息，从而提升了产品的溯源公信力，
+促进了品牌知名度的提升，进一步推动了产品销量
+的增长。 
+然而，尽管区块链技术在解决农产品溯源难题
+上取得了显著成效，但在应用过程中仍面临着一些
+挑战和问题。其中包括存储成本高、处理速度慢、
+节点故障率以及数据安全性等方面存在不足。未来，
+计划针对这些关键挑战提出相应解决方案，并持续
+优化系统性能。 
+另外，计划在后期利用基于区块链技术构建农
+业溯源大数据模块，结合机器学习方法计算链上主
+体的信用等级，为农户提供实时在线信用评级服务，
+从而解决农户在前期投入和后期销售中的资金问
+题，进一步促进农产品产业的发展和升级。 
+参考文献：  
+[1] SHARMA A, JHAMB D, MITTAL A. Food supply chain 
+traceability by using blockchain technology[J]. J Comput 
+Theor Nanosci, 2020, 17(6): 2630-2636. 
+[2] AGGARWAL S, CHAUDHARY R, AUJLA G S, et al. 
+Blockchain for smart communities: Applications, chal-
+lenges and opportunities[J]. J Netw Comput Appl, 2019, 
+144(C): 13-48. 
+[3] YAKUBU B M, LATIF R, YAKUBU A, et al. RiceChain: 
+secure and traceable rice supply chain framework using 
+blockchain technology[J]. PeerJ Comput Sci, 2022, 8: e801. 
+[4] 陈邦越. 基于区块链的水稻全供应链溯源系统设计与
+实现[D]. 长春: 吉林农业大学, 2021. 
+[5] 范茂顺. 基于区块链的隐私保护农产品溯源系统研究
+与实现[D]. 哈尔滨: 哈尔滨工业大学, 2021.  
+[6] GALVEZ J F, MEJUTO J C, SIMAL-GANDARA J. Fu-
+ture challenges on the use of blockchain for food tracea-
+bility analysis[J]. Trac Trends Anal Chem, 2018, 107: 
+222-232. 
+[7] 董莉,王立东,赵晓晨,等.云南水果产业品牌发展现状及
+对策研究初探[J].农学学报,2023,13(3):102-106. 
+[8] 刘烨潼,张玮,陈秋生,等.天津市农产品质量安全存在的
+问题及意见建议[J].农学学报,2021,11(4):97-100. 
+[9] 王华, 李卫卫, 吴怀广, 等. 基于二维码的禽类肉产品
+安全溯源系统设计与实现[J]. 计算机应用与软件, 2020, 
+37(10): 1-5. 
+[10] 左敏, 何思宇, 张青川, 等. 基于区块链的食品溯源技
+术研究[J]. 农业大数据学报, 2020, 2(3): 52-60. 
+[11] AUNG M M, CHANG Y S. Traceability in a food supply 
+chain: Safety and quality perspectives[J]. Food Contr, 
+2014, 39: 172-184. 
+ 
+ 
+

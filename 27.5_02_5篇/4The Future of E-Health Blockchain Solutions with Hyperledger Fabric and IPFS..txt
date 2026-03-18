@@ -1,0 +1,896 @@
+来源文件：4The Future of E-Health Blockchain Solutions with Hyperledger Fabric and IPFS..pdf
+============================================================
+
+【第1页】
+The Future of E-Health: Blockchain Solutions with Hyperledger Fabric and IPFS 
+Hend Abdul Ameer Hadi1*
+, Rana Fareed Ghani2
+1 Informatics Institute for Postgraduate Studies, Iraq Commission for Computers & Informatics, Baghdad 10069, Iraq 
+2 Department of Computer Science, University of Technology-Iraq, Baghdad 10066, Iraq 
+Corresponding Author Email: phd202210700@iips.edu.iq 
+Copyright: ©2025 The authors. This article is published by IIETA and is licensed under the CC BY 4.0 license 
+(http://creativecommons.org/licenses/by/4.0/).
+https://doi.org/10.18280/isi.300121 
+ABSTRACT 
+Received: 21 August 2024 
+Revised: 16 October 2024 
+Accepted: 27 November 2024 
+Available online: 25 January 2025 
+The electronic representation of a patient's medical information is called an electronic health 
+record, or EHR. Normally, these records are kept on cloud-based or central servers. 
+Blockchain technology is a new technology used to solve security and privacy problems of 
+EHR data in a decentralized way. Hence, they are accessible to authorized health providers 
+for better management of patient care. Building secure e-health systems with public 
+blockchains such as Ethereum faces several problems. The main issue is that these 
+blockchains are permissionless; everybody can join in and obtain access to the data, which 
+becomes a cause of significant privacy concerns. This research proposes a private and 
+decentralized e-healthcare system using Hyperledger Fabric and the Interplanetary File 
+System (IPFS) for securely and effectively storing and retrieving EHRs. Privacy and 
+security are guaranteed with Hyperledger Fabric in ensuring that only authorized parties 
+can access sensitive medical information. The system is further enhanced to include 
+decentralized storage based on IPFS for the storage of medical images and files that cannot 
+be directly stored in the blockchain. 
+Keywords: 
+e-health, blockchain, electronic healthcare
+records 
+(EHRs), 
+Hyperledger 
+Fabric,
+Interplanetary File System
+1. INTRODUCTION
+In blockchain technology, data is maintained in a
+decentralized ledger. Blockchain technology ensures integrity 
+and availability, enabling members in the network to create, 
+read, and verify transactions recorded in a distributed ledger. 
+It prevents the deletion and alteration of any information in its 
+ledger, including transactions. Digital signatures, hash 
+functions, and other cryptographic primitives and protocols 
+support and safeguard the blockchain system. These primitives 
+ensure that the transactions entered into the ledger are 
+legitimate, 
+integrity-protected, 
+and 
+non-repudiated. 
+Furthermore, blockchain technology requires a consensus 
+protocol, which is a set of guidelines that each member must 
+accept in a distributed network. This is necessary for all 
+participants to agree on a single record and create a globally 
+unified perspective [1]. 
+With the increased interest in blockchain technology and its 
+applications in different businesses and organizations, 
+healthcare represents an essential field where many use cases 
+have been recognized for blockchain applications [2-4]. In 
+healthcare, a blockchain network stores and exchanges patient 
+data among hospitals, doctors, drug companies, and diagnostic 
+labs. Using blockchain in healthcare improves security, 
+efficiency, and transparency during medical data sharing [5-7]. 
+Blockchain technology is a great fit for many applications, 
+including virtual currencies, e-government, e-healthcare, and 
+food and drug monitoring, in agreement with the General Data 
+Protection Regulation [8, 9]. There are three types of 
+blockchains: private or permissioned, public or permissionless, 
+and consortium. 
+The public blockchain, such as the Ethereum blockchain, is 
+proposed in many studies in the healthcare sector [10, 11]. 
+However, Ethereum has several drawbacks when it is used to 
+design healthcare apps. The main drawbacks are high 
+transaction costs, poor transaction throughput, and slow 
+efficiency [12, 13]. The Hyperledger Fabric open-source 
+platform is a private blockchain network used to establish a 
+distributed ledger network. The modular architecture of 
+Hyperledger Fabric provides high-security levels, scalability, 
+adaptability, and resilience. Fabric-based systems may 
+therefore be customized to fit different sectors. This secure and 
+private blockchain framework is managed by the Linux 
+Foundation [5]. 
+The benefits of the Hyperledger Fabric platform, including 
+its high performance, modular architecture, open-source 
+nature, and high-quality code, increase its profitability. The 
+key feature of Hyperledger Fabric is that it is permissioned. In 
+contrast to the public blockchain, the private blockchain is not 
+accessible to everyone. Everyone who requests access must 
+first obtain permission. Another key benefit is the multichain 
+support to restrict data access to private members and 
+organizations, where data can be stored in private ledgers 
+accessible only by chaincode on authenticated peers [12]. The 
+Hyperledger Fabric network is proposed in various sectors 
+such as the e-government system [14], health insurance system 
+[15], and student certificate system [16]. One of the main 
+challenges facing the healthcare sector is safely and effectively 
+exchanging patient data throughout various providers and 
+institutions. Many e-health systems have depended on public, 
+Ingénierie des Systèmes d’Information 
+Vol. 30, No. 1, January, 2025 pp. 243-255 
+Journal homepage: http://iieta.org/journals/isi 
+ 
+243
+
+
+【第2页】
+paid platforms like Ethereum, which may be expensive and not 
+completely suit healthcare data management's specialized 
+demands. The suggested e-health system uses Hyperledger 
+blockchain technology to provide an interoperable, transparent, 
+and safe platform for exchanging health information. Data 
+encryption, access controls, and audit trails in Hyperledger 
+Fabric 
+help 
+meet 
+Health 
+Insurance 
+Portability 
+and 
+Accountability’s 
+(HIPAA) 
+strict 
+requirements 
+for 
+confidentiality, integrity, and availability of patient data. The 
+remaining sections of the document are arranged as follows: 
+Section 2 displays some related works, Section 3 presents an 
+overview of the Hyperledger Fabric architecture, Section 4 
+introduces the proposed blockchain-based e-healthcare system, 
+Section 5 displays the study's findings and performance 
+evaluation, and Section 6 concludes with recommendations for 
+future work. 
+2. RELATED WORKS
+Arunkumar and Kousalya [17] suggest a decentralized
+secure cloud-based medical blockchain to maintain the 
+traceability, interoperability, and anonymity of patients' 
+electronic health record (EHR) data between various 
+organizations. To attain better performance, the lightweight 
+authentication encryption algorithm AES_256_GCM encrypts 
+the data before uploading it to the cloud-based blockchain. 
+Access to EHR data on the cloud is restricted by an Ethereum-
+based solidity smart contract.  
+Khatoon [18] explores the use of the Ethereum platform to 
+facilitate data management in the healthcare system. They 
+design and implement various medical workflows like surgery 
+and clinical trials to manage large amounts of medical data. 
+The paper estimates the associated costs of implementing 
+these medical smart contract systems.  
+Kayastha et al. [19] introduce a decentralized application 
+that utilizes Ethereum private blockchain, Interplanetary File 
+System (IPFS), and other internet technology tools to support 
+healthcare 
+providers, 
+research 
+organizations, 
+and 
+policymakers in Nepal. The paper concludes that blockchain 
+technologies can offer a better alternative for public and 
+private health institutions and practitioners in storing safe 
+patient records, thus improving the timely delivery of quality 
+healthcare services in a resource-constrained country like 
+Nepal. 
+Rupa and Chakkaravarthy [20] suggest an Ethereum 
+framework for authenticating medical documents using unique 
+IDs based on blockchain. These digital IDs can substitute 
+physical documents to reduce the risks related to hacking or 
+forgery. The framework recommended in this paper exploits 
+the immutable nature, decentralized nature, and transparency 
+and security of blockchain technology. The proposed 
+framework uses Remix Ethereum IDE, Solidity programming, 
+and MetaMask. 
+Haddad et al. [21] propose an EHR management system that 
+is patient-centered and blockchain-based so that patients can 
+manage their data with many stakeholders, ensuring privacy 
+and control without centralization. It stores data in a 
+distributed and unchangeable manner using the Ethereum 
+blockchain and IPFS. Access control is secured through an 
+Ethereum smart contract. They test and evaluate the 
+framework in Windows using Truffle and Web3 networks for 
+its data storage costs and execution time. 
+While Ethereum is a strong public blockchain, it is not well 
+suited for e-health systems because of its issues with 
+scalability, privacy, governance, and high operating costs. In 
+contrast, Hyperledger Fabric offers a more private, governed, 
+and customized environment that better fits the demands of 
+organizations and industries needing scalability, privacy, and 
+flexibility.  
+3. HYPERLEDGER FABRIC ARCHITECTURE
+Distributed 
+applications 
+built 
+in 
+general-purpose
+programming languages (e.g., Node.js, Go, and Java) are 
+executed by Hyperledger Fabric, a distributed operating 
+system for permissioned blockchains. its execution history in 
+a duplicated ledger data structure that is appended securely. 
+Hyperledger Fabric departs from the conventional order-
+execute design and presents the execute-order-validate 
+blockchain architecture as shown in Figure 1 [22]. 
+Figure 1. Execute-order-validate architecture of Hyperledger 
+Fabric [21] 
+3.1 Execution phase 
+Clients sign and send the proposal for the transaction to one 
+or more endorsers for implementation at the execution step. 
+With the endorsement policy, each chaincode inherently 
+designates a group of endorsers. A proposal includes the 
+following: the MSP- determined identity of the submitting 
+client, the transaction payload, a nonce that each client will use 
+only once (random value or a counter), and a transaction 
+identifier that is created from both the nonce and client. 
+By implementing the operation on the specific chaincode 
+installed on the blockchain, the endorsers simulate the 
+proposal. The simulation generates a writing set (a state update) 
+and a reading set (version dependencies), which endorsers sign 
+and return to the clients as endorsements. Clients gather these 
+endorsements to meet the chaincode endorsement policy 
+before creating and submitting the transaction for ordering 
+service [22]. 
+3.2 Ordering phase 
+A transaction is put together and sent to the ordering service 
+by the client once it has gathered sufficient endorsements for 
+a proposal. The transaction consists of a collection of 
+endorsements, transaction information, and the transaction 
+payload—that is, the chaincode procedures with all of its 
+parameters. Ordering, despite faulty orderers, broadcasts 
+endorsements atomically and begins consensus on transactions. 
+Additionally, the ordering service batches several transactions 
+into blocks, creating a hash-chained sequence containing 
+transactions. to increase the broadcast protocol throughput [22, 
+23]. 
+3.3 Validation phase 
+In Hyperledger Fabric, blocks are forwarded directly to 
+244
+
+
+【第3页】
+peers from the ordering service. Thereafter, they follow a 
+three-phase validation process. In the first phase, there is the 
+validation of the endorsement policy. The second phase is the 
+sequential version check of all the transactions. In the third 
+phase, the state of the blockchain is updated in the local ledger 
+by appending the block [22]. 
+A smart contract in Hyperledger Fabric is called chaincode, 
+a computer code that executes throughout the execution phase 
+and implements the application logic. The chaincode is the 
+core component of a distributed application in Hyperledger 
+Fabric. System chaincodes are special chaincodes that exist to 
+manage the blockchain system and control parameters [22, 24]. 
+ 
+ 
+4. THE PROPOSED METHODOLOGY 
+ 
+This paper proposes the Hyperledger Fabric to serve as the 
+blockchain network that provides secure and immutable 
+storage to manage e-health records. The proposed design of 
+the Hyperledger network-based e-health system involves three 
+organizations: Hospital1, Hospital2, and Patient. The Patient 
+organization is used to record patients' data and retrieve all 
+their EHRs. It uses a single channel to connect the three 
+organizations and maintains a single ledger to store and 
+retrieve the Patient, Hospital1, and Hospital2 records. Figure 
+2 shows the proposed Hyperledger-based e-health system with 
+a single channel and three organizations. 
+It is impossible to directly store images on a blockchain 
+such as Hyperledger Fabric because of their size, cost, 
+inefficiency, and scalability problems. Instead, these issues are 
+tackled through the use of the IPFS, which offers decentralized 
+storage for large files efficiently and at a low cost. IPFS 
+employs content-addressing to ascertain the file's integrity and 
+fast retrieval. Therefore, the proposed solution is to offload 
+image storage to IPFS while storing metadata and file 
+references (hashes) only on the blockchain. The suggested 
+approach is made to work with three different types of web 
+apps (Patient application, Hospital1 application, and Hospital2 
+application). Figure 3 shows the interaction between the 
+entities: Application Interface, Hyperledger SDK, Peer 
+organization, and Orderer organizations to add new blocks to 
+the ledger. 
+ 
+ 
+ 
+Figure 2. The proposed Hyperledger-based e-health system with a single ledger 
+245
+
+
+【第4页】
+ 
+ 
+Figure 3. Activity diagram of the proposed e-health-based 
+Hyperledger Fabric system 
+ 
+4.1 Patient application 
+ 
+Patients can register and create an account in the first one 
+(Patient chaincode) by providing their details, including name, 
+age, gender, username, and password for sign-in. Every patient 
+receives an automatic ID from the system. This ID is essential 
+since it makes the patient's EHRs easier to store and retrieve, 
+as shown in Algorithm 1. The patient can retrieve his medical 
+records from any hospital using his ID. The channel 
+(mychannel) acts as the main channel used to retrieve data 
+from other ledgers. 
+The main steps of this chaincode are: 
+· Add new patients including (name, age, gender, 
+username, and password). 
+·Retrieve the patient's unique ID. 
+·Get patient data using his ID. 
+·Define the count key to retrieve the last count index 
+stored in the ledger to increase it for new patients. 
+·Generate a unique patient ID based on the count key, 
+patient name, and age. 
+ 
+Algorithm 1: Patient chaincode 
+Define constant patient_count_key as "patientCount" 
+ 
+Define structure Patient: 
+    ID: string 
+    Name: string 
+    Gender: string 
+    Age: integer 
+    Username: string 
+    Password: string 
+ 
+Define function GenerateID(name, age, count): 
+    shortName = first 4 characters of  
+    return lowercase (shortName + age + count) 
+ 
+Define function AddPatient(name, gender, age, username, 
+password): 
+    count = GetPatientCount() 
+    id = GenerateID(name, age, count + 1) 
+     
+    patient = new Patient with: 
+        ID = id 
+        Name = name 
+        Gender = gender 
+        Age = age 
+        Username = username 
+        Password = password 
+     
+    Save patient to blockchain 
+    SetPatientCount(count + 1) 
+ 
+Define function GetPatient(id): 
+    patientData = Retrieve data from the blockchain using id 
+    if patientData doesn't exist: 
+        return "Patient not found" 
+    return patientData as a Patient object 
+ 
+Define function GetPatientCount(): 
+    count = Retrieve patient_count_key from blockchain 
+    if count doesn't exist: 
+        SetPatientCount(0) 
+        return 0 
+    return count as integer 
+ 
+Define function SetPatientCount(count): 
+    Save count to the blockchain using patient_count_key 
+ 
+Main function: 
+    Initialize PatientContract 
+    Start the blockchain application 
+ 
+4.2 Hospital1 application 
+ 
+Hospital1 uses the second application, Hospital1 chaincode, 
+to store the patient's medical record indexed by their ID. The 
+medical record that makes up this chain code contains many 
+pieces of information, including the patient's name, ID, gender, 
+age, blood type, medical conditions, date of admission, 
+treating physician, and any related insurance information. It 
+saves and retrieves data from the Hyperledger blockchain 
+using functions in Algorithm 2. 
+The main steps of this application are: 
+·Add new medical records including medical data (ID, 
+Name, 
+Age, 
+Gender, 
+BloodType, 
+MedicalCondition, 
+AdmissionDate, Doctor, Insurance, BillingAmount). 
+·Retrieve the medical record using ID. 
+ 
+Algorithm 2: Hospital1 chaincode 
+Define structure MedicalRecord: 
+    ID: string 
+    Name: string 
+246
+
+
+【第5页】
+    Age: integer 
+    Gender: string 
+    BloodType: string 
+    MedicalCondition: string 
+    AdmissionDate: string 
+    Doctor: string 
+    Insurance: string 
+    BillingAmount: float 
+    RoomNumber: integer 
+    AdmissionType: string 
+    DischargeDate: string 
+    Medication: string 
+    TestResults: string 
+ 
+Define function SetRecord(all fields of MedicalRecord): 
+    Create a new MedicalRecord with the provided fields 
+    Save MedicalRecord to the blockchain using ID as a key 
+ 
+Define function GetRecord(id): 
+    Retrieve data from the blockchain using id 
+    if data doesn't exist: 
+        return "Record not found" 
+    return MedicalRecord object 
+ 
+Main function: 
+    Initialize MedicalRecordContract 
+    Start the blockchain application 
+ 
+4.3 Hospital2 application 
+ 
+Hospital2 manages patient medical records using the 
+Hospital2 chaincode and IPFS. Since Blockchain technology 
+cannot store files directly in its blocks, we use another storage 
+system such as IPFS or the cloud to store the files. We then 
+take the hash value or the URL of the files (if the cloud is used) 
+and store it in the blockchain to ensure the integrity of the 
+medical record. Hospital2 chaincode involves storing patient 
+medical data and the hash value of the IPFS-generated medical 
+images, guaranteeing effective and safe storage and retrieval 
+of both data and images, as shown in Algorithm 3.  
+The main steps of the Hospital2 application: 
+·Store the medical files such as medical images in the 
+IPFS and take the hash values of the file. 
+·Add new medical record including (ID, Name, Age, 
+ImageHash). 
+·Retrieve the medical record using ID. 
+ 
+Algorithm 3: Hospital2 chaincode 
+Define structure Record: 
+    ID: string 
+    Name: string 
+    Age: integer 
+    ImageHash: string 
+ 
+Define function CreateRecord(id, name, age, imageHash): 
+    Create a new Record with: 
+        ID = id 
+        Name = name 
+        Age = age 
+        ImageHash = imageHash 
+     
+    Save Record to the blockchain using ID as a key 
+ 
+Define function RetrieveRecord(id): 
+    Retrieve data from the blockchain using the ID 
+    if data doesn't exist: 
+        return "Record not found" 
+    return Record object 
+ 
+Main function: 
+    Initialize RecordContract 
+    Start the blockchain application 
+ 
+ 
+5. EXPERIMENTAL RESULTS AND ANALYSIS 
+ 
+The following features are included in the ASUS laptop that 
+was used to carry out the suggested methodology: i7-12700H, 
+a 2.30 GHz 12th generation Intel(R) Core (TM) processor, 
+with 16.0 GB of RAM added. The machine was running 
+Ubuntu 22.04 64-bit. The Hyperledger Explorer dashboard is 
+seen in Figure 4, with the three operational organizations 
+linked to "mychannel" enabling safe and effective cooperation; 
+these institutions serve as the backbone of a private e-health 
+network. Figure 5 shows the three chaincodes that are 
+deployed on “mychannel” (Patient chaincode, Hospital1 
+chaincode, and Hospital2 chaincode). 
+ 
+ 
+ 
+ 
+Figure 4. Three organizations connected to "mychannel" in the private e-health network 
+ 
+247
+
+
+【第6页】
+Figure 5. Three chaincodes that are deployed to "mychannel" in the private e-health network 
+5.1 Performance metrics 
+The performance metrics used in the experimental result are 
+achieved using Hyperledger Explorer and (Prometheus& 
+Grafana) reports. Also, the Average response time is computed. 
+Hyperledger Explorer metrics are: 
+·Blocks per hour
+·Blocks per minute
+·Transactions per hour
+·Transactions per minute
+Grafana is an open-source analytics and visualization
+platform that connects with Prometheus and many data 
+sources to provide interactive, customized dashboards, 
+facilitating the viewing and analysis of metrics. Together, they 
+offer a comprehensive monitoring solution. Grafana provides 
+the following metrics: 
+·Docker containers metrics (CPU usage, and Memory
+usage) 
+·Chaincode metrics (Request duration, Request received,
+Request completed) 
+· Endoreser metrics (Successful Proposal duration,
+Proposal received, Successful proposals) 
+·Ledger metrics (Block processing time, Block storage
+commit time, StateDB commit time). 
+5.2 Experimental results 
+In this section, the proposed system's outcomes are 
+displayed using the mentioned metrics, and a comparison with 
+the Ethereum platform is conducted. Figures 6-9 show the 
+network's performance in terms of blocks/hour, blocks/minute, 
+transactions/hour, and transactions/minute, respectively. 
+The same chaincodes were written in solidity to be run on 
+the Ethereum platform using Truffle and Ganache techniques. 
+Figure 6. Blocks/hour generated in the Hyperledger-based e-
+health system 
+Figure 7. Blocks/min generated in the Hyperledger-based e-
+health system 
+Figure 8. Transactions/hour generated in the Hyperledger-
+based e-health system 
+Figure 9. Transactions/min generated in the Hyperledger-
+based e-health system 
+Hyperledger Fabric uses Docker containers to manage 
+organizations. Each organization includes peers, orderers, and 
+certificate authorities, all operating within isolated Docker 
+containers. 
+This 
+configuration 
+facilitates 
+scalability, 
+248
+
+
+【第7页】
+modularity, and flexibility, enabling organizations to execute 
+chaincodes, manage their ledgers, and process transactions 
+within their containerized environments. The CPU and 
+memory usage by each container are shown in Figures 10 and 
+11. The complexity of the chaincode affects the performance
+metrics for each peer.
+Figures 12-14 show the Endoreser metric. successful 
+proposal duration implies the amount of time in (milli second) 
+for the proposal to be processed by the peer, proposal received 
+indicates the number of proposals received by the peer in time 
+unit, and successful proposals which indicate the number of 
+proposals that are successfully processed and endorsed by the 
+peer. 
+Figures 15-17 display Chaincode metrics. Request duration 
+indicates the time taken to process a request, request received 
+indicates the number of received requests time unit, and 
+request completed indicates the number of completed requests. 
+Figures 18-20 display the Ledger metrics. Block processing 
+time, block storage commit time, and StateDB commit time, 
+respectively. Figures 21-23 show the screenshots from the 
+Ganache display, which presents the gas price of adding 
+blocks when running the three chaincodes on Ethereum. 
+Figure 10. Total CPU usage per container 
+Figure 11. Total memory usage per container 
+249
+
+
+【第8页】
+ 
+ 
+Figure 12. Successful proposal duration 
+ 
+ 
+ 
+Figure 13. Proposal received 
+ 
+ 
+ 
+Figure 14. Successful proposals 
+250
+
+
+【第9页】
+ 
+ 
+Figure 15. Request duration 
+ 
+ 
+ 
+Figure 16. Request received 
+ 
+ 
+ 
+Figure 17. Request completed 
+251
+
+
+【第10页】
+Figure 18. Block processing time 
+Figure 19. Block storage commit time 
+Figure 20. StateDB commit time 
+252
+
+
+【第11页】
+ 
+ 
+Figure 21. Gas amount used for adding blocks of the Patient smart contract 
+ 
+ 
+ 
+Figure 22. Gas used for adding blocks of the Hospital1 smart contract 
+ 
+ 
+ 
+Figure 23. Gas used for adding blocks of the Hospital2 smart contract 
+ 
+Table 1. A comparison of Ethereum and Hyperledger metrics for the three Chaincodes 
+ 
+Chaincode Name 
+Ethereum Time 
+Ethereum Gas 
+Hyperledger Time 
+Hyperledger Gas 
+Patient Chaincode 
+24295 
+201602573 
+150 
+0 
+Hospital1 Chaincode 
+15237 
+167365360 
+138 
+0 
+Hospital2 Chaincode 
+12671 
+118476040 
+136 
+0 
+ 
+Table 1 shows a comparison between the Hyperledger 
+Fabric platform and the Ethereum platform in terms of total 
+execution time (ms) and total gas used for 1,000 transactions 
+from the three organizations. Hyperledger Fabric is a 
+blockchain platform for non-currency purposes designed to 
+serve businesses. In contrast, Ethereum utilizes fees or gas 
+prices for transactions to incentivize miners and secure the 
+network. 
+253
+
+
+【第12页】
+5.3 Result discussion 
+ 
+The performance metrics for the Hyperledger Fabric 
+network indicate generally stable operation with efficient 
+request processing and balanced resource usage. All three of 
+the peers' memory consumption trends indicate an overall 
+upward tendency, peaking at 190–195 MB from initial values 
+of 145–150 MB. The CPU utilization remains consistent, 
+primarily varying between 1.32% and 1.52%. The successful 
+proposal duration fluctuates between 1.75ms and 2.20ms over 
+the monitored period. The proposal received metric ranges 
+from about 44 to 54 proposals. The proposal Received graph 
+shows that almost all proposals received were successful. 
+Request processing is generally stable, with occasional spikes 
+in duration. The network shows high efficiency, with nearly 
+all received requests being completed.  The block processing 
+time mostly ranges between 400μs and 500μs, with occasional 
+spikes up to about 560μs. The peers have much lower and 
+more consistent commit times, mostly between 2ms and 3ms. 
+Furthermore, when comparing the chaincode performance of 
+Ethereum to Hyperledger, Hyperledger exceeds Ethereum in 
+terms of execution time and resource efficiency. For example, 
+the Patient chaincode takes only 150ms on Hyperledger 
+against 24,295ms in Ethereum, and Hyperledger consumes no 
+gas versus Ethereum's 201,602,573 gas units. 
+ 
+ 
+6. CONCLUSION AND FUTURE WORKS 
+ 
+This paper suggests a private and decentralized e-healthcare 
+system that can store and retrieve electronic health records 
+securely and efficiently using Hyperledger Fabric and IPFS. 
+The monitoring of the peers shows stable performance with a 
+gradual increase in memory usage, consistent CPU utilization, 
+and efficient proposal processing times. Network efficiency is 
+high, with nearly all requests completed, and block processing 
+times remain low. Commit times are stable. Unlike Ethereum, 
+which uses fees or gas prices to reward miners to secure the 
+network, Hyperledger Fabric is a blockchain platform for non-
+currency applications developed to support businesses. This is 
+because Hyperledger Fabric operates on the premise of a 
+permissioned blockchain, where known participants are 
+responsible for running consensus processes. Therefore, 
+transactions are faster and cheaper in Hyperledger Fabric, 
+making it an ideal choice for those companies that need robust, 
+scalable, and private solutions without any transaction costs or 
+overheads. In future work, a multichain e-health-based 
+Hyperledger Fabric with multiple channels can be used to 
+maintain multiple ledgers instead of uploading all records in 
+one ledger to increase network scalability. To further enhance 
+data management, cloud storage might also take the role of 
+IPFS. 
+ 
+ 
+REFERENCES  
+ 
+[1] Guo, H., Yu, X. (2022). A survey on blockchain 
+technology and its security. Blockchain: Research and 
+Applications, 
+3(2): 
+100067. 
+https://doi.org/10.1016/j.bcra.2022.100067 
+[2] Agbo, C.C., Mahmoud, Q.H., Eklund, J.M. (2019). 
+Blockchain technology in healthcare: A systematic 
+review. 
+Healthcare, 
+7(2): 
+56. 
+https://doi.org/10.3390/healthcare7020056 
+[3] Marry, P., Yenumula, K., Katakam, A., Bollepally, A., 
+Athaluri, A. (2023). Blockchain based smart healthcare 
+system. In 2023 International Conference on Sustainable 
+Computing and Smart Systems (ICSCSS), Coimbatore, 
+India, 
+pp. 
+1480-1484. 
+https://doi.org/10.1109/ICSCSS57650.2023.10169704 
+[4] Saeed, H., Malik, H., Bashir, U., Ahmad, A., Riaz, S., 
+Ilyas, M., Bukhari, W.A., Khan, M.I.A. (2022). 
+Blockchain technology in healthcare: A systematic 
+review. 
+PlosOne, 
+17(4): 
+e0266462. 
+https://doi.org/10.1371/journal.pone.0266462 
+[5] Sujihelen, L. (2023). An efficient chain code for access 
+control in hyper ledger fabric healthcare system. e-
+Prime-Advances in Electrical Engineering, Electronics 
+and 
+Energy, 
+5: 
+100204. 
+https://doi.org/10.1016/j.prime.2023.100204 
+[6] Tabassum, T., Akter, F., Uddin, M.N. (2023). An 
+Ethereum blockchain-based healthcare system using 
+smart contract. In Applied Informatics for Industry 4.0. 
+Chapman and Hall/CRC, New York, pp. 34-45. 
+https://doi.org/10.1201/9781003256069-4 
+[7] Fang, H.S.A., Tan, T.H., Tan, Y.F.C., Tan, C.J.M. (2021). 
+Blockchain personal health records: Systematic review. 
+Journal of Medical Internet Research, 23(4): e25094. 
+https://doi.org/10.2196/25094 
+[8] Nakamoto, S. (2008). Bitcoin: A peer-to-peer electronic 
+cash system. Satoshi Nakamoto. 
+[9] Wang, S., Ouyang, L., Yuan, Y., Ni, X., Han, X., Wang, 
+F.Y. (2019). Blockchain-enabled smart contracts: 
+architecture, applications, and future trends. IEEE 
+Transactions on Systems, Man, and Cybernetics: 
+Systems, 
+49(11): 
+2266-2277. 
+https://doi.org/10.1109/TSMC.2019.2895123 
+[10] Hasselgren, A., Kralevska, K., Gligoroski, D., Pedersen, 
+S.A., Faxvaag, A. (2020). Blockchain in healthcare and 
+health sciences—A scoping review. International Journal 
+of 
+Medical 
+Informatics, 
+134: 
+104040. 
+https://doi.org/10.1016/j.ijmedinf.2019.104040 
+[11] Khan, D., Jung, L.T., Hashmani, M.A. (2021). 
+Systematic literature review of challenges in blockchain 
+scalability. 
+Applied 
+Sciences, 
+11(20): 
+9372. 
+https://doi.org/10.3390/app11209372 
+[12] Jyothilakshmi, K.B., Robins, V., Mahesh, A.S. (2022). A 
+comparative analysis between hyperledger fabric and 
+ethereum in medical sector: A systematic review. In 
+Sustainable Communication Networks and Application: 
+Proceedings 
+of 
+ICSCN 
+2021, 
+pp. 
+67-86. 
+https://doi.org/10.1007/978-981-16-6605-6_5 
+[13] Saranya, R., Murugan, A. (2023). A systematic review of 
+enabling blockchain in healthcare system: Analysis, 
+current status, challenges and future direction. Materials 
+Today: 
+Proceedings, 
+80: 
+3010-3015. 
+https://doi.org/10.1016/j.matpr.2021.07.105 
+[14] Kamal, Z.A., Ghani, R.F., Farhan, A.K. (2024). 
+Blockchain-based 
+E-Government 
+system 
+using 
+WebSocket protocol. Engineering and Technology 
+Journal, 
+42(4): 
+421-429. 
+https://api.semanticscholar.org/CorpusID:269150792 
+[15] Hasan, I.M., Ghani, R.F. (2021). Blockchain for 
+authorized access of health insurance IoT system. Iraqi 
+Journal of Computers, Communications, Control and 
+Systems 
+Engineering, 
+21(3): 
+76-88. 
+https://doi.org/10.33103/uot.ijccce.21.3.7 
+[16] Ghani, R.F., Salman, A.A., Khudhair, A.B., Aljobouri, L. 
+254
+
+
+【第13页】
+(2022). 
+Blockchain-based 
+student 
+certificate 
+management and system sharing using hyperledger 
+fabric platform. Periodicals of Engineering and natural 
+sciences, 
+10(2): 
+207-218. 
+https://doi.org/10.21533/pen.v10i2.2839 
+[17] Arunkumar, B., Kousalya, G. (2020). Blockchain-based
+decentralized and secure lightweight e-health system for
+electronic health records. In Intelligent Systems,
+Technologies and Applications: Proceedings of Fifth
+ISTA 
+2019, 
+India, 
+pp. 
+273-289.
+https://doi.org/10.1007/978-981-15-3914-5_21
+[18] Khatoon, A. (2020). A blockchain-based smart contract
+system for healthcare management. Electronics, 9(1): 94.
+https://doi.org/10.3390/electronics9010094
+[19] Kayastha, M., Karim, S., Sandu, R., Gide, E. (2021).
+Ethereum blockchain and inter-planetary file system
+(IPFS) based application model to record and share
+patient health information: An exemplary case study for
+e-health education in Nepal. In 2021 19th International
+Conference on Information Technology Based Higher
+Education and Training (ITHET), Sydney, Australia, pp.
+1-7. https://doi.org/10.1109/ITHET50392.2021.9759580
+[20] Rupa, C., Chakkaravarthy, D.M. (2021). A study on
+privacy preservation of medical certificates using
+blockchain technology. Recent Patents on Engineering, 
+15(6): 
+1-11. 
+https://doi.org/10.2174/1872212115666210604125702 
+[21] Haddad, A., Habaebi, M.H., Suliman, F.E.M., Elsheikh,
+E.A., Islam, M.R., Zabidi, S.A. (2023). Generic patient-
+centered blockchain-based EHR management system.
+Applied 
+Sciences, 
+13(3): 
+1761-1779.
+https://doi.org/10.3390/app13031761
+[22] Androulaki, E., Barger, A., Bortnikov, V., Cachin, C.,
+Christidis, K., De Caro, A., Enyeart, D., Ferris, C.,
+Laventman, G., Yellick, J. (2018). Hyperledger fabric: a
+distributed 
+operating 
+system 
+for 
+permissioned
+blockchains. In Proceedings of the Thirteenth EuroSys
+Conference, New York, United States, pp. 1-15.
+https://doi.org/10.1145/3190508.3190538
+[23] Jaafar, R.A., Alsaad, S.N. (2023). Enhancing educational
+certificate verification with blockchain and IPFS: A
+decentralized approach using hyperledger fab. TEM
+Journal, 
+12(4): 
+2385-2395.
+https://doi.org/10.18421/tem124-51
+[24] Liu, Y., Zhang, J., Wu, S., Pathan, M.S. (2021). Research
+on digital copyright protection based on the hyperledger
+fabric blockchain network technology. PeerJ Computer
+Science, 7: e709. https://doi.org/10.7717/peerj-cs.709
+255
+

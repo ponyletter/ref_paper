@@ -1,0 +1,591 @@
+来源文件：4基于区块链的HACCP质量溯源模型与系统实现.pdf
+============================================================
+
+【第1页】
+2 0 2 1 年 6 月
+农 业 机 械 学 报
+第 52 卷 第 6 期
+doi: 10． 6041 /j． issn． 1000-1298． 2021． 06． 039
+基于区块链的 HACCP 质量溯源模型与系统实现
+葛
+艳
+1，2
+黄朝良
+1
+陈
+明
+1，2
+邹一波
+1，2
+( 1． 上海海洋大学信息学院，上海 201306; 2． 农业农村部渔业信息重点实验室，上海 201306)
+摘要: 为提升质量溯源的可信度及有效度，以生食牡蛎为例，应用区块链技术构建了基于危害分析及关键控制点
+( Hazard analysis and critical control points，HACCP) 的质量溯源模型。该模型提取生食牡蛎加工 HACCP 规范中的关
+键控制点( Critical control points，CCP) 作为溯源系统监控数据点，并由此设计智能合约，监控数据上下链和对质量
+进行自动判断，最终应用联盟链平台 Hyperledger Fabric 实现了该模型的系统溯源。结果表明，系统将 HACCP 融入
+智能合约，使用质量控制的关键、有效数据作为溯源数据，并利用区块链中交易的不可篡改性，保证了质量溯源数
+据的可信度，系统平均交易成功率为 99. 96% ，交易吞吐量可相对平稳地达到 377 笔/s，平均交易延迟为 0. 5 s，基本
+满足生食牡蛎加工过程质量溯源的业务需求。
+关键词: 食品加工; 溯源; 危害分析及关键控制点; 区块链
+中图分类号: TP391. 1
+文献标识码: A
+文章编号: 1000-1298( 2021) 06-0369-07
+OSID:
+收稿日期: 2021
+03
+05
+修回日期: 2021
+03
+30
+基金项目: 国家重点研发计划项目( 2018YFD0701003) 、江苏现代农业产业关键技术创新项目( CX( 20) 2028) 、教育部产学研合作项目
+( E 6006
+00
+0222) 和上海市科技创新计划项目( 19511104502)
+作者简介: 葛艳( 1974—) ，女，副教授，博士，主要从事质量安全风险评价、溯源和农业信息化研究，E-mail: yge@ shou． edu． cn
+通信作者: 邹一波( 1983—) ，男，讲师，博士，主要从事区块链技术和机器视觉研究，E-mail: ybzou@ shou． edu． cn
+HACCP Quality Traceability Model and System Implementation
+Based on Blockchain
+GE Yan
+1，2
+HUANG Chaoliang
+1
+CHEN Ming
+1，2
+ZOU Yibo
+1，2
+( 1． College of Information Technology，Shanghai Ocean University，Shanghai 201306，China
+2． Key Laboratory of Fisheries Information，Ministry of Agriculture and Ｒural Affairs，Shanghai 201306，China)
+Abstract: To improve the credibility and efficiency of quality traceability based on blockchain，some
+studies were reportedand explainedthe overall designs of combining hazard analysis and critical control
+points ( HACCP)
+and blockchain technology． However，there is still a lack of operational technical
+solutions in documented research on the combined use of the two． To make up for the above shortage，a
+quality traceability model based on HACCP was constructed by using blockchain technology． This critical
+control points ( CCP)
+in the HACCP specification was extracted for raw oyster processing as the
+monitoring data points of the traceability system，obtaining the to-be-recorded data structure that can truly
+reflect the product quality． A highly scalable standard smart contract was designed based on this data
+structure． Smart contracts for each key control point were then derived． What this achieved was the on-
+chain data monitoring as well as automatic data quality judgment of the whole raw oyster processing
+process． It also discussed how a highly robust deployment model was implemented with the reference to a
+permissioned chain platform Hyperledger Fabric． The whole process of data on-chain was explained from
+a theoretical perspective．
+Lastly，the traceability system prototype of the model was implemented．
+Function and performance tests on the implemented system were conducted． In function tests，the system
+ensured the traceability and credibility of the quality traceability data by the reading of product history
+records． The automatic judgment and real-time control of product quality were achieved at the same time．
+In performance tests，the system average transaction success rate reached up to 377，the transaction
+success rate was 99. 96% and the average delay was 0. 5 s when the total transaction volume reached
+2 000，which met the business needs of the quality traceability of the raw oyster processing process． The
+research result can provide a new reference for the traceability of aquatic product quality or quality safety
+risks．
+Key words: food processing; traceability; hazard analysis and critical control points; blockchain
+
+
+【第2页】
+0
+引言
+水产品的质量安全一直是水产企业和消费者普
+遍关 心 的 问 题，也 越 发 体 现 出 溯 源 系 统 的 重 要
+性
+［1］。自区块链技术问世以来
+［2］，国内外对区块链
+溯源进行了诸多研究。
+针对区块链溯源系统模型，一些研究结合物联
+网、隐藏网络和可视化技术等，为区块链溯源提供了
+高效、安全的分布式信息共享模型
+［3 － 5］，面向溯源业
+务设 计 区 块 链 溯 源 架 构
+［6 － 7］，实 现 高 可 用 性 平
+台
+［8 － 13］，满足了溯源领域对信息透明性、可溯性的
+需求。另一些研究在模型设计中融入权限控制
+［14］，
+大大提高了信息可信度。针对区块链上的溯源查询
+和写入效率瓶颈等，诸多研究从存储模型和共识算
+法优化等多方面入手，如通过提出信誉监督机制共
+识算法
+［15］、融合共识算法
+［16］及双层架构共识
+［17］来
+提升共识效率，通过“数据库 + 哈希值”的存储模式
+来提高查询效率
+［18］，通过使用侧链技术来提高系统
+吞吐量
+［19］，借助密码分组链接模式来保证隐私安
+全
+［20］等。
+上述研究从技术应用和性能改进层面促进了区
+块链溯源的发展。凭借其不可篡改及时间戳等特
+性
+［21 － 22］，区块 链 技 术 已 广 泛 应 用 于 食 品 溯 源 领
+域
+［23 － 24］，利用区块链从质量保障层面更好地服务于
+食品溯源已成为一个重要研究分支。危害分析及关
+键控制点( HACCP) 是食品质量保证的重要指标之
+一
+［25 － 27］。文献［28］提出，可将 HACCP 与区块链结
+合，提高区块链溯源质量监管水平，并从宏观角度阐
+述了 HACCP 结合区块链溯源的大体框架。将溯源
+系统建立在区块链公链以太坊或者联盟链平台
+Hyperledger Fabric 上，利用无线射频识别技术和智
+能合约实现信息录入，可提供质量保障，在一定程度
+上实现了自动化
+［29］。但结合 HACCP 质量体系和区
+块链溯源、通过智能合约来保障产品质量的研究却
+鲜见报道。
+本文以 生 食 牡 蛎 为 例，根 据 生 食 牡 蛎 加 工
+HACCP 质量体系
+［30］，提出基于区块链的生食牡蛎
+加工 HACCP 质量溯源模型，并构建基于该模型的
+原型系统。系统应用区块链技术监控，并溯源牡蛎
+接收、牡蛎干法冷藏、牡蛎肉存储 3 个关键质量控制
+点，确保真实记录病菌生长、病菌污染、环境化学污
+染和天然毒素等显著危害，设计智能合约，增强质量
+预警的自动化程度，在监控质量关键控制点( CCP)
+数据的同时，保证监控数据的不可篡改性，以期实现
+质量监控数据的全过程可视化。
+1
+生食牡蛎加工 HACCP 溯源区块链建模
+区块链溯源对产品质量保证手段、数据记录内
+容、产品质量标准等问题缺乏关注，溯源更多记录的
+是交易信息，缺少质量监管基础数据。针对该不足，
+本研究提出基于区块链的生食牡蛎加工 HACCP 质
+量溯源系统。系统结合 HACCP 质量体系设计生食
+牡蛎加工溯源流程，设计智能合约实现溯源业务，并
+借助联盟链平台 Hyperledger Fabric 使该溯源体系
+得以实现。
+本研究重点解决数据结构设计、智能合约设计
+和区块链底层系统架构等问题( 图 1) 。
+图 1
+基于区块链的生食牡蛎加工危害分析及关键
+控制点质量溯源模型框架
+Fig． 1
+Hazard analysis and critical control points ( HACCP)
+quality traceability model frame for raw oyster processing
+based on blockchain
+从技术实现层面看，总体设计分为 3 层: 溯源逻
+辑层、区块链系统层和溯源业务层。溯源逻辑层为
+设计最底层，在逻辑上形成溯源框架，从整体上设计
+溯源流程，根据 HACCP 规范提取数据结构，为上层
+系统和业务实现提供支撑。具体来说，数据结构规
+定信息录入格式和内容，溯源流程确定溯源环节。
+区块链系统层为设计核心层，用于实现底层溯源逻
+辑，设计智能合约满足上层溯源业务需求。该层包
+含 4 个模块，证书模块、共识模块、存储模块和智能
+合约模块。智能合约模块是系统设计的重点，模块
+通过逻辑语句实现数据读取和上链，并给用户提供
+质量反馈。溯源业务层是本模型设计最上层，用于
+提供应用、实现业务。该层与区块链系统层对接，调
+用智能合约接口写入和读取数据。区块链系统层接
+收输入数据，运行智能合约，给溯源业务层提供产品
+质量是否达标及所处状态等提示，并把数据打包成
+区块写入数据库，实现质量监控。
+0
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 1 年
+
+
+【第3页】
+从业务功能角度看，总体设计分为 2 个板块: 质
+量数据提取与监测板块、链上存储与溯源板块。质
+量数据提取与监测板块提取 HACCP 质量体系中的
+关键质量指标生成数据结构，设计智能合约，完成数
+据上链，同时对数据实时监测。该板块在实现溯源
+数据上链同时，增强质量监测自动化程度。链上存
+储与溯源板块包含区块链系统层证书、共识和存储
+模块，以及溯源业务层溯源模块。证书、共识和存储
+模块构成区块链平台，通过用户注册、信息同步和数
+据存储功能实现上链数据存储，为溯源业务提供真
+实、可信的数据支撑。
+2
+关键技术
+2. 1
+加工环节质量溯源数据结构设计
+生食牡蛎加工 HACCP 质量体系提出了 3 个关
+键控制点: 牡蛎接收、牡蛎干法冷藏和牡蛎肉存储。
+每个关键控制点包含危害分析 ( Hazard analysis，
+HA) 、关键限值、监控内容、纠偏和验证内容等。
+危害分析是对生食牡蛎加工过程中，各个关键
+控制点可能存在的显著危害的评估与描述。关键限
+值、监控内容、纠偏和验证为 HACCP 质量体系核
+心，分别提供质量合格阈值、质量监管内容和信息真
+实性保证方法。
+关键限值是质量达标的标准，也是基于 HACCP
+质量监控体系的重点监控指标，利用这些指标可以
+在各关键控制点监控该产品的真实质量水准与规定
+的质量标准之间的吻合度。首先对 GB /T 19838—
+2005 中 3 个关键控制点的关键限值指标进行提取，
+如表 1 所示。
+表 1
+各关键控制点的关键限值指标
+Tab． 1
+Key limit indices of each critical control
+point ( CCP)
+关键控制点
+关键限值指标
+牡蛎接收
+牡蛎标识、来自开放水域、许可证、运输时长
+牡蛎干法冷藏
+牡蛎标识、冷藏库温度、温度过高总时长
+牡蛎肉存储
+牡蛎标识、冷藏库温度、温度过高总时长、运输时长
+围绕这些关键限值指标，根据监控内容设计合
+理的数据结构，记录下各关键控制点的关键限值指
+标的定期观测数据，可以服务于质量的监控和质量
+预警需求。以生食牡蛎接收关键控制点为例，可设
+置牡蛎批次标识 BatchID、来自开放水域 FromOpen、
+许可 证 Lisence、捕 捞 时 间 CatchTime、冷 冻 时 间
+ＲefrigerateTime 和监管人 Supervisor 等字段，反映该
+关键控制点各关键限值指标。
+纠偏和验证内容是 HACCP 质量体系的重要部
+分，保证上传频率，记录纠偏行为，可确保牡蛎质量。
+通过批次标识 BatchID 字段对指定批次写入纠偏验
+证信息 VerifyInfo 和监测时间 CheckingTime，设置监
+管人 Supervisor 字段实现责任究查。根据纠偏和验
+证内容的数据调节环境、丢弃未达标产品将大大节
+省人力物力。
+对应各关键控制点的关键限值指标( 表 1) ，设
+计 3 个关键控制点的数据结构，与纠偏和验证内容
+的数据结构一同构成生食牡蛎加工环节的数据结
+构，应用于质量溯源的业务流程，如图 2 所示。
+2. 2
+智能合约设计
+智能合约衔接底层区块链平台和上层业务，支
+撑数据上链和读取等众多区块链操作。
+一方面，智能合约实现数据上链，上链后数据借
+助区块链不可篡改和时间戳特性，成为真实且可溯
+信息。另一方面，智能合约本质上属于触发式脚本，
+定义触发事件和处理逻辑后，事件触发时将执行处
+理逻辑，进行自动化操作。这一特性保证智能合约
+调用时严格执行定义操作。
+就基于区块链的生食牡蛎加工 HACCP 质量溯
+源模型而言，智能合约实现 2 个功能:
+( 1) 溯源数据上、下链。智能合约根据数据结
+构提供数据上、下链接口，生食牡蛎加工信息一旦上
+链成为区块内容，将不可篡改且可溯。
+( 2) 牡蛎质量自动化判断。生食牡蛎加工信息
+上链操作为触发事件，数据内容与关键限值比较为
+处理逻辑，一旦数据上链，智能合约将自动判断上链
+生食牡蛎质量是否满足 HACCP 标准，严格控制产
+品质量。
+系统根据关键限值数据结构，设计了一个面向
+生食牡蛎 HACCP 的标准智能合约。智能合约读取
+生食牡蛎数据，与关键限值进行比较，得到质量结
+果，并将输入数据和质量判断结果一起写入区块链。
+标准智能合约算法如下:
+输入: 牡 蛎 批 次 标 识 BatchID，冷 藏 库 温 度
+Temperature，温 度 过 高 时 长 OverTime，运 输 时 间
+TransportTime，养 殖 信 息 BreedingInfo，监 管 人
+Supervisor; 功能: 将( 输入数据 args［］+ 温度过高总
+时长 tOvertime + 质量判断结果 message) 上链。
+1． function Contract( args［］) {
+2． ifExit = Stub． GetState( BatchID)
+∥查询数据库中是否存在 BatchID 记录
+3． if( ifExit = = nil)
+4．
+tOvertime = OverTime;
+5． else
+6．
+tOvertime = ifExit． tOvertime + OverTime;
+7．
+If
+( BreedingInfo!
+=
+达 标 养 殖 信 息
+1
+7
+3
+第 6 期
+葛艳 等: 基于区块链的 HACCP 质量溯源模型与系统实现
+
+
+【第4页】
+图 2
+基于加工危害分析及关键控制点的生食牡蛎加工溯源流程
+Fig． 2
+Tracing procedure for raw oyster processing based on hazard analysis and critical control points ( HACCP)
+BreedingStandard)
+∥获得生食牡蛎质量监测结果
+信息
+8．
+message =“牡蛎来自未达标养殖厂家”;
+9．
+If
+( TransportTime
+＞
+达 标 运 输 时 间
+TransportStandard)
+10．
+message =“牡蛎运输时间过长”;
+11． If ( tOvertime ＞ 温度过高达标时长 TemStandard)
+12．
+message =“牡蛎温度过高总时长未达标”;
+13． If ( Temperature ＞ 达标冷藏库温度 TemStandard)
+14．
+message =“冷藏库温度过高”;
+15． Stub． PutState ( args［］+ tOvertime + message)
+∥将输入以及监测结果信息上链
+}
+通过标准智能合约，系统自动判断食品质量
+是否符合关键限值要求。牡蛎接收、牡蛎干法冷
+藏和牡蛎肉存储 3 个关键控制点在标准智能合约
+基础上，结合各自数据结构，选择性继承标准智能
+合约中的逻辑判断，形成各关键控制点的智能合
+约，实现各关键控制点上不同的质量监控目标，如
+图 3 所示。
+3 个智能合约记录下基于 HACCP 的生食牡
+蛎加工溯源数据，进行质量判断，将数据和质量
+判断结果写入区块后成为不可篡改的账本信息。
+智能合约将 HACCP 质量体系融入区块链生食牡
+蛎溯源 流 程，提 供 质 量 数 据 上 链 和 自 动 化 监 管
+工作。
+图 3
+关键控制点智能合约层次结构
+Fig． 3
+Smart contract hierarchy for critical control
+points ( CCP)
+3
+系统实现
+3. 1
+实现架构及应用流程
+系统底层采用联盟链平台 Hyperledger Fabric，
+借助面向对象型语言 Go 语言开发智能合约。设计
+区块链溯源系统底层架构( 图 4) ，通过应用容器引
+擎技术 Docker 下载架构中各模块镜像，实现一个通
+过智能合约上链数据的区块链系统。
+每个关键控制点相当于一个组织，证书机构服
+务器生成用户证书，每个组织配置键值对数据库
+CouchDB 备份区块链数据，实现分布式存储。
+共 识 模 块 由 排 序 节 点 Kafka、管 理 节 点
+Zookeeper 和 共 识 节 点 Orderer 构 成。排 序 节 点
+Kafka 在联盟链平台 Hyperledger Fabric 中充当消息
+队列，将共识节点 Orderer 发来的交易进行排序; 管
+2
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 1 年
+
+
+【第5页】
+图 4
+区块链溯源系统底层架构
+Fig． 4
+Underlying architecture of blockchain traceability system
+理节点 Zookeeper 在共识中维护着排序节点 Kafka
+的领导者和跟随者的选举流程，保证共识模块正常
+运行; 共识节点 Orderer 负责接收节点传入的信息，
+将排序节点 Kafka 排序后的信息进行广播。本系统
+布署 4 台主机作为服务器，在实现分布式多机，不同
+宿主机能够同步信息、共享数据的同时，具备较高稳
+定性，减少了故障甚至崩溃现象。
+本文系统提供溯源数据上下链和质量判断功能
+( 图 5) 。用户经前端写入质量数据，智能合约读取
+后根据数据结构进行解析，随后执行逻辑，根据输入
+的参数值判断质量。参数和得到的质量判断结果一
+起作为上链内容，以 JavaScript 对象简谱( JavaScript
+object notation，JSON ) 格 式 上 传 至 联 盟 链 平 台
+Hyperledger Fabric，经共识模块在全网达成共识后，
+以链数据结构存入数据库。
+图 5
+溯源质量数据写入区块链流程图
+Fig． 5
+Process of uploading traceability quality data onto blockchain
+通过该溯源系统的客户端可视化页面( 图 6) 调
+用牡蛎干法冷藏智能合约，读取“004”批次标识牡
+蛎历史记录，可查询到该关键控制点的数据写入记
+录和 质 量 判 断 结 果。当 温 度 过 高 总 时 长 超 过
+120 min，即超过 HACCP 质量体系中的达标关键限
+值时，给出“未达标”质量判断结果，说明质量数据
+以及经智能合约处理的质量判断结果上链和溯源均
+成功，体现了智能合约的数据读写和质量判断能力。
+3. 2
+性能测试
+联盟链平台 Hyperledger Fabric 的区块参数将
+在很大程度上影响系统整体性能。本系统将每个区
+块的最大交易量设置为 100 笔、区块最大打包时间
+间隔为 5 s、每个区块最大容量为 32 MB，并采用性
+能测 试 软 件 Caliper 对 反 映 系 统 性 能 的 3 个 指
+标———交易吞吐量、平均交易成功率和平均交易延
+迟进行测试。
+7 轮试验向系统发起共 14 000 笔交易，每轮的总
+交易量同为 2 000 笔，但每秒向系统并发的交易量不
+同，Caliper 记录下每轮试验的每秒交易吞吐量和平均
+交易延迟，根据交易成功量计算出每轮试验的交易成
+功率( 图 7) ，最后可求得系统的平均交易成功率。
+系统性能测试结果( 图 7) 表明: 在并发交易量
+达到 400 笔/s 前，系统吞吐量随着并发交易量逐步
+增长，并在 400 笔/s 交易时达到最大，随后趋于稳
+定，交易量保持在 377 笔/s 左右; 7 轮试验中，受网
+3
+7
+3
+第 6 期
+葛艳 等: 基于区块链的 HACCP 质量溯源模型与系统实现
+
+
+【第6页】
+图 6
+基于区块链的生食牡蛎加工危害分析及关键控制点质量溯源系统前端页面
+Fig． 6
+Front-end page of hazard analysis and critical control points ( HACCP) quality traceability system for
+raw oyster processing based on blockchain
+图 7
+系统性能测试结果
+Fig． 7
+System performance test results
+络环境影响，两轮出现失败交易的情况，计算可得系
+统处理交易的平均成功率约为 99. 96% ; 并发交易
+量为 100、200、300、400 笔/s 时，处理每笔交易所需
+时间保持稳定，平均交易延迟在 0. 5 s 左右，随后由
+于并发交易量过大，消息队列堵塞，平均交易延迟明
+显增长。
+200 笔/s 的 交 易 吞 吐 量 可 基 本 承 载 商 业 应
+用
+［19］，因此，该系统较为稳定的 377 笔/s 交易吞吐
+量，在性能上完全可应用于生产实践。
+4
+结束语
+研究了基于区块链的生食牡蛎加工 HACCP 质
+量溯源模型及系统实现，提出将 HACCP 质量体系
+结合 至 区 块 链 溯 源 的 模 型 架 构 中。对 引 入 的
+HACCP 质量体系进行规范提取，设计数据结构，记
+录 HACCP 中关键质量数据，形成溯源链条; 结合
+HACCP 数据结构设计智能合约; 设计共识模块拓扑
+结 构，实 现 分 布 式 数 据 同 步。结 果 表 明: 基 于
+HACCP 质量体系提取上链数据，保证了质量关键控
+制点业务数据的真实性，提高了上链数据的质量安
+全相关度; 基于 HACCP 质量体系标准设计智能合
+约，对质量进行自动判断，在满足质量数据可溯源的
+同时，对溯源产品质量进行自动化监督，并实时记录
+监管结果; 应用联盟链平台 Hyperledger Fabric 实现
+了该模型的系统溯源，既保证了受监管的关键质量
+数据的可溯性，也保证了数据的可信度、不可篡改
+性，更好地保护了消费者的权益。性能测试表明，系
+统平均交易成功率为 99. 96% ，交易吞吐量可相对
+平稳地达到 377 笔/s，平均交易延迟为 0. 5 s，该系
+统具有的性能使其基本可应用于实际生产。
+参
+考
+文
+献
+［1］ 王东亭，饶秀勤，应义斌． 世界主要农业发达地区农产品追溯体系发展现状［J］． 农业工程学报，2014，30( 8) : 236 － 250．
+WANG Dongting，ＲAO Xiuqin，YING Yibin． Development of agri-products traceability in main developed agriculture region of
+the world［J］． Transactions of the CSAE，2014，30( 8) : 236 － 250． ( in Chinese)
+［2］ NAKAMOTO S． Bitcoin: a peer-to-peer electronic cash system［EB/OL］． 2009
+03
+24． https: ∥bitcoin． org/bitcoin． pdf．
+［3］ HAO Z H，MAO D H，ZHANG B，et al． A novel visual analysis method of food safety risk traceability based on blockchain
+［J］． International Journal of Environmental Ｒesearch and Public Health，2020，17( 7) : 2300．
+［4］ HONG W，CAI Y F，YU Z Ｒ，et al． An agri-product traceability system based on IoT and blockchain technology［C］∥2018
+1st IEEE International Conference on Hot Information-Centric Networking ( HotICN) ，Shenzhen，2018: 254 － 255．
+4
+7
+3
+农
+业
+机
+械
+学
+报
+2 0 2 1 年
+
+
+【第7页】
+［5］ THAKUＲ M，TVEIT G M，VEVLE G，et al． A framework for traceability of hides for improved supply chain coordination［J］．
+Computers and Electronics in Agriculture，2020，174( 7) : 105478．
+［6］ 李明佳，汪登，曾小珊，等． 基于区块链的食品安全溯源体系设计［J］． 食品科学，2019，40( 3) : 279 － 285．
+LI Mingjia，WANG Deng，ZENG Xiaoshan，et al． Food safety tracing technology based on block chain［J］． Food Science，
+2019，40( 3) : 279 － 285． ( in Chinese)
+［7］ 赵磊，毕新华，赵安妮． 基于区块链的生鲜食品移动追溯平台框架重构［J］． 食品科学，2020，41( 3) : 314 － 321．
+ZHAO Lei，BI Xinhua，ZHAO Anni． Frame reconstruction of mobile traceability information system for fresh food based on
+blockchain［J］． Food Science，2020，41( 3) : 314 － 321． ( in Chinese)
+［8］ HANG L，ULLAH I，KIM D H． A secure fish farm platform based on blockchain for agriculture data integrity［J］． Computers
+and Electronics in Agriculture，2020，170( 2) : 1 － 3．
+［9］ 许继平，孙鹏程，张新，等． 基于区块链的粮油食品全供应链信息安全管理原型系统［J/OL］． 农业机械学报，2020，51
+( 2) : 341 － 349．
+XU Jiping，SUN Pengcheng，ZHANG Xin，et al． Prototype system of information security management of cereal and oil food
+whole supply chain based on blockchain ［J/OL］． Transactions of the Chinese Society for Agricultural Machinery，2020，51
+( 2) : 341 － 349． http: ∥www． j-csam． org/jcsam/ch/reader/view_abstract． aspx? flag = 1＆file_no = 2002037＆journal_id =
+jcsam． DOI: 10． 6041 /j． issn． 1000-1298． 2020． 02． 037． ( in Chinese)
+［10］ ABEYＲATNE S，MONFAＲED Ｒ． Blockchain ready manufacturing supply chain using distributed ledger［J］． International
+Journal of Ｒesearch in Engineering and Technology，2016，5( 9) : 1 － 10．
+［11］ WEBEＲ I，XU X W，ＲIVEＲET Ｒ，et al． Untrusted business process monitoring and execution using blockchain［C］∥
+International Conference on Business Process Management，Ｒio de Janeiro，2016: 329 － 347．
+［12］ 廖秋雯． 基于区块链技术的商品溯源方案研究［D］． 广州: 华南理工大学，2018．
+LIAO Qiuwen． Ｒesearch on commodity traceability scheme based on block chain technology ［D］． Guangzhou: South China
+University of Technology，2018． ( in Chinese)
+［13］ 于立娜，张国锋，贾敬敦，等． 基于区块链技术的现代农产品供应链［J/OL］． 农业机械学报，2017，48( 增刊) : 387 －393．
+YU Li'na，ZHANG Guofeng，JIA Jingdun，et al． Modern agricultural product supply chain based on block chain technology［J/
+OL］． Transactions of the Chinese Society for Agricultural Machinery，2017，48( Supp． ) : 387 － 393． http: ∥www． j-csam．
+org/jcsam/ch/reader/view_abstract． aspx? flag = 1＆file_no = 2017s059＆journal_id = jcsam． DOI: 10． 6041 /j． issn． 1000-
+1298． 2017． S0． 059． ( in Chinese)
+［14］ AZAＲIA A，EKBLAW A，VIEIＲA T，et al． Medrec: using blockchain for medical data access and permission management
+［C］∥2016 2nd International Conference on Open and Big Data ( OBD) ，Vienna，2016: 25 － 30．
+［15］ 任守纲，何自明，周正己，等． 基于 CSBFT 区块链的农作物全产业链信息溯源平台设计［J］． 农业工程学报，2020，36
+( 3) : 279 － 286．
+ＲEN Shougang，HE Ziming，ZHOU Zhengji，et al． Design and implementation of information tracing platform for crop whole
+industry chain based on CSBFT-Blockchain［J］． Transactions of the CSAE，2020，36( 3) : 279 － 286． ( in Chinese)
+［16］ TSANG Y P，CHOYK L，WUC H，et al． Blockchain-driven IoT for food traceability with anintegrated consensus mechanism
+［J］． IEEE Access，2019，7( 1) : 129000 － 129017．
+［17］ 丁庆洋，朱建明，张瑾，等． 基于双层架构的溯源许可链共识机制［J］． 网络与信息安全学报，2019，5( 2) : 1 － 12．
+DING Qingyang，ZHU Jianming，ZHANG Jin，et al． Traceability permissioned chain consensus mechanism based on double-
+layer architecture［J］． Chinese Journal of Network and Information Security，2019，5( 2) : 1 － 12． ( in Chinese)
+［18］ 杨信廷，王明亭，徐大明，等． 基于区块链的农产品追溯系统信息存储模型与查询方法［J］． 农业工程学报，2019，35
+( 22) : 323 － 330．
+YANG Xinting，WANG Mingting，XU Daming，et al． Data storage and query method of agricultural products traceability
+information based on blockchain［J］． Transactions of the CSAE，2019，35( 22) : 323 － 330． ( in Chinese)
+［19］ 张朝栋，王宝生，邓文平． 基于侧链技术的供应链溯源系统设计［J］． 计算机工程，2019，45( 11) : 1 － 8．
+ZHANG Chaodong，WANG Baosheng，DENG Wenping． Design of supply chain traceability system based on side chain
+technology［J］． Computer Engineering，2019，45( 11) : 1 － 8． ( in Chinese)
+［20］ 于合龙，陈邦越，徐大明，等． 基于区块链的水稻供应链溯源信息保护模型研究［J/OL］． 农业机械学报，2020，51( 8) :
+328 － 335．
+YU Helong，CHEN Bangyue，XU Daming，et al． Modeling of rice supply chain traceability information protection based on
+block chain［J/OL］． Transactions of the Chinese Society for Agricultural Machinery，2020，51( 8) : 328 － 335． http: ∥www．
+j-csam． org/jcsam/ch/reader/view_abstract． aspx? flag = 1＆file_no = 20200836＆journal_id = jcsam． DOI: 10． 6041 /j． issn．
+1000-1298． 2020． 08． 036． ( in Chinese)
+［21］ 黄俊飞，刘杰． 区块链技术研究综述［J］． 北京邮电大学学报，2018，41( 2) : 1 － 8．
+HUANG Junfei，LIU Jie． Survey on blockchain research［J］． Journal of Beijing University of Posts and Telecommunications，
+2018，41( 2) : 1 － 8． ( in Chinese)
+［22］ 袁勇，王飞跃． 区块链技术发展现状与展望［J］． 自动化学报，2016，42( 4) : 481 － 494．
+YUAN Yong，WANG Feiyue． Blockchain: the state of the art and future trends［J］． Acta Automatica Sinica，2016，42( 4) :
+481 － 494． ( in Chinese)
+［23］ 钱建平，吴文斌，杨鹏． 新一代信息技术对农产品追溯系统智能化影响的综述［J］． 农业工程学报，2020，36( 5) : 182 －191．
+QIAN Jianping，WU Wenbin，YANG Peng．
+Ｒeview on agricultural products smart traceability system affected by new
+generation information technology［J］． Transactions of the CSAE，2020，36( 5) : 182 － 191． ( in Chinese)
+［24］ 孙传恒，于华竟，徐大明，等． 农产品供应链区块链追溯技术研究进展与展望［J/OL］． 农业机械学报，2021，52( 1) : 1 －13．
+SUN Chuanheng，YU Huajing，XU Daming，et al． Ｒeview and prospect of agri-products supply chain traceability based on
+blockchain technology［J/OL］． Transactions of the Chinese Society for Agricultural Machinery，2021，52( 1) : 1 － 13． http: ∥
+www． j-csam． org/jcsam/ch/reader/view_abstract． aspx? flag = 1＆file_no = 20210101＆journal_id = jcsam． DOI: 10． 6041 /j．
+issn． 1000-1298． 2021． 01． 001． ( in Chinese)
+［25］ VILAＲ M J，ＲODＲIGUEZ-OTEＲO J L，SANJUANML，et al． Implementation of HACCP to control the influence of milking
+equipment and cooling tank on the milk quality［J］． Trends in Food Science ＆ Technology，2012，23( 1) : 4 － 12．
+［26］ FOTOPOULOS C，KAFETZOPOULOS D P，GOTZAMANI K． Critical factors for effective implementation of the HACCP
+system: a pareto analysis［J］． British Food Journal，2011，113( 5) : 578 － 597．
+［27］ HEＲATH D，HENSON S． Barriers to HACCP implementation: evidence from the food processing sector in Ontario，Canada
+［J］． Agribusiness，2010，26( 2) : 265 － 279．
+［28］ TIAN F． A supply chain traceability system for food safety based on HACCP，blockchain＆ Internet of Things［C］∥2017 14th
+International Conference on Service Systems and Service Management ( ICSSSM) ，Dalian，2017: 1 － 6．
+［29］ ＲEJEB A． Halal meat supply chain traceability based on HACCP，blockchain and internet of things［J］． Acta Technica
+Jaurinensis，2018，11( 4) : 218 － 247．
+［30］ 中华人民共和国国家质量监督检验检疫总局． 水产品危害分析与关键控制点( HACCP) 体系及其应用指南: GB/T
+19838—2005［S］． 北京: 中国标准出版社，2005．
+5
+7
+3
+第 6 期
+葛艳 等: 基于区块链的 HACCP 质量溯源模型与系统实现
+

@@ -1,0 +1,2188 @@
+来源文件：4Research on Grain Food Blockchain Traceability Information Management Model Based on Master-Slave Multichain.pdf
+============================================================
+
+【第1页】
+Research Article
+Research on Grain Food Blockchain Traceability Information
+Management Model Based on Master-Slave Multichain
+Yue Li,1,2 Xin Zhang
+,1,2 Zhiyao Zhao,1,2 Jiping Xu,1,2 Zixuan Jiang,3 Jiabin Yu,1,2
+and Xiaoyu Cui1,2
+1Beijing Key Laboratory of Big Data Technology for Food Safety, Beijing Technology and Business University,
+Beijing 100048, China
+2Key Laboratory of Internet and Big Data for China Light Industry, Beijing Technology and Business University,
+Beijing 100048, China
+3University of Toronto, St. George Campus, 27 King’s College Circle, Toronto M5S 1A1, Ontario, Canada
+Correspondence should be addressed to Xin Zhang; zhangxin@btbu.edu.cn
+Received 8 October 2022; Revised 14 December 2022; Accepted 15 December 2022; Published 27 December 2022
+Academic Editor: Said El Kafhali
+Copyright © 2022 Yue Li et al. Tis is an open access article distributed under the Creative Commons Attribution License, which
+permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.
+Aiming at the problems such as slow traceability efciency, poor sharing, and the difculty of matching the throughput of a
+blockchain single chain structure due to the complexity of the grain food supply chain links, the large number of participants, and
+the large amount of data information, this paper proposes a grain food blockchain traceability information management model
+based on the master-slave multichain structure by analyzing the processes and data characteristics of each link in the grain food
+supply chain; on this basis, the PLEW consensus algorithm based on Raft + improved PoW algorithm is designed for the master
+chain, and the CI-PBFTconsensus algorithm based on trusted information degree is designed for the slave chain. Te master chain
+and slave chain are anchored to each other through hash locking, and the data is uploaded and queried through smart contracts. In
+order to verify the efectiveness of the model, the blockchain traceability system is designed and implemented based on
+Hyperledger Fabric2.2. At the same time, it is compared with the transaction throughput and traceability efciency of the
+blockchain single chain structure. Trough the safety analysis of the data information of a company in Hubei, the results show that
+the grain traceability system designed and implemented in this study has certain advantages over the blockchain single chain
+structure in all aspects. It can also solve the grain food security problems that consumers worry about, and provide reference for
+the research of grain blockchain traceability information management.
+1. Introduction
+With the growth of the world economy, the grain food
+culture, consumption culture and shopping demand of
+people’s life are also gradually rising. At the same time,
+under the environmental background of the new coronal
+pneumonia epidemic, the safety and health incidents caused
+by the frequent occurrence of global grain food security
+problems, and the problems caused by the inability to track
+down defective products have also attracted people’s at-
+tention. Grain food includes summer grain, early rice, and
+autumn grain according to harvest season, and products
+such as grains, potatoes, and beans according to crop
+varieties. According to China Economic Weekly, the global
+grain production in 2021 was 2.8 billion tons. China
+accounted for the largest proportion of 1365.7 billion kg, an
+increase of 26.7 billion kg over the previous year, or a 2.0%
+increase. Te annual grain output reached a new record high
+and remained above 1.3 trillion kg for seven consecutive
+years [1]. For the people of China and even of the world,
+grain food can not only meet the basic needs of the human
+body but also prevent and assist the treatment of many
+diseases, including bowel cancer, appendicitis, and diabetes
+[2], so it is favored by the masses. However, the grain food is
+prone to mildew and deterioration in its storage [3]. In
+recent years, heavy metals in cadmium rice and fragrant rice
+Hindawi
+Computational Intelligence and Neuroscience
+Volume 2022, Article ID 7498025, 20 pages
+https://doi.org/10.1155/2022/7498025
+
+
+【第2页】
+exceed the standard [4], which greatly afects people’s health
+and quality of life. Under the background of frequent grain
+food security problems, an efcient and comprehensive
+information traceability method is urgently needed to solve
+the problem.
+Te term “traceability” was frst established and im-
+proved by the European Union in 1997 in response to the
+“mad cow disease” problem. In recent years, due to the
+frequent occurrence of grain food safety problems in the
+world, the research on the term “tracing” has become mature
+both at home and abroad [5, 6]. Te traditional traceability
+technology is mainly through two-dimensional code or
+barcode technology, combined with radio frequency iden-
+tifcation (RFID) technology, and through the use of in-
+formation collection technologies such as the IOT in the
+physical layer to collect data. Trough manual recording and
+storage in a centralized database [7, 8], consumers can trace
+the basic information of the product by scanning the bar-
+code on the product package [9]. However, the process of
+grain food from farmland to dining table mainly includes
+fve links: production, processing, storage, transportation,
+and sales. In addition, the data information of the company
+responsible for each link is complex, the format of data
+information among departments is not unifed, and the data
+sharing is poor. Te adoption of traditional traceability
+technology and centralized database will lead to low pel-
+lucidity of data information, reduced government supervi-
+sion, and data is vulnerable to tampering by criminals
+[10, 11]; existing problems of traditional traceability are now
+one of the reasons why grain food security problems occur
+frequently [12].
+In the early days, blockchain technology was considered
+as a kind of chained data structure composed of data blocks
+in chronological order and guaranteed by cryptography to be
+tamper proof and unforgeable distributed ledgers [13]. At
+present, blockchain technology is called a new computing
+paradigm by many scholars. It stores and verifes data in-
+formation by using chain data structures, generates and
+updates data by using a distributed point-to-point consensus
+mechanism, uses cryptography to protect data security, and
+programs through intelligent contracts [14]. With the de-
+centralization, distributed storage, data transparency, and
+traceability of blockchain, many scholars have applied it to
+the grain food industry in recent years. Ding designed a
+grain food security traceability system which adopted
+blockchain technology to solve the security problem of data
+storage [15]. Tao et al. put forward a comprehensive eval-
+uation model based on blockchain smart contract tech-
+nology, which improved the credibility and security of the
+grain industry through automatic detection of smart con-
+tracts [16]. Mao et al. proposed a credit evaluation system
+based on blockchain smart contracts, which improved the
+efectiveness of food supply chain supervision [17]. To sum
+up, the application of blockchain technology in the grain
+food traceability scheme can efectively solve the problems of
+low transparency of grain food traceability data information,
+and can also reduce the government supervision and tamper
+data easily. However, at present, most of the blockchain
+technologies applied to the grain food traceability scheme
+are blockchain single chain structure. With the increase of
+data in all links of the grain food supply chain, problems
+emerged in the blockchain single chain structure applied to
+the grain food traceability model, such as low consensus
+efciency and low transaction throughput.
+Given the existing problems in the blockchain single
+chain structure above, some scholars have designed block-
+chain multichain structure for various industries in the past
+two to three years. Zuo et al. proposed a privacy protection
+K-means clustering algorithm under blockchain multi-
+chains. Tis algorithm uses the idea of homomorphic en-
+cryption to achieve K-means clustering under multichains,
+to solve potential collusion attacks and eavesdropping at-
+tacks, and to avoid data leakage [18]. Zhou et al. designed a
+multichain
+blockchain dynamic
+partition method for
+microgrid power trading, which can not only maximize the
+total amount of power trading per unit time, but also achieve
+decentralization [19]. Liu et al. proposed a two-level branch
+structure blockchain expansion model, and the experiment
+proved that the two-level branch structure expansion model
+has great advantages in data storage efciency and network
+load [20]. Zhang et al. designed a traceability model for the
+whole grain, oil, and food supply chain by using blockchain
+and identifcation technology. Te model uses the data
+multimode storage mechanism to provide an optimization
+scheme for grain and oil food traceability [21]. To sum up,
+the research on the multichain direction of blockchain can
+solve the problems of low consensus efciency, low trans-
+action throughput and high delay in the blockchain single
+chain structure. Terefore, relying on blockchain based
+multichain structure, this paper proposes a grain food
+blockchain traceability information management model
+based on the master-slave multichain structure to solve the
+problems of the current blockchain single chain structure.
+For the research of this paper, we have conducted rel-
+evant work in the early stage and referred to a large number
+of literature [21] for details. Te structure of this paper is as
+follows: frstly, in the relevant work part, the application of
+blockchain single chain structure in grain food traceability
+industry in recent years is studied, and then the application
+of blockchain multichain structure is analyzed and com-
+pared. Secondly, in the part of grain food blockchain
+traceability information management model of master-slave
+multichain, the supply chain links and key information of
+grain food are specifcally analyzed. According to the
+complex characteristics of diferent supply chain links and
+information redundancy, the overall framework of the
+model is designed, and a data storage model of blockchain
+master-slave multichain structure is designed based on the
+overall framework. In addition, a grain food traceability
+information management model based on the blockchain is
+built with the blockchain technology. In order to improve
+the overall traceability efciency, a PLEW consensus
+mechanism is designed for the blockchain main chain, a CI-
+PBFT consensus mechanism is designed for the blockchain
+slave chain, and relevant data transmission and query smart
+contracts are designed. Tirdly, in the analysis part of the
+results, the theoretical verifcation analysis of the model is
+carried out frst, and the feasibility analysis and comparative
+2
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第3页】
+analysis are used to verify the feasibility of this model. Ten,
+the system is built through the Hyperledger Fabric2.2
+framework, and compared with the transaction throughput
+and consensus efciency of the blockchain single chain
+structure. After that, the security performance of this model
+is analyzed through an example. Finally, the conclusion
+summarizes the full text.
+2. Related Work
+Over the past years, with the arrival of blockchain version 2.0
+and web 3.0, more and more scholars tend to combine
+blockchain technology with grain food traceability supply
+chain to design a safe and convenient traceability system.
+However, there is little research on applying the blockchain
+multichain structure to the grain food traceability industry.
+Blockchain obviously means a chain composed of one
+block after another. Each block stores certain information,
+which is connected into a chain according to their respective
+time sequence. It has the characteristics of decentralization,
+independence, being not easy to be tampered with and
+traceability. Blockchain multichain adopts the new scheme
+of “one chain, one contract” to redesign a public chain to
+ensure the normal operation of each contract. Te block-
+chain multichain structure can ensure that the trafc surge
+on one chain will not afect the efciency of the other chain,
+and any business conducted on the chain will not be in-
+terfered by other businesses, efectively realizing resource
+isolation. For the blockchain master-slave multichain
+structure, it means that the master chain is the frst chain
+generated by the blockchain system, and the slave chain is
+the extension chain of the master chain. It has the char-
+acteristics of the blockchain multichain structure. Te data
+growth between the master chain and slave chain will not
+afect each other, and the master chain and slave chain serve
+each other.
+Nowadays, a lot of scholars use blockchain technology to
+solve related food application problems. Some cutting-edge
+research based on blockchain technology applied to the food
+industry is shown in Table 1.
+First, based on China’s infuence on blockchain policies,
+some scholars have analyzed and studied policies under
+diferent supply chains. Liu et al., based on the national
+subsidy and incentive policy support for the blockchain [22],
+set diferent supply chains as research objects in the
+traceability service [23], agriculture, and [24] low-carbon
+felds in the blockchain feld, set demand functions
+according to the characteristics of their respective felds, and
+analyzed the corresponding subsidy models. Teir research
+provides theoretical guidance for the government to for-
+mulate and implement subsidy strategies. Tis enables the
+state to provide more support for blockchain technology.
+At present, lots of students have applied blockchain
+technology to the grain food traceability industry and
+designed diferent innovative ways. Lin et al. proposed a
+blockchain based security mutual authentication system
+BSeln, which implemented fne-grained access control
+policies [25]. Te system provides privacy and security
+guarantee for data information with auditability and
+confdentiality, refecting the security and reliability of the
+blockchain. He and Hu designed a food cold chain trace-
+ability system based on blockchain technology, and used
+quantum secret key distribution technology to replace the
+asymmetric encryption technology of traditional blockchain,
+efectively improving the security of data information
+storage in the traceability system [26]. Dong et al. designed a
+grain and oil food reliable traceability model which used the
+blockchain technology, and replaced the centralized data-
+base with “on chain + cloud database.” Tis storage model
+can solve the low efciency problems caused by the
+blockchain single chain structure [30]. Yang et al. designed a
+vegetable traceability system based on “blockchain + RFID
+technology,” which can solve some problems in information
+collection by using RFID (radio frequency identifcation
+technology) [31]. However, due to the increasingly complex
+data information level and the increasing number of par-
+ticipants, the single blockchain has been unable to solve the
+problems of low consensus efciency and transaction ef-
+ciency reduction. For blockchain multichain structure, most
+mathematicians currently apply it to other industries. Xuan
+et al. proposed a distributed energy trading method based on
+multichain collaborative blockchain, which solved the
+problem of slow transaction speed by adopting blockchain
+system according to the method of parallel transaction
+processing from chain according to regional partition [37].
+Li et al. proposed a new algorithm. Te blockchain system is
+based on CPS storage under multichain edge cloud com-
+puting, in which the nodes of the system are divided
+according to the close communication relationship, and the
+time and space of data synchronization can be reduced
+through the partition storage structure of this algorithm
+[32]. Zhang et al. designed an interoperable multiblockchain
+reliable tourism management platform based on integrated
+REST API. Te platform references the structure that uses
+multiblockchain to improve processing capabilities and help
+the tourism industry to add various commercial services
+[38]. It can be seen that the blockchain multichain structure
+has gradually become the research trend of blockchain
+application in all walks of life.
+However, there are few studies on the application of
+blockchain multichain structure to the grain industry, but
+some scholars also use the multichain structure to study the
+traceability and control of grain. Peng et al. designed a
+multichain
+cooperation
+model
+based
+on
+block-
+chain + subchain to help rice supply chain achieve safe and
+reliable management and control [34]. Yu et al. designed a
+grain food traceability model based on the blockchain
+multichain structure, which can achieve real-time control of
+the traceability data ledger and interchain transaction rec-
+ords, providing reference for the research of the agricultural
+blockchain traceability supervision system [39].
+To sum up, the application of blockchain technology in
+the food traceability industry has become mature at present.
+However, since the traditional blockchain single chain
+structure has the characteristics of distributed storage and is
+not easy to be tampered with, it cannot solve the problem
+that the food industry’s data information is jumbled and the
+consensus efciency and traceability efciency are reduced
+Computational Intelligence and Neuroscience
+3
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第4页】
+due to its complex hierarchy, as well as the numerous
+participants and long life cycle. For the blockchain multi-
+chain structure, its multichain consensus interchain con-
+sensus needs to be further studied. Terefore, this research
+makes use of the characteristics of blockchain distributed
+storage, decentralization, being not easy to be tampered with
+and anticounterfeiting, and combines the hash locking
+method to design a blockchain master-slave multichain
+storage structure, and divides each link of the grain food
+supply chain into fve major links: production, processing,
+storage, transportation, and sales for data classifcation, and
+classifes it into shared information and encrypted infor-
+mation to ensure the security of data information. On this
+basis, two improved consensus mechanisms are designed for
+the blockchain master-slave multichain structure and ap-
+plied to the blockchain master-slave chain to improve its
+consensus efciency. Compared with the existing multichain
+structure, the master-slave chain structure can perform
+traceability queries more quickly and accurately by setting
+priorities. Finally, comparing the single chain structure with
+the master-slave multichain structure can efectively refect
+the advantages of the master-slave multichain structure. It
+can provide reference for building a safe, reliable, and ef-
+fcient grain food traceability system. Trough comparing
+with existing research, this paper makes the following
+contributions:
+(1) It analyzes the links and key information of grain
+food supply chain and divides them into shared
+information and encrypted information to provide
+reference for other scholars
+(2) Tis paper designs a blockchain master-slave mul-
+tichain structure, which provides solutions to the
+problems of inefcient and low throughput of
+blockchain single chain structure caused by mis-
+cellaneous data
+(3) Tis paper designs two diferent consensus algo-
+rithms, PLEW and CI-PBFT, respectively, for the
+master chain and slave chain, providing reference for
+improving the consensus efciency of the master-
+slave multichain structure
+(4) Te grain food blockchain traceability information
+management model based on master-slave multi-
+chain proposed in this paper is also applicable to
+other industries
+Based on the research of literature [21], this paper frst
+classifes the data information of the fve links of the data
+grain supply chain into shared information and encrypted
+information, so that the data information queried by en-
+terprises on the supply chain can be classifed, and the
+specifc blockchain network created will be displayed spe-
+cifcally, and the consensus algorithm between the master
+and slave chains will be improved to enhance the traceability
+efciency of the overall model. While designing relevant data
+judgment, upload query of the smart contract. Finally, the
+system functions were improved, and the supervisor login
+module
+was
+added
+to
+query
+blockchain
+transaction
+information.
+3. Grain Food Blockchain Traceability
+Information Management Model Based on
+Master-Slave Multichain
+3.1. Grain Food Supply Chain Links and Key Information
+Analysis. Tis section takes the grain food supply chain with
+frequent grain food safety problems as an example. Readers
+can refer to this example to analyze other industries. In the
+food supply chain, there are many participants, which can be
+divided into internal participants and external participants
+according to their participation methods. Te internal
+participants are mainly farmers, processing enterprises,
+storage enterprises, logistics transportation enterprises, and
+sales enterprises. External participants mainly include
+consumers, government, and other regulatory departments,
+as well as quality inspection departments [27]. Moreover, the
+data in the whole grain food supply chain is complex, in-
+cluding shareable information and encrypted information.
+Te information that can be shared is the information that
+can be shared for consumers and related enterprises in the
+supply chain, including basic information of grain food
+products, basic information of all links, environmental in-
+formation, and staf information. Encrypted information is
+private data information shared within the enterprise, in-
+cluding product quantity, product cost, sales price, and data
+information generated during specifc transactions [33].
+In this study, the grain food supply chain is divided into
+fve main parts, namely production, processing, storage,
+transportation, and sales. Te planting link refers to the
+operation of seed selection, seed soaking, seedling raising,
+transplanting, fertilization, harvesting, and other operations
+Table 1: Research overview.
+Category
+Research content
+References
+Blockchain policy related
+Analysis of government subsidy policies through diferent
+supply chains
+[22–24]
+Blockchain based food or crop traceability
+solution
+Solve the traceability problems of existing food or crops
+through blockchain technology
+[5, 6, 9, 15, 21, 25–29]
+Solutions to storage problems in food and other
+industries based on blockchain multichain
+structure
+Solve the problems of low efciency and low throughput
+caused by the increase of data information that cannot be
+matched by the single chain structure through blockchain
+multichain
+[18–20, 26, 27, 30–33]
+Solutions to food or crop traceability or
+supervision based on smart contract technology
+Solve the problems of traceability or low regulatory efciency
+and high cost through blockchain smart contract technology
+[5, 16, 34–36]
+4
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第5页】
+for grain seeds and the recording of key information, such as
+seed and achievement information, environmental infor-
+mation, and transaction information. Processing link refers
+to the process of peeling, milling, extracting, refning, and
+other processes of harvested grains and recording key in-
+formation, such as product information, processing link,
+quality inspection results, and processing costs. Te ware-
+housing process refers to the storage of processed products
+to prevent the damage, mainly recording hinge information,
+for example, warehousing links, locations, warehousing
+time, quality inspection methods, warehousing costs, and
+others. Te transportation process refers to the trans-
+portation of the well preserved products in the warehouse to
+the destination, and the recording of their logistics infor-
+mation, logistics cost, and other crux information. Te sales
+link refers to selling products and recording key information
+such as sales information and transaction information. We
+recorded relevant sales information, transaction informa-
+tion, and other key information, as shown in Table 2.
+3.2. Overall Framework of the Model. Under the existing
+blockchain single chain structure, each node needs to store
+all the information on the chain. Tere are problems in its
+capacity, performance, running speed, and information
+security, which cannot meet the needs of customers on the
+alliance chain at this stage [40]. To resolve the questions of
+blockchain single chain, Ethereum 2.0 regional scheme and
+Hyperledger Fabric 1.0 multichannel scheme are extended to
+multichain structure on the basis of blockchain single chain
+structure, and the nodes on each chain only need to store the
+data information of the channel, solving the problem of low
+load of single chain [41, 42].
+Figure 1 shows the overall framework of the grain
+blockchain traceability information management model
+based on master-slave multichain designed in this research.
+After collecting data information from all taches of the grain
+food supply chain through automation devices such as the
+Internet of Tings (IoT), the model uploads data infor-
+mation to the blockchain network with Hyperledger Fabric
+as the underlying structure through data classifcation and
+uploading smart contracts. To guarantee the safety and
+reliability of encrypted information and shared information
+in the grain traceability model and solve the problem of
+miscellaneous and diverse information in each link, this
+research adopts a master-slave multichain structure model
+based on the blockchain single chain technology. Te def-
+inition of master-slave multichain is as follows: main chain:
+the frst chain generated by the system, responsible for the
+confrmation of the slave chain to ensure that the slave chain
+can operate well. Slave chain: a blockchain created by
+extending the main chain with side chain technology. If the
+chain is the extension of the master chain, it is called the
+primary slave chain; if it is the extension of the primary slave
+chain, it is called the secondary slave chain, and so on. Te
+extended chain is called the parent chain, and the extended
+side chain is called the child chain. A parent chain can have
+multiple child chains, while a child chain can only have one
+parent chain. Tis storage model constructs a blockchain
+slave chain for each link of the supply chain to store the data
+that needs to be stored in this link. A total of fve slave chains
+are designed according to the fve major links of production,
+processing, warehousing, transportation, and sales. Te
+blockchain master chain stores the index information and
+hash value and other data information of the slave chain.
+Because the master chain stores less data, only one master
+chain needs to be created. Cross chain processing between
+the master chain and slave chain uses hash time locking
+technology to anchor each other. Hash time lock includes
+two parts: hash lock and time lock. Time locking in master-
+slave multichain refers to the transaction between master
+chain and slave chain, which is valid only when it is com-
+pleted within the specifed time, and it is invalid if it exceeds
+the time (whether it is master chain or slave chain). Hash
+locking means that for a hash value H, if the provided R
+makes Hash (R) � H, the commitment is valid, otherwise it
+becomes invalid. Under the blockchain master-slave mul-
+tichain structure, the master-slave chain is anchored to each
+other by means of hash time locking. If the data information
+cannot be queried or uploaded successfully for various
+reasons, the time lock and hash lock can prevent the data
+information from being stolen by criminals. Based on the
+characteristics of decentralization, decentralized network,
+traceability, consensus mechanism, security, high avail-
+ability, tamper proof, and programmability of blockchain
+technology, and by combining with the links of grain food
+supply chain such as planting, processing, warehousing,
+transportation, sales, and supervision, the corresponding
+nodes in the blockchain network is built. By using the
+master-slave multichain storage model based on blockchain
+to manage the traceability data, a grain food supply chain
+traceability information management model is built to re-
+alize the supervision of the whole grain food supply chain.
+Nowadays, the peer in the alliance chain are provided by
+each institution with several nodes, and each node is
+interconnected to form a distributed network in which
+transactions and blocks are spread and agreed. In addition,
+each node in the federation chain can apply to join a channel
+and communicate with other nodes in the channel after
+authentication and certifcate sending. Tis paper compre-
+hensively compares the consensus algorithms in the alliance
+chain, and fnally adopts the practical Byzantine fault-tol-
+erant (CI-PBFT) consensus algorithm for data consensus in
+the secondary chain by adding credit information. Since the
+main chain is a traceability inquiry chain, it is not necessary
+to store a large amount of data. Te amount of data stored in
+each link of the grain food supply chain is diferent, so the
+main chain uses the PLEW (improved PoW + Raft algo-
+rithm) consensus algorithm. Te specifc two algorithms and
+how to operate between the master and slave chains are
+described in the following sections.
+3.3. Master-Slave Multichain Storage Model Principle.
+Tis section introduces the principle of the blockchain
+master-slave multichain storage model in the production
+link. Other taches in the supply chain can refer to this
+principle. As shown in Figure 2, when the data information
+Computational Intelligence and Neuroscience
+5
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第6页】
+collected by the automation equipment in the production
+process needs to be uploaded to the network, frst it is needed
+to classify the data into shared information and encrypted
+information through data classifcation, and then upload the
+data information to the blockchain slave chain through the
+data upload smart contract. Key data information such as
+encryption information, hash value, data digest, and slave
+chain ID are stored from the block header in the slave chain,
+and shared
+information and other data information
+collected through automation equipment are stored in the
+block body, such as seed name and planting time. Te data
+verifed and uploaded by the smart contract will be broadcast
+in the network from the slave chain. Te consensus node will
+send the data information to each node in the consensus,
+and each node will store the verifed data in the distributed
+ledger. Meanwhile, the consensus node will transfer the key
+data information from the slave chain block to the main
+chain through the data upload smart contract. Te block
+Table 2: Key information of grain food supply chain.
+Project
+Production
+Processing
+Storage
+Transportation
+Sale
+Share information
+Seed source
+Product information
+Storage location
+Type of shipping
+Product
+information
+Seed name
+Processing process
+Storage method
+Place of departure
+Sales time
+Planting
+environment
+Processing
+environment
+Warehousing time
+Transportation time
+Sales method
+Planting time
+Quality inspection
+method
+Quality inspection
+method
+Transport environment
+Sales location
+Harvest time
+Quality inspection
+results
+Delivery time
+Destination
+Sales link
+Encrypted
+information
+Planting quantity
+Product cost
+Warehousing cost
+Transportation quantity;
+transportation cost
+Purchase price
+Planting cost
+Processing expenses
+Warehouse quantity
+Transaction information
+Selling price
+Transaction
+information
+Transaction
+information
+Warehousing
+expenses
+Total products
+Peer
+Peer
+Peer
+Slave 
+chain 1
+Peer
+Peer
+Peer
+Slave 
+chain 2
+Peer
+Peer
+Peer
+Slave 
+chain 3
+Peer
+Peer
+Peer
+Slave 
+chain 4
+Peer
+Peer
+Slave 
+chain 5
+Data upload
+Data query
+Data upload
+Data query
+Slave chain CI-PBFT
+consensus mechanism
+Mainchain PLEW consensus mechanism
+Peer
+Peer
+Peer
+Peer
+Peer
+Peer
+consumer
+Traceability system
+Data
+Acquisition
+Link of Food
+Supply Chain
+Temperature
+and humidity
+sensor
+Photosensitive
+sensor
+Carbon dioxide
+concentration
+sensor
+Environmental
+Detector
+Production
+enterprise
+Processing
+enterprise
+Storage
+enterprise
+Transport
+enterprise
+Sales
+enterprise
+Data upload
+Smart contract
+Data Classification
+Smart Contract
+Figure 1: Grain food supply chain information management model based on blockchain master-slave multichain.
+6
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第7页】
+header in the main chain of the blockchain stores the
+transaction hash, timestamp, and other information gen-
+erated during the slave chain transaction, and the block body
+stores the data information in the slave chain block header.
+Te transactions between the master chain and slave
+chain connect the slave chain and the master chain through
+the hash locking method. In order to ensure that the data
+information on the blockchain is safe and reliable, the
+production to sales enterprises on the food supply chain will
+protect the security and reliability of the main chain of the
+blockchain, while the government and other regulatory
+authorities will protect the security of the slave chain to
+prevent illegal elements from tampering with and destroying
+the data information. In the master-slave multichain
+structure, the master chain, as a query chain, is responsible
+for querying and supervising the corresponding data in-
+formation, and the slave chain, as a storage chain, is re-
+sponsible for storing the data information of the food supply
+chain from production to sales.
+Te shared information can be queried in real time. Te
+encrypted information can be queried only after the cor-
+responding certifcate is issued from the supply chain en-
+terprise on the chain. In the master-slave multichain, the
+slave chain will package and upload each block to the master
+chain. After the slave chain block is authenticated by the
+consensus mechanism of the master chain, it will become an
+unbranched master chain block. Any criminal who wants to
+change the main chain block will have to pay huge costs on
+humans, materials, and fnancial resources.
+3.4. Master-Slave Chain Consensus Algorithm. In this sec-
+tion, in order to make the master-slave multichain storage
+model more suitable for the grain food supply chain
+traceability information management model, two diferent
+consensus algorithms are designed for the blockchain master
+chain and slave chain, respectively, to ensure the timeliness
+of the master-slave multichain storage model. Te two al-
+gorithms will be shown in the model analysis in Section 4.1.
+3.4.1. Slave Chain Consensus Algorithm CI-PBFT. Te
+existing blockchain consensus algorithms integrate alliance
+chain, public chain, and private chain such as PoW, PoS,
+DPoS, Raft, PBFT, and other consensus algorithms. Te
+PBFT consensus algorithm is independent from digital
+currency and has low communication complexity. In ad-
+dition, PBFTcan accommodate the existence of faulty nodes
+and malicious nodes under certain conditions, providing
+Blockchain 
+network
+Block head
+Block body
+Block head
+Block body
+Block head
+Block body
+Block head
+Block body
+Share information
+Encrypted Information
+Blockchain 
+network
+Slave 
+chain
+Data upload
+smart contract
+Shared information, data 
+information collected by 
+automation equipment
+For example: seed name 
+Encrypted Information,
+Hash value, data 
+summary, slave chain data 
+key value, slave chain ID 
+and other key data 
+information
+Main 
+chain
+Block head
+Block body
+Block head
+Block body
+Block head
+Block body
+Block head
+Block body
+Data upload
+Data query
+The transaction hash and 
+timestamp generated by 
+uploading from the slave 
+chain
+Information saved from the 
+block header in the slave
+chain
+Figure 2: Master-slave multichain storage model.
+Computational Intelligence and Neuroscience
+7
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第8页】
+security or fexibility for the system. Figure 3 is a complete
+PBFT algorithm fow chart. Tere are four nodes numbered
+0, 1, 2, and 3 in the system, with 0 as the primary node, 1, 2,
+and 3 as the replica node, and C as the client:
+(1) Client C sends a request to master node 0
+(2) Te master node 0 assigns an integer number to the
+request, and then broadcasts the message content
+containing the integer number to other replica nodes
+(3) After receiving the message, the replica node sends a
+broadcast message to other nodes except itself
+(4) All nodes broadcast throughout the network to
+confrm the assignment serial number of the master
+node
+(5) Reply C to each node’s confrmation message
+(6) Client C judges that a reply has been received and
+confrms the result
+As this model is a grain traceability model, it has high
+requirements for the safety and credibility of data infor-
+mation, so on the basis of the original PBFT consensus
+algorithm, CI (trusted information degree) standard is
+added, and the slave chain uses CI-PBFT consensus algo-
+rithm to resolve the questions of information safety. If the
+information uploaded to the slave chain is malicious, the
+speed and success rate of information transmission can be
+greatly reduced by setting the trusted information, so as to
+prevent criminals from malicious upload. Suppose that there
+are m byzantine nodes among participating nodes CI-PBFT
+consensus algorithm, and the sum of all nodes is N. For all
+nodes, they are divided into consensus node CN (Consensus
+Node) and preset node PN (Preset Node) in a certain
+proportion. Te consensus node participates in the con-
+sensus process, and the preset node saves the consensus
+results as a successor node but does not participate in the
+consensus process. Before the CI-PBFT consensus starts, all
+nodes are ordinary nodes. If a node wants to enter the
+consensus node group, it needs to submit an application and
+broadcast identity registration to the whole network. When
+the node passes the review, it will enter the consensus node
+group. If there are too many CN nodes, the whole consensus
+process will be afected, while too few will afect the con-
+sensus results. Terefore, in comparison, 70% of the nodes
+are selected to form a CN cluster, and the remaining 30% are
+taken as PN clusters. When the CN nodes meet their set
+threshold, the other common nodes enter the PN cluster
+according to the sequence number of entering the network.
+Set CN node cluster as CCN and PN node cluster as CPN, both
+of which should meet as follows:
+N � CCN + CPN.
+(1)
+In the consensus process, all common nodes in the initial
+state have 0 points. In a round of consensus process, when
+the consensus master node initiates a consensus and the
+consensus slave node is verifed, the master node has +1
+points and all slave nodes have +1 points. When the con-
+sensus master node is down or the consensus fails due to a
+malicious node, the master node that initiates a consensus
+request has 2 points less. When the integral is reduced to a
+negative number, it will automatically exit the consensus and
+be supplemented by the preset node. Te CI-PBFT con-
+sensus algorithm can efectively reduce the occurrence of
+malicious data uploaded by criminals. CI-PBFT consensus
+algorithm will be shown in Section 4.1.
+3.4.2. Main Chain Consensus Algorithm (PLEW). As a query
+chain, the main chain is proposed to use the PLEW
+(Raft + improved PoW) consensus algorithm. Nodes inde-
+pendently select several hash algorithms to perform PLEW
+calculation based on their own computing power and other
+resources, and add the successful results to the block. Be-
+cause the amount of data uploaded in each supply chain
+stage is diferent, the workload is also diferent. Te con-
+tribution degree of each phase is proved according to its
+workload (query amount), and the query priority is given
+according to its contribution degree. Te workload proof
+algorithm (PoW) makes the Hash value of the content after
+the transaction data is hit meet the specifed upper limit by
+calculating a value (nonce). After the node successfully fnds
+the satisfying Hash value, it will immediately broadcast the
+package block to the whole network. When the network
+node receives the broadcast package block, it will imme-
+diately verify it. If the verifcation is passed, it indicates that
+some nodes have successfully solved the puzzle, and they will
+no longer compete for the current block packaging, but
+choose to accept this block, record it in their own ledger, and
+then perform the next block’s competition puzzle. Only the
+fastest puzzle solving block in the network will be added to
+the ledger, and other nodes will copy, thus ensuring the
+uniqueness of the entire ledger. If any node cheats, it will
+cause the node of the network to fail the verifcation, and
+directly discard its packaged block, which cannot be
+recorded in the general ledger. Te cost of the cheating node
+is huge and useless, so users on the chain will consciously
+abide by the consensus algorithm, ensuring the security of
+the main chain.
+However, since the time consumed by the PoW con-
+sensus algorithm is related to its mining difculty, its mining
+difculty is not in the block information, but only depends
+on the rule dynamic calculation in the network node. Its rule
+formula is shown in formula (2), where T is the abbreviation
+of Target and D is the abbreviation of Diversity. T1 and Tare
+Request
+Pre-prepare
+Prepare
+×
+Commit
+Reply
+3
+2
+1
+0
+C
+Figure 3: Consensus fow chart of byzantine fault-tolerant
+algorithm.
+8
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第9页】
+large numbers with 256 bits, where T1 is a very large constant
+2256− 32 − 1 = 2224 − 1. According to the formula, T is the
+abbreviation of target and the greater the difculty of D.
+D � T1
+T .
+(2)
+However, this is a traceability query system. If it takes a
+long time to simply use the PoW formula algorithm, it will
+have a lower traceability timeliness. Terefore, PLEW
+consensus algorithm, which combines Raft consensus al-
+gorithm with the improved PoW consensus algorithm, is
+used to improve the low timeliness of PoW.
+Raft consensus algorithm requires two roles, the leader
+and the follower. Tere are three states in the node, namely,
+the leader, the candidate, and the follower. Te leader is
+responsible for transmitting client instructions, and the
+follower is responsible for executing the leader’s commands.
+Te transition of these two roles requires an intermediate
+role, so Raft needs three states: the follower, the candidate,
+and the leader. Te three state process transitions are shown
+in Figure 4.
+Te PLEW consensus algorithm proposed in this paper
+frstly selects the leader node through Raft consensus al-
+gorithm. Te leader node is the node whose query times are
+more than 30% of the total query times. Secondly, the leader
+node is optimized through the improved PoW algorithm to
+improve the timeliness of the main chain. Te improved
+PoW algorithm reduces the computing power required to
+fnd random numbers by reducing the difculty of hash
+calculation. Te initial difculty is set to 1, and the corre-
+sponding difculty value is 3, that is, the frst three bits of the
+hash value obtained by splicing the hash value of the pre-
+vious block with the found Nonce are 0, so it takes less than
+4 s to fnd the results. For the traceability model, it not only
+ensures the security of data information, but also ensures the
+timeliness of traceability.
+3.5. Design of Smart Contract. To sum up, it is a computer
+protocol that achieves information dissemination, verifca-
+tion, and contract execution through programming code
+[35], and contract participants can participate in modifying
+these protocols. Smart contract is an important symbol of
+blockchain 2.0, which makes blockchain expand from digital
+currency to other felds [28, 43]. Smart contracts have the
+characteristics of security, order, verifability, decentraliza-
+tion, and automatic execution on the blockchain network
+[44], which can be used to the traceability system of the grain
+food supply chain to efectively improve its shortcomings of
+lengthy and slow traceability. Food supply chain data in-
+formation is complex and there are many links. In its lengthy
+data traceability stage, food safety and health accidents are
+easy to occur, and it is very difcult to fnd the cause of the
+accident. Terefore, smart contract technology can be used
+to monitor the data of each link of the food supply chain, so
+that it can quickly fnd the source of the accident, so as to
+improve the frequent occurrence of food health security. As
+shown in Figure 5, this smart contract performs algorithm
+analysis to judge the uploaded data according to the national
+standard of the People’s Republic of China-Rice GB1350
+(Safe Storage and Quality)-2009. If the uploaded data does
+not meet the standards, the relevant enterprises will be
+notifed to rectify through the smart contract in a timely
+manner, and the judgment will be made again after the
+rectifcation. If the data meets the standards, it will be di-
+rectly uploaded to the slave chain. Te smart contract for
+data determination is shown in Algorithm 1. When data is
+uploaded to the slave chain, the master chain, and slave
+chain will anchor each other through hash time locking, and
+upload and query data through the data upload and query
+smart contract. Te smart contract algorithm for uploading
+data information from the chain to the main chain is shown
+in Algorithm 2.
+In Algorithm 2, Hash (R) � H and time are prerequisites
+for hash time locking.
+4. Results and Discussion
+4.1. Model Analysis
+4.1.1. Feasibility Analysis. Te operation fow chart of grain
+food
+blockchain
+traceability
+information
+management
+model based on master-slave multichain is shown in
+Figure 6. By virtue of the automatic equipment and manual
+recording, when the information in the grain food pro-
+duction link such as the seed source, name, planting envi-
+ronment, and planting cost, the information in the
+processing phase such as the product, processing environ-
+ment, quality inspection method, and quality inspection
+result, the information in the warehousing link such as the
+storage location, warehousing method, and warehousing
+cost, the information in the transportation link such as the
+transportation mode, departure place, destination, and
+storage cost, as well as the information in the sales link such
+as the sales time, place, and price, are collected, and then in
+the data upload stage, the format and standard of the data are
+fltered through the smart contract verifcation, and they are
+classifed according to their keyword information. Ten, the
+data information is uploaded to the blockchain slave chain
+through the data upload smart contract, and their main key
+information is transferred to the blockchain mainchain
+through the smart fltering. When the consumer needs to
+query or supervise the data information of the product, the
+main chain calls the relevant data from the chain by querying
+the smart contract and directly transmits it to the system,
+efectively improving the efciency of the traceability su-
+pervision data information.
+According to the theoretical analysis of the model, the
+model will be systematically built in Section 4.2, and the
+model will be tested and analyzed according to the actual
+data validation of relevant enterprises to prove the feasibility
+of this model.
+4.1.2. Consensus Performance Analysis. In this part, the
+feasibility of the system is analyzed by designing the master-
+slave chain algorithm in the master-slave multichain model
+and applying it to the system built in Section 4.2. CI-PBFT
+consensus algorithm for slave chain is shown in Algorithm 3.
+Computational Intelligence and Neuroscience
+9
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第10页】
+Followers
+candidate
+Leader
+Start
+Waiting for 
+timeout to 
+start election
+Discover server nodes with 
+higher tenure
+Find existing leader nodes or 
+nodes with higher tenure
+Election timeout
+(reelection)
+Receive affirmative 
+votes from more 
+than half of the 
+server nodes
+Figure 4: Server state transition model.
+Processing 
+phase data
+Storage
+phase data
+Transportation 
+phase data
+Production 
+phase data
+Sales phase 
+data
+Classification 
+by data 
+keyword
+Share 
+information
+Encrypted 
+information
+The rest of rice is less 
+than 5%
+Brown rice outside the 
+valley is less than 2%
+Yellow rice (less than 
+1%)
+ę
+ę
+Judgment 
+criteria
+Determine smart 
+contract
+Upload to 
+slave chain
+Notify relevant 
+enterprises to 
+make new 
+judgment after 
+rectification
+Data meets 
+the standard
+Data does not 
+meet the standard
+Block
+chain 
+main 
+chain
+Data 
+upload 
+(query)
+Figure 5: Flow chart of smart contract.
+Input: input collected data, Input Data (ID)
+Output: qualifed data, Standard Data (SD)
+(1)
+count ID � n//Te total number of input data is n
+(2)
+for ! n do
+(3)
+if ID ! � foat32/foat64
+(4)
+return null
+(5)
+else if
+(6)
+return SD
+(7)
+end for
+ALGORITHM 1: Data judgment smart contract.
+10
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第11页】
+For the design of the slave chain CI-PBFT consensus
+algorithm, if the criminals want to tamper with and destroy
+the data information, their own trusted information will be
+reduced, and their nodes will also withdraw from the
+consensus. Tis algorithm can efectively guarantee the
+safety and credibility of record information, and reduce the
+Notify the 
+enterprise to 
+rectify
+Judge whether the data is 
+qualified
+Collect data information 
+through automatic 
+equipment
+Upload data information 
+to blockchain through 
+data upload smart 
+contract
+Upload the slave chain 
+data to the blockchain 
+main chain according to 
+the main key 
+information
+Consumers or regulators 
+query data information 
+through the system
+Validate and 
+classify data 
+information 
+through smart 
+contracts
+Non conformance
+Data 
+verification 
+qualified
+Mutual 
+anchoring 
+through hash 
+locking
+Query the 
+main chain by 
+keyword
+Find the 
+correspondin
+g slave chain 
+data 
+information 
+according to 
+keywords
+According to 
+the needs of 
+the main 
+chain, the 
+data 
+information 
+is directly 
+uploaded to 
+the system 
+for review by 
+consumers or 
+regulators
+Figure 6: Flow chart of model operation.
+Input: data saved from the chain, Standard Data (SD)
+Output: slave chain ID, slave chain data key value, ID code, data summary, product batch number and hash value; 1: input SD
+(1)
+if Hash(R) � H
+(2)
+if time ≤ 0.1 s
+(3)
+simplify SD (Simplify keywords of input data SD)
+(4)
+return Slave chain ID, slave chain data key value, ID code, data summary, product batch number and hash value
+(5)
+else
+(6)
+else
+(7)
+else return none
+ALGORITHM 2: Data upload algorithm.
+Computational Intelligence and Neuroscience
+11
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第12页】
+number and success rate of the criminals’ destruction of data
+information. Algorithm 4 shows the improved PoW algo-
+rithm. Te PLEW algorithm used for the main chain is
+shown in Algorithm 5.
+Compared with the slave chain, the master chain, as a
+query chain, needs to grade the query users. For users who
+have many queries and visits, setting the priority of the
+leader node can make it easier for users to query, monitor
+data information and other operations, and provides the-
+oretical support for model implementation.
+Compared with the traditional PBFT consensus algo-
+rithm, the slave chain CI-PBFT algorithm proposed in this
+model not only extends the advantages of PBFT nodes in
+reaching consensus faster, lower latency, higher throughput,
+and energy conservation, but also adds the standard of credit
+information to reduce the frequency of illegal elements’
+destruction of data on the grain food supply chain and
+improve the security of data information. At the same time,
+compared with the traditional PoW algorithm, the PLEW
+consensus algorithm used by the main chain upgrades the
+timeliness of the traceability model by reducing the dif-
+culty, and selects the leader node to determine the access
+priority according to the Raft consensus, efectively im-
+proving the timeliness of the traceability information
+management model.
+4.2. System Design and Implementation
+4.2.1. System Overall Framework Design. Te grain food
+supply chain involves many subjects, which makes it more
+difcult to trace its products. Te blockchain technology can
+provide the grain food supply chain with solutions that make
+it more difcult to trace its data and information. With the
+progress of science and technology and the increasing
+growth of people’s living standards, the main body of the
+supply chain has become more complex, and the data in-
+formation has become more diverse, and the traditional
+single chain structure has been unable to adapt to its op-
+erating speed, so the master-slave multichain structure is
+used to solve this problem. However, blockchain technology
+only solves problems such as preventing data from being
+tampered with and writing false information, but cannot
+conduct substantive data collection. Terefore, Internet of
+Tings devices are cited as the information collection
+function of each link of the grain food supply chain to ensure
+the authenticity and reliability of data information [29].
+Based on the blockchain technology and combined with the
+overall framework of the system involved in each link of the
+grain food supply chain, as shown in Figure 7, it is divided
+into six layers according to the function, namely the physical
+layer, the data layer, the network layer, the consensus layer,
+the contract layer, and the application layer.
+Te physical layer collects information on production,
+processing, storage, transportation, and sales of the grain food
+supply chain through IoT devices, sensors, GPS, and manual
+records. Te data layer generates data blocks from the grain
+food related data collected by the physical layer, establishes
+distributed ledger storage data, encrypts the data through
+asymmetric encryption technology, and forms a chain storage
+structure through hash functions, so that the data cannot be
+easily tampered with, which ensures the security and reliability
+of the data [36]. Te network layer encapsulates the networking
+mode (P2P network) of the blockchain system, data verifcation
+and propagation mechanism, and other elements. Te con-
+sensus layer establishes the PLEW consensus mechanism
+adopted by the main chain and the CI-PBFT consensus
+mechanism adopted by the secondary chain. Te contract layer
+mainly establishes a contract model through programming,
+writes contracts for judging data, extracting and uploading
+data, and automatically executes the contracts when the op-
+eration mechanism is met [45]. Te application layer mainly
+provides information interaction services and ledger mainte-
+nance services for enterprises in the supply chain link through
+the visual terminal interface, provides data supervision services
+for the government and regulatory authorities, and provides
+front-end interface data query services for consumers.
+4.2.2. System Development Environment. Te system uses
+the Hyperledger Fabric system under the alliance chain as
+the development platform. Since the alliance chain only
+targets members of a specifc group and a limited number of
+third parties, it internally designates multiple preselected
+nodes as bookkeepers. Te generation of each block is jointly
+determined by all preselected nodes. Other access nodes can
+participate in transactions, but do not interfere with the
+accounting process. Terefore, it can meet the requirements
+of multiple nodes and participants in the complex grain food
+supply chain. Te traceability information management
+system includes the blockchain network of Hyperledger
+Fabric 2.2 underlying structure. Te traceability system web
+front-end interface is developed using Python language and
+Django framework. Te blockchain network is built on
+CentOS Linux 7.5 operating system based on the multiple
+docker containers built by the Fabric operating system. Te
+required peers in the fabric network are deployed through
+the docker compose command, and smart contracts are
+written in the go programming language, Te Docker
+version is 2.10.9, the docker compose version is 1.29.2, and
+the go language version is 1.19. Te CoutchDB with the
+Fabric framework is used as the database to store data.
+Meanwhile, the network of blockchain uses the Fabric node
+sdk module to provide developers with pluggable APIs, user
+clients, network components required by the blockchain
+[46].
+Tis system sets the fve links of production, pro-
+cessing, storage, transportation, and sales as organiza-
+tions and adds them to the blockchain main chain. Te
+essence of organizations is permissions, and diferent
+permissions can be given to diferent links. Each enter-
+prise builds a slave chain according to its needs, and sets
+up two related departments and one supervision de-
+partment according to the enterprise needs, as shown in
+Figure 8. Te blockchain network is deployed under the
+VMware virtual machine with multiple machines and
+peers. Te virtual machine is confgured with 64G
+memory, 16 core processor, and 200G hard disk. Te fve
+12
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第13页】
+links of the whole grain food supply chain, namely, from
+production to sales, are set as fve organizations, each
+organization contains two peers. Te peer is essentially a
+data storage peer. To ensure the authority of the regu-
+latory authority, three ordering nodes are added to the
+fabric network. Te sorting nodes are the same as or-
+dinary nodes. Diferent organizations can be granted
+diferent permissions by confguring certifcates, ca1 and
+ca2 are certifcates produced by fve links and supervision
+departments.
+Input: common node cluster Q
+Output: consensus node cluster CN, preset node cluster PN
+(1)
+for round i
+(2) if s″ � “Ordinary Node”
+(3)
+if j apply to become Consensus Node then
+(4)
+if CCN < 70% N then
+(5)
+if application is approved then
+(6)
+CCN � CCN + 1
+(7)
+end if
+(8)
+else
+(9)
+CPN � CPN + 1
+(10)
+end if
+(11)
+else
+(12)
+switch(b)
+(13)
+{
+(14)
+case1://Successful initial block as master node
+(15)
+Score″ +� 1
+(16)
+break
+(17)
+case2://Successful initial block as slave node
+(18)
+Score″ +� 1
+(19)
+break
+(20)
+case3://Successfully challenge the master node as a slave node
+(21)
+Score″ +� 1
+(22)
+break
+(23)
+case4://Being challenged by the master node as a slave node
+(24)
+Score″ − � 2
+(25)
+break
+(26)
+case5://Failed to unpack as master/slave node
+(27)
+Score″ − � 2
+(28)
+break
+(29)
+}
+(30)
+end if
+(31)
+Te frst n nodes of CPN become CCN
+(32)
+Te next n nodes of CCN become CPN
+(33)
+return CCN, CPN
+ALGORITHM 3: CI-PBFT consensus algorithm.
+Input: hash value of the previous block prehash, difculty n;
+Output: random number nonce;
+(1)
+def hash (prehash, nonce);
+(2)
+str � f′{prehash}{nonce}′.encode()
+(3)
+return hashlib.sha256 (str).hexdigest ()//Generate SHA256 Summary
+(4)
+def proof (prehash.n):
+(5)
+nonce � 0
+(6)
+while hash (prehash.nonce) [:n] ! � str (0).zfll (n)
+(7)
+nonce+ � 1
+(8)
+return nonce
+ALGORITHM 4: Improved PoW algorithm.
+Computational Intelligence and Neuroscience
+13
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第14页】
+Input: Candidate: Candidate
+Output: Improve PoW Leader: P-leader
+(1)
+timeWait � true
+(2)
+Candidate——>server
+//Broadcast the request to be the leader in the candidate queue and wait for the approval of other candidate nodes
+(3)
+for ! timeWait do
+(4)
+if reciveResponse () ! � true then
+(5)
+//Tere are candidate nodes with longer waiting time in the queue
+(6)
+sever.State � follower
+(7)
+Candidate.Delete (server)
+(8)
+return null l
+(9)
+end if
+(10)
+server.State � leader
+(11)
+server.Wait � 0
+(14)
+def hash (server)
+(15)
+def proof (server)
+(16)
+server.leader � P-leader//Select leader node
+(17)
+return P-leader
+(18)
+end for
+ALGORITHM 5: PLEW algorithm.
+Physical 
+layer
+Data layer
+Network 
+layer
+Consensus 
+layer
+Contract 
+layer
+application 
+layer
+sensor
+P2P 
+network
+Contract 
+Model
+PLEW
+Enterprises in Supply 
+Chain Link
+Internet of Things 
+acquisition equipment
+Automatic Control 
+Terminal of the 
+Internet of Things
+GPS
+Manual 
+Recording
+Food-
+related 
+data
+Data 
+Block
+merkle 
+trees
+Chain 
+structure
+Distributed 
+Storage
+hash 
+function
+ę ę
+Common 
+maintenance
+Consensus 
+mechanism
+Master-slave chain 
+communication and 
+verification mechanism
+CI-PBFT
+Data judgment 
+contract writing
+Data Extraction and 
+Upload Contract 
+Preparation
+Intelligent 
+Contract 
+Deployment
+ę ę
+Data Block 
+Management
+Book 
+Maintenance
+Governments 
+and Regulators
+Data Monitoring
+Consumer
+Data query
+Figure 7: Overall framework of the system.
+14
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第15页】
+4.2.3. Systematic Implementation. Tis system takes the
+product supply chain of a rice limited company in Hubei
+Province of China as the tracing target. Rice is the largest
+grain crop in China, and Hubei Province is one of the
+provinces with the widest distribution of rice production in
+China. In the actual application of the system, the corre-
+sponding unique production batch number is generated
+according to the production and processing location of rice,
+environment, and other information. If it is checked that it
+meets the national food safety and health standards, it will
+enter the storage, transportation, and sales links. Te
+traceability system interface is shown in Figure 9.
+Te Web login interface of the traceability system is
+shown in Figure 9(a). Users log in to the system according to
+their own permissions. When the consumer user logs in to
+the system, the interface is shown in Figure 9(b). After
+entering the query code, the consumer can view the basic
+information such as the batch number and production date
+of the traceability product. At the same time, in order to
+verify the traceability query time, we query the traceability
+codes of diferent batches, and fnd that the average response
+time is 0.15 s, as shown in Figure 10. When the supervisor
+and the department on the supply chain log in, the interface
+is as shown in Figure 9(c). Tis interface can manage
+blockchain,
+production,
+processing,
+warehousing,
+transportation, sales, and other links, and view block in-
+formation, personnel information, platform records, node
+transaction data, and other information. Figure 9(d) shows
+the event data information generated recently. Te event
+types include traceability and supervision. Supervisors and
+supply chain departments can view their specifc data
+information.
+4.3. System Test Results and Analysis. In order to ensure the
+normal operation of the system and its security performance,
+the system operation efciency, throughput, and security
+performance are tested.
+In the system performance test, this research proposes a
+grain food supply chain traceability information manage-
+ment model based on the master-slave multichain structure,
+which protects the input and reading of encrypted infor-
+mation in all links of the supply chain through smart
+contract technology, and solves the data storage pressure
+caused by the lengthy and complex data information of the
+grain food supply chain under the traditional blockchain
+single chain structure [47]. Te master-slave multichain
+structure model proposed in this study is that production,
+processing, storage, transportation, and sales each have a
+slave chain, and each slave chain has a desired node to store
+SDK 
+Technology
+peer0
+peer1
+org1
+Production channel
+Processing channel
+Storage channel
+Transportation channel
+Sales channel
+peer0
+peer1
+org2
+peer0
+peer1
+org3
+peer0
+peer1
+org4
+peer0
+peer1
+org5
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+block
+ę ę
+ę ę
+ę ę
+ę ę
+ę ę
+ca1
+ca2
+orderer1
+orderer2
+orderer3
+Blockchain 
+network
+Figure 8: Deployment diagram of the blockchain network environment.
+Computational Intelligence and Neuroscience
+15
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第16页】
+data, so the reading and writing of shared information and
+encrypted information are strictly controlled. In addition, in
+order to explore the performance comparison between the
+traditional blockchain single chain structure and the master-
+slave multichain structure, the PBFT consensus mechanism
+is adopted by designing and deploying a single chain
+blockchain network structure with fve nodes, and the PLEW
+consensus mechanism is adopted by deploying a master
+chain with fve nodes. Five slave chains with 10 nodes each
+adopt the master-slave multichain blockchain network
+(a)
+(b)
+(c)
+(d)
+Figure 9: Traceability information query platform interface. (a) Te login interface of the system. (b) Te system query information
+interface. (c) and (d) Te interface that can be queried after the supervision department or the supply chain department logs in.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Unit : second
+Query time
+Response time of data query
+0
+0.05
+0.1
+0.15
+0.2
+Figure 10: Traceability response time result chart.
+16
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第17页】
+structure composed of CI-PBFT consensus mechanism.
+When the total number of data is 100, 200, 500, 1000, and
+1500, compare data information of 50 queries. It can be seen
+from the results that when the data query volume is less than
+100, there is almost no diference in the query time between
+the two. But when the data volume increases to a certain
+extent, the efciency of adopting a consensus blockchain
+single chain structure decreases signifcantly, and the query
+time increases gradually. Te master-slave multichain
+structure uses diferent consensus mechanisms of the
+master-slave chain to ensure that the query time is basically
+unchanged. Te test results are shown in Figure 11. As
+shown in Figure 12, in the transaction throughput test, the
+master-slave multichain structure has certain advantages
+over the single chain structure in terms of the transaction
+throughput between 50 and 1000. Meanwhile, to test the
+safety of the traceability system, the system performed safety
+verifcation with the data information of a wheat variety of a
+grain, oil and food company in Hubei Province. Te test was
+conducted in the frst quarter of 2022. During this period,
+the company set up wheat batches for 2132 times, and the
+traceability accuracy rate reached 100%, which shows that
+the accuracy of the system for traceability accuracy is ex-
+tremely high. At the same time, the safety of data infor-
+mation storage of the blockchain master-slave multichain
+structure was tested. In the frst month, about 32500 batches
+of data information were stored; in the second month, about
+33250 batches of data information were stored; and in the
+third month, about 34350 batches of information were
+stored. Te results are shown in Figure 13. Te data shows
+that the number of malicious tampering with data infor-
+mation by criminals is almost zero, which provides a strong
+support for the safety of data information storage of the
+system.
+Te three comparative verifcation results prove that the
+master-slave multichain grain blockchain traceability in-
+formation model proposed by this model has more ad-
+vantages in data credibility, timeliness, and practicality, and
+has certain advantages over traditional traceability methods
+and blockchain single chain structure.
+At present, lots of students have applied the blockchain
+technology to the grain food supply chain traceability and
+supervision industry. However, most of the current research
+is limited to the blockchain single chain structure, and the
+single chain structure has gradually failed to meet the
+traceability, low supervision efciency, poor timeliness,
+security degradation, and other problems caused by the
+iteration of data information updates on the food supply
+chain. At the same time, some scholars have applied the
+blockchain multichain structure to the grain food trace-
+ability industry, but it is not yet mature. In order to refect
+the advantages of the grain blockchain traceability infor-
+mation management model of master-slave multichain
+proposed in this paper, this paper compares it with other
+relevant documents, and the results are shown in Table 3.
+Literature [30] proposed a trusted traceability model of
+the grain and oil food supply chain based on blockchain
+technology, and solved the problem of grain food traceability
+security by using the blockchain “peer + cloud database”
+storage mode. Literature [39] proposed a grain traceability
+model based on the blockchain multichain structure, and on
+this basis, established a multichain data storage structure,
+designed a network access mechanism based on regulatory
+authorization to build a chain, and realized prechain su-
+pervision of data and on chain control of traceability nodes
+through smart contracts.
+0
+0.5
+1
+1.5
+2
+2.5
+0
+100
+200
+500
+1000
+1500
+RESPONSE TIME (S)
+THE TOTAL AMOUNT OF DATA/PIECE
+Master-slave multi-chain
+single chain
+Figure 11: Comparison of query time between single chain and
+master-slave multichain.
+0
+100
+200
+400
+600
+800
+1000
+Transaction throughput test
+Single chain
+Master slave multi chain
+0
+50
+100
+150
+200
+250
+300
+Figure 12: Comparison of single chain and master-slave multi-
+chain transaction throughput.
+January
+February
+March
+Test chart in the frst quarter of 2022 Unit: batch
+Total number
+Number not tampered with
+31,500
+32,000
+32,500
+33,000
+33,500
+34,000
+34,500
+Figure 13: Data information security test chart.
+Computational Intelligence and Neuroscience
+17
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第18页】
+According to security performance analysis, compared
+with literature [30], it uses the storage method of blockchain
+peer + cloud database to store data. When a large amount of
+data fows into the cloud database, if there are criminals to
+destroy it, a large amount of data will be tampered and
+fowed out, causing serious losses for enterprises. Te
+blockchain master-slave multichain storage structure pro-
+posed in this study can ensure the security and reliability of
+data and prevent illegal elements from destroying. For the
+vulnerability of data information, compared with the
+multichain structure proposed in literature [39], this paper
+sets the master-slave multichain structure, and uses hash
+locking to anchor each other between the master and slave
+chains. If you want to attack the slave chain, you must attack
+the master chain frst, and the cost of attacking the master
+chain is huge, which greatly reduces the possibility of being
+attacked.
+In terms of model efciency, compared with the single
+chain single consensus proposed in literature [30] and the
+multichain single consensus proposed in literature [39], the
+master-slave multichain model proposed in this study sets
+priority in terms of query and supervision, which improves
+the transaction throughput and timeliness of the traceability
+model. In addition, diferent consensus mechanisms are
+designed for the master chain and slave chain to adapt to the
+traceability model, efectively reducing the delay of this
+model.
+In terms of scalability, this model is developed using the
+Hyperledger Fabric open source framework, while literature
+[30] uses cloud database and literature [39] uses interstellar
+system fles, both of which are nonopen source structures.
+Terefore, this model has more development prospects in
+terms of resource consumption.
+To prove the advantages of this model over the existing
+multichain research, we have analyzed the efciency of the
+multichain single consensus and the multichain multi-
+consensus proposed by this model. In terms of data query
+time, the multichain single consensus costs more time than
+the multichain multiconsensus proposed by this model. Te
+results are shown in Figure 14. It can be seen that this model
+has certain advantages over the existing multichain single
+consensus structure.
+5. Conclusion and Prospect
+Tis research proposes a grain food blockchain traceability
+information management model based on master-slave
+multichain. Te blockchain master-slave multichain struc-
+ture is used to store the data information of the fve major
+links of grain food, including production, processing,
+storage, transportation, and sales. It efectively solves the
+problems of slow operation speed and reduced transaction
+throughput caused by the miscellaneous information under
+the traditional blockchain single chain structure. Te
+master-slave chain is anchored through hash locking. It
+makes the data on the chain more difcult to be tampered
+with, improves the security and reliability of the data, and
+ensures the authenticity of the data on the traceability
+system. Moreover, on the basis of the blockchain master-
+slave multichain structure, in order to adapt to the trace-
+ability system, the PLEW consensus mechanism is designed
+for the main chain, and the CI-PBFT consensus mechanism
+is designed for the slave chain, which efectively improves
+the efciency of traceability supervision data information
+and provides guarantee for the timeliness of the model. On
+this basis, Hyperledger Fabric2.2 alliance chain builds the
+system. Te overall traceability information management
+model is of great signifcance for ensuring food quality and
+security and improving people’s overall quality of life.
+However, although most grain food enterprises use
+automatic equipment to collect and upload data information
+at present, a small number of small enterprises still upload
+data information in an artifcial way, which makes it im-
+possible to ensure the authenticity of product data infor-
+mation in the circulation process. Tis is also the defciency
+of the design model of this research institute. Te govern-
+ment and other regulatory authorities can conduct cen-
+tralized agency certifcation and training for the input
+information personnel to reduce the harm of certifcation
+and dissemination of false information on the chain. In the
+future, we will combine blockchain technology with radio
+Table 3: Comparison and analysis.
+Performance
+Index
+Literature [21]
+Literature [30]
+Tis paper
+Security
+Data security
+Middle
+High
+High
+Vulnerability
+High
+Middle
+Low
+Timeliness
+Low
+Middle
+High
+Model efciency
+Troughout
+Low
+High
+High
+Delay
+High
+Middle
+Low
+Scalability
+Resource consumption
+Middle
+Lower
+Low
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+query time 
+Response time of data query
+Master-slave multi chain storage model
+Multi chain single consensus
+0
+0.05
+0.1
+0.15
+0.2
+0.25
+unit second
+Figure 14: Traceability time comparison chart.
+18
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第19页】
+frequency identifcation technology (RFID) and other In-
+ternet of Tings devices to guarantee the reliable collection
+of data information before the link, avoid too much human
+intervention, and design an algorithm protocol combining
+blockchain and RFID to guarantee the safety of data in-
+formation during the upload process, so as to further better
+the reliability of the traceability system data information.
+Data Availability
+Te data supporting this study are included within the paper.
+Conflicts of Interest
+Te authors declare that they have no conficts of interest.
+Acknowledgments
+Tis work was supported in part by the National Key Re-
+search
+and
+Development
+Program
+of
+China
+(2022YFF1101103 and 2019YFC1605306) and the Beijing
+Natural Science Foundation (4222042).
+References
+[1] National Bureau of statistics, “National data,” 2021, https://
+data.stats.gov.cn/.
+[2] S. Chung, J. T. Hwang, and S. H. Park, “Physiological efects of
+bioactive compounds derived from whole grains on cardio-
+vascular and metabolic diseases,” Applied Sciences, vol. 12,
+no. 2, p. 658, 2022.
+[3] J. Zhan, B. Liu, and M. Chen, “Infuences and prevention of
+food security in China under global momentous public health
+event,” Journal of Agricultural Science and Technology A,
+vol. 24, no. 2, pp. 49–57, 2022.
+[4] D. Wang and S. Chen, “Food safety emergency management
+system and analysis of environmental pollution cases in
+China,” Food Science, vol. 37, no. 5, pp. 283–289, 2016.
+[5] J. P. Qian, Q. Y. Yu, S. Y. Shi, B. Zhang, Y. Zha, and W. Wu,
+“Design of an intelligent control platform for agricultural
+inputs based on blockchain,” Journal of Agricultural Big Data,
+vol. 2, no. 2, pp. 38–46, 2020.
+[6] H. L. Yu, B. Y. Chen, D. M. Xu, X. Yang, and C. Sun,
+“Modeling of rice supply chain traceability information
+protection based on block chain,” Transactions of the Chinese
+Society for Agricultural Machinery, vol. 51, no. 8, pp. 328–335,
+2020.
+[7] R. Sparrow, M. Howard, and C. Degeling, “Managing th e
+risks of artifcial intelligence in agriculture,” NJAS: Impact in
+Agricultural and Life Sciences, vol. 93, no.1, pp.172–196, 2021.
+[8] Q. Lin, H. Wang, X. Pei, and J. Wang, “Food safety traceability
+system based on blockchain and EPCIS,” IEEE Access, vol. 7,
+pp. 20698–20707, 2019.
+[9] L. Wang, Y. He, and Z. Wu, “Design of a blockchain-enabled
+traceability system framework for food supply chains,” Foods,
+vol. 11, p. 744, 2022.
+[10] J. P. Xu, P. C. Sun, and X. Zhang, “Prototype system of in-
+formation security management of cereal and oil food whole
+supply chain based on blockchain,” Transactions of the Chi-
+nese Society for Agricultural Machinery, vol. 51, no. 2,
+pp. 341–349, 2020.
+[11] M. S. Al-Mashari and M. Al-Rakhami, “ProChain: prove-
+nance-aware traceability framework for IoT-based supply
+chain systems,” IEEE Access, vol. 10, pp. 3631–3642, 2022.
+[12] B. M. Yakubu, R. Latif, A. Yakubu, M. I. Khan, and
+A. I. Magashi, “RiceChain: secure and traceable rice supply
+chain framework using blockchain technology,” Peer Journal
+Computer Science, vol. 8, p. e801, 2022.
+[13] Y. Yuan and F.-Y. Wang, “Blockchain: the state of the art and
+future trends,” Acta Automatica Sinica, vol. 42, no. 4,
+pp. 481–494, 2016.
+[14] T. N´obrega, C. E. S. Pires, and D. C. Nascimento, “Blockchain-
+based Privacy-Preserving Record Linkage: enhancing data
+privacy in an untrusted environment,” Information Systems,
+vol. 102, Article ID 101826, 2021.
+[15] Y. Fu and J. Zhu, “Operation mechanisms for intelligent
+logistics system: a blockchain perspective,” IEEE Access, vol. 7,
+pp. 144202–144213, 2019.
+[16] Q. Tao, X. Cui, X. Huang, A. M. Leigh, and H. Gu, “Food
+safety supervision system based on hierarchical multi-domain
+blockchain network,” IEEE Access, vol. 7, pp. 51817–51826,
+2019.
+[17] D. Mao, F. Wang, Z. Hao, and H. Li, “Credit evaluation system
+based on blockchain for multiple stakeholders in the food
+supply chain,” International Journal of Environmental Re-
+search and Public Health, vol. 15, no. 8, p. 1627, 2018.
+[18] L. Zuo, Z. K. Xu, and M. X. Xiao, “Data privacy preserving
+K-means clustering algorithm based on blockchain multi-
+chain,” Communication technology, vol. 55, no. 6, pp. 771–775,
+2022.
+[19] Q. Zhou, J. Ou, and J. Peng, “Design and implementation of
+multi-chain block chain dynamic partitioning method for
+micro grid power trading,” Chinese Journal of Electron De-
+vices, vol. 43, no. 4, pp. 771–777, 2020.
+[20] Q. Liu, B. Song, and J. Wang, “Second-degree branch
+structure blockchain expansion model,” International Journal
+of Distributed Sensor Networks, vol. 18, no. 3, 2022.
+[21] X. Zhang, Y. Li, X. Peng, Z. Zhao, J. Han, and J. Xu, “In-
+formation traceability model for the grain and oil food supply
+chain based on trusted identifcation and trusted blockchain,”
+International Journal of Environmental Research and Public
+Health, vol. 19, no. 11, p. 6594, 2022.
+[22] P. Liu, X. Cui, and Y. Li, “Subsidy policies of a fresh supply
+chain considering the inputs of blockchain traceability service
+system,” Science and Public Policy, 2022.
+[23] P. Liu, Z. Zhang, and F. Y. Dong, “Subsidy and pricing
+strategies of an agri-food supply chain considering the ap-
+plication of Big Data and blockchain,” RAIRO - Operations
+Research, vol. 56, no. 3, pp. 1995–2014, 2022.
+[24] P. Liu, X. Cui, Z. Zhang, W. Zhou, and Y. Long, “Pricing
+strategies of low-carbon enterprises in the Yellow River Basin
+considering demand information and traceability services,”
+Kybernetes, 2021.
+[25] C. Lin, D. He, X. Huang, K. K. R. Choo, and A. V. Vasilakos,
+“BSeIn: a blockchain-based secure mutual authentication with
+fne-grained access control system for industry 4.0,” Journal of
+Network and Computer Applications, vol.116, pp. 42–52, 2018.
+[26] J. He and X.-Y. Hu, “Construction of food cold chain
+traceability system based on quantum blockchain,” Food
+Science, vol. 43, no. 15, pp. 294–301, 2022.
+[27] X. Y. Wang, Z. N. Wang, J. L. Kong, S. U Tingli, and B. Yuting,
+“Risk assessment of hazardous materials in grain supply
+ChainBased on frequent pattern growth combined with self-
+organizing maps (FPG-SOM),” Food Science, vol. 41, no. 9,
+pp. 15–22, 2020.
+Computational Intelligence and Neuroscience
+19
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+【第20页】
+[28] L. W. Ouyang, Y. Yuan, and F. Y. Wang, “Learning markets:
+an AI collaboration framework based on blockchain and
+smart contracts,” IEEE Internet of Tings Journal, vol. 9,
+no. 16, pp. 14273–14286, 2022.
+[29] J. J. Li, X. C. Ni, Y. Yuan, and F. Y. Wang, “A Novel GSP
+auction mechanism for dynamic confrmation games on
+bitcoin transactions,” IEEE Transactions on Services Com-
+puting, vol. 15, no. 3, pp. 1436–1447, 2022.
+[30] Y. F. Dong, X. Zhang, J. P. Xu, W. Xiaoyi, K. Jianlei, and
+S. Pengcheng, “Blockchain-based traceability model for grains
+and oils whole supply chain,” Food Science, vol. 41, no. 9,
+pp. 30–36, 2020.
+[31] W. C. Yang, Y. R. Zhong, and Z. Z. Chuai, “Research on
+vegetable traceability system based on blockchain + RFID
+technology -- Taking Jilin City as an example,” Southern
+agricultural machinery, vol. 52, no. 24, pp. 26–28, 2021.
+[32] S. Li, H. Xiao, and J. Qiao, “Multi-chain and data-chains
+partitioning algorithm in intelligent manufacturing CPS,”
+Journal of Cloud Computing, vol. 10, no. 1, p. 9, 2021.
+[33] J. P. Xu, J. Wang, X. Zhang, X. Wang, K. Jianlei, and L. Yang,
+“Information supervision modeling of rice supply chain
+driven by blockchain,” Transactions of the Chinese Society for
+Agricultural Machinery, vol. 52, no. 5, pp. 202–211, 2021.
+[34] X. Z. Peng, X. Zhang, X. Wang, H. Li, J. Xu, and Z. Zhao,
+“Multi-chain collaboration-based information management
+and control for the rice supply chain,” Agriculture, vol. 12,
+no. 5, p. 689, 2022.
+[35] L.-W. Ouyang, S. Wang, and Y. Yuan, “Smart contracts:
+structure and research progresses,” Acta Automatica Sinica,
+vol. 45, no. 3, pp. 445–457, 2019.
+[36] M. P. Caro, M. S. Ali, M. Vecchio, and R. Giafreda,
+“Blockchain-based traceability in Agri-Food supply chain
+management: a practical implementation,” in Proceedings of
+the 2018 IoT Vertical and Topical Summit on Agriculture -
+Tuscany (IOT Tuscany), pp. 1–4, Tuscany, Italy, May 2018.
+[37] J. X. Xuan, X. Liu, and G. M. Li, “Distributed energy trans-
+action based on multi-chain collaborative blockchain,”
+Electric Power Construction, vol. 42, no. 11, pp. 34–43, 2021.
+[38] L. Zhang, L. Hang, W. Jin, and D. Kim, “Interoperable multi-
+blockchain platform based on integrated REST APIs for re-
+liable tourism management,” Electronics, vol. 10, no. 23,
+p. 2990, 2021.
+[39] H.-J. Yu, D.-M. Xu, N. Luo, X. Bin, and S. Chuanheng,
+“Design of the blockchain multi-chain traceability supervision
+model for coarse cereal supply chain,” Transactions of the
+Chinese Society of Agricultural Engineering, vol. 37, no. 20,
+pp. 323–332, 2021.
+[40] J.-P. Xu, J. Q. Han, and X. Zhang, “Research on traceability of
+grain and oil quality and safety based on trusted blockchain
+and trusted identifcation,” Food Science, pp. 1–16, 2022.
+[41] X. F. Li, “Research and implementation of key technologies of
+multi-channel alliance chain,” University of Electronic Science
+and technology, 2020.
+[42] M. Q. Li, X. T. Yang, D. M. Xu, Y. Huajing, and S. Chuanheng,
+“Design and implementation of aquatic product blockchain
+traceability information management system based on mas-
+ter-slave multi-chain,” Fishery Modernization, vol. 48, no. 3,
+pp. 80–89, 2021.
+[43] R. Qin, Y. Yuan, and F. Y. Wang, “Optimal block withholding
+strategies for blockchain mining pools,” IEEE Transactions on
+Computational Social Systems, vol. 7, no. 3, pp. 709–717, 2020.
+[44] C. H. Sun, H. J. Yu, N. Luo, D. M. Xu, B. Xing, and X. Y. Yang,
+“Blockchain traceability data storage method of fruit and
+vegetable foods supply chain based on smart contract,”
+Transactions of the Chinese Society for Agricultural Machinery,
+vol. 53, no. 8, pp. 361–370, 2022.
+[45] X. Zhang, X.-Z. Peng, J.-P. Xu, X. Y. Wang, H. S. Li, and
+Z. Z. Zhao, “Dynamic supervision model of rice supply chain
+based on blockchain and smart contract,” Transactions of the
+Chinese Society for Agricultural Machinery, vol. 53, no. 1,
+pp. 370–382, 2022.
+[46] D. Wu, D. Gao, and D. Lo, “Scalable online vetting of Android
+apps for measuring declared SDK versions and their con-
+sistency with API calls,” Empirical Software Engineering,
+vol. 26, no. 1, p. 7, 2021.
+[47] S. Wang, L. W. Ouyang, Y. Yuan, X. Ni, X. Han, and
+F. Y. Wang, “Blockchain-enabled smart contracts: architec-
+ture, applications, and future trends,” IEEE Transactions on
+Systems, Man, and Cybernetics: Systems, vol. 49, no. 11,
+pp. 2266–2277, 2019.
+20
+Computational Intelligence and Neuroscience
+ 8483, 2022, 1, Downloaded from https://onlinelibrary.wiley.com/doi/10.1155/2022/7498025, Wiley Online Library on [18/03/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+

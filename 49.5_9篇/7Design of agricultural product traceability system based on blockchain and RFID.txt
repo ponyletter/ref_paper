@@ -1,0 +1,814 @@
+来源文件：7Design of agricultural product traceability system based on blockchain and RFID.pdf
+============================================================
+
+【第1页】
+Design of agricultural product 
+traceability system based on 
+blockchain and RFID
+Li Li1,2, Pengbo Tian1,2, Jiapeng Dai1 & Fengjuan Miao1
+Ensuring the traceability of agricultural products is essential for quality control and food safety. Recent 
+technological advances have provided new ways to enhance traceability systems. This study aims to 
+use blockchain technology, centralized database and RFID tags to develop a secure agricultural product 
+traceability system, retain the detailed information of agricultural products traceability, ensure that 
+the summary information of agricultural products on the chain cannot be modified, and optimize 
+the SM3 algorithm to effectively summarize the traceability data and improve the efficiency of the 
+system. The aggregated data is time-stamped, recorded on the blockchain, and written into an RFID 
+tag. The optimization of the SM3 algorithm improved the efficiency by 30% and reduced the execution 
+time of 192-byte messages to 210µs. The system ensures accurate linking of traceability data through 
+secure data retention and unalterable summaries on the blockchain. The integrated use of blockchain, 
+centralized database and RFID technology, as well as the enhanced SM3 algorithm, allows the system 
+to meet the standards for data accuracy and performance requirements in agricultural traceability 
+applications.
+Keywords Traceability of agricultural products, RFID, Blockchain, SM3, HSM,  Internet of things 
+technology
+In recent years, with the advancement of the Internet of Things (IoT) industry, the application of sensors and big 
+data for data collection and storage has significantly enhanced China’s traceability industry. However, a series 
+of issues persist. Traditional anti-counterfeiting traceability technologies, such as QR codes and fluorescence 
+markers, remain relatively outdated. These methods are prone to forgery and fail to provide detailed traceability 
+information, limiting their effectiveness in ensuring product safety and transparency1–3. Therefore, the traditional 
+agricultural product traceability data system has barriers to interaction, limited interaction capabilities, and is 
+prone to information islands4,5.
+Currently, the majority of applications utilizing RFID-based traceability systems are primarily designed for 
+single-node traceability, with a predominant focus on tracking information at the planting stage. Consequently, 
+the management of comprehensive traceability data, including information from subsequent stages of the 
+agricultural supply chain, remains underdeveloped. This lack of integration limits the effectiveness of these 
+systems in providing a holistic view of agricultural product traceability and addressing the entire lifecycle 
+of the product6,7. Agricultural products involve multiple links in the circulation process, and it is difficult to 
+unify the synchronization of traceability information based solely on RFID tags, resulting in low accuracy of 
+traceability data and errors that make it difficult to ensure the accuracy of traceability data8–10. Traceability 
+data is stored in a central database, and if the database is subjected to tools, the data can be easily leaked and 
+tampered with11–13. RFID-based traceability systems that rely on centralized databases face significant challenges 
+in ensuring the authenticity and integrity of traceability data. Additionally, there is insufficient emphasis on 
+the security risks associated with data interactions between readers and databases. The potential vulnerabilities 
+in reader devices expose the system to security threats and attacks, compromising the overall reliability and 
+protection of the traceability information14,15. Simultaneously, the inherent characteristics of blockchain 
+technology—decentralization, immutability, traceability, and trust—make it exceptionally well-suited to address 
+the challenges associated with centralized management and multi-party trust issues prevalent in current RFID 
+anti-counterfeiting traceability systems. Blockchain’s distributed ledger capabilities offer a robust solution 
+for enhancing data integrity, security, and transparency, effectively mitigating the limitations of traditional 
+centralized traceability approaches16–18. However, neither personal research nor the blockchain platform can 
+ensure the authenticity of the traceability data before it is put on the chain, and when the amount of traceability 
+1College of Communications and Electronics Engineering, Qiqihar University, Heilongjiang 161006, China. 2Li Li and 
+Pengbo Tian are co-first authors. email: 271426099@qq.com; miaofengjuan@163.com
+OPEN
+Scientific Reports |        (2024) 14:23599 
+1
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports
+
+
+【第2页】
+data is large, the operation efficiency of the traceability system cannot be guaranteed. Alberto Zancanaro et 
+al. enable sensors to receive complex data through machine learning, but the data collection focuses more on 
+specific parameters of production, processing, transportation and other links, ignoring other factors affecting 
+food safety19. The distribution and density of data collection points in this experiment can more fully reflect the 
+actual situation of the entire food supply chain. MIAOMIAO ZHENG et al. designed a food safety traceability 
+system, but the stability and reliability of the mentioned RFID technology and two-dimensional code technology 
+in complex environments (such as high humidity, high temperature cold chain environment) are poor, which 
+will affect the accuracy and integrity of the data20. The blockchain technology used in this experiment has good 
+data processing speed and storage capacity, and does not face performance bottlenecks when processing massive, 
+high-dimensional data. Raouf Mehannaoui et al. designed a food traceability system based on the Internet of 
+Things to better improve the food traceability system through the use of 5G and DLT two advanced technologies, 
+but there was a lack of detailed description of the system architecture, as well as analysis of experimental details 
+and performance indicators21. This experiment is improved on this basis, by applying blockchain technology, 
+RFID tags and optimized SM3 algorithm, the traceability system has higher reliability and efficiency.
+Integrating traditional agricultural product traceability systems with RFID and blockchain technologies offers 
+a transformative enhancement in transparency and data integrity. The synergy of blockchain’s decentralized 
+ledger and RFID’s real-time tracking capabilities significantly bolsters consumer trust and satisfaction 
+by ensuring the authenticity and reliability of traceability data. This integration not only fosters sustainable 
+development and scalability in industry transformation but also elevates the overall operational efficiency of 
+commodity circulation. As a result, it enhances the social value of agricultural products and presents substantial 
+potential for advancement and application within engineering practices.
+Key technologies
+Blockchain technology
+Blockchain technology is a decentralized distributed digital ledger used to record transactions and data in a 
+secure and transparent manner. It employs encryption algorithms to ensure the integrity and validity of the 
+data stored on it, and once the data is recorded on it, it is nearly impossible to change, hack, or manipulate. 
+Blockchain technology underpins cryptocurrencies such as Bitcoin and Ethereum, but its potential applications 
+extend beyond digital currencies. It can be Bitcoin and Ethereum, among others, but its potential applications 
+extend beyond digital currencies. It has been used in supply chain management, identity verification, voting 
+systems, and more.
+This paper uses the storage method of combining blockchain and centralized database (MySql), which only 
+stores the traceability summary data of agricultural products calculated by SM3, which reduces the storage space 
+of the blockchain system and improves the query and search speed. The centralized database (MySql) is used to 
+store the traceability details of agricultural products, and RFID tags are used to record the summary information 
+of agricultural products at each stage.
+RFID sensing technology
+RFID technology allows the antenna to play its important role, it can cross-couple the energy of electromagnetic 
+waves and other physical factors, so that the antenna can exert its maximum efficiency. In addition, the field area 
+of the antenna can also reflect the environment near the antenna, which can make the environment near the 
+antenna more stable, so as to better meet the requirements of RFID technology. According to this principle, the 
+information transmission between the reader and the tag can be divided into two types: backscatter modulation 
+and load modulation. In the passive RFID system, the reader receives the data sent by the electronic tag, and the 
+communication method used is backscatter modulation. The traditional RFID tag consists of an antenna and 
+a chip, and the input impedance of the chip itself needs to be adjusted by adding an impedance switch, and the 
+schematic diagram is shown in Fig. 1.
+RFID technology uses an antenna to obtain data and then transmit it to the marker, which can use the 
+surrounding electromagnetic field, transmission path, modulation reflection to transmit the data to the reader’s 
+mobile phone. By applying Maxwell’s equations, an accurate near-field and far-field model of the antenna 
+radiation field can be established, which is helpful to better understand the application mechanism of RFID 
+technology and provide strong support for its related research.
+When discussing the radiation characteristics of antennas, an ideal dipole antenna needs to be assumed. An 
+ideal dipole antenna refers to a current with uniform radiation and size meeting dl << λ , where the parameters 
+θ , ϕ , γ  and dl in the antenna are shown in Fig. 2. The magnetic field strength and electric field strength 
+generated by an ideal dipole antenna are:
+ 
+E = − Idl
+4π η 0β 22cosθ
+�
+1
+(jβ r)2 +
+1
+(jβ r)3
+�
+e−jβ r�r  
+(2.1)
+ 
+− Idl
+4π η 0β 2sinθ
+�
+1
+jβ r +
+1
+(jβ r)2 +
+1
+(jβ r)3
+�
+e−jβ r�θ  
+(2.2)
+ 
+H = − Idl
+4π β 2sinθ
+�
+1
+jβ r +
+1
+(jβ r)2
+�
+e−jβ r �ϕ  
+(2.3)
+When β r ≪ 1, r ≪ λ /2π , Eqs. (2.2) and (2.3) can be simplified to:
+ 
+Enf = j
+Idl
+4π β r3η 0(2cosθ�r + sinθ �θ )  
+(2.4)
+Scientific Reports |        (2024) 14:23599 
+2
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第3页】
+ 
+Hnf =
+Idl
+4π r2sinθ �ϕ  
+(2.5)
+From the above equation, the magnetic field strength at this distance is attenuated by 1/r2, the electric field 
+strength is attenuated by 1/r3, and the Poynting vector E × H is an imaginary number, and its energy is not 
+enough to radiate to outer space, so it exists on and near the antenna surface by electromagnetic energy exchange.
+When β r ≫ 1, r ≫ λ /2π  is far field, Eqs. (2.2) and (2.3) can be simplified to:
+ 
+Eff = j Idl
+4π rη 0β e−jβ rsinθ �θ  
+(2.6)
+ 
+Hff = j Idl
+4π rβ e−jβ rsinθ �ϕ  
+(2.7)
+From the above formula, it can be concluded that in the far-field case, the electromagnetic field radiates energy 
+outward, and the high-frequency RFID reader mainly uses this method to complete the interaction with RFID 
+tag data through energy transmission.
+The distance between the radiated near-field region and the far-field region is usually set to R:
+ 
+R = 2D2
+λ
+ 
+(2.8)
+where the antenna diameter is D, the antenna wavelength is λ , and D ≥ λ .
+During the preparation of the antenna, when L is smaller than the wavelength λ, only the radiated far-field 
+region and the reactive near-field region exist. When the field area exceeds λ /2π , the vicinity of the antenna 
+mainly belongs to the radiation field. RFID tags are usually limited by the size of the antenna in the process of 
+preparing packaging, and the antenna structure adopts L/λ ≪ 1 or L/λ < 1 structure mode.
+According to the above design concept, a passive RFID sensor is designed, whose working energy completely 
+depends on the radio frequency signal sent by the reader. This design not only reduces the cost, but also extends 
+the service life of the sensor. The selection of different antenna materials, size optimization and integration with 
+temperature sensors ensure that the sensor can operate stably in different environments, accurately transmit 
+temperature data traceability system design, and real-time monitoring of the entire life cycle of agricultural 
+products. Through RFID tags, detailed traceability information such as unique identification, batch information, 
+and harvest date of agricultural products can be stored and queried, providing a strong guarantee for the data 
+integrity and security of the agricultural product traceability system.
+Traceability system design
+Business process analysis
+The traceability process of agricultural products mainly includes planting, processing, classification, 
+transportation, storage and sales. In order to realize the safe and efficient storage of data in the circulation 
+process, this paper uses blockchain distributed storage summary information and centralized database (MySql) 
+to store detailed traceability information, and combines RFID repository authentication mode to realize the safe 
+storage and query of agricultural product traceability information. The process of storing agricultural products 
+based on blockchain and centralized database (MySql) is shown in Fig. 3.
+In order to record the raw data during the circulation of agricultural products while reducing the amount 
+of upstream data, the raw traceability data of agricultural products is stored in a centralized database. This 
+paper uses a centralized database and blockchain storage mechanism to achieve data binding verification, and 
+the centralized database adopts MySql database, which is widely used in storage systems because of its low 
+Fig. 1. Electronic tag impedance control mode.
+ 
+Scientific Reports |        (2024) 14:23599 
+3
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第4页】
+cost, small size and fast development speed. By designing multiple forms, they are used for data recording and 
+authority division in the process of agricultural product circulation.
+Blockchain and RFID-based traceability data storage of agricultural products relies on blockchain distributed 
+storage, and distributed data is jointly verified and managed in the blockchain storage process, which ensures the 
+safe storage of data and efficient collaboration between nodes.
+The database table design for storing raw traceability data includes several key headers to ensure data 
+reliability. Each entry is uniquely identified by the Product_ID and RFID_Tag_ID, which are critical for 
+tracking and validation. The Batch_Number, Harvest_Date, and Processing_Date provide temporal context for 
+the product’s lifecycle, while Blockchain_Record_ID links the data to the blockchain for additional security 
+and transparency. The Supplier_ID ensures traceability back to the source, and the Quality_Assurance_Score 
+captures the product’s quality status, aiding in quality control. Storage_Conditions describe the environment in 
+which the product is kept, which can impact its quality. Database key storage table, as shown in Table 1.
+This design aims to ensure comprehensive and reliable tracking of agricultural products from harvest through 
+to final storage, supporting data integrity and traceability.
+The blockchain-based and RFID storage system model includes the following parts: data collection and 
+writing layer, data processing storage layer, network transport layer, consensus mechanism layer, smart contract 
+layer, data interface layer, and user participation layer. Through layering, the layers are relatively independent, 
+and there is only a data interaction interface relationship between each layer, which has good flexibility, and 
+does not affect the overall architecture when modifying and adjusting some information, so as to avoid the 
+shortcomings of the business system caused by the barrel effect. When encountering network attacks or hacker 
+Fig. 2. Ideal dipole coordinates.
+ 
+Scientific Reports |        (2024) 14:23599 
+4
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第5页】
+damage, you can quickly locate specific location information to facilitate later operation and maintenance. The 
+storage architecture is shown in Fig. 4.
+Data acquisition read and write layer: This layer includes RFID tags, SM3 algorithms, main control chips, 
+data transmission and passive RFID temperature sensors. An ultra-high speed and high sensitivity temperature 
+sensor based on ZnO/MoS2/RGO nanocomposite modified microwave band-stop filter is designed and 
+fabricated, which can collect ambient temperature information at low cost. The temperature amplitude in the 
+environment is determined to be in the 2.73–2.76 GHz band, and the optimized microstrip patch temperature 
+sensor obtains higher response and better optimal value, which improves the sensitivity of the temperature 
+sensor22. Data storage layer: The links involved in the on-chain storage process of data include: SM3 (hash) data 
+digest verification, timestamp, Merkle and blockchain chain storage structure. Network transport layer: The 
+network transport layer uses P2P network transmission and identity authentication mechanism to communicate 
+data between planting nodes, processing nodes, transportation nodes, storage nodes, sales nodes, and user query 
+nodes. Consensus mechanism layer: All nodes follow the POS consensus mechanism agreed upon in the process 
+of updating and storing blockchain data to ensure that the data reaches consensus in the storage process of their 
+respective nodes and successfully completes the data on the chain. Smart contract layer: When the traceability 
+of agricultural products is established, in the process of farmer planting, enterprise processing, transportation, 
+distribution, consumer inquiry and transaction, the market supervision department will legally and morally 
+constrain it, set script and program rules, abide by the conditions agreed in advance in the process of data on the 
+chain, and automatically verify the nodes on the chain according to the smart contract to further strengthen the 
+reliability of traceability data. Data interface layer: by providing API data interface, it is convenient to access the 
+data of each node, and the interface can be used to complete the upload and query of data, which is convenient 
+for later maintenance and operation, and facilitates the expansion of the blockchain traceability platform. User 
+Column name
+Data type
+Description
+Constraints
+Product_ID
+VARCHAR(50)
+Unique identifier for each agricultural product
+Primary key, not null
+Batch_Number
+VARCHAR(50)
+Identifier for the product batch
+Not null
+Harvest_Date
+DATE
+Date when the product was harvested
+Not null
+Processing_Date
+DATE
+Date when the product was processed
+Not null
+RFID_Tag_ID
+VARCHAR(100)
+Unique RFID tag associated with the product
+UNIQUE, NOT NULL
+Blockchain_Record_ID
+VARCHAR(100)
+Identifier for the blockchain record
+Unique, not null
+Supplier_ID
+VARCHAR(50)
+Identifier for the supplier
+Not null
+Quality_Assurance_Score
+INTEGER
+Score indicating the quality of the product
+Check (Quality_Assurance_Score > = 0)
+Storage_Conditions
+VARCHAR(255)
+Description of storage conditions
+Nullable
+Table 1. Traceability information storage table of agricultural products.
+ 
+Fig. 3. Data storage process based on blockchain and MySql traceability.
+ 
+Scientific Reports |        (2024) 14:23599 
+5
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第6页】
+participation layer: realize human-computer interaction, use the API function of the data interface layer to 
+obtain traceability data, consumers can realize the query of traceability information of agricultural products, 
+supply chain departments and regulatory departments can realize the management of agricultural products, and 
+realize data circulation in all links through the user participation layer. In view of the problems of traditional 
+traceability platforms relying on centralized databases and unsynchronized data updates, through the above 
+analysis of the traceability needs of agricultural products and the design of storage methods, combined with 
+blockchain technology, RFID technology and optimization of the national secret SM3 algorithm, a complete and 
+safe traceability platform for agricultural products is built.
+Fig. 4. Agricultural product traceability data storage system architecture based on blockchain.
+ 
+Scientific Reports |        (2024) 14:23599 
+6
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第7页】
+Fig. 5. (a) RFID tag data interaction process; (b) process of validation of abstract data.
+ 
+Sequence
+Block
+Name
+Function
+Sequence
+0
+00
+Reserved
+Store the authentication password
+0
+1
+01
+EPC
+Extend the identity zone
+1
+2
+02
+TID
+Unique encoding
+2
+3
+03
+USER
+User store
+3
+Table 2. Function zones of labels.
+ 
+Scientific Reports |        (2024) 14:23599 
+7
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第8页】
+Data summary information generation and validation
+In the process of data acquisition and storage, the domestic SM3 algorithm is used to perform summary 
+calculation on the original data, and the original data and summary data are further processed through the data 
+processing layer. After completing the process of each node, the summary data of this node is summarized, and 
+the summary data of the SM3 algorithm of the sum is calculated and written into the RFID tag. The process of 
+calculating data using the SM3 algorithm summary is as follows: According to the standard guidance of the State 
+Cryptography Administration, the SM3 algorithm specifies that the length of the input data is less than 264 bits 
+in the process of calculation. In the traceability data of agricultural products, through the pre-setting, the data of 
+each data summary operation is much less than 264 bits, and the operation steps by feeding the original data into 
+the SM3 algorithm are as follows: (1) Message length filling; (2) Message expansion; (3) Iterative compression; 
+(4) Summary data outputs.
+Information storage and verification
+In the process of traceability of agricultural products, RFID tags are pasted inside the commodity packaging. 
+According to the flow characteristics in the process of traceability of agricultural products, the labels selected 
+by this system are ultra-high frequency labels with low cost, high reliability, strong anti-interference and long 
+radiation distance.
+In the RFID tag, the storage area is composed of four areas, namely: tag identification number, electronic 
+product code, user data storage area and reserved area, the four areas are independent of each other, data storage 
+can be carried out, and the tag function area is divided as shown in Table 2. The reserved area is mainly used for user 
+storage access passwords, kill passwords, and tags are password verified and locked in the process of interacting 
+with the reader, further improving the security of system identification. Agricultural products involve a variety 
+of categories in the circulation process, and the coding and classification of items can be realized through the 
+identification inside the label. Starting from 20 H as the address, considering the number of types of agricultural 
+products, 12 bytes are selected for coding classification, and the final coding range is: 00000001 ~ FFFFFFFFF. 
+By coding agricultural products to facilitate post-management and query, it is conducive to faster identification, 
+warehousing, distribution and other functions of commodities in the later stage. The tag identification area is 
+a globally unique code that cannot be changed by the user. In the process of data storage, the TID value of the 
+RFID tag pasted on the surface of each agricultural product is used as the index value of the MySql database, 
+and the user area can customize the data by the user. The output value combined with the SM3 algorithm in this 
+scheme is fixed at 32 bytes and 256 bits, and the user storage area of the tag is 512 bits by looking up the data 
+sheet, which meets the requirements of the agricultural product traceability system.
+The process of RFID tag storing information is: After the tag is initialized, the EPC identification code is 
+used as the identifier of the agricultural product, and the complete traceability information is obtained through 
+the reader, the original information summary is processed and uploaded to the MySql database, and the agreed 
+Fig. 6. Flow chart of SM3 compression function.
+ 
+Scientific Reports |        (2024) 14:23599 
+8
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第9页】
+summary data is uploaded to the USER area of the blockchain network and the RFID tag, the process is shown 
+in Fig. 5a.
+After using blockchain agricultural product traceability to complete each process, each step is completed 
+through the SM3 algorithm to complete the data summary, all the information of agricultural product traceability 
+is uploaded to the centralized database, the summary information is stored on the chain, and the agricultural 
+product information of the total process is recorded in the summary and written into the RFID tag by the SM3 
+algorithm. Through blockchain storage, centralized database, RFID tags, the use of data interaction in multiple 
+links of the process to ensure the transparency, authenticity and consistency of data, the difficulty of tampering 
+with data by a single node, the intensity of review, and the reliability of data storage are guaranteed.
+The commodity ID can be obtained by reading the RFID tag information through the reader, and the detailed 
+information and summary information in the agricultural product traceability node can be read through the API 
+interface reserved by the centralized database, and the total summary of the summary information is consistent 
+with the summary information stored in the RFID tag through secondary verification.
+By storing traceability summary data on the chain, combined with MySQL database and RFID tags, the 
+pressure of blockchain storage is reduced, and the rapid dissemination and query speed of data in the blockchain 
+is accelerated. RFID is pasted inside the commodity to realize the linkage between the item and the data, improve 
+the efficiency of data storage and query, and ensure the authenticity of the traceability data of agricultural 
+products. The summary data validation process is shown in Fig. 5b.
+Fig. 7. Hardware implementation process of SM3 algorithm.
+ 
+Scientific Reports |        (2024) 14:23599 
+9
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第10页】
+Sm3 algorithm improvement and optimization
+By theoretically analyzing the execution time of the algorithm and the running time of the ISYSTEM debugger 
+tracking function, the time data monitored by the debugger is analyzed and it is concluded that during the 
+execution of the SM3 algorithm, the time consumption of the compression function accounts for 58.9%, and 
+the time consumption of message expansion reaches 25.4%, as shown in Fig. 8a, the key to improving the fast 
+implementation of the SM3 algorithm is to reduce the execution time of the compression function and message 
+expansion.
+The purpose of the message expansion phase is to divide 512-bit messages into two groups. The first group is 
+given 68 words and is denoted as w_0-w_67, and the second group is 64 characters, denoted as w_0^’-w_63^’. 
+In the process of operating 132 words, the call and storage time of data can be reduced, and the execution time 
+of the algorithm can be reduced indirectly. Reduce the loading of unnecessary messages by adjusting the initial 
+value calculation of the compression function. Increase the speed of computation during execution by reducing 
+w_0^’-w_63^’ computation and storage.
+Step 1: Before the 64 round of compression function, the message expansion stage only calculates the initial 
+value of w0 − w3;
+Step 2: The i-round generation wi+4 in the process of compression function, w′
+i = wi ⊕ wi+4;
+Step 3: w′
+0 − w′
+63 receives the assignment of the wi operation.
+The compression function is the most time-consuming in the SM3 algorithm, as shown in Fig. 6 for the flow 
+chart of the SM3 compression function. There are multiple loop iterations in the compression function, there 
+are a large number of XOR, addition operations A register iteration process contains a large number of key 
+calculations, E register path is the longest, there are more calculation logic, there are intermediate variables SS1 
+and TT2, and the C code implementation process contains displacement functions, adders, shift operations, and 
+addition operations.
+Written in C language, the SM3 algorithm, SHA-256 algorithm, and optimized SM3 algorithm are 
+compiled using the TASKING compiler respectively, and the execution files are burned to the chip on the 
+TC397 development board using the ISYSTEM debugger, and the simulated debugging record data is analyzed 
+respectively. In order to further improve the execution speed of the SM3 algorithm, the SM3 algorithm realizes 
+the fast input and output of the original data traced in agricultural products, and the single-chip microcomputer 
+resources are internally set in a larger buffer area (FIFO) to facilitate the input and output of data. On Infineon’s 
+TC397 chip, the SM3 hardware implementation block diagram is shown in Fig. 7.
+In the process of experimentation, the Isystem debugger supports Python script automation to load 16-bit, 
+64-bit, 128-bit, and 192-bit fixed-packet length data into the algorithm to complete debugging. Use the debugger 
+trace function to record the operation of functions and count the algorithm time, execution time of each 
+function, memory occupation, and stack usage. Each set of data was repeated 100 times, and finally the average 
+value of each group of data was found as the final comparative analysis data value. The test results are shown in 
+Fig. 8b; after the improvement and optimization of the SM3 algorithm, the speed increase reaches about 30%, 
+which is slightly better than the SHA-256 algorithm. The data execution time of 192 Byte is calculated within 
+230 microseconds, which can meet the needs of reader encryption of agricultural product traceability system.
+By comparing the message expansion stage and compression function stage before and after the optimization 
+of the SM3 algorithm, it can be found that the number of data loading and data storage after optimization is 
+reduced, which improves the execution speed of the improved SM3 algorithm. This is shown in Fig. 8c.
+Fig. 8. (a) Time proportion of SM3 algorithm implementation function; (b) comparison of execution time of 
+SM3 algorithm and SHA256 algorithm before and after optimization; (c) comparison of execution speed of 
+SM3 optimized compression function.
+ 
+Scientific Reports |        (2024) 14:23599 
+10
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第11页】
+Conclusions and tests
+Acquisition and transmission system realized
+The hardware part based on blockchain and RFID agricultural product traceability system mainly includes: 
+TC397 main control chip, UHF-R200 reader chip, ESP8266WiFi module, TLF35584 power module, download 
+and debugging module, TFT display screen and other peripheral circuits, and the software part mainly includes: 
+reader, vector network analyzer. A schematic of the data acquisition is shown in Fig. 9a.
+When selecting the main control chip, the CPU computing speed and performance are mainly considered. 
+According to the application scenario, TC397 in Infineon’s AURIX 2G family is selected as the main control 
+chip, the main core of the chip is TriCore, and the encryption core is ARM core, which can realize hardware 
+Fig. 9. (a) Schematic diagram of data acquisition system; (b) TC397 Internal resources.
+ 
+Scientific Reports |        (2024) 14:23599 
+11
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第12页】
+acceleration of SM3 algorithm and is widely used in the field of high-speed computing. In the process of tracing 
+the origin of agricultural products, the amount of data is large, and the process of data processing involves 
+interactive operations such as reading and writing, data summary, and data upload. With TC397, tasks are set 
+on each core to enable multiple applications to run simultaneously. Flash modules with multiple independent 
+interfaces are designed inside the chip, which remain independent of each other in the process of real-time 
+processing and provide parallel execution processes. The main frequency is up to 300 MHz, and 6-stage pipelines 
+can be realized. The internal resources of the TC397 are shown in Fig. 9b.
+Fig. 10. Main program execution flow.
+ 
+Scientific Reports |        (2024) 14:23599 
+12
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第13页】
+The hardware part of the traceability system based on blockchain and RFID agricultural products mainly 
+includes: TC397 main control chip, UHF-R200 reader chip, ESP8266WiFi module, TLF35584 power module, 
+download and debugging module, TFT display screen and other peripheral circuits. TC397 is used as the main 
+control chip to complete a write. First, the single-chip microcomputer is initialized, including internal resources 
+such as internal clock, watchdog circuit, ADC, CAN, and SRC. The first tag writing workflow is shown in Fig. 10, 
+when the system initialization is completed, the program enters the main loop until the UHF-R200 read and 
+write module sends a wake-up reminder to the main control chip, the main control chip receives the serial 
+port data sent by UHF-R200, parses the RFID tag information, summarizes other traceability information of 
+agricultural products, and then calls the HSM core to calculate the SM3 algorithm to obtain the data summary 
+of the traceability information of agricultural products.
+The underlying driver configuration of TC397 is completed by using the ILLD driver package, which has 
+completed the low-level register configuration of the microcomputer, given the function interface, and defined 
+the structure declaration definition in the header file. The underlying ILLD driver configuration is shown in 
+Fig. 11a. The ILLD underlying driver package encapsulates the functions of each peripheral module of the 
+microcontroller, which developers can call directly, improve the reliability of the code, and the code portability 
+is better and readable, which helps developers and debugging personnel understand the code, improves 
+development efficiency, and facilitates software updates and upgrades. The underlying software design of the 
+controller based on TC397 mainly includes serial communication, CAN communication, GTM driver and ADC 
+driver of TC397 microcomputer.
+This paper uses UHF-R200 as the card reading chip, UHF-R200 integrates UHF RFID reading and writing 
+chip, which has the advantage of long-distance reading and writing, and is widely used in many RFID systems. 
+The module has a multi-tag anti-collision function, and users can communicate with their devices through their 
+USART pins.
+Fig. 11. (a) ILLD underlying driver configuration; (b) circuit diagram of ESP8266 module.
+ 
+Scientific Reports |        (2024) 14:23599 
+13
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第14页】
+ESP8266 can be run as a host alone, independently through SDK development, or as a slave device driven 
+by other MCUs. When ESP8266 is running as the main control module, the application can be downloaded to 
+the on-board Flash, and the program can be run in external flash memory when power-on. ESP8266 integrates 
+antennas, voltage conversion modules, and other external circuitry. In this article, the ESP8266-ESP01S module 
+developed by Essence is used, which uses the Ten silica L106 ultra-low-power 32-bit micro MCU. The MCU also 
+supports the operation of an embedded operating system with integrated Wi-Fi, MAC, BB, RF, PA, LNA, and 
+on-board antennas. The appearance and circuit diagram of the ESP8266 module are shown in Fig. 11b.
+In Infineon’s AURIX microcontroller, its internal HSM core meets the Medium Version level, with TriCore 
+as the master core and HSM as the slave core. Work is carried out when the SM3 algorithm is called, and the call 
+can be made by bridge connection between the master and slave cores. Among them, the ARM core in HSM 
+contains 24-bit timers, 8 interrupt nodes, 8 priorities, and has a memory protection unit (MPU). The Boot ROM 
+is 4 KB and contains the code and read-only data necessary to start the HSM, and this ROM can be shut down 
+after booting through DBGCTR, and each operation of the boot ROM will be checked and tested. The local 
+RAM size is 96 KB, and no data is retained after the off-chain operation. The internal watchdog circuit is a 16-bit 
+timer, where Flash is 40 × 16 KB = 640 KB. TP and HSM operations are used during interaction with the main 
+core, requiring operations from PF0 SO to S39, as shown in Fig. 12.
+Data testing and processing
+This paper uses blockchain, RFID tags, and centralized databases to ensure the authenticity of agricultural 
+product traceability. By using a virtual machine to build a server system and using Windows Server 2016 
+operating system, create 5 nodes to build a blockchain network to store summary information of agricultural 
+product traceability; Use a single host to deploy the business system, and install MySql 8.0 to store detailed data 
+of agricultural product traceability. The configuration information is shown in Table 3.
+The system’s blockchain platform is designed to be based on Hyperledger Fabric and can be developed 
+using general-purpose programming languages such as Java, GO, and Node.js, rather than being limited to the 
+platform’s own specific language (DSL). Fabric is a consortium chain, so only users who agree to the organization 
+can join the network, and the participants in Fabric are aware of each other. The development of Fabirc mainly 
+includes network construction, smart contract writing, and SDK calling smart contracts.
+The user’s operation interface is used for data communication with RFID readers and blockchain platforms, 
+mainly including identity registration, product registration, product sending, product receiving and product 
+inquiry. When the user interface receives the identity registration request and fingerprint information sent by 
+the reader, enter the ID and name through the interactive interface, click Register, the underlying logic will 
+write the data into the HTTP request URL parameter, and write the registration information to the blockchain 
+platform by sending POST request submission parameters to the blockchain platform. When the user reads the 
+RFID tag through the reader, the data of product registration, product sending and product reception can be 
+sent through the reader. The data is parsed and displayed on the user interface. After the user enters the product 
+ID and clicks the query, submits parameters to the blockchain platform by sending an HTTP POST request, and 
+obtains the query result. The flow of the user interaction module is shown in Fig. 13.
+The web server adopts the GO language, based on the BeeGO framework for development, processing HTTP 
+requests sent by the user operation interface, database calls and calling the blockchain GO SDK to achieve 
+interaction with the blockchain, the process design of beego is shown in Fig. 14. After receiving the HTTP 
+request, the web server mainly does the following operations: (1) Parameter processing: obtain the parameters 
+through GetString (parameter name), and determine whether the parameters are empty or valid, and proceed 
+to the next step if they are all composite. (2) Blockchain interaction: Query the blockchain status and update the 
+status by calling the GO SDK, and return the call result to the user. (3) Database update: There is a local SQLite 
+database in the server, and when the interaction with the blockchain is successful, the data can be written to the 
+centralized database to facilitate future data queries. (4) Return user information: define a Respons structure, 
+which contains State and Result. State is the response of the user’s request that succeeded or failed, and is 1 if 
+successful, otherwise 0.
+Sensing properties
+Read RFID tags, use single-chip microcomputer to initialize the RF module, read RFID tag data, read the label 
+data by operating the upper computer, test whether the module can scan the tag normally and read and write 
+data. The main interaction process between RFID tag and reader is: when the RF module identifies the RFID 
+tag data, completes the reading of TID code and USER area summary data, and determines whether the USER 
+area (data summary area) data is the initial value, if it is the initial value, pop-up window reminder in the 
+host computer to write the card. In the process of data circulation, RFID tags are pasted in the packaging of 
+agricultural products, the reader is to identify the tag, read the EPC code, TID code, User area data of the RFID 
+tag, upload it to the host computer through the single-chip microcomputer, the upper computer through the 
+TID code to search for the current circulation of this commodity, query the detailed information recorded in 
+the central database. Through the transaction address of the blockchain, read the data summary information 
+stored by the blockchain, and judge the authenticity of the data in the process of commodity circulation by 
+comparing the record data of the RFID tag with the information recorded by the blockchain and the centralized 
+database. If the data is consistent in the next step, the label data is read and written at each stage of circulation to 
+ensure the accuracy of the whole process. Use C# programming to make host computer software, and connect 
+to the vector network analyzer (TVNA) via USB. Call VISA’s function library to realize the control of TVNA, 
+and the steps to read passive RFID temperature sensor data are as follows: (1) Complete system initialization 
+through the C# programming language and establish communication with TVNA; (2) After the host computer 
+establishes communication with TVNA, read out the information string of TVNA and complete data analysis; 
+Scientific Reports |        (2024) 14:23599 
+14
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第15页】
+Name
+disposition
+IP address
+Remark
+Host 1
+11thGenIntel(R)Core(TM)i51135G7@2.40GHz8G/512G
+172.16.28.53
+Planting nodes
+Host 2
+11thGenIntel(R)Core(TM)i51135G7@2.40GHz8G/512G
+172.16.28.54
+Machining nodes
+Host 3
+Intel(R)Core(TM)i5-8300 H @2.30 GHz 8G/256G
+172.16.28.55
+Transportation nodes
+Host 4
+Intel(R)Core(TM)i5-8300 H @2.30 GHz 8G/256G
+172.16.28.56
+Warehousing nodes
+Host 5
+Intel(R)Core(TM)i5-8300 H @2.30 GHz 8G/256G
+172.16.28.57
+Sales node
+Host 6
+Intel(R)Xeon(R)Silver4314@2.4 GHz 32G/512G
+172.16.28.58
+Business systems
+Table 3. Specific configuration information.
+ 
+Fig. 12. HSM internal resources.
+ 
+Scientific Reports |        (2024) 14:23599 
+15
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第16页】
+(3) Set the measurement parameters through the host computer; (4) Vector network analysis instrument starts 
+data measurement; (5) The upper computer reads the measurement data, converts it into Celsius according to 
+the fitting curve and displays and records the data.
+In order to ensure the safe and stable operation of the entire software, static code and dynamic code testing 
+of the engineering code are required. Static code testing mainly tests MISRA C, CERT C check, dynamic testing 
+is divided into unit testing and integration testing. In the process of testing, you need to write test cases, record 
+the status of bugs, modify bugs, and reissue versions.
+Fig. 13. Flow chart of user interaction module.
+ 
+Scientific Reports |        (2024) 14:23599 
+16
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第17页】
+In order to verify the validity and reliability of processing node information in the agricultural product 
+traceability platform based on blockchain and RFID technology, a series of experiments were designed and 
+implemented. Figure 15 shows the data entry interface used in the experiment, which is an important part of the 
+agricultural product traceability platform. You can see the table of “processing node information”, which lists the 
+product name, processing method, processing location and other key information in detail. This information 
+is uniquely identified by RFID tags or barcodes and is associated with the data on the blockchain to ensure the 
+authenticity and immutability of the data. It also presents summary data related to processing nodes (such as 
+“66e7f04 62eeedd9”, etc.), which are obtained by hashing the information in RFID tags or barcodes using specific 
+algorithms to increase data security and traceability. The experimental results show that the agricultural product 
+traceability platform based on blockchain and RFID technology can effectively prevent data tampering and 
+falsification, and ensure the authenticity and traceability of agricultural product information.
+The system conducts test work in accordance with the method of software testing engineering, according 
+to test records and test case manuals, and completes more than 300 static test regulations, and the static test 
+code coverage is 100%. Use tools to produce 400 TestCases, manually write more than 30 test cases, and the test 
+case coverage is 100%. The pass rate of the first test is 93%, the second pass rate is 100%, the main defects are 
+Fig. 15. Data entry interface.
+ 
+Fig. 14. Process design drawing of beego.
+ 
+Scientific Reports |        (2024) 14:23599 
+17
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第18页】
+concentrated in the implementation of back-end code logic account for about 3%, and the defect closure rate is 
+100% through secondary patch patching.
+Data availability
+The datasets used and/or analysed during the current study available from the corresponding author on reason-
+able request.
+Received: 25 March 2024; Accepted: 20 September 2024
+References
+ 1. Dayana, D. S., Kalpana, G. & Vigneswaran, T. Implementation of circular blockchain-based approach for food crops supply chain 
+with bitcoin prediction using deep learning[J]. Soft. Comput. 1, 1–14. https://doi.org/10.1007/s00500-023-08484-3 (2023).
+ 2. Fan, B. et al. Improving continuous traceability of food stuff by using barcode-RFID bidirectional transformation equipment: two 
+field experiments[J]. Food Control. 98, 449–456. https://doi.org/10.1016/j.foodcont.2018.12.002 (2019).
+ 3. Urbano, O. et al. Cost-effective implementation of a temperature traceability system based on smart RFID tags and IoT services[J]. 
+Sensors. 20 (4), 1163. https://doi.org/10.3390/s20041163 (2020).
+ 4. Xiao, F. et al. Mater. Continua 76(1), 1. https://doi.org/10.32604/cmc.2023.038937 (2023).
+ 5. Almaghrabi, A. & Alhogail, A. Blockchain-based donations traceability framework[J]. J. King Saud University-Computer Inform. 
+Sci. 34 (10), 9442–9454. https://doi.org/10.1016/j.jksuci.2022.09.021 (2022).
+ 6. Cappelli, I. et al. Battery-less HF RFID sensor tag for soil moisture measurements[J]. IEEE Trans. Instrum. Meas.70, 1–13. https://
+doi.org/10.1109/TIM.2020.3036061 (2020).
+ 7. Colella, R. et al. Design of UHF RFID sensor-tags for the biomechanical analysis of human body movements[J]. IEEE Sens. J. 21 
+(13), 14090–14098. https://doi.org/10.1109/JSEN.2021.3069113 (2021).
+ 8. Benouakta, S., Hutu, F. D. & Duroc, Y. UHF RFID temperature sensor tag integrated into a textile yarn[J]. Sensors. 22 (3), 818. 
+https://doi.org/10.3390/s22030818 (2022).
+ 9. Mc Gee, K., Anandarajah, P. & Collins, D. Use of Chipless RFID as a passive, printable sensor technology for aerospace strain and 
+temperature monitoring[J]. Sensors. 22 (22), 8681. https://doi.org/10.3390/s22228681 (2022).
+ 10. Khalid, N. et al. A three-port zero-power RFID sensor architecture for IoT applications[J]. IEEE Access. 8, 66888–66897. https://
+doi.org/10.1109/ACCESS.2020.2985711 (2020).
+ 11. Mulloni, V. & Donelli, M. Chipless RFID sensors for the internet of things: challenges and opportunities[J]. Sensors. 20 (7), 2135. 
+https://doi.org/10.3390/s20072135 (2020).
+ 12. Shariq, M. & Singh, K. A secure and lightweight RFID-enabled protocol for IoT healthcare environment: a vector space based 
+approach[J]. Wireless Pers. Commun. 127 (4), 3467–3491. https://doi.org/10.1007/s11277-022-09928-z (2022).
+ 13. Ali, I. et al. Ruthenium (Ru) doped zinc oxide nanostructure-based radio frequency identification (RFID) gas sensors for NH3 
+detection[J]. J. Mater. Res. Technol. 9 (6), 15693–15704. https://doi.org/10.1016/j.jmrt.2020.11.033 (2020).
+ 14. Min, S. H. et al. Stretchable chipless RFID multi-strain sensors using direct printing of aerosolised nanocomposite[J]. Sens. 
+Actuators A: Phys. 313, 112224. https://doi.org/10.1016/j.sna.2020.112224 (2020).
+ 15. Silveira, T. M., Pinho, P. & Carvalho, N. B. Harmonic RFID temperature sensor design for harsh environments[J]. IEEE Microwave 
+Wirel. Compon. Lett. 32 (10), 1239–1242. https://doi.org/10.1109/LMWC.2022.3172027 (2022).
+ 16. Rahman, L. F. et al. Traceability of sustainability and safety in fishery supply chain management systems using radio frequency 
+identification technology[J]. Foods 10(10), 2265. https://doi.org/10.3390/foods10102265 (2021).
+ 17. Wang, L., He, Y. & Wu, Z. Design of a blockchain-enabled traceability system framework for food supply chains[J]. Foods. 11 (5), 
+744. https://doi.org/10.3390/foods11050744 (2022).
+ 18. Violino, S. et al. A full technological traceability system for extra virgin olive oil[J]. Foods. 9 (5), 624. https://doi.org/10.3390/
+foods9050624 (2020).
+ 19. Zancanaro, A., Cisotto, G. & Badia, L. Tackling age of information in access policies for sensing ecosystems[J]. Sensors. 23 (7), 
+3456. https://doi.org/10.3390/s23073456 (2023).
+ 20. Zheng, M. et al. Construct food safety traceability system for people’s health under the internet of things and big data[J]. Ieee 
+Access. 9, 70571–70583. https://doi.org/10.1109/ACCESS.2021.3078536 (2021).
+ 21. Mehannaoui, R., Mouss, K. N. & Aksa, K. IoT-based food traceability system: Architecture, technologies, applications, and future 
+trends[J]. Food Control. 145, 109409. https://doi.org/10.1016/j.foodcont.2022.109409 (2023).
+ 22. Miao, F. et al. Passive RFID microstrip antenna sensor for temperature monitoring[J]. Vacuum. 201, 111108. https://doi.
+org/10.1016/j.vacuum.2022.111108 (2022).
+Acknowledgements
+We would like to thank the Engineering Research Center of Agricultural Multi-Dimensional Sensor Information 
+Perception, Heilongjiang Province, and Heilongjiang Provincial Key Laboratory of Micro-Nano Sensor Compo-
+nent. This work was jointly supported by Heilongjiang Science Foundation Project (No. LH2023F052), Heilong-
+jiang Province University Discipline Collaborative Innovation Achievement Project (No.LJGXCG2023-070).
+Author contributions
+Li Li supervision, data curation, writing—original draft. Pengbo Tian investigation, validation, formal analysis, 
+data curation, writing—original draft. Jiapeng Dai Data curation, writing—original draft. Fengjuan Miao con-
+ceptualization, methodology, formal analysis, data curation, resources, writing—original draft, writing—review 
+and editing, supervision, project administration, funding acquisition.
+Declarations
+Competing interests
+The authors declare no competing interests.
+Additional information
+Correspondence and requests for materials should be addressed to L.L. or F.M.
+Scientific Reports |        (2024) 14:23599 
+18
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+
+
+【第19页】
+Reprints and permissions information is available at www.nature.com/reprints.
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and 
+institutional affiliations.
+Open Access  This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 
+4.0 International License, which permits any non-commercial use, sharing, distribution and reproduction in 
+any medium or format, as long as you give appropriate credit to the original author(s) and the source, provide 
+a link to the Creative Commons licence, and indicate if you modified the licensed material. You do not have 
+permission under this licence to share adapted material derived from this article or parts of it. The images or 
+other third party material in this article are included in the article’s Creative Commons licence, unless indicated 
+otherwise in a credit line to the material. If material is not included in the article’s Creative Commons licence and 
+your intended use is not permitted by statutory regulation or exceeds the permitted use, you will need to obtain 
+permission directly from the copyright holder. To view a copy of this licence, visit http://creativecommons.org/
+licenses/by-nc-nd/4.0/.
+© The Author(s) 2024  
+Scientific Reports |        (2024) 14:23599 
+19
+| https://doi.org/10.1038/s41598-024-73711-2
+www.nature.com/scientificreports/
+

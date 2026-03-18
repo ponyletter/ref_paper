@@ -1,0 +1,1071 @@
+来源文件：6支持国密算法的区块链交易数据隐私保护方案.pdf
+============================================================
+
+【第1页】
+NETINFOSECURITY
+技 术研究 2023年第3期
+doi:10.3969/j.issn.1671-1122.2023.03.009
+支持国密算法的区块链交易数据隐私保护方案
+一王晶宇1，马兆丰1，徐单恒²，段鹏飞1
+（1.北京邮电大学网络空间安全学院，北京100876；2.杭州安存网络科技有限公司，杭州310000）
+摘要：随着区块链技术的发展，链上数据共享越来越重要。当前区块链交易数
+据在链上公开透明，存在隐私数据共享受限问题，而且HyperledgerFabric平台缺乏国
+密算法的支持，在国内应用中受限。文章首先采用国密算法改造Hyperledger Fabric平
+台；然后提出交易数据隐私保护方案，以国密算法完成对交易数据的安全和限时共享；
+最后对改造的Hyperledger Fabric平台和提出的方案做系统实现和性能测试。实验结果
+表明，文章方法实现了对Hyperledger Fabric平台的国密改造，该方案的执行效率和系
+统性能均满足实际需求。
+关键词：区块链；隐私保护；国密算法；HyperledgerFabric
+中图分类号：TP309文献标志码：A文章编号：1671-1122（2023）03-0084-12
+中文引用格式：王晶宇，马兆丰，徐单恒，等.支持国密算法的区块链交易数据隐私保护方案[J].信息网
+络安全，2023，23（3）：84-95.
+英文引用格式:WANG Jingyu, MA Zhaofeng, XU Danheng, et al. Blockchain Transaction Data Privacy-Preserving
+Scheme Supporting National Cryptographic Algorithm[J. Netinfo Security, 2023, 23(3): 84-95.
+Blockchain Transaction Data Privacy-Preserving Scheme
+Supporting National Cryptographic Algorithm
+WANG Jingyu', MA Zhaofeng', XU Danheng², DUAN Pengfeil
+(1. School of Cyberspace Security, Beijing University of Posts and Telecommunications, Bejing 100876, China; 2.
+Hangzhou Ancun Network Technology Co., Ltd., Hangzhou 310000, China)
+Abstract: With the development of blockchain technology, the realization of data
+sharing on the chain has become an important application to promote the implementation
+of the blockchain industry. The transaction data of the current blockchain is open and
+transparent on the chain, with problems of restricted sharing. At the same time, considering
+that the Hyperledger Fabric platform is limited in domestic applications due to the lack of
+support of the national cryptographic algorithm, this paper transformed the Fabric platform
+by adopting the national cryptographic algorithm firstly. Secondly, a transaction data privacy-
+preserving scheme was proposed to complete the security and limited sharing of transaction
+收稿日期：2022-10-19
+基金项目：国家重点研发计划[2020YFB1005500]；北京市自然科学基金[M21034]
+作者简介：王晶宇（1999一），女，内蒙古，硕士研究生，主要研究方向为区块链与隐私保护技术；马兆丰（1974一），男，甘肃，副教授，
+博士，主要研究方向为区块链理论与技术、区块链核心创新及应用；徐单恒（1994一），男，杭州，硕士，主要研究方向为区块链技术与
+应用；段鹏飞（1995一），男，山东，博士研究生，主要研究方向为区块链及安全技术。
+通信作者：马兆丰mzf@bupt.edu.cn
+84
+
+
+【第2页】
+NETINFOSECURITY
+2023年第3期 技术研究
+data with national cryptographic algorithm. Finally, the modified Fabric platform and the
+proposed solution were tested for system implementation and performance. The experimental
+results show that this paper completes the national cryptographic algorithm transformation of
+the Fabric platform, which ensures the correctness of various operations. The implementation
+efficiency and system performance of the privacy protection scheme also meet the practical
+requirements.
+Key words: blockchain; privacy-preserving; national cryptographic algorithm; Hyperledger
+Fabric
+0引言
+区块链技术起源于2008年[!]，是比特币的技术支撑。
+近年来，随着区块链技术的发展，各行业逐渐与其深
+度融合发展。“ 区块链+” 的发展模式受到广泛关注，
+如区块链+教育[2]、区块链+医疗[3]等。区块链被广泛
+应用于数据共享[4]、信息溯源[5]、版权保护[6,]、数据
+可信管理[8.9]等领域。在区块链应用的众多领域中，用
+户的隐私数据安全成为关注的重点。然而，区块链的
+公开性、透明性等特点会导致交易隐私数据的安全遭
+到威胁[10]。因此，保证链上用户隐私数据的安全性是
+区块链真正落地应用的关键。目前，国内外学者针对
+区块链交易数据的隐私保护做了大量的工作。文献[11]
+提出了一种基于差分隐私算法和账户映射技术的隐私
+保护方案BLDP-AM来解决交易数据的泄露问题，该
+方案通过重新设计数据扰动机制来构造BLDP算法，
+从而保护交易数据的隐私。文献[12]提出了一种基于
+群签名与属性加密的区块链可监管隐私保护方案，该
+方案利用群签名实现交易的可监管，对数据进行属性
+加密来保证链上数据的隐私保护。文献[13]提出了一
+种基于联盟链的个人数据隐私保护方案，该方案利用
+改进后的Paillier同态加密算法来加密存储原始数据，
+利用分布式私有集群来存储加密数据，通过链下存储
+和链上传输协同，提高数据传输效率。文献[14]结合
+区块链、群签名、非对称加密设计了一种医疗数据隐
+私保护方案，可以实现医疗机构间可靠的医疗数据共
+享，保证数据的隐私性。
+针对区块链中用户交易隐私数据安全共享的问题，
+本文采用国密算法来解决。国密算法作为国内自主研
+发的一套数据加密算法，具有高安全性、高效性、稳
+定性等特点，目前在隐私保护、身份认证、数据加密
+等方面具有重要作用。文献[15]提出了一种基于无证
+书联合签名的电子发票真伪公开验证方案，该方案利
+用SM2加密算法对电子发票中的用户隐私数据进行保
+护，并利用SM2签名算法实现了电子发票数据的公开
+核验。文献[16]基于国密算法和区块链提出了一种移
+动端的安全电子身份证及身份认证协议，该协议采用
+SM2签名算法和SM3哈希算法实现用户身份的安全认
+证。文献[17]将SM4对称加密算法应用于车载PEPS和
+EMS的动态加密安全认证来提高效率。利用国密算法
+高效性和高安全性的特点，本文将其应用到区块链中，
+提出一个基于国密算法的区块链交易数据隐私保护方
+案。该方案将采用SM4对称加密算法作为加密手段，
+对链上必要的交易数据进行加密，同时规定数据的有
+效时间，利用SM2公钥加密算法来实现时间校验。
+另外，区块链目前的底层密码学算法采用的是
+国际通用标准。以HyperledgerFabric为例，其涉及的
+加密算法主要是ECDSA签名算法、ECDH加密算法、
+AES对称加密算法和SHA-256哈希算法。一方面，由
+于区块链的安全性依赖于底层密码学算法的强度，因
+此安全高效的加密算法是区块链持续安全发展的关
+键。根据目前的研究，SM2、SM3算法的安全性略高
+于ECC-256和SHA-256算法，SM4算法的加解密速度
+略高于AES算法[18-2]。另一方面，Hyperledger Fabric
+作为联盟链的代表平台，其应用十分广泛。但是目前
+HyperledgerFabric平台并没有正式地提供国密算法的支
+持，导致HyperledgerFabric平台无法进一步在国内商用。
+因此，采用国密算法来改造HyperledgerFabric平台底
+85
+
+
+【第3页】
+NETINFOSECURITY
+技术研究 2023年第3期
+层的密码学算法是持续发展区块链技术十分关键的一
+步，也是必要的一步。
+综上所述，本文利用SM2、SM3、SM4等国密
+算法来替换联盟链代表平台HyperledgerFabric1.4版本
+的底层密码学算法，改造任务分为3个部分，包括对
+Hyperledger Fabric区块链网络、Fabric-CA 和Fabric-SDK
+的改造。同时基于国密算法，提出一种区块链交易数据
+隐私保护方案，用于对隐私数据进行保护。本文采用
+SM4对称加密算法对隐私数据加密，保证只有交易接收
+者能够获取隐私数据。同时利用SM2公钥加密算法来
+实现对数据有效期的验证，适用于投标、文件下载等场
+景。最后，本文系统实现国密算法改造后的Hyperledger
+Fabric平台，仿真实现基于国密算法的区块链交易数据
+隐私保护方案，并对其进行功能测试与性能分析。
+1背景知识
+1.1区块链技术
+区块链本质上是一种分布式账本技术，以去中心
+化的方式对交易进行存储与验证，由大量的对等节点来
+共同维护其一致性[21],从而使得链上交易数据公开透明。
+区块链中的交易数据以区块形式打包存储，各区块之间
+通过哈希值相连，保证了链上数据的不可篡改性和可追
+溯性[2]。由于区块链消除了对第三方参与验证和记录交
+易的依赖性[23],因此可以作为现有应用系统的信任基础,
+在金融、教育、医疗等领域发挥重要作用。
+密码学技术作为区块链的核心，用于确保交易信
+息的完整性、不可抵赖性和不可篡改性。区块链技术底
+层的密码学算法主要包括哈希算法和非对称加密算法。
+利用哈希算法对前一个区块进行哈希计算，将得到的固
+定长度摘要保存在当前区块中，从而实现区块链的完整
+性和不可篡改性。在非对称加密算法中，交易发起者会
+利用自己的私钥对交易进行数字签名，来确保交易传输
+的完整性和交易发送者的不可抵赖性[24]。
+1.2国产密码算法
+国产密码算法是由我国公开发布的一系列商用密
+码算法，其中使用最为广泛的包括SM2椭圆曲线公钥
+密码算法、SM3密码杂凑算法和SM4分组密码算法。
+这3种国密算法可以满足较多应用的安全性需求[25]。
+SM2椭圆曲线公钥密码算法[26] 主要与国际通用的
+ECC算法和RSA算法相对应。SM2算法包括公钥加密
+算法、密钥交换协议和数字签名算法三个部分[2]。本
+文主要采用SM2数字签名算法来替换区块链底层数字
+签名算法。相对于ECDSA算法来说，SM2数字签名算
+法安全性更高[18]。
+SM3密码杂凑算法是一种哈希算法，通过单向散
+列函数将任意长度的消息压缩成长度为256bit的摘要，
+其中消息分组长度为512bit，其安全性高于MD5算法
+和SHA-1算法。另外，相较于国际通用的SHA-256算法，
+SM3算法的结构更为复杂，可以更有效地抵抗具有强
+碰撞性的差分分析、弱碰撞性的线性分析和比特追踪
+法等，其安全性较高，实现效率略高于或等同于SHA-
+256算法[18]。
+SM4分组密码算法是一种对称加密算法，采用对
+称密钥对消息进行加解密。SM4算法由加解密算法和
+密钥扩展算法组成，二者均采用32轮非线性迭代结
+构[28]。相比于高级加密标准AES算法，SM4算法可以
+有效抵抗差分攻击、线性攻击、积分攻击等多种密码
+分析，具有较强的安全几余度[29]。
+根据文献[29]给出SM4算法的密钥扩展算法和加
+解密算法。密钥扩展算法用于根据初始密钥生成轮密
+钥。MK-(MKo,MK1,MK2,MK3)e(Z2)4为初始密钥，则
+轮密钥生成过程如下：
+已知系统参数FK=(FKo,FKi,FK2,FK3)，固定参数
+CK=(CKo,CK2,;CK31)，T(O)=L(t(O)是一个可逆变换，其
+中t是非线性变换，L'是线性变换。则轮密钥生成方法
+为 rk=K+4-K,@T(Kii④Ki2④K+3@CK),(i-0,1,2,,31),其
+中，K=MK,④FK;(i=0,1,2,3)。将轮密钥生成算法记作rk-
+Gen_rk(MK,FK,CK)
+SM4算法的加密运算过程如下：已知明文输人是M-
+(Xo,X1,X2,X3)=(Z22)4,轮密钥是rk-(rki,rk,",rks1)(Z2)31,
+86
+
+
+【第4页】
+NETINFOSECURITY
+2023年第3期 技术研究
+可逆变换是TO)=L(t()，其中t是非线性变换，L是线
+性变换。则加密算法的运算过程：Xi4=X④T(Xi+④Xi+2④
+Xt3①rk)(i-0,1,;31),密文输出 C-(Yo,Y1,Y2,Y3)=(X35, X34,
+X33,X32)。
+将加密算法的运算过程记为C-SM4_Enc(M,rk)。
+SM4算法的加解密算法的变换结构相同，只是轮
+密钥的使用顺序不同。解密算法的轮密钥顺序为(rk31,
+rk30,rki)。将解密算法的运算过程记为M=SM4_
+Dec(C,rk)。
+1.3HyperledgerFabric
+Hyperledger Fabric是一个由Linux基金会托管的企
+业级开源许可区块链平台，目前在区块链领域内是联
+盟链的代表性平台[30]。Hyperledger Fabric平台的体系
+架构高度模块化，因此各模块之间可以独立升级，以
+提高可扩展性。HyperledgerFabric平台由Fabric网络、
+Fabric-CA和Fabric-SDK三部分组成，各部分之间通过
+交互连接得到完整的Fabric平台交易流程[31]。
+首先，Fabric-SDK应用程序客户端会向证书颁发
+机构Fabric-CA申请登记注册，获取身份证书。然后，
+客户端可以向Fabric区块链网络中的背书节点提交交
+易提案。当客户端收集到足够的背书结果后，会将其
+打包并向排序节点发起交易。排序节点使用PBFT共识
+算法[32]对所有的交易打包并生成区块。最后，排序节
+点使用Gossip协议将区块广播给所有的对等节点，每
+个对等节点验证块内交易无误后会更新分布式账本。
+Fabric平台提供了客户端SDK、链码API等调用接
+口，向Fabric应用提供身份管理、账户管理等服务。值
+得注意的是，在Fabric区块链网络交易流程涉及的每一
+个交易环节中，都存在数字签名和签名验证操作，以
+确保客户端私钥的所有权和交易的不可抵赖性。而交
+易的签名与验证的功能是由底层安全与密码服务所提
+供。该服务包含BCCSP组件,为Fabric提供了密钥生成、
+消息的签名与验证、哈希算法和加解密等服务。因此，
+利用国密算法替换Fabric底层的密码学算法最核心的研
+究内容是BCCSP底层实现基于国密算法的接口[33]。
+2国密算法改造Fabric平台
+本章将研究利用基于Go标准的国密算法来替换
+Fabric平台的底层密码学算法，包括基于SM2的数字
+签名与验证算法、基于SM3的哈希算法和基于SM4的
+加解密算法。国密算法的实现将采用同济区块链研究
+院的开源代码[34]。Fabric平台的改造将从Fabric区块链
+网络、Fabric-CA和Fabric-SDK三方面展开，下面将详
+细给出改造方案。
+2.1Fabric区块链网络改造
+改造Fabric区块链网络的密码学算法主要的工作
+是实现BCCSP模块下的国密算法接口以及利用Factory
+生成国密BCCSP实例并修改相关应用的调用接口，使
+其调用国密算法接口。
+BCCSP模块下需要实现的国密算法接口包括SM4
+加解密算法、SM3哈希算法、SM2数字签名和验证算法、
+SM2证书和标准X.509证书转换算法。Factory包的作
+用是生成BCCSP实例，需要将Factory的默认选项改为
+国密，并添加gmfactory.go文件来实现BCCSPFactory接
+口，实现国密BCCSP的创建，如图1所示。
+SM2算法
+SM4算法
+签名Sign接口
+Keygen接口
+验签Verify接口
+Keylmport接口
+SM3算法
+Hash接口
+GetHash接口
+安全等级配置接口
+生成支持GM算法的BCCSP实例接口
+实现BCCSPFactory接口
+图1BCCSP模块下国密算法接口实现
+接下来需要实现Fabric上层应用支持国密的相关调
+用接口。首先，在网络启动之前需要利用工具cryptogen
+为网络中的节点生成静态的国密证书和密钥。因此需要
+GM算法接口实现
+同济
+GMSM
+KeyDeriv接口
+KeyStore接口
+SM2证书生成接口
+证书转换接口
+修改默认Factory选项
+Encrypt接口
+Decrypt接口
+证书支持
+87
+
+
+【第5页】
+NETINFOSECURITY
+技术研究 2023年第3期
+对common包下的工具cryptogen进行修改，包括CA结
+构体、证书的生成、MSP证书等，具体要修改的文件夹
+是 ca、msp和 csp。然后，将 core、peer、orderer、gossip
+等包下调用的密码算法接口修改为国密BCCSP提供的
+相关接口，保证交易过程中的交易验证、区块生成、区
+块分发和链码调用等应用支持国密算法。
+2.2Fabric-CA改造
+Fabric-CA是Fabric平台的数字证书颁发机构，主要
+功能包括用户注册、数字证书颁发和数字证书管理等。
+与Fabric区块链网络中的cryptogen工具不同，Fabric-CA
+可以为网络节点动态生成证书。改造Fabric-CA使得生
+成支持国密类型的证书。Fabric-CA分为Client端和Server
+端，Client端负责向Server端发出签发证书的请求并存储
+证书，Server端负责签发并管理国密证书。证书动态生
+成过程如图2所示。
+Client端
+2.请求登记注册(ClientEnroll请求）
+3.返回登记证书Ecert
+4.请求注册节点(Register请求）
+5.返回节点注册结果
+6.请求登记节点(PeerEnroll请求）
+7.生成证书Tcert并
+存入数据库中
+8.返回节点登记结果
+图2Fabric-CA证书动态生成过程
+根据证书生成过程，从底层算法实现和上层应用
+的初始化、注册、登记等方面修改调用接口以实现支
+持国密算法的调用。首先需要修改Fabric-CA-Server和
+Fabric-CA-Client中的 config.go 文件，将BCCSP的默认
+实例改为GM，并将CSR中的算法指向为国密。然后
+在lib包下申请证书请求与签发证书流程的调用接口更
+改为国密算法，并添加gmca.go文件实现生成证书、对
+证书签名等支持国密算法的接口。接着，修改util包下
+相关调用接口为国密算法，并添加token获取和证书管
+理等方法。最后，替换对Fabric包的引用以修改依赖
+包vendor，实现对国密算法的支持。
+2.3Fabric-SDK改造
+Fabric-SDK是与Fabric网络和Fabric-CA进行交互的
+客户端应用程序。本文主要针对Fabric-SDK-GO版本的
+语言开发包进行国密改造。Fabric-SDK-GO的改造需要
+国密TLS的支持，本文将采用同济区块链研究院开源
+的 gmtls 代码 [35]。Fabric-SDK-GO下包含了 intermal、third-
+party、pkg等包。intermal包中主要是Fabric和Fabric-CA的
+源码，按照前两节的内容将其均修改为国密算法接口。
+pkg是Fabric-SDK的主要功能包，包括交易管理、链码
+管理、身份管理等。因此，改造Fabric-SDK最核心的
+部分就是对pkg的修改。
+pkg包下对相关接口调用的部分修改如图3所示，
+主要包括对client、common、core和fab等相关密码算
+Server端
+法接口的修改。其他需要修改的部分就是将相关证书
+1.服务器启动并初
+管理接口更改为国密接口。最后，将相关依赖添加到
+始化
+vendor包下。
+client
+common
+pkg包
+core
+fab
+图3pkg包下部分接口的修改
+3基于国密算法的交易数据隐私保护方案
+基于第2章提出的国密区块链架构，本章将提出
+一种基于国密算法的交易数据隐私保护方案。在该方
+案中，用户数据被划分为普通数据与隐私数据，数据
+提供者自行决定数据的类型。普通数据可以直接上链，
+不会对用户隐私造成威胁。隐私数据由用户利用SM4
+验证证书有效期接口
+Orderer证书类型
+Peer证书类型
+TLS国密证书配置
+TLS证书哈希计算
+opt选项TLS国密支持
+GRPC协议传输凭证
+验证链证书到期接口
+CertPool国密标准库接口
+Endpoint国密证书配置
+BCCSP实例接口
+返回证书私钥接口
+Peer与背书节点证书类型
+Endpoint加载私钥接口
+88
+
+
+【第6页】
+NETINFOSECURITY
+2023年第3期 技术研究
+对称加密算法进行加密，保证其在链上的安全性。本
+文采用区块链隐蔽信道对交易双方的SM4对称密钥进
+行传输，可以保证对称密钥的隐蔽性、不可篡改性和
+抗干扰性[36]。另外，本文利用SM2加密算法来验证隐
+私数据的有效性。即只有在规定的时间之内才能解密
+数据，一旦超出时间该数据就无法被解密，保证数据
+的时效性。该功能的实现可以满足知识产权保护、招
+标投标等应用场景。本章首先给出系统模型，再给出
+方案的详细设计。
+3.1系统模型
+根据业务场景需求，首先给出基于国密算法的交
+易数据隐私保护方案的系统模型，如图4所示。该系
+统模型由数据提供者、国密区块链网络和数据接收者3
+部分组成。
+国密区块链网络
+医疗机构
+登记注册
+加入区块链网络
+税务机构
+隐私数据
+数据提供者
+处理上链
+政府机构
+智能合约
+时间限制验证
+证书管理
+投标机构
+1）数据提供者是指向需求方提供数据的医疗、税
+务、政府和投标等机构；数据提供者将数据分为普通
+数据和隐私数据，在上传到区块链网络前对隐私数据
+进行加密处理。
+2）国密区块链网络是指利用国密算法替换Fabric
+平台底层密码学算法的Fabric区块链平台；数据提供
+者通过登记注册后，作为对等节点添加到网络的不同
+组织中；区块链网络中存在验证节点，该节点的主要
+功能为验证签名的有效性和验证交易的正确性；对等
+节点可以发起交易调用智能合约实现相关密文数据的
+上传和数据的加密共享，保证交易数据的安全性、完
+整性和时效性。
+3）数据接收者是指实现各种业务应用而需要数据
+的一方，包括利用用户数据进行医疗研究、对用户信
+用评级、获取用户个人信息完成各种业务、项目的招
+标投标等；数据接收者通过发起数据请求交易来获取
+密文数据，在客户端可以解密所获取数据。
+3.2方案设计
+根据系统模型，本文设计了详细的基于国密算法
+的交易数据隐私保护方案。方案中涉及的参数由表1
+给出说明。
+表1参数说明
+符号
+符号定义
+FK
+SM4中4个8字节的系统参数
+CK
+SM4中32个8字节的固定参数
+M,
+待加密的用户隐私数据
+Cp
+SM4加密后的密文
+MK
+SM4初始密钥
+MK"
+经过编码调制后的对称密钥
+底层密码学算法由国密算法所支持
+登记注册
+排序节点背书节点
+加入区块链网络
+获取交易内容
+对等节点
+对等节点
+验证节点主节点
+智能合约
+圆
+证书管理
+CA机构
+图4系统模型
+医疗研究
+信用评级
+数据接收者
+业务信息
+招标投标
+Cert
+sk
+pk,
+sk
+pki
+SM2_Enc(m,pk)
+SM2_Dec(c,sk)
+ID
+payload
+Timestamp
+基于国密算法的区块链交易隐私数据方案的具体
+流程如图5所示。
+1）隐蔽传输规则初始化：数据提供者和数据接收
+者事先初始化生成隐蔽传输时对消息的处理规则，包
+括编码表R(R,R2,",Rn)和调制符号表S(Si,S2,",S,)。
+2）密钥生成：数据提供者生成SM4对称加密算法
+所需要的初始密钥，即MK=（MKo,MKi,MK2,MK，)E
+(Z3)4。
+3）加密：数据提供者根据初始密钥生成轮密钥
+Gen_rk(MK,FK,CK)→>rk ；利用轮密钥rk加密用户隐
+私数据Mp，得到密文C,，即SM4_Enc(Mp,rk)→>Cp
+4）生成隐蔽信息：数据提供者根据与数据接收者
+CA机构向用户颁发的数字证书
+区块链中验证节点的SM2私钥
+区块链中验证节点的SM2公钥
+数据提供者客户端的SM2私钥
+数据提供者客户端的SM2公钥
+SM2的加密算法
+SM2的解密算法
+区块链交易ID
+区块链交易数据内容
+区块链交易时间戳
+89
+
+
+【第7页】
+NETINFOSECURITY
+技术研究 2023年第3期
+到区块链中。
+9）数据请求：数据接收者需要数据提供者上传的
+数据提供者
+1.初始化隐蔽传输
+规则S,R
+2.生成SM4初始密钥
+MK
+3.加密M,得到Cp
+4.根据MK生成MK
+6.生成T利用pk，加
+密数据MK+T和C
+7.登记注册
+返回证书信息Certisk1
+8.发出交易T1数据上链
+10.发起交易T2查询
+相关数据
+11.解密数据并验证
+数据到期时间：发起
+交易T3,上传数据
+12.发出交易T4,查询数据
+13.根据规则S,R恢复
+密钥MK
+14.解密隐私数
+据C,得到M,
+图5方案设计流程
+约定的消息处理规则对初始密钥MK进行编码与调制，
+得到隐蔽信息MK"，即S(R(MK)→MK"。
+5）公私钥对生成：区块链网络中的验证节点根据
+系统参数获取到SM2算法的公私钥对（pk,sk，），并对
+pk,进行广播公开，sk,本地存储。
+6）加密数据：数据提供者生成限制解密隐私数
+据的时间T。然后利用验证节点的公钥pk,分别对数据
+MK"+T和C,进行加密，得到密文C,和C2。即SM2_
+Enc(MK"+T,pk)→Ci,SM2_Enc(Cp,pk,)→C2o
+7）用户登记注册：数据提供者和数据接收者对应
+的SDK客户端分别向证书颁发机构申请登记注册，获
+取数字证书Certi、Cert²和签名私钥ski、sk2。
+8）数据上链：数据提供者客户端发起交易T，将
+加密后的密文C 和C2上传到区块链中。具体的交易形
+式为 T = (IDi, payload(Ci,C2),Timestampi) 。
+在上传区块链之前，各个记账节点利用数据提供
+者客户端的公钥pk对交易T的签名进行验证，验证
+通过则将交易加人区块；验证失败则拒绝将交易上传
+区块链网络
+5.验证节点生成SM2
+公私钥对pk和sku，
+广播pk,
+7.登记注册
+返回证书信息Certiski
+9.向验证节点客户
+端发起数据请求
+数据接收者
+1.初始化隐蔽传输规则
+s.R
+隐私数据M，时，其客户端向验证节点客户端发起数
+据请求。
+10）验证节点数据查询：验证节点客户端接收请
+求后，发起交易T，查询区块链中的数据C和C2，即
+T →(C,C2)。具体的交易形式为={ID2,payload(Null),
+T2,Timestamp2) 。
+11）时间验证:验证节点利用私钥分别解密C 和C2,即
+SM2_Dec(Ci,sk.)→MK"+T, SM2_Dec(C2,sk,)→>Cpo
+解密后，验证节点判断是否超过当前时间。若
+超出当前时间，验证节点客户端则给数据需求者返回
+Invalid。否则发起交易T，上传MK"和Cp，具体的
+交易形式为 T, ={IDs, payload(MK",C,),Timestamps) 。
+12）数据接收者数据查询：验证节点客户端向数据接
+收者发起数据可查询的信息，然后数据接收者发起交易，
+查询区块链中的数据MK"和C,，即T4→(MK",C,)。具
+体的交易形式为 T4={ID4,payload(Null),Timestamp4) 。
+13）密钥恢复：数据接收者根据与数据提供者约
+定的消息处理规则对隐蔽信息进行解调与解码，得到
+初始对称密钥MK，即R(S(MK")→MK。
+14）解密：数据接收者根据恢复出的初始对称密
+钥MK生成轮密钥Gen_rk(MK,FK,CK)→rk ；利用
+轮密钥rk解密用户密文隐私数据C,得到解密文Mp，
+即SM4_Dec(C,rk)→Mp。至此，数据提供者与数
+据接收者的隐私数据共享过程完成。
+通过上述方案，用户隐私数据在上传到区块链之
+前进行SM4对称加密处理，可实现隐私数据的链上
+安全性。SM4对称密钥采用隐蔽信道传输，可实现密
+钥的不可篡改性、安全性和完整性。同时，由于对用
+户数据进行分类，只有隐私数据进行加密，普通数据
+可以直接上链，提高了数据共享的效率。数据需求者
+在获取数据时由验证节点来验证时间的有效性，保证
+了隐私数据的时效性。底层区块链网络采用国密算法
+改造后的Fabric平台，进一步加强了区块链交易的安
+90
+
+
+【第8页】
+NETINFOSECURITY
+2023年第3期 技术研究
+全性。
+4系统实现
+本文实验的主要工作是搭建国密算法改造后的
+HyperledgerFabric1.4区块链平台并基于该平台仿真实现
+基于国密算法的交易数据隐私保护方案。本章首先给
+出实验环境，然后分别实现两项工作，最后对实验结
+果进行分析。
+4.1实验环境
+本文的实验均在虚拟机环境中执行，采用的虚拟
+机是VMwareWorkstationPro16。虚拟机的环境配置为
+Ubuntu20.04操作系统，处理器内核8个，内存8GB。主
+机配置为Intel(R)Core(TM)i7-8550U CPU@1.80GHz
+2.00GHz。Ubuntu操作系统中Fabric所需的环境配置包括
+go1.15.6、docker20.10和 docker-compose2.3 等服务。对于
+HypeledgerFabric联盟链的国密算法改造采用的是1.4版
+本。本文隐私保护方案中的智能合约采用go语言进行
+开发。
+4.2实验实现
+本次实验首先对HyperledgerFabric1.4进行国密改
+造，然后在此基础上实现提出的隐私保护方案。利用
+SM2签名算法、SM3哈希算法和SM4对称加密算法替
+换了Fabric中使用的通用算法，从而保证了生成证书、
+签名、验签、哈希等操作都通过调用国密算法接口来
+实现。本文主要测试验证国密证书是否有效生成和
+Fabric网络的启动是否正常。然后在该Fabric平台的基
+础上，模拟实现了提出的交易数据隐私保护方案。本
+文主要测试验证该方案的可行性。
+4.2.1国密算法证书生成
+国密算法证书可以通过cryptogen工具静态生成和
+Fabric-CA动态生成。因此，此处的测试验证国密证书的
+有效生成包含两部分。第一部分是利用cryptogen在终端
+执行生成静态证书的命令，为Fabric网络中的节点生成
+静态证书。证书的签名算法指向1.2.156.10197.1.501，该
+标识是由国家商用密码标准规定，指向SM2证书中的
+签名算法。
+第二部分是利用Fabric-CA容器为节点生成动态证
+书。启动容器后，fabric-ca-server会执行服务器初始化，
+生成根证书和私钥。然后各节点通过fabric-ca-client命
+令来生成证书。证书内容中签名算法同样指向SM2签
+名算法。
+综上所述，Fabric网络和Fabric-CA成功替换为国
+密算法来生成证书。
+4.2.2国密改造后的Fabric网络启动
+通过编写脚本network.sh分别执行Fabric国密区
+块链网络的节点创建、网络启动、加人通道、安装链
+码和发起一次交易等操作，来测试验证Fabric网络是
+否正常启动。执行结果显示，测试完成了fabric网络
+创建、容器启动、组织加人通道和链码的安装，发起
+交易也查询到了对应的记录。可以证明Fabric网络的
+启动正常。
+4.2.3隐私保护方案的实现
+本文方案的实现将采用go项目来完成。首先编写
+数据提供者客户端代码provider.go来实现隐私数据的
+相关处理，并分别编写上传数据、数据请求和数据查
+询的链码操作；然后编写验证节点客户端代码verify.
+go来实现对密文的处理和时间的校验；最后编写数据
+接收者客户端代码receiver.go来发起数据请求并对接
+收的数据进行处理。另外利用改造后的SDK-Go来实
+现创建通道，安装、实例化和调用链码等，从而进行
+相关业务逻辑操作。本文方案需要编写的链码操作包
+括：initO、createO、updateO和queryO。InitO实现链码
+的实例化，createO和updateO实现数据的上传与更新，
+queryO实现数据的查询。该项目在go后端直接命令行
+调用，根据终端日志输出可以得出各端执行流程成功，
+如图6所示。
+wws=provider.go==
+Initiatetransaction Ti..
+bccspgmkeyinport pkis*sm2.PublicKey
+SM3
+SM3
+bccspgmkeyimport.pkis*sm2.PublicKey
+SuccessfulLy,txId:1f38c956dbadd4401d650ead2cd4839beb2bb582b4c1d3bf1be3f921f5086b
+Successful execution of transaction T1
+a）数据提供者运行结果
+91
+
+
+【第9页】
+NETINFOSECURITY
+技术研究 2023年第3期
+verifter-go=s
+InttiatetransactionT2.....
+bccspgnkeyinport pkis*sm2.PublicKey
+SM3
+SM3
+bccspgnkeyinport.pk ts *sn2.PublicKey
+Successfuy,txId:a476ea52514cf7d16bafa2264691bd61d41cf07abc1feb22bcb247e6c6363a9
+chatncodequery success.
+InitiatetransactionT3.
+bccspgnkeytnportpkts *sm2.Publickey
+SM3
+SH3
+Successfully,txId:2e9f4bfc7465152edbdfb45fb8963037c97fd9ale2c2f47d2b75081e47f69e24
+bccspgnkeyiportpkis*sm2.Publickey
+Successful execution of transaction T3
+=provider.goms
+bccsp gnkeylmport pk ts sm2.Publtckey
+Initiatetransaction Ti.
+SH3
+SM3
+bccspgnkeyLnportpkis*sm2.PubltcKey
+Successfullytxid:if38c956dbadd44801d650ead2cd4839beb2bb582b4c1d3bf1be3f921f5086b
+Successful execution of transaction T1
+4.3结果分析
+本文采用go提供的时间包对国密算法进行改造生
+成Fabric平台，利用JMeter测试工具来对提出的隐私保
+护方案进行性能测试，并根据测试结果进行分析。
+为了体现国密算法改造的Fabric平台的性能，本文
+测试了国密Fabric与原生Fabric的网络启动时间和利用
+SDK客户端发起交易的时间。网络启动时间包括静态证
+书生成、docker容器创建、加人通道、安装实例化链码
+和调用链码的操作。测试网络启动时间的方式为编写执
+行脚本fabric_gm.sh和fabric.sh并测试其运行5次的平均时
+间。编写测试代码fanric-main.go来实现利用Fabric-SDK-
+Go执行创建并加人通道、安装实例化和调用链码的操作。
+运行时间如表2所示，国密Fabric网络平均执行时
+间为13.302s，原生Fabric网络平均执行时间为12.337s。
+相较于原生Fabric网络，国密Fabric网络的启动时间增
+加了7%。SDK发起交易时间只包含调用链码的执行
+时间，根据表2可得，经过国密改造后的Fabric-SDK
+调用链码时间相比于原生的SDK发起交易时间增加了
+13.28mS。二者的网络启动与SDK发起交易时间差异均
+在可接受的范围内。
+表2运行时间对比
+国密Fabric平台 原生Fabric平台
+网络启动执行时间/s
+13.302
+SDK发起交易时间/ms
+33.86
+根据测试结果可以得出，国密改造后的Fabric平
+台会比原生Fabric平台的性能开销大。其可能的原因
+是国密算法和国际标准算法的性能存在差异。本文对
+两种算法的性能进行了测试，结果如图7所示。
+2000
+?SM2签名
+1800-
+→SM2认证
+-O-ECDSA签名
+1600-
+→ECDSA认证
+b）验证节点运行结果
+1400
+兰.1200
+1000
+800
+600-
+c）数据接收者运行结果
+400
+图6隐私保护方案各阶段执行结果
+200200
+400
+a）SM2与ECDSA的签名与验证时间测试
+700 →1000BSM3
+1000BSHA256
+600- -O- 2000B SM3
++2000B SHA256
+500
+300
+200
+100
+5
+b）不同次数下SM3和SHA256哈希时间测试
+60
+→SM4Encrypt加密
++SM4Decrypt解密
+50 -O-AES Encrypt加密
++AEsDecrypt解密
+40
+030
+20
+10
+200
+根据图7a）得出，SM2和ECDSA的签名与验证
+12.337
+算法执行时间不会随着字节的增多而增加，始终处于
+20.58
+一个平均状态。SM2签名算法效率优于ECDSA，而验
+签算法效率略次于ECDSA。
+根据图7b）得出，SHA256和SM3哈希算法在不
+600
+800
+10001200 1400 1600 1800 2000
+字节数/B
+10
+15
+400
+600
+C）SM4与AES加解密时间测试
+图7国密算法时间测试
+20
+执行次数/次
+800
+10001200 1400 1600
+1800 2000
+字节数/B
+25
+30
+35
+40
+45
+50
+92
+
+
+【第10页】
+NETINFOSECURITY
+2023年第3期 技术研究
+同字节数下会有不同的效率，其中SHA256算法的效
+率略优于SM3算法。随着调用次数的增加，SM3和
+SHA256的运行时间也呈线性增长。但SM3增长的速
+度比SHA256快。在执行25次2000B的数据时，SM3
+的执行时间大约是SHA256的2倍左右。
+根据图7）所示，SM4和AES算法随着字节的增
+长而增加，SM4加密与解密算法的效率都优于AES。
+根据国密算法与国际标准算法的时间测试结果，
+可以分析得出国密Fabric平台性能略次于原生Fabric平
+台的主要原因是SM3算法的性能低于SHA256算法。
+本文采用JMeter工具来测试方案的执行时间和区
+块链的吞吐量。通过设置不同的线程并发量来测试方
+案的性能。
+各阶段的执行时间如图8所示。根据图像可以看
+出，随着并发量的增加，各阶段执行时间会随之增加。
+数据提供者执行的工作包括链下数据加密和链上数据
+更新；验证节点执行的工作包括链上数据查询、链下
+数据解密和数据验证及链上数据更新；数据接收者执
+行的工作包括链上数据查询和链下数据解密。因此，
+验证节点的执行时间最长，数据提供者的执行时间次
+之，数据接收者的执行时间最短。在并发量为500的
+情况下，3个阶段的执行时间分别为1.877s，4.221s和
+1.269 s。
+8000 Provider
++Verifier
+7000-o-Receiver
+6000
+5000
+兰
+4000
+3000
+2000
+1000
+100
+国密改造后的Fabric平台发起更新数据交易的测
+试结果如图9所示，设置并发线程为1000，全部启动
+时间为20s，循环次数为6次。根据聚合报告可以得出，
+吞吐量达到141.77tps，错误率为0。
+abal iSampies
+Total
+1000
+HITP请求100
+800
+700
+00
+Sd/喜U基
+500
+300
+200
+1123:1511:23:20 1123:25 1123:30 11:23:35 11:23:40 11:23:4511:23:5011:23:5511:24:00
+时间
+b）更新数据的交易接口吞吐量
+图9方案测试结果
+根据实验结果可以得出，随着并发量的增多，执
+行时间在不断增大。并且并发线程为1000时，吞吐量
+相对较低。根据图9的结果，分析平台性能较低的主
+要原因可能是随着并发线程的增多，SM3算法的时间
+在不断增大，从而影响了方案的整体性能。但是，本
+方案的执行效率也在可接受的范围之内，满足了可用
+性的同时也增强了平台的安全性。
+5结束语
+为了满足HypperledgerFabric平台在国内的商业化，
+本文利用国密算法分别从Fabric网络、Fabric-CA和
+Fabric-SDK三方面进行了底层密码学算法的改造。同
+时，为了解决隐私数据在区块链上的公开透明而分享
+受限的问题，本文在国密Fabric平台的基础上提出了
+一种基于国密算法的交易数据隐私保护方案。该方案
+采用SM4算法对隐私数据进行加密保护，并通过隐蔽
+通道进行对称密钥的链上传输；在方案中引入SM2公
+钥加密算法，对密文数据在有效时间内进行加密，满
+足了多种实际场景的应用。通过对实验结果分析可以
+得出，本文成功基于国密算法改造了Fabric平台，其
+200
+300
+图8方案各阶段执行时间
+esponseTimrspmt)
+AL
+0.00%
+0.00% 5649.75
+a）更新数据的交易接口聚合报告
+11:24:0511:24:10 11:24:151124:20
+400
+500 600
+并发量
+Throogngul
+sonpetm petsm pet*
+5648.75
+40
+40
+17229 5475.00
+700
+800
+17229
+900
+1000
+5475.00
+平台的系统性能开销在可接受的范围内。本文提出的
+基于国密算法的交易数据隐私保护方案具有可行性，
+其整体执行效率和系统性能都具有良好的表现。该方
+案的提出对相关场景的实际应用都有一定的参考价值。
+9105.30
+9105.30
+102400 12763.9
+1024.00
+12763.99
+141.77
+141.7
+10.38
+10.38
+16.48
+16.48
+93
+
+
+【第11页】
+NETINFOSECURITY
+技术研究 2023年第3期
+未来，将针对Fabric平台的国密算法改造性能做出进
+一步优化，提高其效率。同时将继续研究基于区块链
+的隐私保护方案，来完善目前未涉及的监管功能。
+参考文献：
+[1] NAKAMOTO S. Bitcoin: A Peer-to-Peer Electronic Cash System[EB/OL].
+[2022-09-06]. https:/ /bitcoin.org/bitcoin.pdf.
+[2] XIA Yadong, CHE Lu, WANG Guanxiang, et al. Design of Passwordless
+Authentication System Using Decentralized Identity in Universities[EB/OL].
+(2022-07-13)[2022-09-06]. http://kns.cnki.net/kcms/detail/61.1224.
+TN.20220712.1526.002. html.
+夏亚东，车路，王关祥，等。高校去中心化身份无密码认证系统设
+计[EB/OL].（2022-07-13）[2022-09-06]. http://kns.cnki.net/kcms/
+detail/61.1224. TN.20220712.1526.002. html.
+[3] LIN Chao, HE Debiao, HUANG Xinyi. Blockchain-Based Electronic
+Medical Record Secure Sharing[EB/OL]. (2022-01-17)[2022-09-06].
+http:/ /kns.cnki.net/kcms/detail/51.1307. TP.20220115.1014.002. html.
+林超，何德彪，黄欣沂，基于区块链的电子医疗记录安全共享[EB/OL]
+(2022-01-17) [2022-09-06]. http://kns.cnki.net/kcms/detail/51.1307.
+TP.20220115.1014.002. html.
+[4] ZHAI Sheping, TONG Tong, BAI Xifang, Blockchain-Based Attribute
+Proxy Re-encryption Data Sharing Scheme[EB/OL]. (2022-07-20)[2022-
+09-21]. http://kns.cnki.net/kcms/detail/11.2127. TP.20220719.1534.004.
+html.
+翟社平，童彤，白喜芳.基于区块链的属性代理重加密数据共享方
+案[EB/OL].（2022-07-20) [2022-09-21]. http://kns.cnki.net/kcms/
+detail/11.2127. TP.20220719.1534.004. html.
+[5] AZZI R, CHAMOUN R K, SOKHN M. The Power of a Blockchain-
+Based Supply ChainDJ. Computers & Industrial Engineering, 2019, 135: 582-592.
+[6] JING Nan, LIU Qi, SUGUMARAN V. A Blockchain-Based Code
+Copyright Management System[EB/OL]. [2022-09-21]. https://xueshu.
+baidu.com/usercenter/paper/show?paperid=1u630e30dh420p90xj430270st46
+2748&site=xueshu_se.
+[7] MA Zhaofeng, JIANG Ming, GAO Hongmin, et al. Blockchain for
+Digital Rights ManagementJ. Future Generation Computer Systems, 2018,
+89: 746-764.
+[8] MA Zhaofeng, WANG Xiaochang, JAIN D K, et al. A Blockchain-
+Based Trusted Data Management Scheme in Edge Computing]. IEEE
+Transactions on Industrial Informatics, 2019, 16(3): 2013-2021.
+[9] MA Zhaofeng, WANG Lingyun, WANG Xiaochang, et al. Blockchain-
+Enabled Decentralized Trust Management and Secure Usage Control of IoT
+Big Datall. IEEE Intermet of Things Journal, 2019, 7(5): 4000-4015.
+[10] ZHONG Sheng, HUANG Xinyi. Introduction to Security and Privacy
+in Blockchain ApplicationsJ. Chinese Science: Information Science, 2020,
+50(3): 461462.
+仲盛，黄欣沂.区块链应用中的安全隐私专题简介.中国科学：
+信息科学，2020,50（3)：461-462.
+[11] SHI Kun, ZHOU Yong, ZHANG Qiliang, et al. Privacy-Preserving
+Scheme of Energy Trading Data Based on Consortium Blockchain[EB/OL].
+(2022-08-12)[2022-09-13]. http:/ /kns.cnki.net/kcms/detail/50.1075.
+tp.20220810.0952.024. html.
+时坤，周勇，张启亮，等.基于联盟链的能源交易数据隐私保护方
+案[EB/OL](2022-08-12) [2022-09-13]. http:/ /kns.cnki.net/kcms/detail/50.1075.
+tp.20220810.0952.024. html.
+[12] LI Li, DU Huina, LI Tao. Blockchain Supervisable Privacy Protection
+Scheme Based on Group Signature and Attribute EncryptionJ. Computer
+Engineering, 2022, 48(6): 132-138.
+李莉，杜慧娜，李涛.基于群签名与属性加密的区块链可监管隐私
+保护方案.计算机工程，2022，48（6）：132-138.
+[13] LIANG Wei, YANG Yang, YANG Ce, et al. PDPChain: A Consortium
+Blockchain-Based Privacy Protection Scheme for Personal DataJ. IEEE
+Transactions on Reliability, 2022: 1-13.
+[14] WANG Baocheng, LI Zetao. Healthchain: A Privacy Protection System
+for Medical Data Based on Blockchain)J. Future Internet, 2021, 13(10): 247.
+[15] LUO Yurong, CAO Jin, LI Hui, et al. Electronic Invoice Public
+Verification Scheme based on SM2 Coalition Signature AlgorithmlJ. Chinese
+Joumal of Network and Information Security, 2022, 8(2): 122-131.
+罗榕，曹进，李晖，等.基于SM2联合签名的电子发票公开验证
+方案』.网络与信息安全学报，2022，8（2）：122-131.
+[16] HU Wei, WU Qiuhan, LIU Shengli, et al. Design of Secure elD and
+Identity Authentication Agreement in Mobile Terminal Based on Guomi
+Algorithm and BlockchainJ. Netinfo Security, 2018, 18 (7): 7-15.
+胡卫，吴邱涵，刘胜利，等.基于国密算法和区块链的移动端安全
+eID及认证协议设计DI.信息网络安全，2018，18（7)：7-15.
+[17] LI Min, CHEN Fulong, PANG Hui. Vehicle PEPS and EMS Security
+Certification Based on Encryption Algorithm SM4DJ. Journal of Nanjing
+University of Information Science & Technology(Natural Science Edition),
+2022, 14(5): 543-550.
+李敏，陈付龙，庞辉.基于国密算法SM4的车载PEPS和EMS安
+全认证方法研究D.南京信息工程大学学报（自然科学版），2022，
+14 (.5 ): 543-550.
+[18] WANG Xiaoyun, YU Hongbo. SM3 Cryptographic Hash Algorithm].
+Journal of Information Security Research, 2016, 2(11): 983-994.
+王小云，于红波SM3密码杂算法.信息安全研究，2016，2（11）：
+983-994.
+[19] SUN Rongyan, CAI Changshu, ZHOU Zhou, et al. The Comparision 
+between Digital Signature Based on SM2 and ECDSADJ. Network Security
+Technology & Application, 2013(2): 60-62.
+孙荣燕，蔡昌曙，周洲，等.国密SM2数字签名算法与ECDSA算
+法对比分析研究.网络安全技术与应用，2013（2)：60-62.
+[20] WU Zhihong, ZHAO Jianning, ZHU Yuan, et al. Comparative Study
+on Application of Chinese Cryptographic Algorithms and International
+Cryptographic Algorithms in Vehicle Microcotrollers[l. Netinfo Security,
+2019, 19(8): 6875.
+吴志红，赵建宁，朱元，等。国密算法和国际密码算法在车载单片
+机上应用的对比研究D.信息网络安全，2019，19（8）：68-75.
+[21] ALI O, JARADAT A, KULAKLI A, et al. A Comparative Study:
+Blockchain Technology Utilization Benefits, Challenges and Functionalities.
+94
+
+
+【第12页】
+NETINFOSECURITY
+2023年第3期 技术研究
+IEEE Access, 2021, 9: 12730-12749.
+[22] MA Zhaofeng. Blockchain Technology Development Guide[M].
+Bejing: Tsinghua University Press, 2020.
+马兆丰.区块链技术开发指南[M].北京：清华大学出版社，2020.
+[23] BHUTTA M N M, KHWAJA A A, NADEEM A, et al. A Survey
+on Blockchain Technology: Evolution, Architecture and SecurityJ. IEEE
+Access, 2021, 9: 61048-61073.
+[24] WANG Huaqun, WU Tao. Cryptography on the Blockchain]. Jourmal
+of Nanjing University of Posts and Telecommunications(Natural Science
+Edition), 2017, 37(6): 61-67.
+王化群，吴涛。区块链中的密码学技术.南京邮电大学学报（自
+然科学版），2017，37（6):61-67.
+[25] YANG Long, HAN Dan, OUYANG Weile. Application of Commercial
+Cipher Algorithm in Blockchain Technology]. Computer Engineering and
+Applications, 2020(s): 29-35.
+杨龙，韩丹，欧阳维乐.商用密码算法在区块链技术中的应用.
+计算机工程与应用，2020（s):29-35.
+[26] GM/T 0003-2012 SM2 Eliptic Curve Public Key Cryptography[S].
+China: State Cryptography Administration, 2012.
+GM/T0003-2012SM2椭圆曲线公钥密码算法[S].中国：国家密码
+管理局，2012.
+[27] WANG Zhaohui, ZHANG Zhenfeng. Overview on Public Key
+Cryptographic Algorithm SM2 Based on Elliptic Curves. []. Journal of
+Information Security Research, 2016, 2(11): 972-982.
+汪朝晖，张振峰.SM2椭圆曲线公钥密码算法综述D.信息安全研究，
+2016, 2 (11): 972-982.
+[28] YANG Kai. IP Core Design Compatible with DES, AES and SM4
+Algorithms[D]. Xi'an: Xidian University, 2017.
+杨凯.兼容DES、AES和SM4算法的IP核设计[D].西安：西安电子
+科技大学，2017.
+[29] LYU Shuwang, SU Bozhan, WANG Peng, et al. Overview on SM4
+Algorithm]. Jourmal of Information Security Research, 2016, 2(11): 995-1007.
+吕述望，苏波展，王鹏，等.SM4分组密码算法综述].信息安全研究，
+2016, 2 (11): 995-1007.
+[30] Hyperledger Fabric Official Documentation[EB/OL]. [2022-08-21].
+https://hyperledgerfabric.readthedocs.io/en/release-1.4.
+[31] XU Xiaoqiong, SUN Gang, LUO Long, et al. Latency Performance
+Modeling and Analysis for Hyperledger Fabric Blockchain Network[EB/OL].
+(2021-01-12)[2022-07-21]. https:/ /xueshu.baidu.com/usercenter/paper/sh
+ow?paperid=1x5v0gc04w1q0aj0xy3y0cg00v032442&site=xueshu_se.
+[32] CASTRO M, LISKOV B. Practical Byzantine Fault Tolerance and
+Proactive Recovery]. ACM Transactions on Computer Systems, 2002,
+20(4): 398-461,
+[33] CAO Qi, RUAN Shuhua, CHEN Xingshu, et al. Embedding of
+National Cryptographic Algorithm in Hyperledger Fabricl. Chinese Journal
+of Network and Information Security, 2021, 7(1): 65-75.
+曹琪，阮树骅，陈兴蜀，等，HyperledgerFabric平台的国密算法嵌入
+研究D.网络与信息安全学报，2021，7（1):65-75.
+[34] Tongji Blockchain Research Institute. Implementation of State Secret SM2,
+SM3 and SM4 algorithms[EB/OL]. [2022-08-21]. https:/ / github.com/tifoc/
+gmsm.
+同济区块链研究院.国密SM2、SM3和SM4算法实现[EB/OL].[2022-
+08-21]. https:/ /github.com/tifoc/gmsm.
+[35] Tongji Blockchain Research Institute. TLS/SSL Code Based on National
+Secret Algorithm[EB/OL]. [2022-08-26]. https:/ / github.com/tifoc/gmtls.
+同济区块链研究院.基于国密算法的TLS/SSL代码库[EB/OL].[2022-
+08-26]j. https:/ /github.com/tifoc/gmtls.
+[36] LI Yanfeng, DING Liping, WU Jingzheng, et al. Research on a New
+Network Covert Channel Model in Blockchain Environment[]. Journal on
+Communications, 2019, 40(5): 67-78.
+李彦峰，丁丽萍，吴敬征，等。区块链环境下的新型网络隐蔽信
+道模型研究[].通信学报，2019，40（5）：67-78.
+95
+

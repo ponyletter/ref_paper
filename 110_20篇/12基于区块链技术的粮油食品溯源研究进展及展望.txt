@@ -1,0 +1,1186 @@
+来源文件：12基于区块链技术的粮油食品溯源研究进展及展望.pdf
+============================================================
+
+【第1页】
+第 39 卷   第 5 期                         农 业 工 程 学 报                              Vol.39  No.5 
+  214    2023 年     3 月          Transactions of the Chinese Society of Agricultural Engineering         Mar. 2023        
+ 
+基于区块链技术的粮油食品溯源研究进展及展望
+ 
+葛宏义 1,2,3，吴旭阳 1,2,3，蒋玉英 1,2,4※，张  元 1,2,3※， 
+孙振雨 1,2,3，崔光远 1,2,3，贾志远 1,2,3 
+（1. 河南工业大学粮食信息处理与控制教育部重点实验室，郑州 450001；2. 河南工业大学河南省粮食光电探测与 
+控制重点实验室，郑州 450001；3. 河南工业大学信息科学与工程学院，郑州 450001； 
+4. 河南工业大学人工智能与大数据学院，郑州 450001） 
+ 
+摘  要：粮油食品供应链周期长、结构复杂、利益相关者众多，维护供应链的安全具有挑战性。近年来，特别是在粮食
+购销领域，存在“以陈顶新”、“转圈粮”、压级压价等现象，已严重威胁到粮食安全。追溯系统是一个能够对产品实施正
+向、反向和非定向跟踪的产品管理系统，可以连接粮油食品供应链的各个环节，监控原料采集、加工、储运、分销与销
+售过程，对粮食质量安全有重要保障。传统的追溯体系面临数据中心化、信息不透明、数据容易伪造、极易形成信息孤
+岛等问题。区块链作为继网络之后的下一代颠覆性技术，具备去中心化、分布式存储、匿名性、数据公开透明、内容不
+易篡改等新特点，为粮油食品供应链中的产品可追溯性问题带来新的解决方案。该文首先介绍近年来区块链智能合约、
+共识机制等关键技术的发展和应用，其次，阐述区块链技术应用到粮油食品溯源等领域的研究进展；最后，探讨当前粮
+油食品区块链溯源在存储、跨域与跨链、系统互操作性和可移植性等方面所面临的挑战，对区块链技术在粮油食品溯源
+领域中提高存储性能、跨域跨链、可扩展性等方面进行展望，为区块链技术在粮油食品中的创新应用提供参考。 
+关键词：农产品；溯源；区块链；追溯体系；粮油食品；供应链   
+doi：10.11975/j.issn.1002-6819.202209205  
+中图分类号：TP301           文献标志码：A           文章编号：1002-6819(2023)-05-0214-10 
+葛宏义，吴旭阳，蒋玉英，等. 基于区块链技术的粮油食品溯源研究进展及展望[J]. 农业工程学报，2023，39(5)：214-223.    
+doi：10.11975/j.issn.1002-6819.202209205    http://www.tcsae.org 
+GE Hongyi, WU Xuyang, JIANG Yuying, et al. Research progress and prospect of grain and oil food traceability based on 
+blockchain technology[J]. Transactions of the Chinese Society of Agricultural Engineering (Transactions of the CSAE), 2023, 
+39(5): 214-223. (in Chinese with English abstract)    doi：10.11975/j.issn.1002-6819.202209205    http://www.tcsae.org 
+ 
+0  引  言  
+中国作为农产品贸易大国，近年来，出口农产品质
+量安全事故时有发生。在世界范围内，各国政府高度关
+注，并出台法律法规加强对可追溯性的管理，以保障农
+产品质量安全[1-3]。粮食作为农产品的一个重要分支，粮
+油食品几乎每天都占据着国人的餐桌，其中谷物是人体
+矿物质、膳食纤维等营养素的重要食物来源，有助于预
+防心血管和代谢性疾病等[4]。油性食物可以提供人体所需
+的脂肪酸[5]。但粮油供应链具有周期长、参与主体多、涉
+及面广、环境较为复杂等特性，再加上传统溯源体系中
+数据中心化、供应链数据不透明、易篡改等问题，导致
+粮油食品安全事件仍然严峻，使中国农业发展面临重大
+                                                           
+收稿日期：2022-09-26    修订日期：2023-02-24 
+基金项目：国家自然科学基金项目（61975053, 62271191）；河南工业大学粮
+食 信 息 处 理 与 控制 教 育 部 重点 实验 室 开 放 基 金 项目 （ KFJJ2020103, 
+KFJJ2021102）；河南省自然科学基金项目（222300420040）；河南省高校科
+技创新人才支持计划项目（22HASTIT017, 23HASTIT024）；河南省重大公
+益专项（201300210100） 
+作者简介：葛宏义，博士，副教授，研究方向为先进传感技术、区块链技术。
+Email：gehongyi2004@163.com 
+※通信作者：蒋玉英，博士，副教授，研究方向为智能信息处理。 
+Email：jiangyuying11@163.com 
+※通信作者：张元，教授，博士生导师，研究方向为智能信息与信号处理、
+电磁波探测技术。Email：zhangyuan@haut.edu.cn 
+挑战[6-7]。 
+在粮油食品供应链中，特别是在粮食购销领域，存
+在诸多因监管力度不足而引起的粮食安全问题。“转圈
+粮”、“以陈顶新”、“升溢粮”、压级压价等现象已
+严重影响到中国粮食供给安全[8]。因此，为解决传统粮油
+食品溯源中存在的问题，急需一种先进的溯源技术应用
+到粮油食品溯源领域来保障粮油食品安全。 
+区块链技术是一个跨学科创新技术，狭义的讲，区
+块链是哈希指针连接到一起的交易区块，广义来说区块
+链是一种分布式账本存储技术，被誉为下一个“信任的
+基石”[9-10]。其去中心化、不易篡改等特性可以有效解决
+传统溯源中存在的问题。中国在区块链溯源领域已有一
+些应用，其中华为发布的“中国农村沃土云平台”；由
+京东自己开发的区块链服务平台—智臻链；五常市政府
+与天猫等开展全方位协作，引进蚂蚁金服区块链追溯科
+技，使出售的每袋稻谷都有一张专属的“身份证”等[11-12]。 
+基于当前区块链技术在溯源领域已取得的成果及应
+用，本文阐述了区块链技术应用到粮油食品溯源等领域
+的研究进展，探讨了当前粮油食品区块链溯源面临的挑
+战，对区块链技术在粮油食品溯源领域中的应用潜力进
+行展望，以期为区块链技术在粮油食品中的创新应用提
+供参考。 
+·农产品加工工程· 
+ 
+
+
+【第2页】
+第 5 期 
+葛宏义等：基于区块链技术的粮油食品溯源研究进展及展望 
+ 
+215 
+1  区块链概述 
+2008 年，一位名为“中本聪”的学者首次定义了比
+特币[13]。比特币网络中的信息交流能够在没有其他第三
+方的情况下完成，其本质是一个分布式数据库系统，包
+括所有参与成员间共同的交易记录[14-15]。因为每次交易
+都是由大多数成员间共同确定的，使得虚假交易无法经
+过集体证实，一旦记录被区块链创建并接受，它就很难
+被篡改[16-17]。这也是区块链应用到粮油食品溯源领域重
+要原因之一。针对于不同的应用场景，区块链的发展历
+程可分 1.0-3.0 阶段，如表 1 所示。 
+表 1  区块链 1.0-3.0 阶段发展历程及应用场景 
+Table 1  Development history and application scenarios of 
+blockchain 1.0-3.0 stages 
+阶段 
+Stages 
+时间 
+Period 
+特征 
+Features 
+应用场景 
+Application scenarios 
+区块链 1.0[18] 
+Blockchain 1.0 
+2008－2014 年 
+虚拟加密货币 
+区块链 2.0[18] 
+Blockchain 2.0 
+2014－2016 年 智能合约+加密货币 
+区块链 3.0[18] 
+Blockchain 3.0 
+2016－至今 
+智能合约+信任机制 
+专注于安全的电子支
+付主要在金融领域、
+医疗领域、 
+物流领域等 
+ 
+区块链分为公有链、私有链与联盟链[19-20]。公有区
+块链一般被看作是“彻底去中心化”的，即指每个节点
+都能够随时随地加入到网络系统中读取数据、争夺记账
+权等[21-22]。私有区块链的去中心化水平较低，其权限是
+由某个机构或者管理者掌控，根据不同的需求对外选择
+性开放读写权限，适用于特定机构的内部数据管理。联
+盟链的去中心化程度介于上述 2 种链之间，其数据只允
+许联盟成员访问，实现“部分去中心化”功能[23-24]。 
+ 
+图 1  区块结构图 
+Fig.1  Block structure diagram 
+ 
+区块链具有去中心化、可追溯、不易篡改、匿名性
+等特征[25-26]。去中心化意味着不是将区块链权限被某一
+个节点所控制，而是依赖共识机制负责验证和确认，这
+也使得节点想要篡改数据基本不可能实现[27]。区块基本
+架构由带有时间戳的链式区块组成，如图 1 所示，具备
+极强的可溯源性，匿名性在一定程度上很好保护了用户
+的隐私[28-29]，但区块链不能提供完全的隐私保护，其中
+每一笔交易都可以被所有节点查看，通过分析每个地址
+发生的交易，就能发现很多用户之间的关系。 
+2  区块链与粮油食品溯源 
+2.1  区块链相关技术研究进展 
+区块链技术诞生以来，越来越多的研究人员从事相
+关技术的研究，当前区块链不仅有传统的链式结构，也
+存在有向无环图（direct acyclic graph, DAG）架构的区块
+链[30]。区块链关键技术包括分布式存储技术、智能合约、
+共识机制等，如图 2 所示。在供应链溯源领域，区块链
+技术在维护供应链安全、保障数据隐私等方面发挥着至
+关重要的作用。 
+ 
+图 2  区块链相关技术 
+Fig.2  Blockchain related technologies 
+ 
+2.1.1  区块链存储技术 
+由于区块链技术具有多个网络节点共同记录和存储
+的特点，随着用户量的增加和数据的高冗余存储，区块
+链网络越来越拥堵，效率也无法满足要求，区块空间的
+大小成为了限制区块链发展的瓶颈[31-32]。目前已有不少
+学者开展基于区块链存储优化的研究，主要有区块链自
+身存储结构的优化，包括区块链分片技术等，也有部分
+研究将区块链与星际文件系统（interplanetary file system，
+IPFS）、云存储等相结合的方式提高存储能力，区块链
+多链架构缓解存储压力也取得了一些研究成果。无论哪
+种研究方式，旨在提高区块链技术的存储能力。 
+DAI 等[33]为了满足快速增长的存储需求，将网络编
+码（network coded，NC）和分布式存储（distributed storage，
+DS）相结合，提出了一个 NC-DS 存储的区块链框架，该
+框架在节约存储空间方面取得了显著成绩。XU 等[34]为了
+满足数据量大的应用程序的存储，提出了段区块链概念，
+使节点存储一个区块链段的副本相比于传统区块链的存储
+方式，存储需求大大减小。ZHANG 等[35]提出了一种基于
+区块链技术的粮食供应链系统架构，并设计了一种结合
+链存储的多模式存储机制，该机制在一定程度上减轻区
+块链存储压力。KUMAR 等[36]提供了一个基于 IPFS 的区
+块链存放模式，矿工们将事件存放到 IPFS 分布式档案管
+理系统内存上，并把从事件中返回的 IPFS 哈希值放在区
+块链块中，减缓了区块链存储压力。ZHANG 等[37]建立了
+粮油食品供应链模型，设计了多链存储结构，建立可信溯
+源机制，解决了传统溯源机制中存在的数据安全性低，共
+享差等问题。于华竟等[38]提出了基于区块链多链架构的杂
+
+
+【第3页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+216 
+粮追溯模型，建立多链数据存储架构，设计了基于监管授
+权组网建链的网络准入机制，通过智能合约实现数据的链
+前监管与追溯节点的链上管控，验证了模型的有效性。 
+2.1.2  智能合约与共识机制 
+智能合约是区块链基础架构中合约层的重要组成部
+分，可以作为一种嵌入式脚本语言内置在任何区块链的
+交易数据和数字资产上，形成一种可编程自动控制执行
+的系统，在溯源系统中，智能合约的应用也很常见[39-40]。
+当前区块链智能合约研究主要有智能合约的运行机制、
+基于智能合约的隐私保护、交易并发执行效率、智能合
+约安全性等。 
+WANG 等[41]提出了一个基于联盟和智能合约的框架
+来跟踪农产品供应链的工作流程，实现供应链的可追溯
+性和可共享性，并尽可能地打破企业之间的信息孤岛，
+消除对中央机构和代理机构的需要，提高交易记录的完
+整性、可靠性和安全性。YU 等[42]提出了一种利用联盟区
+块链和智能合约来高效执行农产品交易的方法，从而实
+现对农产品在整个供应链中的跟踪。KTARI 等[43]提出一
+种使用物联网的多链橄榄油追溯系统，并设计两个智能
+合约，一个部署到系统参与者的私有区块链，另一个部
+署到可以访问该系统的公共区块链，实现对橄榄油供应
+链整条链的溯源。YAKUBU 等[44]提出一个稻米供应链框
+架，该框架能够通过智能合约跟踪和监控稻米供应链中
+所有利益相关者之间的交易信息，也包含一个客户满意
+度反馈系统，使所有利益相关者能够获得最新的稻米质
+量信息，使他们能够作出更明智的供应链决策。 
+共识机制是整个区块链技术的核心，确保在分布式
+环境下节点间对系统状态进行的一致性确认，直接决定
+着整个区块链体系的执行效率。不同共识算法存在不同的
+优缺点，如工作量证明（proof of work，PoW）算法虽稳
+定性较好，若出现恶意节点入侵区块链系统，需要付出极
+大的成本，且其会造成严重的资源浪费和网络性能低[45-46]。
+因此，不少研究人员开始改进共识算法来提高区块链系统
+的运行效率，包括引入奖惩机制、委员会节点等，但委员
+会节点会在一定程度上降低区块链的去中心化能力。 
+LI 等[47]实现了轻量级区块链，提出了基于奖惩策略
+的 PBFT 区块链共识机制，根据每个节点的行为，奖惩策
+略更新节点得分，并对每个节点的状态进行评估，依据
+每个节点的状态，筛选出参与协商一致过程的节点，然
+后从这些协商一致节点中投票选出主节点，减少了区块
+链一致性确认的时间。BRAVO-MARQUEZ 等[48]介绍了
+一种新的分布式共识协议 PoL（proof of learning），该算
+法通过对给定任务的机器学习系统进行排序来实现分布
+式共识，减少了系统资源的浪费。任守纲等[49]提出一种
+基于信誉监督机制共识算法（credit-supervisor byzantine 
+fault tolerance，CSBFT），提高联盟链共识机制的安全性
+和效率，并设计智能合约，自动保存关键溯源信息，与
+传统溯源平台相比，应用 CSBFT 算法的溯源平台在溯源
+信息上链时具有更高的安全性和更小的时延。LI 等[50]分
+析了粮食食品供应链各环节的流程和数据特点，提出了
+基于主从多链结构的粮食食品区块链可追溯信息管理模
+型，针对主链设计了基于 Raft 与改进 PoW 算法相结合的
+PLEW 共识算法，针对从链设计了基于可信信息度的
+CI-PBFT 共识算法，并与区块链单链结构的交易吞吐量
+和可追溯效率进行了比较，所设计实现的粮食溯源系统
+在各方面均优于区块链单链结构。 
+2.1.3  访问控制与隐私保护 
+在供应链的管理中，如何维护用户的管理权限、设
+计适合于供应链的管理策略、做到细粒度访问控制是一
+个巨大的挑战[51-52]。区块链技术可以为供应链提供一种
+新的安全身份认证方式，保障数据在用户之间的安全共
+享。目前，基于区块链的访问控制研究主要有访问权限
+的管理策略制定、细粒度访问控制的设计与实施、供应
+链中敏感数据的保护等。 
+ZHANG 等[53]针对当前谷物大米追溯体系所面临的
+问题，设计了安全可靠的农产品追溯系统的逻辑框架，
+使用数据加密和灵活的访问控制来保护追溯系统中利益
+相关者的数据安全共享。TARIQ 等[54]为实现橄榄油的细
+粒度访问追溯，设计一种基于物联网的多链追溯系统，
+系统中的内部参与者使用私有链，访问系统的用户使用
+公有链，实现橄榄油溯源数据的安全共享。ZHANG 等[55]
+为了实现溯源数据的细粒度访问控制，利用基于属性加
+密算法来加密数据。使用密钥管理服务，使数据共享方
+法无需更新密文即可撤销。总体而言，这些方法实现了
+隐私保护、可撤销性和去中心化的细粒度访问。 
+此外，隐私意味着用户信息或数据必须受到保护，
+在任何情况下未经参与主体同意不能泄露[56]。区块链网
+络中数据完全公开透明，但是区块链公开透明的特性也
+会导致用户身份和数据隐私泄露问题[57]，其中访问控制
+在一定程度上也对用户隐私或数据隐私起到一定的保护
+作用。当前供应链研究中隐私保护主要包含身份隐私保
+护和数据隐私保护，其中应用混币技术、各种加密算法
+已成为供应链隐私保护的趋势。 
+陈邦越[58]设计了基于区块链的水稻全供应链溯源系
+统，针对敏感数据、隐私数据上链问题，搭建敏感数据
+溯源模型和区块链隐私数据共享模型，实现在区块链网
+络中共享隐私数据。范茂顺[59]基于微众银行 FISCO 区块
+链框架，采用基格密码的可连接环签名技术替代传统签
+名技术，实现区块链上用户身份信息的隐私保护。ZHOU
+等[60]利用了同态加密，隐私共享以及零知识证明技术建
+立了一种开放可验证的安全性 MPC 协定，该协定由链上
+运算阶段和链下预处理阶段 2 个部分构成，并把该协定
+整合在超级账本结构的链码中，以保障交易数据的隐私
+性。WANG 等[61]针对大米供应链各个环节建立关键信息
+分类表，利用各种加密算法保护供应链上企业的敏感数
+据，满足监管机构高效监管的需要。MALIK 等[62]提出了
+一个隐私保护框架 PrivChain，使用零知识证明保护区块
+链上的敏感数据，PrivChain 提供来源和可追溯性，不会
+向终端消费者或供应链实体透露任何敏感信息，这对于
+农产品溯源建立隐私保护有很大启发。李莉等[63]针对区
+块链溯源中数据可追溯与用户隐私保护难以平衡的问
+题，提出一种区块链可监管双重隐私保护方案，用户选
+
+
+【第4页】
+第 5 期 
+葛宏义等：基于区块链技术的粮油食品溯源研究进展及展望 
+ 
+217 
+择对数据进行属性加密，实现链上数据的隐私保护。 
+2.1.4  区块链+物联网 
+由于区块链技术的迅速发展，有效缓解了传统供应
+链追溯的问题，但在实际应用中存在无法保证供应链溯
+源数据在上链之前的准确性，有人为篡改的可能性[64]。
+物联网技术能有效避免这一问题。将区块链技术与物联
+网技术相结合能够更好把控供应链在溯源过程中数据采
+集、数据传输到数据应用的真实性，真正实现从“农田
+到餐桌”全区链条溯源[65]。目前供应链中应用到的物联
+网技术主要有传感器技术、RFID 等。 
+刘丹等[66]将物联网和区块链结合起来建立农产品溯
+源系统，通过物联网设备进行信息采集，应用 ZigBee 技
+术、二维码技术等，实现了对农产品的全过程追溯。XU
+等[67]基于区块链的特点，应用物联网技术，建立城市水
+果可追溯模型，实现水果品质全过程的真实记录和跟踪，
+有效提高智慧城市的服务水平。WU 等[68]将区块链技术、
+机器学习和 RFID 相结合，搭建了基于机器学习的区块链
+物联网茶叶可追溯系统，确保链上信息的真实性，实现
+了对茶叶供应链的全程可追溯。MONDAL 等[69]建立一个
+基于区块链和物联网的架构，RFID 提供数据的唯一标识，
+有助于实施质量监控；区块链体系结构有助于创建每个
+实例的食品包装防篡改数字数据库，并对此架构进行了
+详细的安全分析。 
+2.2  粮油食品区块链溯源研究进展 
+2.2.1  粮油食品供应链管理 
+在新冠疫情、俄乌冲突的大背景下，全球粮食供应
+链也面临前所未有的挑战。面对突发事件，粮食应急调
+度效率低、不及时的问题较为严重；各种粮油食品原料
+和成品的供应受到威胁，全球市场粮油食品价格有所上
+涨[70]。中国作为粮食生产大国，要切实保障粮食质量安
+全和供应链安全，一个可靠的粮油食品供应链管理体系，
+对人民群众生命健康和社会和谐发展具有重要意义。当
+前基于区块链的粮油食品供应链管理包括国家粮油主管
+部门、各级粮油主管部门，利用新一代信息化技术建立
+粮油食品溯源平台，实现穿透式监管，避免“转圈粮”、
+“升溢粮”、“以陈顶新”、压级压价等现象发生；针对
+粮油食品供应链溯源，主要是对溯源数据的管控，确保
+数据的真实性和可靠性；对参与主体的管理主要是用户
+身份认证、跨域与跨链的访问控制等。通过部署智能合
+约、建立可信的管理机制与监督机制，确保整条供应链
+的安全。 
+PENG 等[71]基于多链协同管理供应链，对大米供应链
+信息管控进行研究，构建“区块链+子链”供应链模型，
+设计可信链机制、多级子链加密机制、可信监督机制和
+分层共识机制，这些机制共同服务于大米供应链溯源数
+据管理。ALKHUDARY 等[72]针对橄榄油供应链中存在
+的有关质量和欺诈等问题，提出区块链与物联网和智能
+合约相结合的架构，保障橄榄油质量安全和供应链安全
+管理。 
+2.2.2  传统粮油食品供应链溯源 
+在传统粮油食品溯源系统中，大部分溯源系统是内
+部溯源，虽然传统溯源系统结合了物联网技术，如图 3a
+所示，但还存在以下几方面的问题： 
+1）信息不对称，出现严重的信息孤岛问题[73]。供应
+商在各个环节中维护着自己所在节点的生产信息，使供
+应商内部产生了中心化的数据库结构，各节点间信息衔
+接更加困难，追溯过程耗费大量时间。 
+2）信息易被篡改。传统粮油食品供应链是一个中心
+化的溯源体系，企业可能存在为了利益而修改粮油食品
+关键追溯信息。 
+3）追溯条码可复制[74]。传统粮油食品追溯条码并不
+是唯一的，每个环节都可能会有一个追溯条码，有被复
+制的可能，造成粮油食品掺假的问题。 
+4）难以确认责任主体。在粮油食品发生质量安全问
+题时，由于传统追溯体系的复杂性，很难实现精准和快
+速确认责任主体。 
+ 
+图 3  粮油食品追溯不同框架 
+Fig.3  Different frameworks for tracing grain and oil food 
+
+
+【第5页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+218 
+2.2.3  基于区块链的粮油食品供应链溯源 
+区块链的可追溯性，可以满足追踪粮油食品信息的
+需求[75]。区块链技术一开始并没有和其他技术结合应用
+到追溯领域，只是作为一种单一的技术，把追溯的各个
+环节数据上传到区块链网络[76]，如图 3b 所示。但人为上
+传数据存在被篡改的可能，使得上链的数据从源头开始
+就不真实，这与区块链之所以能应用到追溯体系相悖论。 
+之所以对粮油食品供应链溯源，其目的为保障整个
+粮油食品供应链安全。粮油作为农产品的一个重要分支，
+是人们日产生活中的必需品。但不同品类的农产品溯源
+工作也存在一定差异。其中粮油食品供应链周期长，参
+与主体多，在溯源过程中会注重溯源数据的真实性、溯
+源工作的效率以及供应链各个环节内部的规范化[77]。果
+蔬在生长过程中存在喷洒农药等情况，会侧重源头溯源
+信息的透明度[78]；奶制品由于保存时间不宜过长，会注
+重溯源工作的时效性[79]；烟草受严格国家管控，其重点
+为烟草供应商的身份认证和溯源数据标准性[80]；冷链食
+品由于在物流仓储环节有相关要求，更加侧重物流和仓
+储信息更新的及时性与溯源信息查询效率[81]。 
+PENG 等[82]分析了大米供应链中溯源数据特点以及
+在不同并行区块链中存储的不同类型的数据，提出一种
+基于“数据加密+智能合约+中继链”的跨链数据管理机
+制，以及一种适用于多链共识算法，通过仿真实验，该
+模型具有较好的安全性、跨链效率和可扩展性。董云峰
+等[83]构建了基于区块链的粮油食品供应链模型，解决了
+当前追溯系统中心化程度高、信息孤岛等问题，在此基
+础上，开发了粮油食品供应链原型系统，并应用实际场
+景论证模型的可行性和有效性。 
+2.2.4  基于区块链+物联网的粮油食品供应链溯源 
+为了解决源头数据不真实的问题，往往是区块链技术
+和物联网技术一起应用到供应链溯源系统中[84]，如图 3c 所
+示。其中较多溯源系统应用传感技术、射频识别技术等通
+信技术。 
+区块链技术不仅应用于粮油食品领域，在金融、工
+业物联网等领域应用也较为广泛[85]。虽然都是利用区块
+链技术赋能相关领域，但不同领域结合区块链技术的侧
+重点有所不同。在粮油食品溯源领域，涉及主体多，每
+个环节的数据类型不同，且都有大量的非结构化数据，
+如何利用上链技术将每个环节的非结构化数据上链是一
+个巨大挑战。另外，数据存储压力在粮油食品区块链溯
+源中也是一个显著问题。在金融区块链领域，非结构化
+数据较少，更多利用区块链技术防篡改、去中心化等特
+征保障数据安全、降低服务成本。在工业物联网领域中，
+更加侧重用保障网络安全和提高整个工业流程效率，其
+中区块链共识机制替代中心认证机制，整个网络节点无
+需第三方信任平台，上链数据需网络节点达成共识才可
+被记录，降低网络被攻击的可能性，保护整个工业物联
+网的安全[86-87]。 
+XU 等[88]提出了区块链和工业物联网连接器应用于
+粮油溯源的概念，基于这一理念，构建了可靠的粮油质
+量安全追溯模型。最后，设计了可靠的小麦质量安全追
+溯样机系统，并验证了模型的系统实现。LU 等[89]提出了
+一种基于区块链和物联网的食品防伪溯源系统。该系统
+利用区块链技术存储食品生产、销售和运输过程中的溯
+源数据，同时，通过物联网技术保证区块链源数据的真
+实可靠，该系统具有更高的安全性和更低的通信成本。 
+3  挑战与发展方向 
+3.1  挑  战 
+3.1.1  数据上链存储压力大 
+粮油食品供应链参与主体多，有大量的溯源数据，
+其中包含结构化溯源数据和非结构化溯源数据。区块链
+自身存储性能不足已无法满足整条供应链溯源数据的存
+储，容易遇到存储瓶颈。在视频溯源数据上链存储中，
+特别是粮油食品供应链中粮库视频监管数据，无论是从
+图像质量还是视频分辨率，国家对其有较高的要求，导
+致视频数据占有较大的存储空间，其上链存储对整条粮
+油食品供应链来说是一个巨大的挑战。 
+3.1.2  系统操作性和可移植性差 
+目前很多行业都应用了区块链技术，在粮油食品供
+应链中，参与主体较多，在部分供应链溯源系统中没有
+标准协议可以让它们互相协作和集成，这不利于粮油食
+品区块链的发展。尽管开发人员可以用不同的平台编写
+代码，但存在一些区块链网络孤立的情况，难以满足系
+统之间的交互。此外，一部分供应链系统由于没有标准
+化的管理策略与高效的转化机制，系统移植性差，无法
+保证移植后的系统仍具备与其他系统的互操作性。 
+3.1.3  粮油食品溯源监管难度大 
+粮油食品供应链具有周期长、利益相关者众多、结
+构复杂的特点。对于监管部门来说，粮油食品供应链中
+每个环节的监管方式与监管内容存在不同，收购环节是
+对粮食质量数据的监测，仓储环节则是对粮食存储环境
+进行监测，因监管力度不足存在的“转圈粮”、“升溢
+粮”“以陈顶新”、压级压价等粮食安全问题已严重影
+响到粮油食品供应链的安全。除粮油食品外，不同农产
+品溯源工作也存在一定的差异，监管的重心也有所不同，
+对不同的农产品监管力度也不易掌控。 
+3.1.4  跨域与跨链实施困难 
+粮油食品供应链中利益相关者众多，存在诸多可信
+域，一些可信域彼此之间互不信任，如何将这些可信域
+之间建立信任，满足用户跨域访问，对粮油食品供应链
+来说是一个挑战。目前在粮油食品供应链中，单链的跨
+域访问已有一些研究成果[90-91]。随着供应链中参与主体
+的增多，单链在粮油食品供应链中可能已无法满足用户
+的需求。跨链技术存在智能合约不通用、用户身份可能
+存在重复等问题，对粮油食品区块链而言，跨域与跨链
+实施较为困难。 
+3.2  发展方向 
+3.2.1  提高粮油食品区块链的存储性能和可扩展性 
+在整个粮油食品供应链溯源中有大量的溯源数据需
+要上链存储，其中包含一些非结构化的视频数据。区块
+链在自身存储方面存在缺陷，当前已有不少学者提出不
+
+
+【第6页】
+第 5 期 
+葛宏义等：基于区块链技术的粮油食品溯源研究进展及展望 
+ 
+219 
+同的方法来提高区块链存储能力，但多数方法会增加粮
+油食品供应链的成本开销，其中也存在链下数据库存储
+数据丢失或者损坏的可能性。如何构建一个适合于粮油
+食品供应链的高容量、安全共享的存储架构是一个重要
+课题。其次，区块链可扩展性差和吞吐量低一直以来都
+是一个比较难解决的问题[92]。比特币网络每秒能处理的
+交易数量约为 7 笔，以太坊约网络约为 20 笔交易，而传
+统网络 Visa 可以处理 1 700～2 000 笔交易[93-94]。有向无
+环图（direct acyclic graph, DAG）架构的区块链技术是不同
+于传统区块链的一种分布式账本技术，其具有系统延展性
+高和交易速度快的明显优势，但安全性和一致性相对传统
+区块链还有待验证[95]。当前 DAG 架构的区块链已在数据
+管理[96-97]、数据安全[98-99]、6G 网络服务[100-101]等领域有
+所应用，其在供应链溯源领域研究相对较少，因此，加
+大对DAG架构区块链在粮油食品供应链溯源的研究也是
+势在必行。 
+3.2.2  加强粮油食品供应链常态化穿透式监管 
+粮油食品供应链周期长，参与主体多，对各个环节
+实现全方位的监管难度较大，特别是在粮食购销领域因
+监管力度不够出现的粮食安全问题。将区块链技术应用
+到粮油食品溯源领域可以减少供应链监管缺失缺位的问
+题，其去中心化可以实现对粮油食品供应链中质量安全
+的实时监控，确保溯源数据的安全性和完整性；共识机
+制也可以提高粮食安全监管的效率。如何利用区块链技
+术建立粮油食品供应链常态化穿透式监管机制，是未来
+粮油食品溯源领域的一个重要研究方向。 
+3.2.3  融合区块链+IoT+人工智能 
+相比粮油食品溯源架构中将区块链技术与物联网技
+术结合，其他前沿技术与区块链结合应用到溯源架构的
+研究较少。融合区块链、IoT、人工智能，应用到粮油食
+品供应链是一个重要研究方向。将机器学习应用到粮油
+食品区块链共识算法领域，通过建立模型将共识节点聚
+类，加快共识节点的选取，提高溯源系统的效率；利用
+深度学习优化访问控制策略，解决用户之间的访问策略
+冲突问题；利用人工智能算法对粮油区块链中智能合约
+进行安全分析和漏洞检测，确保合约执行结果的完整性
+和可靠性。 
+3.2.4  面向多系统的跨域与跨链访问 
+在粮油食品区块链溯源中，如何利用区块链技术在
+各个可信系统之间建立低成本的信任机制，满足不同用
+户之间跨域访问需求，在粮油食品区块链未来发展中是
+一个重要的研究方向。但是，粮油食品区块链中有大量
+的溯源数据需要管理和维护，仅仅通过单链来实现所有
+数据管理较为困难，那么多链并行协同管理各系统溯源
+数据势在必行。因此，如何解决多链之间智能合约不匹
+配、用户访问策略冲突，在未来粮油食品区块链溯源研
+究中也是一个重要研究课题。 
+4  总  结 
+传统的粮油食品追溯体系存在着数据中心化、信息
+不透明、数据共享困难、溯源成本高等问题，且监管部
+门对粮油食品溯源信息并不能实施全方位的监管，在粮
+食购销领域出现“转圈粮”、“升溢粮”、“以陈顶新”、
+压级压价等粮食安全问题。区块链具有其去中心化、防
+止伪造、数据透明化和可溯源性等优点，结合物联网技
+术保证链上数据的真实性和完整性，实现对粮油食品供应
+链全链条的追溯与监管，确保粮油食品供应链安全。本文
+总结了区块链技术应用到粮油食品溯源等领域的研究进
+展，指出当前粮油食品区块链溯源面临的挑战，并对区块
+链技术在粮油食品溯源领域中的应用潜力进行展望，为区
+块链技术在粮油食品中的创新应用提供有益参考。 
+[参  考  文  献] 
+[1] 
+LIU J G, ZHANG H M, ZHEN L. Blockchain technology in 
+maritime supply chains: Applications, architecture and 
+challenges[J/OL]. 
+International 
+Journal 
+of 
+Production 
+Research, 2021: 1-17. https://doi.org/10.1080/00207543.2021. 
+1930239. 
+[2] 
+ETEMADI N, BORBON-GALVEZ Y, STROZZI F, et al. 
+Supply chain disruption risk management with blockchain: A 
+dynamic literature review[J]. Information, 2021, 12(2): 70. 
+[3] 
+KUMVENJI D C E, CHAMBA M V M, LUNGU K. 
+Effectiveness of food traceability system in the supply chain 
+of local beef and beef sausages in Malawi: A food safety 
+perspective[J]. Food Control, 2022, 137: 108839. 
+[4] 
+CHUNG S W, HWANG J T, PARK S H. Physiological 
+effects of bioactive compounds derived from whole grains on 
+cardiovascular and metabolic diseases[J]. Applied Sciences, 
+2022, 12(2): 658. 
+[5] 
+XU Y, LI J, ZHAO J, et al. Hempseed as a nutritious and 
+healthy human food or animal feed source: A review[J]. 
+International Journal of Food Science & Technology, 2021, 
+56(2): 530-543. 
+[6] 
+吴晓彤，柳平增，王志铧. 基于区块链的农产品溯源系统
+研究[J]. 计算机应用与软件，2021，38(5)：42-48. 
+WU Xiaotong, LIU Pingzeng, WANG Zhihua. Traceability 
+system of agricultural products based on blockchain[J]. 
+Computer Applications and Software, 2021, 38(5): 42-48. (in 
+Chinese with English abstract) 
+[7] 
+JAGTAP S, TROLLMAN H, TROLLMAN F, et al. The 
+Russia-Ukraine conflict: Its implications for the global food 
+supply chains[J]. Foods, 2022, 11(14): 2098. 
+[8] 
+中国纪委国家监委. 中央纪委国家监委公开通报十起粮食购
+销领域违纪违法典型案例[EB/OL]. 2023-01-29[2023-02-12]. 
+https://www.ccdi.gov.cn/toutiaon/202301/t20230129_243305.html. 
+[9] 
+DUAN J, ZHANG C, GONG Y, et al. A content-analysis 
+based literature review in blockchain adoption within food 
+supply chain[J]. International Journal of Environmental 
+Research and Public Health, 2020, 17(5): 1784. 
+[10] ETEMADI N, VAN GELDER P, STROZZI F. An ism 
+modeling of barriers for blockchain/distributed ledger 
+technology 
+adoption 
+in 
+supply 
+chains 
+towards 
+cybersecurity[J]. Sustainability, 2021, 13(9): 4672. 
+[11] LIU 
+P. 
+Investment 
+decisions 
+of 
+blockchain-based 
+anti-counterfeiting traceability services in a high-quality fresh 
+supply chain of china[J]. Agriculture, 2022, 12(6): 829. 
+[12] JOO J, HAN Y. An evidence of distributed trust in 
+blockchain-based 
+sustainable 
+food 
+supply 
+chain[J]. 
+Sustainability, 2021, 13(19): 10980. 
+[13] BUDISH E B. The economic limits of Bitcoin and 
+anonymous, decentralized trust on the blockchain[J]. 
+
+
+【第7页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+220 
+University of Chicago, Becker Friedman Institute for 
+Economics Working Paper, 2022(83): 1-56. 
+[14] RUAN P, DINH T T A, LOGHIN D, et al. Blockchains vs. 
+distributed databases: Dichotomy and fusion[C]//Proceedings 
+of the 2021 International Conference on Management of Data, 
+New York, USA: ACM Conference, 2021: 1504-1517. 
+[15] LIAO D, DONG X, XU Z, et al. An efficient storage 
+architecture based on blockchain and distributed database for 
+public security big data[C]//International Conference on 
+Computer Science, Engineering and Education Applications. 
+Springer, Cham, 2022: 350-362. 
+[16] LI X, WU L, ZHAO R, et al. Two-layer adaptive 
+blockchain-based supervision model for off-site modular 
+housing production[J]. Computers in Industry, 2021, 128: 
+103437. 
+[17] ZHANG Y, WANG T, YUEN K V. Construction site 
+information decentralized management using blockchain and 
+smart contracts[J]. Computer‐Aided Civil and Infrastructure 
+Engineering, 2022, 37(11): 1450-1467. 
+[18] CHENG H K, HU D, PUSCHMANN T, et al. The landscape 
+of blockchain research: Impacts and opportunities[J]. 
+Information Systems and e-Business Management, 2021, 
+19(3): 749-755. 
+[19] 钱建平，范蓓蕾，史云，等. 基于区块链的农产品可信追
+溯系统框架构建[J]. 中国农业信息，2019，31(3)：48-57. 
+QIAN Jianping, FAN Beilei, SHI Yun, et al. The structure of 
+credible traceability system for agricultural products based on 
+blockchain[J]. China Agricultural Informatics, 2019, 31(3): 
+48-57. (in Chinese with English abstract) 
+[20] KERESZTES É R, KOVÁCS I, HORVÁTH A, et al. 
+Exploratory analysis of blockchain platforms in supply chain 
+management[J]. Economies, 2022, 10(9): 206. 
+[21] SAI A R, BUCKLEY J, FITZGERALD B, et al. Taxonomy 
+of centralization in public blockchain systems: A systematic 
+literature review[J]. Information Processing & Management, 
+2021, 58(4): 102584. 
+[22] FENG H, WANG X, DUAN Y, et al. Applying blockchain 
+technology to improve agri-food traceability: A review of 
+development methods, benefits and challenges[J]. Journal of 
+Cleaner Production, 2020, 260: 121031. 
+[23] RATTA P, KAUR A, SHARMA S, et al. Application of 
+blockchain and internet of things in healthcare and medical 
+sector: Applications, challenges, and future perspectives[J/OL]. 
+Journal of Food Quality, 2021: 7608296. https://doi.org/ 
+10.1155/2021/7608296. 
+[24] 郭上铜，王瑞锦，张凤荔. 区块链技术原理与应用综述[J]. 
+计算机科学，2021，48(2)：271-281. 
+GUO Shangtong, WANG Jinrui, ZHANG Fengli. Summary 
+of principle and application of blockchain[J]. Computer 
+Science, 2021, 48(2): 271-281. (in Chinese with English 
+abstract) 
+[25] BHUTTA M N M, KHWAJA A A, NADEEM A, et al. A 
+survey on blockchain technology: Evolution, architecture and 
+security[J]. IEEE Access, 2021, 9: 61048-61073. 
+[26] 伍德伦，饶元，许磊，等. 农产品区块链信息可信评估差
+异化共享模型设计与实现[J]. 农业工程学报，2022，
+38(11)：309-317. 
+WU Delun, RAO Yuan, XU Lei, Design and implementation 
+of the trusted evaluation and differentiated sharing model for 
+agricultural blockchain information[J]. Transactions of the 
+Chinese Society of Agricultural Engineering (Transactions of 
+the CSAE), 2022, 38(11): 309-317. (in Chinese with English 
+abstract) 
+[27] DEMESTICHAS K, PEPPES N, ALEXAKIS T, et al. 
+Blockchain in agriculture traceability systems: A review[J]. 
+Applied Sciences, 2020, 10(12): 4113. 
+[28] FENG Q, HE D, ZEADALLY S, et al. A survey on privacy 
+protection in blockchain system[J]. Journal of Network and 
+Computer Applications, 2019, 126: 45-58. 
+[29] SHAO W, JIA C, XU Y, et al. Attrichain: Decentralized 
+traceable 
+anonymous 
+identities 
+in 
+privacy-preserving 
+permissioned blockchain[J]. Computers & Security, 2020, 99: 
+102069. 
+[30] WU H Y, YANG X, YUE C, et al. Chain or DAG? 
+Underlying data structures, architectures, topologies and 
+consensus in distributed ledger technology: A review, 
+taxonomy and research issues[J]. Journal of Systems 
+Architecture, 2022: 102720. 
+[31] WANG Z, WANG L, XIAO F, et al. A traditional Chinese 
+medicine 
+traceability 
+system 
+based 
+on 
+lightweight 
+blockchain[J]. Journal of medical Internet research, 2021, 
+23(6): e25946. 
+[32] 杨信廷，王明亭，徐大明，等. 基于区块链的农产品追溯
+系统信息存储模型与查询方法[J]. 农业工程学报，2019，
+35(22)：323-330. 
+YANG Xinting, WANG Mingting XU Daming, et al. Data 
+storage and query method of agricultural products traceability 
+information based on blockchain[J]. Transactions of the 
+Chinese Society of Agricultural Engineering (Transactions of 
+the CSAE), 2019, 35(22): 323-330. (in Chinese with English 
+abstract) 
+[33] DAI M, ZHANG S, WANG H, et al. A low storage room 
+requirement 
+framework 
+for 
+distributed 
+ledger 
+in 
+blockchain[J]. IEEE Access, 2018, 6: 22970-22975. 
+[34] XU Y, HUANG Y. Segment blockchain: A size reduced 
+storage mechanism for blockchain[J]. IEEE Access, 2020, 8: 
+17434-17441. 
+[35] ZHANG X, SUN P, XU J, et al. Blockchain-based safety 
+management system for the grain supply chain[J]. IEEE 
+Access, 2020, 8: 36398-36410. 
+[36] KUMAR R, TRIPATHI R. Implementation of distributed file 
+storage 
+and 
+access 
+framework 
+using 
+IPFS 
+and 
+blockchain[C]//2019 Fifth International Conference on Image 
+Information Processing (ICIIP). Shimla, India: IEEE, 2019: 
+246-251. 
+[37] ZHANG X, LI Y, PENG X, et al. Information traceability 
+model for the grain and oil food supply Chain based on 
+trusted identification and trusted blockchain[J]. International 
+Journal of Environmental Research and Public Health, 2022, 
+19(11): 6594. 
+[38] 于华竟，徐大明，罗娜，等. 杂粮供应链区块链多链追溯
+监管模型设计[J]. 农业工程学报，2021，37(20)：323-332. 
+YU Huajing, XU Daming, LUO Na, et al. Design of the 
+blockchain multi-chain traceability supervision model for 
+coarse cereal supply chain[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the 
+CSAE), 2021, 37(20): 323-332. (in Chinese with English 
+abstract) 
+[39] SALAH K, NIZAMUDDIN N, JAYARAMAN R, et al. 
+Blockchain-based soybean traceability in agricultural supply 
+chain[J]. IEEE Access, 2019, 7: 73295-73305. 
+[40] LIU X, BARENJI A V, LI Z, et al. Blockchain-based smart 
+tracking and tracing platform for drug supply chain[J]. 
+Computers & Industrial Engineering, 2021, 161: 107669. 
+
+
+【第8页】
+第 5 期 
+葛宏义等：基于区块链技术的粮油食品溯源研究进展及展望 
+ 
+221 
+[41] WANG L, XU L, ZHENG Z, et al. Smart contract-based 
+agricultural food supply chain traceability[J]. IEEE Access, 
+2021, 9: 9296-9307. 
+[42] YU C T, ZHAN Y Z, LI Z Y. Using blockchain and smart 
+contract for traceability in agricultural products supply 
+chain[C]//2020 International Conference on Internet of 
+Things and Intelligent Applications (ITIA). Zhenjiang, China: 
+IEEE, 2020: 1-5. 
+[43] KTARI J, FRIKHA T, CHAABANE F, et al. Agricultural 
+lightweight embedded blockchain system: A case study in 
+olive oil[J]. Electronics, 2022, 11(20): 3394. 
+[44] YAKUBU B M, LATIF R, YAKUBU A, et al. RiceChain: 
+secure and traceable rice supply chain framework using 
+blockchain technology[J]. PeerJ Computer Science, 2022, 8: 
+e801. 
+[45] 靳世雄，张潇丹，葛敬国，等. 区块链共识算法研究综述[J]. 
+信息安全学报，2021，6(2)：85-100. 
+JIN Shixiong, ZHANG Xiaodan, GE Jingguo, et al. 
+Overview of blockchain consensus algorithm[J]. Journal of 
+Information Security, 2021, 6(2): 85-100. (in Chinese with 
+English abstract) 
+[46] 景旭，刘滋雨，秦源泽. 基于区块链中继技术的集群式农
+产品供应链溯源模型[J]. 农业工程学报，2022，38(11)：
+299-308. 
+JING Xu, LIU Ziyu, Qin Yuanze. Traceability model of 
+cluster agricultural product supply chains based on 
+blockchain relay technology[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the 
+CSAE), 2022, 38(11): 299-308. (in Chinese with English 
+abstract) 
+[47] LI C, ZHANG J, YANG X, et al. Lightweight blockchain 
+consensus 
+mechanism 
+and 
+storage 
+optimization 
+for 
+resource-constrained IoT devices[J]. Information Processing 
+& Management, 2021, 58(4): 102602. 
+[48] BRAVO-MARQUEZ 
+F, 
+REEVES 
+S, 
+UGARTE 
+M. 
+Proof-of-learning: A blockchain consensus mechanism based 
+on 
+machine 
+learning 
+competitions[C]//2019 
+IEEE 
+International Conference on Decentralized Applications and 
+Infrastructures (DAPPCON). Newark, CA, USA: IEEE, 2019: 
+119-124. 
+[49] 任守纲，何自明，周正己，等. 基于 CSBFT 区块链的农
+作物全产业链信息溯源平台设计[J]. 农业工程学报，
+2020，36(3)：279-286. 
+REN Shougang, HE Ziming, ZHOU Zhengji, et al. Design 
+and implementation of information tracing platform for crop 
+whole industry chain based on CSBFT-Blockchain[J]. 
+Transactions of the Chinese Society of Agricultural 
+Engineering (Transactions of the CSAE), 2020, 36(3): 
+279-286. (in Chinese with English abstract) 
+[50] LI Y, ZHANG X, ZHAO Z, et al. Research on grain food 
+blockchain traceability information management model 
+based on master-slave multichain[J/OL]. Computational 
+Intelligence 
+and 
+Neuroscience, 
+2022: 
+7498025. 
+https://doi.org/10.1155/2022/7498025. 
+[51] GAO H, MA Z, LUO S, et al. BSSPD: A blockchain-based 
+security sharing scheme for personal data with fine-grained 
+access control[J/OL]. Wireless Communications and Mobile 
+Computing, 2021: 6658920. https://doi.org/10.1155/2021/ 
+6658920. 
+[52] LU X, FU S, JIANG C, et al. A fine-grained IoT data access 
+control scheme combining attribute-based encryption and 
+blockchain[J]. Security and Communication Networks, 2021: 
+5308206. https://doi.org/10.1155/2021/5308206. 
+[53] ZHANG G, CHEN X, FENG B, et al. Research on a safe and 
+reliable agricultural product traceability system driven by 
+permissioned blockChain technology[C]//The International 
+Conference on Image, Vision and Intelligent Systems 
+(ICIVIS 2021). Singapore: Springer, 2022: 955-966. 
+[54] TARIQ F, KHAN Z A, SULTANA T, et al. Leveraging 
+fine-grained access control in blockchain-based healthcare 
+system[C]//International 
+Conference 
+on 
+Advanced 
+Information Networking and Applications. Caserta, Italy, 
+Springer, Cham, 2020: 106-115. 
+[55] ZHANG L, KAN H, XU Y, et al. Revocable data sharing 
+methodology based on SGX and blockchain[C]//International 
+Conference on Network and System Security. Tianjin, China: 
+Springer, Cham, 2021: 61-78. 
+[56] LEI M, XU L, LIU T, et al. Integration of privacy protection 
+and blockchain-based food safety traceability: potential and 
+challenges[J]. Foods, 2022, 11(15): 2262. 
+[57] HASSAN M U, REHMANI M H, CHEN J. Privacy 
+preservation in blockchain based IoT systems: Integration 
+issues, prospects, challenges, and future research directions[J]. 
+Future Generation Computer Systems, 2019, 97: 512-529. 
+[58] 陈邦越. 基于区块链的水稻全供应链溯源系统设计与
+实现[D]. 长春：吉林农业大学，2021. 
+CHEN Bangyue. Design and Implementation of A 
+Blockchain-Based Whole Supply Chain Traceability System 
+for Rice[D]. Changchun:Jilin Agricultural University, 2021. 
+(in Chinese with English abstract) 
+[59] 范茂顺. 基于区块链的隐私保护农产品溯源系统研究与实
+现[D]. 哈尔滨：哈尔滨工业大学，2021. 
+FAN 
+Maoshun. 
+Research 
+and 
+Implementation 
+of 
+Privacy-Preserving Agricultural Product Traceability System 
+Based on Blockchain[D]. Harbin: Harbin Institute of 
+Technology, 2021. (in Chinese with English abstract) 
+[60] ZHOU J, FENG Y, WANG Z, et al. Using secure multi-party 
+computation 
+to 
+protect 
+privacy 
+on 
+a 
+permissioned 
+blockchain[J]. Sensors, 2021, 21(4): 1540. 
+[61] WANG J, ZHANG X, XU J, et al. Blockchain-based 
+information supervision model for rice supply chains[J]. 
+Computational 
+Intelligence 
+and 
+Neuroscience, 
+2022: 
+2914571. https://doi.org/10.1155/2022/2914571. 
+[62] MALIK S, DEDEOGLU V, KANHERE S S, et al. Privchain: 
+Provenance and privacy preservation in blockchain enabled 
+supply chains[C]//2022 IEEE International Conference on 
+Blockchain, Espoo, Finland: IEEE, 2022: 157-166. 
+[63] 李莉，杜慧娜，李涛. 基于群签名与属性加密的区块链可
+监管隐私保护方案[J]. 计算机工程，2022，48(6)：132-138. 
+LI Li, DU Huina, LI Tao. Blockchain supervisable privacy 
+protection scheme based on group signature and attribute 
+encryption[J]. Computer Engineering, 2022, 48(6): 132-138. 
+(in Chinese with English abstract) 
+[64] 钱建平，吴文斌，杨鹏. 新一代信息技术对农产品追溯系统
+智能化影响的综述[J]. 农业工程学报，2020，36(5)：182-191. 
+QIAN Jianping, WU Wenbin, YANG Peng. Review on 
+agricultural products smart traceability system affected by 
+new generation information technology[J]. Transactions of 
+the 
+Chinese 
+Society 
+of 
+Agricultural 
+Engineering 
+(Transactions of the CSAE), 2020, 36(5): 182-191. (in 
+Chinese with English abstract) 
+[65] 李佳利，陈宇，钱建平，等. 融合 HACCP 体系的农产品
+区块链追溯系统精准上链机制改进[J]. 农业工程学报，
+2022，38(20)：276-285. 
+
+
+【第9页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+222 
+LI Jiali, CHEN Yu, QIAN Jianping, et al. Improvement of 
+the precise up-chain mechanism of the agricultural products 
+blockchain traceability system integrating the HACCP 
+system[J]. 
+Transactions 
+of 
+the 
+Chinese 
+Society 
+of 
+Agricultural Engineering (Transactions of the CSAE), 2022, 
+38(20): 276-285. (in Chinese with English abstract) 
+[66] 刘丹，窦津津，胡建斌. 基于“区块链+物联网”融合的农
+产品溯源系统[J]. 软件工程，2021，24(7)：39-42. 
+LIU Dan, DOU Jinjin, HU Jianbin. Agricultural product 
+traceability system based on integration of “blockchain + 
+internet of things”[J]. Software Engineering, 2021, 24(7): 
+39-42. (in Chinese with English abstract) 
+[67] XU C, CHEN K, ZUO M, et al. Urban fruit quality 
+traceability model based on smart contract for Internet of 
+Things[J]. Wireless Communications and Mobile Computing, 
+2021: 9369074. https://doi.org/10.1155/2021/9369074. 
+[68] WU Y, JIN X, YANG H, et al. Blockchain-based internet of 
+things: Machine learning tea sensing trusted traceability 
+system[J]. 
+Journal 
+of 
+Sensors, 
+2022: 
+8618230. 
+https://doi.org/10.1155/2022/8618230. 
+[69] MONDAL S, WIJEWARDENA K P, KARUPPUSWAMI S, 
+et 
+al. 
+Blockchain 
+inspired 
+RFID-based 
+information 
+architecture for food supply chain[J]. IEEE Internet of Things 
+Journal, 2019, 6(3): 5803-5813. 
+[70] JAGTAP S, TROLLMAN H, TROLLMAN F, et al. The 
+Russia-Ukraine conflict: Its implications for the global food 
+supply chains[J]. Foods, 2022, 11(14): 2098. 
+[71] PENG X, ZHANG X, WANG X, et al. Multi-Chain 
+collaboration-based information management and control for 
+the rice supply chain[J]. Agriculture, 2022, 12(5): 689. 
+[72] ALKHUDARY R, BRUSSET X, NASERALDIN H, et al. 
+Enhancing the competitive advantage via blockchain: an olive 
+oil case study[J]. IFAC-PapersOnLine, 2022, 55(2): 469-474. 
+[73] ZHANG X, SUN P, XU J, et al. Blockchain-based safety 
+management system for the grain supply chain[J]. IEEE 
+Access, 2020, 8: 36398-36410. 
+[74] PENG W, YI L, FANG L, et al. Secure and traceable 
+copyright management system based on blockchain[C]//2019 
+IEEE 5th International Conference on Computer and 
+Communications (ICCC). Chengdu, China: IEEE, 2019: 
+1243-1247. 
+[75] AIELLO G, ENEA M, MURIANA C. The expected value of 
+the 
+traceability 
+information[J]. 
+European 
+Journal 
+of 
+Operational Research, 2015, 244(1): 176-186. 
+[76] 潘慧萍，李宝安，吕学强，等. 湘冷链——基于区块链的
+冷链溯源系统[J]. 食品与机械，2021，37(9)：145-152. 
+PAN Huiping, LI Baoan, LV Xueqiang, et al. Hunan cold 
+chain: Cold chain traceability system based on blockchain[J]. 
+Food & Machinery, 2021, 37(9): 145-152. (in Chinese with 
+English abstract) 
+[77] GARCÍA-OLIVEIRA P, FRAGA-CORRAL M, PEREIRA A 
+G, et al. Solutions for the sustainability of the food 
+production and consumption system[J]. Critical Reviews in 
+Food Science and Nutrition, 2022, 62(7): 1765-1781. 
+[78] GHOSH S, PUDALE S. Traceable and reliable food supply 
+chain through blockchain-based technology in association 
+with marginalized farmers[M]// New York: Apple Academic 
+Press, 2022: 431-457. 
+[79] VARAVALLO G, CARAGNANO G, BERTONE F, et al. 
+Traceability platform based on green blockchain: An 
+application case study in dairy supply chain[J]. Sustainability, 
+2022, 14(6): 3321. 
+[80] CHEN C L, LIM Z Y, LIAO H C, et al. A traceable and 
+verifiable tobacco products logistics system with gps and rfid 
+technologies[J]. Applied Sciences, 2021, 11(11): 4939. 
+[81] BAMAKAN S M H, MOGHADDAM S G, MANSHADI S D. 
+Blockchain-enabled pharmaceutical cold chain: Applications, 
+key challenges, and future trends[J]. Journal of Cleaner 
+Production, 2021, 302: 127021. 
+[82] PENG X, ZHANG X, WANG X, et al. Research on the 
+cross-chain model of rice supply chain supervision based on 
+parallel blockchain and smart contracts[J]. Foods, 2022, 
+11(9): 1269. 
+[83] 董云峰，张新，许继平，等. 基于区块链的粮油食品全供
+应链可信追溯模型[J]. 食品科学，2020，41(9)：30-36. 
+DONG Yunfeng, ZHANG Xin, XU Jiping, et al. Blockchain- 
+based traceability model for grains and oils whole supply 
+Chain[J]. Food Science, 2020, 41(9): 30-36. (in Chinese with 
+English abstract) 
+[84] 李旭东，杨千河，姚竟发，等. 基于区块链的农产品溯源
+技术研究综述[J]. 江苏农业科学，2022，50(6)：16-24. 
+LI Xudong, YANG Qianhe, YAO Jingfa, et al. Study on 
+traceability technology of agricultural products based on 
+blockchain: A review[J]. Jiangsu Agricultural Science, 2022, 
+50(6): 16-24. (in Chinese with English abstract) 
+[85] MALIK N, ALKHATIB K, SUN Y, et al. A comprehensive 
+review of blockchain applications in industrial Internet of 
+Things and supply chain systems[J]. Applied Stochastic 
+Models in Business and Industry, 2021, 37(3): 391-412. 
+[86] LATIF S, IDREES Z, E HUMA Z, et al. Blockchain 
+technology for the industrial Internet of Things: A 
+comprehensive survey on security challenges, architectures, 
+applications, and future research directions[J]. Transactions 
+on Emerging Telecommunications Technologies, 2021, 
+32(11): e4337. 
+[87] GORKHALI A, CHOWDHURY R. Blockchain and the 
+evolving financial market: A literature review[J]. Journal of 
+Industrial Integration and Management, 2022, 7(1): 47-81. 
+[88] XU J, HAN J, QI Z, et al. A reliable traceability model for 
+grain and oil quality safety based on blockchain and 
+industrial internet[J]. Sustainability, 2022, 14(22): 15144. 
+[89] LU Y, LI P, XU H. A Food anti-counterfeiting traceability 
+system based on Blockchain and Internet of Things[J]. 
+Procedia Computer Science, 2022, 199: 629-636. 
+[90] SUN S, DU R, CHEN S, et al. Blockchain-based IoT access 
+control 
+system: 
+Towards 
+security, 
+lightweight, 
+and 
+cross-domain[J]. IEEE Access, 2021, 9: 36868-36878. 
+[91] ZHANG H, CHEN X, LAN X, et al. BTCAS: A 
+blockchain-based thoroughly cross-domain authentication 
+scheme[J]. Journal of Information Security and Applications, 
+2020, 55: 102538. 
+[92] MAZLAN A A, DAUD S M, SAM S M, et al. Scalability 
+challenges in healthcare blockchain system: A systematic 
+review[J]. IEEE Access, 2020, 8: 23663-23673. 
+[93] YAQOOB I, SALAH K, JAYARAMAN R, et al. Blockchain 
+for healthcare data management: opportunities, challenges, 
+and future recommendations[J/OL]. Neural Computing and 
+Applications, 2021: 1-16. https://link.springer.com/article/ 
+10.1007/s00521-020-05519-w. 
+[94] KHAN U, AN Z Y, IMRAN A. A blockchain ethereum 
+technology-enabled digital content: Development of trading 
+and sharing economy data[J]. IEEE Access, 2020, 8: 
+217045-217056. 
+[95] FERRARO P, KING C, SHORTEN R. On the stability of 
+unverified transactions in a DAG-based distributed ledger[J]. 
+IEEE Transactions on Automatic Control, 2019, 65(9): 
+
+
+【第10页】
+第 5 期 
+葛宏义等：基于区块链技术的粮油食品溯源研究进展及展望 
+ 
+223 
+3772-3783. 
+[96] YANG W, DAI X, XIAO J, et al. LDV: A lightweight 
+DAG-based blockchain for vehicular social networks[J]. 
+IEEE Transactions on Vehicular Technology, 2020, 69(6): 
+5749-5759. 
+[97] CHEN W, YANG X, ZHANG H, et al. Big data architecture 
+for scalable and trustful DNS based on sharded DAG 
+blockchain[J]. Journal of Signal Processing Systems, 2021, 
+93: 753-768. 
+[98] LU Y, HUANG X, ZHANG K, et al. Blockchain empowered 
+asynchronous federated learning for secure data sharing in 
+internet of vehicles[J]. IEEE Transactions on Vehicular 
+Technology, 2020, 69(4): 4298-4311. 
+[99] JAYABALAN J, JEYANTHI N. Scalable blockchain model 
+using off-chain IPFS storage for healthcare data security and 
+privacy[J]. Journal of Parallel and Distributed Computing, 
+2022, 164: 152-167. 
+[100] XIE J, ZHANG K, LU Y L, et al. Resource-efficient DAG 
+blockchain with sharding for 6G networks[J]. IEEE Network, 
+2021, 36(1): 189-196. 
+[101] ZHANG 
+H, 
+LENG 
+S, 
+WU 
+F, 
+et 
+al. 
+A 
+DAG 
+blockchain-enhanced 
+user-autonomy 
+spectrum 
+sharing 
+framework for 6G-enabled IoT[J]. IEEE Internet of Things 
+Journal, 2021, 9(11): 8012-8023. 
+ 
+ 
+ 
+Research progress and prospect of grain and oil food traceability based on 
+blockchain technology 
+ 
+GE Hongyi1,2,3, WU Xuyang1,2,3, JIANG Yuying1,2,4※, ZHANG Yuan1,2,3※, SUN Zhenyu1,2,3,  
+CUI Guangyuan1,2,3, JIA Zhiyuan1,2,3 
+(1. Key Laboratory of Grain Information Processing and Control, Ministry of Education, Henan University of Technology, Zhengzhou 
+450001, China;  2. Henan Key Laboratory of Grain Photoelectric Detection and Control, Henan University of Technology, Zhengzhou 
+450001, China;  3.College of Information Science and Engineering, Henan University of Technology, Zhengzhou 450001, China;   
+4. College of Artificial Intelligence and Big Data, Henan University of Technology, Zhengzhou 450001, China) 
+ 
+Abstract: Grains and oils have been one of the most important branches of agricultural products in the basic necessity of daily 
+life. The safety accidents of cereal and oil food occur frequently in recent years, leading to a gradual weakening of the 
+consumers' trust in cereal and oil food quality and supply chain. There is a long cycle in the supply chain of cereals, oils, and 
+foodstuffs, particularly for the complex structure and many stakeholders. It is still challenging to maintain the safety of the 
+supply chain, especially in the field of grain purchase and sale. There are some risks to food security, such as "topping new 
+with old", "revolving grain", and pressure on grade and price. The traceability system can serve as the product management to 
+implement forward, reverse, and non-directional tracking of products, in order to connect all aspects of grain, oil, and food 
+distribution. As such, an important guarantee can be provided for the quality and safety in the process of raw material 
+collection, manufacturing, processing, storage, and transportation, as well as distribution and sales. The traditional traceability 
+system cannot fully meet the large-scale production in recent years, such as data centralization, opaque information, easy data 
+falsification, and easy formation of information silos. Blockchain can be taken as a next-generation disruptive technology after 
+the Internet, with new features such as decentralization, distributed storage, anonymity, open and transparent data, and content 
+not easily tampered with, bringing new solutions to product traceability in the grain and oil food supply chain. The article first 
+introduced the basic meaning of blockchain technology, and then listed the development stages of blockchain 1.0-3.0, 
+including the characteristics and application scenarios of each stage. Blockchain technology was summarized in the blockchain 
+traceability field of grain and oil food over the past five years, with emphasis on the different architectures. The progress of 
+blockchain-related technology was described in such fields as grain and oil food traceability, including combining blockchain 
+and Internet of Things (IoT) technologies. The traceability system was then optimized for the blockchain storage performance 
+for the traceability system. The basic architecture of blockchain was applied to the grain and oil food traceability, including 
+blockchain alone and the blockchain + IoT. Some differences and difficulties were proposed to apply the blockchain in the 
+field of grain, oil, and foodstuffs traceability, compared with the financial and industrial IoT fields. Traceability was used for 
+the different categories of agricultural products. The current challenges were elaborated, in terms of storage performance, 
+interoperability, traceability system portability, supervision difficulty, cross-chain, and cross-domain. The blockchain storage 
+performance enhanced the blockchain scalability and throughput, and then integrated blockchain+IoT+artificial intelligence, as 
+well as the cereal and oil food blockchain in the cross-domain and cross-chain. An outlook was given on the future field of 
+cereal and oil food traceability. The finding can also provide a strong reference for the innovative application of blockchain 
+technology in cereal and oil food. 
+Keywords: agricultural products; traceability; blockchain; traceability system; grain and oil food; supply chain 
+

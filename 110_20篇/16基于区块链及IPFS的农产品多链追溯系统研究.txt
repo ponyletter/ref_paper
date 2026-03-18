@@ -1,0 +1,719 @@
+来源文件：16基于区块链及IPFS的农产品多链追溯系统研究.pdf
+============================================================
+
+【第1页】
+第7期
+张净 等:基于区块链及IPFS的农产品多链追溯系统研究
+127
+ 
+DOI:10.13733/j.
+jcam.
+issn.2095 5553.2024.07.019
+张净,唐恒睿,刘晓梅.基于区块链及IPFS的农产品多链追溯系统研究[J].中国农机化学报,2024,45(7):127-134
+ZhangJing,Tang Hengrui,LiuXiaomei.Researchonmulti-chaintraceabilitysystemofagriculturalproductsbasedonblockchainandIPFS [J].Journalof
+ChineseAgriculturalMechanization,2024,45(7):127-134
+基于区块链及IPFS的农产品多链追溯系统研究*
+张净1,唐恒睿1,刘晓梅2
+(1.江苏大学电气信息工程学院,江苏镇江,212013;2.江苏科茂信息技术有限公司,江苏镇江,212001)
+摘要:面对农产品供应市场日益庞大以及现存追溯系统中心化结构严重、溯源信息模糊简陋、数据安全难以得到有效保障
+等问题,通过分析供应链的业务流程及相关特点,融合区块链及IPFS技术设计灵活的多链分布式追溯系统以应对错综复
+杂多变的市场情况中的精准溯源及监管的需求。充分利用星际文件系统IPFS的去重存储以及分布式存储特性提高存储
+资源的利用率,解决以往溯源数据存储中心化严重、数据类型单一、负载过大等问题;区块链多链与IPFS私有网络的结合
+以及 CBC、ECC两个加密算法的采用可以支持全面的市场监管,并可以满足企业隐私数据的加密保护需求。为验证模型
+有效性,以水培蔬菜溯源项目作为应用案例进行分析测试,其中区块链多链系统吞吐量达到上链500TPS、查询400TPS;
+CBC加密算法的相关性、扩展性分析中密文改变率分别达到96.727%、97.136%。测试结果表明:本追溯系统在实现溯
+源数据高效记录存储和精准监管溯源的基础上,也能够给予供应链内各方合法权益及隐私数据有效的安全保护,亦可以
+面对业务交错复杂的市场供应链,为完整可靠的农产品区块链追溯监管系统研究发展与落地实现提供借鉴与参考。
+关键词:农产品;追溯;区块链;数据加密;数据安全;IPFS
+中图分类号:TP399  文献标识码:A  文章编号:2095 5553 (2024)07 0127 08
+收稿日期:2022年11月8日  修回日期:2023年2月20日
+*基金项目:镇江市科技创新资金项目(NY2021017)
+第一作者:张净,女,1975年生,江苏镇江人,博士,副教授;研究方向为计算机应用。E-mail:jszj08062000@163.com
+Researchonmulti-chaintraceabilitysystemofagriculturalproducts
+basedonblockchainandIPFS
+ZhangJing
+1,TangHengrui
+1,LiuXiaomei
+2
+(1.SchoolofElectricalandInformationEngineering,JiangsuUniversity,Zhenjiang,212013,China;
+2.JiangsuKemaoInformationTechnologyCo.,Ltd.,Zhenjiang,212001,China)
+Abstract:Inthefaceoftheincreasinglylargesupplymarketofagriculturalproducts,theseriouscentralizedstructureof
+theexistingtraceabilitysystem,fuzzyandsimpletraceabilityinformation,anddifficulttoeffectivelyguaranteedata
+securityandotherproblems,byanalyzingthebusinessprocessandrelatedcharacteristicsofthesupplychain,this
+paperintegratesblockchainandIPFStechnologytodesignaflexible multi-chaindistributedtraceabilitysystemto meet
+theneedsofaccuratetraceabilityandsupervisioninthecomplexandchanging marketsituation.It makesfulluseof
+thededuplicationstorageanddistributedstoragecharacteristicsofInterplanetary FileSystem (IPFS)toimprovethe
+utilizationofstorageresources,andsolvestheproblemsofseverecentralization,singledatatype,andexcessiveloadof
+traceabledatastorageinthepast.Thecombinationofblockchainmulti-chainandIPFSprivatenetworkandtheadoptionof
+CBCand ECC encryption algorithms can supportcomprehensive marketregulation,and can meetthe encryption
+protectionneedsofenterpriseprivacydata.Finally,inordertoverifythevalidityofthemodel,thehydroponicvegetable
+traceabilityprojectis used asan application caseto analyzeandtest,in whichthethroughputofthe blockchain
+multi-chainsystemhasreached500TPSfortheup-chainand400TPSforthequery.TheciphertextchangerateofCBC
+encryptionalgorithm hasreached96.727% and97.136%,respectively,incorrelationandexpansibilityanalysis.The
+testresultsshow thaton the basis oftherealization ofefficientsupply chain traceability data record store and
+accuratesupervisionandtraceability,thetraceabilitysystemcanalsogivetheparties􀆳legitimaterightsandinterestswithin
+第45卷 第7期
+2024年7月
+中国农机化学报
+JournalofChineseAgriculturalMechanization
+Vol.45 No.7
+Jul. 2024
+
+
+【第2页】
+128
+ 
+中国农机化学报
+2024年
+thechain andtheeffective protection ofprivacy data,can alsofacethe businesscrisscross and complex market
+supplychain,providingreferencefortheresearch,developmentandimplementationofacompleteandreliableblockchain
+ofagriculturalproductstraceabilitysupervisionsystem.
+Keywords:agriculturalproducts;traceability;blockchain;dataencryption;datasecurity;IPFS
+0 引言
+我国农产品市场已逐渐形成一个庞大复杂的经济
+产业网络,具有点多、线长、面广、错综交叉等特点
+[1],这
+使得市场的监管以及追溯难度较大
+[2],各种食品安全问
+题以及市场信任问题在近些年频出不穷,扰乱市场秩
+序,侵犯市场参与者的合法权益
+[3,4];随着新冠病毒在全
+球掀起的疫情风波以及后疫情时代的来临,一些产品运
+输供应链,如冷链运输、生鲜运输的不合理监管及追溯
+会产生严重的社会安全问题以及民众恐慌心理。而现
+有传统追溯 系统高度依赖着中心化的存储及监管体
+系
+[5],数据极易被私自篡改,存在信息壁垒并有着很高
+的信任成本,追溯信息链断链情况也极易发生
+[6],且事
+发后责任纠察也往往难以进行。在这种时代背景下,高
+精度、高可靠、高效率的农产品追溯系统研究及相关技
+术的开发应用有着十分重要的研究意义。
+区块链技术基于去中心化存储,有着透明可靠、不
+可篡改的特性
+[7];基于 MerkleDAG、P2P、分布式存储
+等技术的IPFS则有着高吞吐、按内容寻址、永久存储、
+全局共享等特性。两者都为实现高精度、高广度、高灵
+活、安全可靠的产品追溯系统提供新的研究方向和思
+路,成为国内外专家学者研究的热点
+[810]。在数据存
+储方面,杨信廷
+[11]、许继平
+[12]、董云峰
+[13]等使用“区块
+链+数据库”的双存储模式来应对区块链存储压力过
+大的问题;国外 Salah
+[14]、Cocco
+[15]等使用区块链融合
+IPFS来解 决 区 块 链 存 储 短 板 问 题,但其中直接 加 入
+IPFS公网的方式伴也随着一定的风险。Cao
+[16]、李梦
+琪
+[17]、于华竟
+[18]等则使用主从多链的区块链存储模式
+来扩大 存 储 容 量。在 隐 私 信 息 安 全 保 护 方 面,孙 传
+恒
+[19]、于合龙
+[20]等使用对称加密、节点授权、非对称解
+密等混合加密方式建立数据安全保护模型。另外面对
+市场中企业关系网络复杂、供应链相互交叉的现状,王
+志铧等
+[21]开发使用“一环节一账本”的系统模式让追溯
+系统有了较高的柔性与灵活性,但企业私自管理己方数
+据且系统强度依赖中心模块管理服务,削弱了去中心化
+及安全性。综上,在支持大容量存储数据的基础上,如
+何做到所有数据去中心化存储以保证全局数据皆不可
+篡改以及对隐私数据提供有效的保护是目前两个重要
+的研究方向。另外提高系统的灵活性拓展性以应对复
+杂的市场结构,实现对每个供应链的精准把控以及整个
+供应市场的清晰监管有着重要的研究意义。
+本文从蔬果产业市场的结构特点入手,研究实现基
+于区块链多链、
+IPFS私有网络的监管追溯系统,清晰描
+述市场全局关系网络,并为每条供应链路提供精准的溯
+源与监管服务;设计数据加密以及权限授予功能;通过
+试验搭建和案例应用测试系统完整性和可行性,为基于
+区块链的农产品追溯系统的研究发展提供参考。
+1 基于区块链及IPFS的多链追溯系统架构
+1.1 农产品供应链追溯需求分析
+纵观整个市场链路,根据各环节职能分工,本文将
+每个环节按照批次产生的数据分类总结如表1所示。
+表1 供应链各环节溯源数据
+Tab.1 Traceabilitydataofeachlinkinthesupplychain
+供应链环节
+公开数据
+隐私数据
+生产
+批次标识,种植时间,农药记录,化肥记录,种植条件参
+数记录仪(土壤 pH 值、温湿度等),地理位置,生产许可
+凭证,检疫证明,种植环境,多媒体记录(照片、视频)
+农户信息,种植成本明细,售出对象信息,售出数量,售出
+价格,各账目来往凭证
+加工
+批次标识,加工厂商,加工时间,加工环境参数,添加剂
+记录,添加剂合格证书,检疫证明,生产许可凭证,多媒
+体记录(照片、视频)
+购入对象,购入批次信息(数量,购入成本),加工成本明
+细,加工工 人 信 息,批 次 成 品 信 息 (数 量,重 量、售 出 价
+格),各账目来往凭证
+运输
+批次标识,运输公司信息,出发地点,目标地点,运输时
+间,运输环境参数(温湿度等),运输环境快照
+运输两方企业信息,批次订单信息(数量、重量、类型、金
+额等),运输车辆信息,运输人员信息,各账目来往凭证
+存储
+批次标识,入库出 库 时 间,仓 库 地 点,存 储 环 境 参 数(温
+湿度、光照等),存储环境快照
+批次存储信息(数量、重量、存储成本),各账目往来凭证
+售卖
+批次标识,售卖地点
+进货批次信息(数量、价格),售卖信息(数量、单价),销售
+人员信息
+
+
+【第3页】
+第7期
+张净 等:基于区块链及IPFS的农产品多链追溯系统研究
+129
+ 
+  一条完整的农产品供应链包括种植、加工、仓储、
+运输、销售五个环节,每个环节之间产生的溯源数据的
+类型及大小也不尽相同;除了各种文本信息如指标、位
+置、日期、质量,还有图片、视频等各种多媒体数据,它
+们也应参与追溯,丰富且精细的数据可使得追溯更加
+透明、安全、可靠。针对账目、设备信息、人员档案等直
+接关联参与者利益及安全的隐私敏感数据,为了明确
+责任划分及方便后续的责任纠察,也应当参与追溯过
+程录入追溯系统,但系统应具有稳定且有效的加密功
+能以及权限管理以保证隐私数据只向部分用户或部门
+开放查询。综合以上几点,区块链追溯系统在保证所
+有类型的多源异构数据能参与分布式存储及溯源的基
+础上,也应当支持对重要隐私数据的加密存储、设限查
+询,以完成对参与企业和用户的资产以及信息的保护。
+1.2 区块链多通道追溯系统架构
+国内农产品市场庞大,企业以及个体农户、厂商数
+目众多,它们之间的利益关系和供应网络也深邃复杂。
+中心化结构的传统追溯系统有很大的数据篡改风险以
+及较高的信任成本,问责和追溯流程也存在着众多的
+阻碍和困难。而去中心化存储的区块链技术可使存储
+在其中的数据有着不可篡改的属性,无论是前期的数
+据记录与后期的信息追溯,都可做到全链共享、有迹可
+循、永久存在;保证其中的数据安全可靠,消除信息壁
+垒,降低或消除信任成本。但其劣势也十分明显,其不
+便于存储较大的数据如各种常见的多媒体数据,会对
+区块链造成极大的存储负担以及资源浪费;另外在实
+际溯源应用中,面对具有错综复杂供应网络的庞大市
+场的监管需求,只针对单条供应链的单链或多链溯源
+系统,往往无法很好地延伸至整个市场中发挥作用,更
+无法做到清晰梳理全局的利益关系以及在全链共享数
+据的前提下完成必要的精准数据隔离与隐私保护,有
+着较高的耦合性和较低的灵活性。
+面对上述区块链自身的缺陷以及目前区块链追溯
+系统的不足,本文通过使用区块链通道机制以及IPFS
+私有网络来建立具备 特殊多链结构的农产品追溯系
+统,解决单链系统在存储和加密方面的短板,也满足整
+个市场在具备多条供应链路以及多种企业合作关系的
+复杂实际情况下的精准溯源要求。如图1所示,该系
+统中共分为两类区块链路:一类是各企业或部门的内
+部私链,用于与企业内所有节点共享存储、备份记录本
+企业内生成的所有溯源数据,提高系统的健壮性以及
+数据的安全性;另一类是溯源链,针对市场中的每条供
+应链,系统都会部署一条专属的溯源链来进行针对性
+配置服务。节点中根据身份职能不同分为企业节点和
+监管部门节点。面对一个企业会同时参与多个供应链
+路这种情况,企业将参与的供应链对应的溯源链根据
+工作需求及便捷性分别分配给内部的节点即可,即各
+节点被分配加入多个溯源链来代表所属企业参与相应
+供应链以提供溯源服务,监管部门中的节点同理。
+在这种结构下,每个节点只需加入一条组织内部
+链以及多条自己被分配给的溯源链。此外所有节点通
+过监管机构下发的资质文件共同加入所在市场唯一的
+IPFS溯源私有网络中,通过智能合约将节点中产生的
+所有大型数据上传至该市场私有网络进行 分布式存
+储,且与区块链上数据形成互相绑定验证的关系,最终
+消费者溯源接口也由该IPFS私有网络中引出得以让
+消费者获得多样且精细的溯源数据。由此整个溯源系
+统内部所有节点产生的所有溯源数据皆全部上链到溯
+源系统中,不会出现任何机构内部私自独立存储管理
+己方数据的情况,也在一定程度上削弱了信息壁垒以
+及信任成本,而各企业在过程中产生的隐私数据则经
+过链路隔离、算法加密以及权限授予三个措施来给予
+完善保护。综合这些要求与设定则可在整个市场层面
+上形成多链追溯系统,如图1所示。
+图1 多链追溯系统网络结构
+Fig.1 Multiplechaintraceabilitysystemnetworkstructure
+这种每个供应链都配备一条专一且独立的溯源链
+与之对应为之服务的系统结构设定,可简化正向记录
+与反向溯源路径,隔绝其他链路干扰,减少单链网络存
+储压力,提高事务提交处理效率,且可以更加精准的进
+行监督管理与追究责任;企业内部链则可以对内部所
+有节点产生的溯源数据进行记录备份和共享,便于企
+业内部数据管理并保障存储安全,增强整个区块链系
+统以及IPFS网络的健壮性与稳定性。两种链的相互
+交叉配合则可以清晰地将市场内错综复杂的供应合作
+网络按照区块链中节点、组织及链路的形式铺设表述
+出来,并实现对所有的供应链及相关企业完成有效且
+精准的监管及溯源,通道的对外隔绝属性也可以很好
+地完成链路间数据隔离保护以避免工作过程中企业间
+供应链路间产生各种隐私泄露或利益冲突等问题。
+1.3 数据存储模式与IPFS市场私有网络
+按照市场中一般蔬果供应链的路径结构,设计溯
+
+
+【第4页】
+130
+ 
+中国农机化学报
+2024年
+源系统数据存储模型,如图2所示。参与环节企业分
+别有生产、加工、物流、仓储及销售企业,所有企业生成
+一对 CBC对称密钥及一对 ECC 非对称密钥,监管部
+门生 成 一 对 ECC 非 对 称 密 钥,然 后 两 者 之 间 通 过
+“CBC+ECC”加密传输方式,经三个步骤完成传输发
+送各种文件、证书及密钥,进而各参与企业能够建立企
+业内链并加入市场溯源系统,监管部门能够获取所有
+企业的监管资格。
+图2 多链溯源系统数据存储模式
+Fig.2 Datastoragemodeofmultiplechaintraceabilitysystem
+系统搭建完成后,各企业中各工作节点通过调用
+分类上链智能合约完成对所处理批次产品数据的分类
+以及公开或加密上传,将文本数据和大型数据分别上
+传存储 至 批 次 所 属 供 应 链 通 道 的 溯 源 区 块 链 账 本
+(CouchDB状态数据库)与IPFS 市场私有网络中,同
+时也自动完成两部份数据之间的互相验证及绑定,进
+一步加强数据的不可篡改与安全性;此外也会将上传
+至区块链账本中的所有文本数据上传至各企业内部链
+中,用于共享与备份增加数据安全及健壮性。另外其
+中的加密过程由智能 合约调用己方企业对称密钥完
+成,而企业的非对称密钥则主要用于上链过程中的签
+名认证以及企业间隐私数据的请求与授权。在反向追
+溯时,每个企业节点可通过智能合约查看溯源链中所
+有公开的数据,也可依靠己方企业密钥查询己方企业
+的隐私数据,而监管机构可通过拿到的所有企业密钥
+查看所有的数据以完成监管职能,消费者则通过系统
+的消费者接口查询到所购买到批次的公开数据。
+IPFS是基于内容寻址的用于存储和访问文件、网
+站、应用程序和数据的分布式文件系统,每个文件数据
+都通过唯一的 CID 码分布式存储以及供所有节点获
+取,使得数据存储及访问更加安全以及高效。但如果
+直接将节点和数据暴露在庞大复杂的公共网络中,也
+会面临着很大的泄露风险。因此,本文使用 SWARM
+密钥的方式搭建属于此市场的私有网络,此密钥由监
+管部门生成然后通过三步加密传输送至各企业各节点
+来保证密钥不会泄露。分发此密钥后市场中所有参与
+者都可加入该市场私有网络,用于市场内部分布式存
+储共享所有大型溯源数据,摒弃深邃复杂的IPFS 公
+网,隔绝外界其他节点及其他IPFS私有网络以规避数
+据泄露以及其他未知风险。但是针对网络内部的数据
+保护,大型隐私数据也需先通过企业自身对称密钥进
+行文件加密,再上传至IPFS私有网络中,进一步对隐
+私数据完成安全保护,消除任何数据泄露发生的可能。
+2 数据权限管理与智能合约设计
+2.1 权限级别与隐私数据保护
+企业中所有隐私数据在正向记录过程中均通过己
+方对称密钥完成加密,以便后续己方以及监管部门的
+查询和监管,而面对一般过程外的特殊需求,如企业间
+部分隐私数据的请求查询,则需要双方企业进行权限
+请求以及权限授予。根据这些需求可将所有的参与者
+划分出三个权限等级:监管者具有一级权限,可以查看
+所有数据用于监督管理;参与企业为二级,可以查看己
+方所有数据、他方企业的公开数据,以及他方企业授予
+权限查看的部分隐私数据;消费者则为第三级,只允许
+查看所买到产品的公开数据。权限的等级划分则通过
+密钥授予以及复合加密方式进行实现。如图3所示,
+监管机构通过 CBC+ECC 混合加密的三个步骤获取
+到所有企业的私有对称密钥:第一步监管机构向所有
+企业发送己方 ECC公钥;第二步各企业通过此监管机
+构 ECC公钥加密己方 CBC 对称密钥;第三步监管机
+构在收到各企业的加密后的 CBC对称密钥后,通过己
+方 ECC私钥进行解密从而获得所有企业的对称密钥,
+自此获得所有数据的浏览和监管权限。
+图3 密钥交换与资质文件发送的流程
+Fig.3 Processofexchangingkeysand
+sendingqualificationfiles
+2.2 权限授予模式设计
+各企业可通过己方对称密钥查看己方所有数据,
+通过他方企业公钥加密相关数据授予这些企业查看相
+关数据的权限,通过己方私钥完成对被授权数据的解
+密和浏览。流程如图4所示。请求方企业首先提交请
+求事务至区块链账本中以生成此次请求记录,其中包
+括请求日期时间、数据明细、请求原因以及己方签名等
+必要信息,通过授权方企业公钥加密后提交至区块链
+
+
+【第5页】
+第7期
+张净 等:基于区块链及IPFS的农产品多链追溯系统研究
+131
+ 
+系统,授权方查看此记录后进行审核,不通过记录原因
+后结束此请求事务,通过则从存储系统中下载所请求
+隐私数据,使用请求方公钥加密,最后通过己方私钥签
+名后再提交上传至存储系统中,请求方拿到数据后通
+过己方私钥即可查阅相关数据。另外,这些请求、下载
+和上传等操作均通过智能合约与系统交互完成,这种设
+计可以保证整个过程中的每一步都在区块链账本中进
+行着跟踪和记录,最终在整个过程完成后,在相应的账
+本中就形成了此次请求的完整记录与备案,并且此记录
+也具有不可篡改的特性。消费者则是拿到产品后通过
+批次码以及溯源系统消费者接口获取相关公开数据。
+图4 数据查阅权限授予流程图
+Fig.4 Flowchartofgrantingdataquerypermissionssystem
+2.3 智能合约设计
+本文对农产品追溯数据的操作主要有三类:加密
+以及存储上链、下载查询以及解密、权限请求以及授
+予。这三类都需要通过设计相应的智能合约来实现,
+以保证过程的自动化、精准化,并保证不可篡改地记录
+这些具体的过程与操作。
+2.3.1 加密及存储上链
+本文完成加密以及存储记录的智能合约主要设计
+如下:首先,在某企业节点在对某批次产品数据进行加
+密以及存储记录时,需要判断该批次所属的溯源通道
+账本中是否存在相同批次号的数据,以免发生重复编
+号、重复上链的情况;然后,在确定没有相同的批次号
+后,智能合约会通过本节点持有的 CBC 密钥对隐私文
+本数据以及隐私多媒体数据进行加密,再将公开的多
+媒体数据以及加密后的隐私多媒体数据上传到IPFS
+私网中,并返回两者的 CID 编号;智能合约调用本企
+业的私钥对批次号进行加密;得到可以验证己方身份
+的签名。最后,在完成上述这些 操 作 后,将 产 品 批 次
+号,公开文本数据、加密后的文本数据、两类多媒体数
+据的 CID、企业签名等打包,上传至该批次所属的溯源
+通道账本中。至此完成对一个批次产品的加密以及存
+储上链。具体过程如图5所示。
+图5 加密及存储上链流程图
+Fig.5 Flowchartofencryptionandon-chainstorage
+2.3.2 查询下载以及解密
+本文下载查询以及解密的智能合约主要设计如下:
+首先,需要判断链中是否存在所需要查询的批次数据;
+在确定存在后,智能合约会通过批次号(BatchID)获取到
+该批次的数据,包括所有的公开数据以及加密后的隐
+私数据。然后,调用 CBC密钥完成对加密文本数据的
+解密,通过IPFS根据所有多媒体数据的 CID 下载多
+媒体文件。最后,调用解密函数完成对加密多媒体数
+据的解密,至此可以对该批次的所有数据以及文件进
+行浏览。具体过程如图6所示。
+图6 查询下载以及解密流程图
+Fig.6 Flowchartofquerydownloadanddecryption
+2.3.3 权限请求以及授予
+在2.2节中叙述了权限请求以及授予的纵向流程,
+详细介绍了请求方和授权方的一系列动作和行为,但对
+
+
+【第6页】
+132
+ 
+中国农机化学报
+2024年
+每个具体的企业节点,其身份并不是固定的,在不同的
+情况下,有可能是请求方,也有可能是授权方。所以对
+企业的每个节点,需要同时具备这两个身份所需要具备
+的功能。本文权限请求以及授予智能合约也分为两类。
+针对权限请求方,需要上传请求明细且签名后上链。针
+对权限授权方,先查看请求内容,在审核通过后,使用请
+求方公钥加密内容,上链完成授权,具体如图7所示。
+(a)权限请求  
+(b)权限授权
+图7 权限请求及授予流程图
+Fig.7 Flowchartofrequestingbytherequesterand
+authorizationbythelicensor
+3 试验与测试
+3.1 试验环境
+试验 与 测 试 在 虚 拟 机 中 进 行,基 于 Hyperledger
+Fabricv2.4 和 go-ipfsv0.13.0 搭 建。虚 拟 机 配 置 为:
+Ubuntu18.0464位操作系统,4G 内存、50G 硬盘,共
+有13条链,链内节点包括生产企业节点、加工企业节
+点、监 管 机 构 节 点;所 有 Fabric节 点 及 IPFS 节 点 均
+在 docker 中 搭 建 与 运 行,外 部 状 态 数 据 库 采 用
+CouchDB,多链区块链网络的所有测试通过区块链基准
+测试工具 Tape完成,试验环境具体配置如表2所示。
+表2 试验环境
+Tab.2 Experimentalenvironment
+配置
+参数
+说明
+组织数
+6
+三个生产企业组织,两个加工企
+业组织,一个监管机构组织
+链数
+13
+六条溯源链,七条内部链
+Peer节点数
+25
+24 个 企 业 节 点,1 个 监 管 机 构
+节点
+数据库
+CouchDB
+链外 世 界 状 态 存 储 器 用 于 富
+查询
+IPFS节点数
+6
+对应各个区块链节点
+共识算法
+Raft
+原生支持且实现去中心化
+区块生成时间
+2s
+链上区块生成时间间隔
+区块容量
+20 MB
+每个区块容纳的最大容量
+区块交易量
+50
+每个区块接受的最大交易数
+3.2 区块链系统性能测试
+系统 架 构 主 要 由 Fabric 区 块 链 多 链 平 台 以 及
+IPFS分布式存储两部分组成,两者一起决定整个系统
+的性能。其中作为所有事务处理者的 Fabric部分主
+要测试其事务处理吞吐量以及时延来体现其性能;对
+用于分布式存储大型数据的IPFS,上传及下载速度为
+其主要的两个性能指标。
+3.2.1 多链区块链平台性能测试
+多链区块链网络性能测试主要分为数据上链以及
+数据查询测试,具体对应record()以及query()两个方
+法。但两个方法的具体职能中包含着调用大型数据的
+加密解密和上传下载过程,这些工作分别受加密算法以
+及IPFS的工作效率影响,并不受区块链平台自身的性
+能影响,只有文本数据的相关处理过程才可以反应出多
+链区块链平台的实际工作效率,于是在此部分只进行文
+本数据的上链和查询两个事务处理过程的吞吐量及时
+延测试。使用 Tape组件进行多链区块链网络结构的测
+试,图8和图9为上链与查询性能的主要测试结果。
+从图8、图9可以看出,上链记录事务在测试前期
+阶段即数量较少时变化较大,时延以及吞吐量随着次
+数的增加而都有着较为明显的变化,时延不断下降,吞
+吐量一直攀升,当到达600次时,起伏变化趋于平稳,
+时延大约在2 ms左右浮动,吞吐量则在500TPS附
+近。相较于处理上链与记录事务,查询事务的两个参
+数随着测试次数增加而变化的幅度较为缓和,其中吞
+吐量呈上升趋势,在600次时稳定在了400TPS左右,
+时延呈下降趋势,于600次时稳定于2.5ms左右。因
+此可以看出次区块链多链网络结构无论上链还是查询
+操作都有着较高的吞吐量以及较低的时延。
+图8 吞吐量测试结果
+Fig.8 Throughputtestresults
+图9 时延测试结果
+Fig.9 Delaytestresults
+3.2.2 IPFS性能测试
+IPFS在整个系统架构中主要承担着溯源过程中
+大型数据的分布式文件存储职能,上传及下载的速度
+
+
+【第7页】
+第7期
+张净 等:基于区块链及IPFS的农产品多链追溯系统研究
+133
+ 
+即代表其业务处理能力且影响着整个溯源系统的运行
+效率。实际业务中IPFS工作于私有网络,在此网络环
+境中进行上传与下载测试,使用ipfs-http-client工
+具按照文件大小一共测试10组,每组测试10次取其
+平均值,测试结果如图10所示。
+图10 IPFS速率测试结果
+Fig.10 IPFStestresults
+由图10可以发现,整体的上传速度在随着文件的
+增加不断攀升,最终停留在100 MB/s,由于这个过程
+主要工作是对文件的分块以及连接存储,所以这个过
+程与 CPU 和硬盘的性能有着较大的关联。而在下载
+过程中起伏不大,一直在20 MB/s左右浮动,这是因
+为下载操作主要由网络带宽决定。最后需要注 意 的
+是,虽然文件越小,所需要的时间越少,但是处理速度
+却是较慢的,这是由网络连接时间占比的变化引起的。
+3.3 安全性测试
+本文的基于多链结构及私有网络在结构上隔绝了
+外界的大量威胁,则整个系统中存在的主要安全隐患
+存在于内部的隐私数据泄露以及权限等级失效。而这
+两种隐患完全由两种加密算法决定,因此必须验证两
+者是否有着可靠的的安全性能。针对对称加密 算 法
+AES-256-CBC,其直接面对文本以及大型文件数据
+的加密,引入相关性以及扩展性两个方面对其进行测
+试,前者为密钥不变内容改变一个字符时所引起的密
+文的改变率,后者为内容不改变时密钥改变一位所引
+起密文的改变率。分别测试20组,每组测试10次取
+密文改变率的平均值,测试结果如图11、图12所示。
+图11 CBC加密相关性测试结果
+Fig.11 CBCEncryptioncorrelationtest
+图12 CBC加密扩展性测试结果
+Fig.12 CBCEncryptionscalabilitytest
+相关性测试中密文改变率为96.727%,扩展性中
+密文改变率为97.136%。由此可见,本文所采用的针
+对具体数据加密的 AES-256-CBC加密算法有着较
+高的混淆性,很难通过暴力等攻击手段进行破解。
+ECC非对称加密算法用于 CBC密钥的加密以完成
+全局监管和权限授予,是一种基于椭圆曲线数学理论实
+现的非对称加密算法。相比较为经典的 RSA 非对称加
+密算法,ECC的数学理论非常深奥和复杂,因此有着较
+高的安全强度,目前理论上并没有非常好的针对其有效
+的破解方法,往往其破译和求解难度都是指数级的,常
+规暴力破解的成功概率也是微乎其微,因此用于系统中
+的密钥加密和权限授予有着很高的安全性。
+4 结论
+1)本文 将 区 块 链 多 链 结 构 与IPFS 私 有 网 络 融
+合,研究设计具有特殊多链网络结构的农产品追溯系
+统,其中各供应链之间数据隔离,保护各方隐私安全,
+契合国内错综复杂的农产品市场结构。同时IPFS分
+布式存储可弥补区块链在数据存储容量上的短板,区
+块链去中心化且不可篡改的特性可为IPFS的数据安
+全提供有效保障。为实现农产品市场全局监管、精准
+溯源、隐私保护的农产品追溯系统提供借鉴与参考。
+2)本文应用密码学原理,设计实现隐私加密方案
+与权限授予功能。通过编写智能合约完成隐私数据加
+密、溯源数据上链、IPFS大文件分布式存储等一系列
+操作,最终实现溯源数据从录入上传到查询下载全程
+的自动化、智能化进行。
+3)通过 Fabric区块链多链性能测试、IPFS私网
+速度测试、加密算法安全性分析。以水培蔬菜溯源数
+据作为试验实例进行分析测试,其中区块链多链系统
+吞吐量达到上链500TPS、查询400TPS;CBC加密算
+法的 相 关 性、扩 展 性 分 析 中,密 文 改 变 率 分 别 达 到
+96.727%、97.136%。表明本追溯系统在实现供应链
+溯源数据高效记录存储和精准监管溯源的基础上,也
+能够保障链内各方的数据安全以及合法权益。
+参 考 文 献
+[1]刘晓云,王晓春.“物联网+区块链”的农产品质量溯源体
+系研究[J].常州工学院学报,2018,31(5):60-65.
+[2]GalvezJF, Mejuto J C, Simal-Gandara J. Future
+challenges
+on
+the
+use
+of
+blockchain
+for food
+traceability analysis [J]. TrAC Trends in Analytical
+Chemistry,2018,107:222-232.
+[3]ThakaliA, MacRae J D. A review of chemical and
+microbialcontaminationin food: What are the threats
+toacircularfoodsystem? [J].EnvironmentalResearch,
+
+
+【第8页】
+134
+ 
+中国农机化学报
+2024年
+2021,194:110635.
+[4]Kim Y G, WooE. Consumer acceptance of a quick
+response (QR)codeforthefood traceability system:
+Applicationofan extendedtechnologyacceptance model
+(TAM) [J].Food Research International,2016,85:
+266-272.
+[5]任守纲,何自明,周正己,等.基于 CSBFT 区块链的农作
+物全产业链信息溯源平台设计[J].农业工程学报,2020,
+36(3):279-286.
+Ren Shougang, He Ziming, Zhou Zhengji, et al.
+Designandimplementationofinformationtracingplatform
+for crop whole industry chain based on CSBFT -
+blockchain [J].Transactionsofthe Chinese Society of
+AgriculturalEngineering,2020,36(3):279-286.
+[6]于丽娜,张国锋,贾敬敦,等.基于区块链技术的现代农产
+品供应链[J].农业机械学报,2017,48(S1):387-393.
+Yu
+Lina, Zhang
+Guofeng, Jia Jingdun, et al.
+Modern agricultural product supply chain based on
+blockchaintechnology [J].TransactionsoftheChinese
+Society for Agricultural Machinery, 2017, 48 (S1):
+387-393.
+[7]张长贵,张岩峰,李晓华,等.区块链新技术综述:图型区
+块链和 分 区 型 区 块 链 [J].计 算 机 科 学,2020,47(10):
+282-289.
+[8]钱建平,吴文斌,杨鹏.新一代信息技术对农产品追溯系
+统智能化 影 响 的 综 述 [J].农 业 工 程 学 报,2020,36(5):
+182-191.
+Qian Jianping, Wu Wenbin, Yang Peng. Review on
+agricultural products smarttraceability system affected
+by new
+generation information
+technology
+[J ].
+Transactions of the Chinese Society of Agricultural
+Engineering,2020,36(5):182-191.
+[9]弋伟国,何建国,刘贵珊,等.区块链增强果蔬质量追溯可
+信度方法研 究 与 系 统 实 现 [J].农 业 机 械 学 报,2022,53
+(2):309-315,345.
+Yi
+Weiguo, He Jianguo, Liu
+Guishan, et al.
+Developmentandimplementationofblockchaintoenhance
+traceabilityandreliabilityoffruitandvegetablequality[J].
+Transactions of the Chinese Society for Agricultural
+Machinery,2022,53(2):309-315,345.
+[10]许继平,孙鹏程,张新,等.基于区块链的粮油食品全供
+应链信息安 全 管 理 原 型 系 统 [J].农 业 机 械 学 报,2020,
+51(2):341-349.
+Xu Jiping, Sun Pengcheng, Zhang
+Xin, et al.
+Prototypesystem ofinformation security management
+of cereal and oilfood whole supply chain based on
+blockchain [J].TransactionsoftheChineseSocietyfor
+AgriculturalMachinery,2020,51(2):341-349.
+[11]杨信廷,王明亭,徐大明,等.基于区块链的农产品追溯
+系统信息存储模型与查询方法[J].农业工程学报,2019,
+35(22):323-330.
+Yang Xinting, Wang Mingting, Xu Daming,et al.
+Datastorageandquery methodofagriculturalproducts
+traceability information based on blockchain
+[J].
+Transactions of the Chinese Society of Agricultural
+Engineering,2019,35(22):323-330.
+[12]许继平,王健,张新,等.区块链驱动的稻米供应链信息监
+管模 型 研 究 [J].农 业 机 械 学 报,2021,52(5):202-
+211,101.
+Xu
+Jiping,
+Wang
+Jian,
+Zhang
+Xin, et
+al.
+Information supervision
+modeling
+of rice
+supply
+chain driven by blockchain [J]. Transactions ofthe
+ChineseSocietyforAgriculturalMachinery,2021,52(5):
+202-211,101.
+[13]董云峰,张新,许继平,等.基于区块链的粮油食品全供
+应链可信追溯模型[J].食品科学,2020,41(9):30-36.
+[14]SalahK,NizamuddinN,JayaramanR,etal.Blockchain-
+basedsoybeantraceabilityinagriculturalsupplychain[J].
+IeeeAccess,2019,7:73295-73305.
+[15]CoccoL,Mannaro K,TonelliR,etal.A blockchain-
+basedtraceabilitysysteminagri-foodSME:Casestudy
+ofatraditionalbakery [J].IEEE Access,2021,9:
+62899-62915.
+[16]CaoY,ChengY,YangC,etal.Doublechainblockchain
+based on improved Virginia algorithm [C].Journal
+ofPhysics,2021,1820(1):012158.
+[17]李梦琪,杨信廷,徐大明,等.基于主从多链的水产品区
+块链溯源 信 息 管 理 系 统 设 计 与 实 现 [J].渔 业 现 代 化,
+2021,48(3):80-89.
+[18]于华竟,徐大明,罗娜,等.杂粮供应链区块链多链追溯监
+管模型设计[J].农业工程学报,2021,37(20):323-332.
+Yu Huajing,XuDaming,Luo Na,etal.Designofthe
+blockchain multi-chain traceability supervision model
+forcoarsecerealsupplychain [J].Transactionsofthe
+ChineseSociety of Agricultural Engineering,2021,37
+(20):323-332.
+[19]孙传恒,于华竟,罗娜,等.基于智能合约的果蔬区块链
+溯源数据 存 储 方 法 研 究 [J].农 业 机 械 学 报,2022,52
+(8):361-370.
+SunChuanheng,YuHuajing,LuoNa,etal.Researchon
+thestorage method offruit and vegetable blockchain
+traceability data based on smart contracts
+[J].
+Transactions of the Chinese Society for Agricultural
+Machinery,2022,52(8):361-370.
+[20]于合龙,陈邦越,徐大明,等.基于区块链的水稻供应链
+追溯信息 保 护 模 型 研 究 [J].农 业 机 械 学 报,2020,51
+(8):328-335.
+YuHelong,ChenBangyue,XuDaming,etal.Modeling
+ofricesupply chain traceabilityinformation protection
+basedonblockchain [J].Transactionsofthe Chinese
+Society for Agricultural Machinery, 2020, 51 (8):
+328-335.
+[21]王志铧,柳平增,宋成宝,等.基于区块链的农产品柔性可
+信溯源系统研究[J].计算机工程,2020,46(12):313-320.
+

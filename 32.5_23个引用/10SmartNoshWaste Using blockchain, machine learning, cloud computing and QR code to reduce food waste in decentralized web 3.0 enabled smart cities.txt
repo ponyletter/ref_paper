@@ -1,0 +1,1027 @@
+来源文件：10SmartNoshWaste Using blockchain, machine learning, cloud computing and QR code to reduce food waste in decentralized web 3.0 enabled smart cities.pdf
+============================================================
+
+【第1页】
+����������
+�������
+Citation: Dey, S.; Saha, S.; Singh,
+A.K.; McDonald-Maier, K.
+SmartNoshWaste: Using Blockchain,
+Machine Learning, Cloud Computing
+and QR Code to Reduce Food Waste
+in Decentralized Web 3.0 Enabled
+Smart Cities. Smart Cities 2022, 5,
+162–176. https://doi.org/10.3390/
+smartcities5010011
+Academic Editor: Renita Murimi
+Received: 25 December 2021
+Accepted: 12 February 2022
+Published: 14 February 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright:
+© 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed
+under
+the
+terms
+and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+smart cities
+Article
+SmartNoshWaste: Using Blockchain, Machine Learning, Cloud
+Computing and QR Code to Reduce Food Waste in
+Decentralized Web 3.0 Enabled Smart Cities
+Somdip Dey 1,2,*,†
+, Suman Saha 2, Amit Kumar Singh 1 and Klaus McDonald-Maier 1
+1
+School of Computer Science and Electronic Engineering, University of Essex, Colchester CO4 3SQ, UK;
+a.k.singh@essex.ac.uk (A.K.S.); kdm@essex.ac.uk (K.M.-M.)
+2
+Nosh Technologies, Colchester CO4 3SL, UK; suman.saha@nosh.tech
+*
+Correspondence: somdip.dey@essex.ac.uk or dey@nosh.tech
+†
+Current address: Wivenhoe Park, University of Essex, Colchester CO4 3SQ, UK.
+Abstract: Food waste is an important social and environmental issue that the current society faces,
+where one third of the total food produced is wasted or lost every year while more than 820 million
+people around the world do not have access to adequate food. However, as we move towards a
+decentralized Web 3.0 enabled smart city, we can utilize cutting edge technologies such as blockchain,
+artiﬁcial intelligence, cloud computing and many more to reduce food waste in different phases of
+the supply chain. In this paper, we propose SmartNoshWaste—a blockchain based multi-layered
+framework utilizing cloud computing, QR code and reinforcement learning to reduce food waste.
+We also evaluate SmartNoshWaste on real world food data collected from the nosh app to show the
+efﬁcacy of the proposed framework and we are able to reduce food waste by 9.46% in comparison to
+the originally collected food data based on the experimental evaluation.
+Keywords: food production; supply chain; blockchain; qr code; machine learning; food security;
+food waste; sustainability; reinforcement learning; agriculture
+1. Introduction
+Smart cities are often visualized as consortium of technologies including sensors,
+computing systems and services, across many scales that are connected through multiple
+networks which provide continuous data regarding the activities of people and objects
+including devices, buildings, and assets in terms of the ﬂow of decisions about the physical,
+operational, and social form of the city [1]. On the other hand, as we move towards Web
+3.0 with focus on decentralized semantic web [2,3], it is unavoidable to imagine smart cities
+of the future without decentralized Web 3.0 as the underlying information system.
+Figure 1 shows the diagrammatic representation of a smart city utilizing Web 3.0 infor-
+mation system along with other technologies such as Blockchain, Artiﬁcial Intelligence (A.I.
+or simply, AI) Cloud Computing, Edge Computing, and many more, to feed information
+from each other to optimize the efﬁciency of city operations and services and connect to
+the citizens [4]. The key goals of information ﬂow within the smart cities could include a
+plethora of activities including managing trafﬁc and transportation systems, power plants,
+utilities, water supply networks, waste, crime detection, information systems, schools,
+libraries, hospitals, and other community services.
+On the other hand, one of the most important issues that the modern society faces
+today is food wastage, which is both a social issue and an environmental one [5–7]. Every
+year one third of total food produced, which weighs approximately 1.3 billion tonnes and is
+equivalent to $2.6 trillion, is lost or wasted. However, more than 820 million people around
+the globe doesn’t have access to proper nutritious meal [6]. Moreover, food waste and loss
+contributes to almost 6% of the total greenhouse gas emissions around the globe, leading to
+Smart Cities 2022, 5, 162–176. https://doi.org/10.3390/smartcities5010011
+https://www.mdpi.com/journal/smartcities
+
+
+【第2页】
+Smart Cities 2022, 5
+163
+detriment of the environment as well [7]. That being said, the supporting technologies of
+a Web 3.0 enabled smart city could be the enabler of reducing food waste and to build a
+more sustainable planet.
+Web 3.0 
+Information System
+Smart City
+Blockchain
+A.I.
+Edge 
+Computing
+Cloud 
+Computing
+Many 
+more...
+Figure 1. Representational diagram of a smart city using technologies such as Blockchain, Artiﬁcial
+Intelligence (A.I.), Cloud and Edge Computing and many more within the Web 3.0 information
+system.
+Several studies [8–12] have been proposed over the years to utilize blockchain and
+other technologies such as QR code in conjunction to digitize food supply chain data.
+Moreover, studies [13,14] using blockchain to raise awareness of food waste are also
+being proposed. However, none of the published studies use blockchain, QR code, cloud
+computing, and machine learning in conjunction to develop a framework that could reduce
+food waste.
+To reduce food waste, we propose SmartNoshWaste—a Blockchain based multi-layered
+framework utilizing machine learning (more speciﬁcally reinforcement learning), cloud
+computing and QR code in a decentralized Web 3.0 enabled smart city. Blockchain is an
+excellent technology to digitize and decentralize food supply chain data, whereas, QR
+code [15,16] could be utilized in concurrence to make the digitized data more accessible to
+consumers, especially via smartphones. We have chosen cloud computing [17,18] for the
+framework to improve the speed of computation to provide a seamless user experience
+in validating and accessing the data. Also, cloud computing improves maintainability of
+software development as the changes in the software could be easily pushed on to the
+server for it to effect. On the other hand, machine learning being a sub ﬁeld of AI, where
+the computing machine improves automatically through experience and by the use of
+data [19], such a mechanism can be utilized to learn from the data and henceforth, optimize
+food waste.
+SmartNoshWaste has two layers: (1) Data System Architecture and (2) Machine Learning
+Module. The goal of the Data System Architecture is to digitize and store food data on the
+Blockchain using QR code and cloud computing to improve traceability and accessibility
+of such data and such that intelligence could be used by agents (machines) to reduce
+waste in Machine Learning Module. To the best of our knowledge this is the ﬁrst framework
+to be proposed using Blockchain, cloud computing, QR code and machine learning in
+
+
+【第3页】
+Smart Cities 2022, 5
+164
+conjunction in a Web 3.0 enabled smart city to reduce food waste. To this extent the main
+contributions of this paper are as follows:
+1.
+Propose SmartNoshWaste, a Blockchain based framework using machine learning,
+cloud computing and QR code to reduce food waste in a Web 3.0 enabled smart city;
+2.
+Propose a metric to quantify food production and waste data;
+3.
+Experimental evaluation of SmartNoshWaste on real world food data collected from the
+nosh food management app [20] and show the efficacy of the proposed framework.
+The rest of the paper is organized as follows. Section 2 brieﬂy mentions some of
+the key concepts and technologies used in this paper, whereas, Section 3 mentions the
+related studies, which are already performed on the topic. In Section 4 we propose the
+SmartNoshWaste framework to reduce food waste and Section 5 shows the experimental
+evaluation of SmartNoshWaste on real world food data collected from the nosh app. Finally,
+we discuss the limitations and related future works as part of the proposed framework in
+Section 6 and conclude the paper in Section 7.
+2. Preliminaries
+2.1. Blockchain Technology
+With the advent of Bitcoin as proposed by Satoshi Nakamoto [21] we observed the
+introduction of a new currency system, which does not require the intervention of insti-
+tutional mediator while transferring money from one entity to another. At the same time,
+we also noticed the emergence of one of the most disruptive technologies that we know
+as Blockchain (also refereed as BT), which is a digital ledger where all transactions are
+recorded chronologically and publicly. However, the application of BT is not just limited
+to crypto-currencies [22,23] such as Bitcoin, Ethereum, etc. It has proved to be useful in
+provenance of documents, tracking ownership, digital assets, physical assets, voting rights,
+among many other applications. Traditionally, BT network is of three types: Public, Private
+and Consortium [12]. BT is especially popular in the industry because of its design features,
+which comprise of six key elements including Decentralization, Transparency, Open Source,
+Autonomy, Immutability, and Anonymity.
+2.2. QR Code
+QR code [15,15,16,24,25] is an effective information transmission medium, which is
+widely used today in various applications including product traceability, mobile payment,
+advertising, degree, and transcript generation, passport veriﬁcation and in many other
+ﬁelds. QR code is deﬁned into 40 symbol versions (to carry various data payloads) and
+4 user-selectable error correction level (ECL): L, M, Q and H, which can correct up to 7%,
+15%, 25%, and 30% error, respectively, when attacked by using defacement. QR code uses
+the Reed-Solomon error correction algorithm to recognize this fault tolerance, where the
+error correction codewords would be created by the Reed-Solomon algorithm and then
+added in the tail of QR code data codewords [25–28]. The larger is the version of QR code
+and the error correction level, then it can offer a higher data payload and reliability in terms
+of data retrieval. Figure 2 represents an exemplar QR code, where a simple message like
+“Hello, World!” is embedded in it.
+Figure 2. Representational QR code with “Hello, World!” message embedded in it.
+
+
+【第4页】
+Smart Cities 2022, 5
+165
+2.3. Reinforcement Learning
+Reinforcement learning (RL) [29] is a type of machine learning algorithm, where an
+intelligent agent, which is a computing system that perceives its environment to take
+actions autonomously in order to achieve cumulative rewards based on the knowledge
+gathered from the environment. Figure 3 shows a representative diagram of an intelligent
+agent. Here, reward could be optimizing performance or power consumption or thermal
+efﬁciency or combination of these together.
+Environment
+Actions
+Percepts
+Intelligent agent
+What is the 
+environment 
+like now?
+Action to be 
+taken
+Figure 3. Representative diagram of intelligent agent.
+2.4. Cloud Computing
+Cloud computing (cloud) [17,18] is a computing model to enable ubiquitous, conve-
+nient, on-demand network access to a shared pool of conﬁgurable computing resources
+such as networks, servers, storage, applications, and services, which can be rapidly provi-
+sioned and released with minimal management effort or service provider interaction [30].
+The essential features of cloud computing includes Broad network access, On-demand self-
+service, Rapid elasticity, Resource pooling, and Measured service [12].
+Cloud services can be provided to consumers in numerous ways, and one such service
+is Software as a service (also called SaaS) [31], where the software and its related data are
+hosted in the cloud computing environment such that the software could be provided to
+numerous consumers.
+3. Related Works
+Several studies [8–12,14,32,33] have been published on Agri-food production and
+supply chains over the years. The study in [34] as proposed by Li et al. developed a
+dynamic planning mechanism for food supply chain. This mechanism minimizes the losses
+of food products while simultaneously maximizing the proﬁts for the members of food
+supply chain. In 2015, the study [35] provided by Foroglou et al. highlights the applications
+of blockchain including electronic cash system. In the same study, Foroglou et al. also
+showed applications of blockchain in different industrial domains such as contracts, voting,
+intellectual property rights, smart property, and ﬁnance. In 2016, the study in [8] by Tian
+proposed a food blockchain framework using RFID technology to implement data acqui-
+sition, circulation, and sharing in different phases of supply chain including production,
+processing, warehousing, distribution, and sales links of food supply chain. In the study
+by Zhao et al. [9], they foresaw the storage capacity of blockchain being one of the biggest
+issues for applying BT in food supply chain. Another key challenge on implementing
+blockchain in supply chain, mentioned in [9], was the demanding computational power
+of using such framework. In the study [36], Singh et al. proposed a secured framework
+of using BT and Fog-based Architecture Network for Internet of Everything applications
+
+
+【第5页】
+Smart Cities 2022, 5
+166
+in the smart cities. In a different study by Astill et al. [10], they proposed the use of
+Internet-of-Things (IoT) at different stages of food production in the supply chain to acquire
+data of production and supply chain, and henceforth, using BT to create transparency of
+such data. Another study [32] uses blockchain in enabling a secure IoT based smart city.
+Also, Gayialis et al. [33] proposed a platform to minimize counterfeit labeling and improve
+traceability of wines and spirits by using a combination of blockchain, anti-counterfeit
+labels, and sensors. Though these works [8–10,33–35] are focused on using blockchain as
+one of the key technologies for purposes such as food data traceability, they do not focus
+on minimizing food waste nor deal speciﬁcally with waste related data.
+On the other hand, BT can also affect sustainable business models in the agri-food
+industry by being a source of innovation [37,38]. In [39], it is also pointed out that diffusion
+of technological innovations such as BT could attribute to initial lack of knowledge and
+expertise of the innovation and to scalability issues as well. Henceforth, this calls for a
+BT based framework in the agri-food industry for traceability, accessibility, and veriﬁ-
+cation of produce to empower sustainable business models and encourage diffusion of
+such technology.
+In the study by Bogner et al. [40], they proposed a decentralized application to share
+everyday objects based on a smart contract utilizing Ethereum blockchain and QR code.
+In this application [40], smart contract hosted on the blockchain, the local Ethereum client,
+and a web app is used to identify each object or device based on QR code, which is unique
+to each object. Despite this approach is utilizing QR code and blockchain together to share
+objects in a decentralized fashion, the logistics of supply chain, especially in context of food
+production, is far more complex and hierarchical, which requires a more holistic approach
+speciﬁc to agricultural industry. In [41], Kumar et al. proposed an approach to prohibit
+counterfeit of medicine in supply chain using BT and encrypted QR code such that the
+consumer is able to trace each active ingredients in the medicine. In this approach each
+ingredient is traced using blockchain mechanism and then embedded as encrypted data
+in the QR code for further veriﬁcation by the consumer. The approach in this method [41]
+is complex in terms of implementation in the agricultural industry, especially given the
+distributed nature of the food supply chain. Moreover, tracking each ingredient in the food
+product also means that additional storage memory is required to trace the ingredients.
+On the other hand, in the study by Baralla et al. [42], they proposed an approach to trace
+European food supply chain data by using BT and QR code. However, the approach
+uses the Hyperledger Sawtooth, which is a BT suitable for institutes like enterprises while
+discouraging individual and small farmers with small production capacity to utilize such a
+technology. Additionally, this approach also do not encourage recovery and veriﬁcation
+of data such as expiry date of the food product during the shopping phase of the food
+supply chain. This multi-level system architecture as proposed in [42] also generates the
+QR code at every step of the food supply chain, which makes the QR codes abundant and
+henceforth, unnecessary. To make it more convenient to access food data in the supply
+chain by the end-user (consumer) for traceability purposes, in [12] Dey et al. proposed a
+method utilizing BT along with QR code and cloud computing.
+None of the aforementioned methodologies and studies actually deal with a speciﬁc
+solution dedicated to reducing food waste. In [14], Marin et al. proposed a learning platform
+based on BT which tracks food waste in the supply chain and henceforth, contributing to
+the awareness in food waste reduction utilizing blockchain. However, this study also did
+not focus on minimizing waste directly.
+In [43], Abdullah et al. proposed an IoT based waste management system in smart
+cities, focusing on collection, disposal, and utilization of waste in relevant facilities. In [44],
+Dubey et al. proposed IoT and machine learning based waste management system, where
+produced waste is managed at the household and society level of the city. In this study,
+the authors also focus on managing the different process of waste such as collection,
+disposal, and utilization. However, these studies [43,44] focus on managing waste rather
+than reducing it.
+
+
+【第6页】
+Smart Cities 2022, 5
+167
+Given the importance of food waste towards building a more sustainable planet, this
+calls for a solution that could utilize the key technological infrastructure of Web 3.0 smart
+cities to reduce food waste happening at different phases in the supply chain.
+4. Proposed Framework: SmartNoshWaste
+SmartNoshWaste is an extension of our previously published work—FoodSQRBlock [12]
+framework. FoodSQRBlock framework digitizes the food supply chain data such that data at
+the consumer end in a Farm-to-Fork supply chain model is easily accessible by the consumer
+for traceability. However, the FoodSQRBlock framework lacked two key components to
+reduce food waste as follows: (1) it did not focus on making the data from all the phases in
+the supply chain (such as production, processing, distribution, retailing, and consumption)
+easily accessible to the consumer; (2) it did not focus on reducing food wastage based on the
+data from the supply chain. SmartNoshWaste is built as an extension of FoodSQRBlock to
+resolve these.
+Our SmartNoshWaste framework has two distinct layers: (1) Data System Architecture
+and (2) Machine Learning Module. In the Data System Architecture we utilize BT, QR code,
+and cloud computing to digitize and store the food data such that it can be used in the
+Machine Learning Module to minimize food wastage.
+4.1. Assumptions and Data System Architecture of SmartNoshWaste
+In order to design blockchain based framework to minimize food waste, ﬁrst, we have
+to digitize food production data such that it is more traceable and accessible at all stages
+of the supply chain. To achieve this we have to analyze the different phases and activities
+present within a generic food supply chain. In our proposed framework, we focus our
+research on Farm-to-Fork supply chain, which has ﬁve main phases/stages [42] identifying
+a generic food supply chain, consisting of Production, Processing, Distribution, Retailing, and
+Consumption.
+In our proposed framework, SmartNoshWaste, ﬁrst, we aim to digitizing data from
+the ﬁve aforementioned phases (production, processing, distribution, retailing, and con-
+sumption). After the digitization of the supply chain data we store the data on the BT for
+traceability and accessibility by the stakeholders in any phase including farmers and con-
+sumers. All digital data regarding the ﬁve phases will be recorded and maintained on the
+blockchain in the cloud. Cloud computing service is chosen for two speciﬁc purposes: (1) to
+improve the computational speed of the processing and transactions on the blockchain;
+(2) any changes made to the software side of the SmartNoshWaste framework could be
+easily deployed by the developers across different regions.
+Data System Architecture: To design our BT framework we propose a multilevel system,
+whose architecture is represented in Figure 4. Our system has three layers as follows.
+•
+Physical layer: This layer comprises of different products from the supply chain from
+different farmers and producers.
+•
+Digital data layer: This layer consists of every single digital data correlated to the
+produce belonging to the physical layer, which will be used for traceability and
+accessibility. Example of data about the produce could be the expiry date of the food
+product, the farm’s identity where it was produced along with the production batch
+number.
+•
+Cloud layer: In this layer, the digital data is processed in the Cloud using BT and
+made available using QR code at different phases, which is used for traceability and
+accessibility.
+
+
+【第7页】
+Smart Cities 2022, 5
+168
+Cloud
+Digital data
+Physical
+Production
+Processing
+Distribution
+Retailing
+Consumption
+QR Code
+Trace 
+& 
+access 
+data
+Title (#Unique_id-Job_Type-job_name)
+Abstract (Quick summary)
+Description along with associated documents/attachments
+Responsible Person(s)
+Children Jobs
+Status
+QR Code
+QR Code
+QR Code
+QR Code
+Figure 4. Overview of the Data System Architecture of SmartNoshWaste based on Farm-to-Fork
+supply chain.
+Data stored: Figure 5 shows the generic data regarding the food item in different phases of
+the supply chain that are digitized in the digital data layer such that they can be used/stored
+in the BT framework in the cloud layer. When the food item is produced in the farm the
+basic data that are stored are: item type, farm id and production date. However, as we
+progress in to different phases of the supply chain more information about the food item is
+added and stored in the blockchain. The relevant information about the food item from
+the production phase are digitized and stored in the genesis block/block 0 and then the
+item is transported to different phases of the supply chain. As the food item is transported
+and processed in different phases of the supply chain, more relevant data about the item
+is added and a new block is created in each phase to store them along with the hash
+of the previous block. The consumption phases in our proposed framework consist of
+the following data: item type, farm id, weight, production date, best before date, batch
+no., distribution centre id, shop id, and location. These data can be modiﬁed and vary
+based on the unique requirements of the farm or processing center or distributor or the
+country of produce. It should be noted that in order to safeguard the privacy of user, in the
+consumption phase we only store the geographical location data of the user/consumer
+tied with the food item data such that the user’s true identity cannot be revealed, however,
+consumption and wastage details about a particular food item can still be traced.
+Source 
+Code of 
+Application
+Process IR
+Pre-process Source-Code
+IR Generator
+Code 
+Cleanser
+Image 
+Creator
+(Output)
+(Input)
+Digital data
+Physical
+Production
+Processing
+Distribution
+Retailing
+Consumption
+item type,
+farm id,
+production date
+item type,
+farm id,
+weight,
+production date,
+best before date,
+batch no.
+item type,
+farm id,
+weight,
+production date,
+best before date,
+batch no.,
+distribution centre 
+id
+item type,
+farm id,
+weight,
+production date,
+best before date,
+batch no.,
+distribution centre 
+id,
+shop id
+item type,
+farm id,
+weight,
+production date,
+best before date,
+batch no.,
+distribution centre 
+id,
+shop id,
+location
+Figure 5. Generic data regarding food in different phases of the supply chain that are digitized to be
+stored in the blockchain.
+In each phase of this food supply chain, a new block of data is created, which stores the
+hash of the previous block such that at any point the food item/ingredient could be tracked
+and traced. In each step, the block data is also made available in the form of digital QR code
+
+
+【第8页】
+Smart Cities 2022, 5
+169
+(as shown in Figure 4) such that the digital data about the item on the block is accessible
+easily to consumers or any stakeholders from any phase in the supply chain. We use the
+SHA256 algorithm [45], which is very popular in blockchain nowadays for using the hash
+function to create the hash of the previous block. In our SmartNoshWaste, we use SHA256
+for the hash function because it provides the desirable required security for the associated
+computational cost on the cloud. If we use a different hash function as in SHA512, then it is
+computationally more expensive, and henceforth, takes longer to compute on the cloud.
+In case of using SHA512, it would ultimately increase the computational cost, especially
+given the fact that thousands of digital data of the food produce will be processed on the
+cloud every day based on the proposed framework.
+Metric to quantify production: We also need to quantify the food production and wastage
+data such that they could be used by our machine learning module. We have assumed that
+the amount of food produced is based on consumption, surplus for food security and the
+amount wasted. In order to achieve this we propose a metric considering the production,
+consumption, surplus, and wastage of a particular food item each week of each month in a
+quarter as follows.
+Pi
+YYQXNM = Ci
+YYQXNM + Si
+YYQXNM + Wi
+YYQXNM
+(1)
+In Equation (1), P, C, S and W are the total amount of produce for a particular food
+item, total amount of the food item consumed, the surplus of the food item kept for food
+security and the amount wasted of the food item, respectively. In the equation, YYQXN
+represents the year (YY) and the quarter (QXNM, where Xϵ{1, 2, 3, 4}, Nϵ{1, 2, 3} and
+Mϵ{1, 2, 3, 4}) of the particular food item being produced, respectively. This is to signify
+that there are four quarters (X) (Q1, Q2, Q3, and Q4) and each quarter consist of three
+months (N) and each month consists of 4 weeks approximately. A quarter is a three-
+month period on a company’s ﬁnancial calendar and we utilize the same concept in food
+production to quantify and track the data. In the equation, i signiﬁes the respective phase
+in the food production supply chain (production, processing, distribution, retailing, and
+consumption).
+For each phases the Equation (1) will look something as follows, starting from level
+1—production phase:
+Production:
+P1
+YYQXN = C1
+YYQXNM + S1
+YYQXNM + W1
+YYQXNM
+(2)
+Processing:
+P2
+YYQXN = C2
+YYQXNM + S2
+YYQXNM + W2
+YYQXNM
+(3)
+Distribution:
+P3
+YYQXN = C3
+YYQXNM + S3
+YYQXNM + W3
+YYQXNM
+(4)
+Retailing:
+P4
+YYQXN = C4
+YYQXNM + S4
+YYQXNM + W4
+YYQXNM
+(5)
+Consumption:
+P5
+YYQXN = C5
+YYQXNM + S5
+YYQXNM + W5
+YYQXNM
+(6)
+It is also worth noting that except in the production phase the amount produced in
+processing, distribution, retailing, and consumption maintains a direct relationship with the
+amount consumed, surplus produced and amount wasted of the food item in the previous
+phase. This could be denoted by the following equation.
+Ci−1
+YYQXN + Si−1
+YYQXNM + Wi−1
+YYQXNM = Pi
+YYQXNM
+(7)
+Note: Though we are quantifying production, consumption, surplus and wastage of food, it
+should be kept in mind that in real world the food supply chain data can often vary due to
+unforeseen or unknown variables that could often include geographical and political issues.
+
+
+【第9页】
+Smart Cities 2022, 5
+170
+However, to propose a framework to minimize food waste using machine learning we have
+to make certain assumptions and henceforth, quantifying the data in the aforementioned
+approach. It should also be kept in mind that often times food wastage and loss is closely
+related to food surplus [46,47] in different phases of the supply chain. For this purpose, we
+try to minimize food surplus in a particular phase to minimize wastage.
+4.2. Machine Learning Module of SmartNoshWaste
+As part of the SmartNoshWaste framework we utilize Q-learning based reinforcement
+learning (RL) [48] (as represented in Figure 6). In Q-learning, the RL agent maintains
+a table consisting of actions (a) and states (s), where it can identify an optimal action-
+selection policy based on the Q function that the agent computes. The RL agent determines
+the environment (ϵ), in which the agent observes the state (st) at a given time instance t.
+Then it performs an action (at), and receives a reward (rt) for that instance in ϵ. At every
+time instance (t-th), the agent chooses an action at from a predeﬁned list of actions where
+at ∈ 1, 2, . . . K and K is the maximum number of actions allowed for a given state. Following
+the action at time t any changes are perceived in the ϵ are observed at time t + 1, when the
+state of ϵ changes to st+1.
+P
+Reinforcement Learning Module
+Each phase in supply 
+chain
+f
+Figure 6. Diagramatic representation of Q-Learning based RL method in the Machine Learning
+Module of SmartNoshWaste, where P is the production amount and f is the amount of food to be
+reduced or increased in food surplus in a phase of the supply chain to minimize wastage.
+In SmartNoshWaste, the environment ϵ is the production amount (Pi
+YYQXNM) of a food
+item in a particular phase consisting of a tuple of food consumption, surplus, and wastage
+(< Ci−1
+YYQXNM, Si−1
+YYQXNM, Wi−1
+YYQXNM >) as per Equation (1).
+The goal of the RL agent is to maximize the reward rt in the future. The propagation
+of information from the future is discounted by a factor called γ at every time step such
+that: rt = ∑t+n
+t
+γtrt in order to lessen the reward’s effect on the RL agent’s choice of action.
+For every time step the probability that the agent chooses an action at a given state is
+deﬁned by a policy function. In this policy, the function, which maximizes the agent’s long
+term reward generation is called action-value function, which is deﬁned by Q(st, at) and is
+shown in Equation (8).
+Q(st, at) = Q(st, at) + α(rt − Q(st, at) + γmaxaQ(st+1, a))
+(8)
+In Equation (8), α is the learning rate at which the agent learns new information. We
+have to keep in mind that the optimal action-value function could be obtained by iteratively
+updating Q(st, at) in Equation (8). Now, in order to maximize the reward generation we
+would require a reward function (R(st, at)).
+Since, food surplus leads to a lot of wastage if not consumed properly we try to mini-
+mize food surplus in order to minimize wastage. Given the fact that food production data is
+correlated to consumption, surplus, and wastage (as shown in Equation (1)), if we consider
+a variable—f—that denotes the amount of food that should be reduced or increased in
+
+
+【第10页】
+Smart Cities 2022, 5
+171
+the food surplus to minimize wastage in that said phase of supply chain, we can modify
+Equation (1) as follows.
+Pi
+YYQXNM = Ci
+YYQXNM + (Si
+YYQXNM + f ) + Wi
+YYQXNM
+(9)
+In Equation (9), the value of f can be positive, negative, or zero. Based on this equation,
+we can develop our reward function as follows.
+R : minimize(Wi
+YYQXNM) −→ Si
+YYQXNM + f
+(10)
+The RL agent has three actions: Up (add the value of f to Si
+YYQXNM), Down (subtract
+the value of f to Si
+YYQXNM) and Do Nothing (value of f is set to zero). The actions in the RL
+agent are invoked depending on the initiator of the particular point in the phase. For our
+proposed technique, the actions are invoked every week.
+Note: When we mention the goal to minimize food surplus, we keep in mind that the
+surplus is minimized not to threaten food security in that particular phase, however, only
+to minimize food wastage at that phase. RL agent is implemented locally, meaning that local
+optimization is performed in each phases of the supply chain to minimize food wastage.
+As per Equations (1) and (7), since, production amount is correlated to the consumption,
+surplus and wastage amount of other phases in the supply chain, local optimization of
+wastage using RL agent would also lead to global optimization of wastage throughout all
+phases as well. The value of f in local optimization is deﬁned or set by the initiator or
+manager of the particular point in the particular phase in the supply chain. For example,
+f value for a farm could be set by the farmer to minimize wastage in that farm, whereas,
+the f value in the retailing phase could be set by the shop owner to minimize wastage in
+the shop. These f values for different points in different phases could either be the same or
+different based on the requirements of consumption, surplus and wastage of that particular
+point in the respective phase. The f value after being used by the RL agent to ﬁnd the
+minimized value of wastage in that particular phase (based on Equation (10)), it could
+be used by the initiator or manager as a guiding amount to reduce waste. For example,
+if the f value by RL agent is computed as x% of the surplus (as shown in Figure 6), which
+should be reduced in the shop to achieve y% of wastage, then the manager should reduce
+the surplus by x% in the next production cycle to achieve that reduction in waste goal.
+5. Experimental Evaluation: Case Study with Real Food Data
+To evaluate the efﬁcacy of our proposed SmartNoshWaste framework we implemented
+it on real data collected from the nosh app [20]. The nosh app is a food management app
+that helps the consumer to reduce food waste in their household by better managing their
+food consumption. The app comes with the capability to track the food items consumed or
+wasted in the week such that the user can make a more informed decision on what food
+to buy or not to buy the next time they go shopping. We focused on the data on “potato”
+collected worldwide via the nosh app. We chose to focus on data on potato because it is
+one of the most popular food items that is wasted, especially in the United Kingdom where
+the research team is located [49]. The data collected are completely anonymized such that
+from the data user/consumer could not be identiﬁed, however, each food item datum
+comes with a geolocation tag such that the consumption or wastage about the item could
+be tracked in a particular region. (It should be noted that no personal information was
+included in the dataset meeting the de-identiﬁcation criteria.) There were 134,996 potato
+consumption data collected worldwide via the nosh app over a 1 year period (December
+2020 to November 2021). Figure 7 shows the consumption and wastage data on potatoes
+collected via the nosh app, where the Y-Axis represents the number of items consumed (′C)
+or wasted (W) and X-Axis represents the months of the year when the data was collected.
+The nosh app was created to help consumer manage their food wastage occurring from
+overbuying and/or forgetting to consume the food before the “best before date” of the item.
+For this reason, the app collects data about consumption and wastage. The consumption
+
+
+【第11页】
+Smart Cities 2022, 5
+172
+data (′C) from the nosh app already considers the amount of food consumed by the user
+(C) and the surplus bought by the user (S), aiming to reduce waste by reducing the food
+surplus. Therefore, the consumption data from the nosh app can be denoted using the
+following equation.
+′C5
+YYQXNM = C5
+YYQXNM + S5
+YYQXNM
+(11)
+In Equation (11), YYQXNM represents the year (YY) and the quarter (QXNM, where
+Xϵ{1, 2, 3, 4}, Nϵ{1, 2, 3} and Mϵ{1, 2, 3, 4}) of the potato being consumed in the con-
+sumption phase (level 5) respectively. We evaluated SmartNoshWaste framework in the
+consumption phase, since, we use the data from the nosh app to ﬁnd the desirable value
+of f that we need to subtract from the food surplus to achieve our minimal wastage goal.
+Our goal is to ﬁnd f from the Machine Learning Module of SmartNoshWaste such that
+′C5
+YYQXNM + (− f ) leads to reduction in waste (W5
+YYQXNM) of potatoes for consumers.
+It should be noted that we aim to ﬁnd the value of f that needs to be subtracted from
+′C5
+YYQXNM.
+From Figure 7 it should be noted that 123,938 amounts of potatoes were consumed
+whereas, 11,058 amounts of potatoes were wasted over the 12 month period. From the
+chart (Figure 7) we can also notice that the average wastage over the months remained
+around 7% to 9% of the respective consumption for that month. Based on this knowledge
+we chose f value from 1 to 9 and evaluated our SmartNoshWaste’s Machine Learning
+Module. We also predicted the percentage of potatoes that could be saved from being
+wasted compared to the amount of potatoes wasted over the 12 months period, which is
+collected from the nosh app. Table 1 shows the prediction data evaluated by the Machine
+Learning Module of SmartNoshWaste. In the table, W′ represents the predicted amount
+of potatoes wasted based on the f value; O.W represents the amount of potatoes wasted,
+which is collected from the nosh app; R.W% is the percentage of potatoes that could be
+saved, predicted by the Machine Learning Module of SmartNoshWaste. R.W% is calculated
+based on {(O.W − W′)/O.W ∗ 100}. From the Table 1 it is evident that we could potentially
+save 9.46% potatoes more compared to the original amount of potatoes wasted.
+Table 1. Amount of potatoes saved from being wasted over 12 months period for different f value,
+ranging from 1 to 9 and comparison between the original amount of potatoes wasted. W′ represents
+the predicted amount of potatoes wasted based on the f value; O.W represents the amount of potatoes
+wasted, which is collected from the nosh app; R.W% is the percentage of potatoes that could be saved,
+predicted by the Machine Learning Module of SmartNoshWaste.
+W′
+O.W
+R.W%
+f = 1
+10,900
+11,058
+1.43
+f = 2
+10,786
+11,058
+2.46
+f = 3
+10,693
+11,058
+3.3
+f = 4
+10,542
+11,058
+4.67
+f = 5
+10,482
+11,058
+5.21
+f = 6
+10,351
+11,058
+6.39
+f = 7
+10,232
+11,058
+7.47
+f = 8
+10,099
+11,058
+8.67
+f = 9
+10,012
+11,058
+9.46
+
+
+【第12页】
+Smart Cities 2022, 5
+173
+Figure 7. Consumption and wastage data of potatoes collected via the nosh app [20] where the Y-Axis
+represents the number of items consumed (′C) or wasted (W) and X-Axis represents the months of
+the year when the data was collected.
+6. Discussion and Future Works
+There are several standards available related to food safety and traceability such as the
+General Food Law in the EU [50] and the Food Safety Modernization Act (FSMA) [51] in the
+United States, which focus on standardizing the traceability of the digital food production
+information in some of the stages of the food supply chain. However, these standards are
+regional, and currently, there is no holistic standardization approach of the tracking and
+recording digital data for food traceability and waste purposes in all stages of the food
+supply chain across the globe. The proposed SmartNoshWaste aims to provide a general
+framework that can be implemented by academics and industry practitioners to reduce
+food waste despite geo-political and standardization difference across different regions
+around the globe.
+Given the fact that SmartNoshWaste utilizes blockchain, QR code, cloud computing,
+and machine learning in conjunction to tackle food waste, each technology involved in the
+framework comes with its own implementation issues based on the implementation of the
+framework by targeted software developer(s) in a particular region. As SmartNoshWaste
+aims to provide a holistic approach to use blockchain, QR code, cloud computing, and
+machine learning in conjunction to tackle food waste; speciﬁc implementation challenges
+related to each of these associated technologies are not discussed in detail as they would
+not fall within the scope of this research and framework proposal.
+One of the key challenges of using blockchain in a smart city could be to prioritize
+privacy and data security of the citizens [52]. If we look closely to some of the implementa-
+tions of the smart city projects using blockchain in the practice then we could notice that
+regardless of using blockchain as a technology, the implementation to protect privacy and
+improve data security of citizens vary based on the available infrastructure of the respective
+project. Examples of such smart city projects in practice include French City Brain [53],
+Smart Dubai [54] and Limestone Network (Singaporean Startup) [55]. Keeping this in mind,
+while implementing SmartNoshWaste as part of the smart city, the stakeholders including
+software developer(s) might have to modify the blockchain network to improve the privacy
+and data security of its citizen based on the respective infrastructure of the smart city.
+In Section 4.1, we have used digital QR code to make the food data from each phases
+of the supply chain accessible and traceable by every stakeholders including the consumer.
+Though QR code has really good resistance against defacement or error correction in case
+of wear and tear of the physical print of QR codes, it should be kept in mind that based on
+the implementation of the QR code, security of protecting the data embedded in the QR
+code will also vary. For example, physical printouts of QR code could be vulnerable to man-
+in-the-middle attack, by replacing the legitimate QR code by a fake one. Or the payload
+in the QR code could also be replaced by misrepresented payload, henceforth, damaging
+
+
+【第13页】
+Smart Cities 2022, 5
+174
+the integrity of the data stored within the QR code to be accessible to the stakeholders [56].
+To avoid these challenges we have implemented our QR code in digital form, which could
+be veriﬁed over a mobile platform including smartphones, tablets, etc. Moreover, to avoid
+earlier mentioned malpractice the exact implementation of the QR code would depend on
+the available infrastructure of the smart city and the implementation by the developers.
+Another point to keep in mind that we have used Q-learning (Q-table) based rein-
+forcement learning, which is a type of delayed reinforcement learning, where the reward is
+delayed till a better understanding of the enthronement is gathered through actions by the
+intelligent agent [57]. Such type of machine learning algorithm depends on training the
+agent for a sufﬁcient time to meet convergence. However, there are better machine learning
+algorithms that could improve this shortcoming and could lead to better rewards with
+less execution time and memory space. One such model could be Deep Q-Learning [58],
+where deep neural network is used with Q-table to map input states to the action and
+Q-value pair.
+7. Conclusions
+In this paper, we explore the existing state-of-the-art methodologies using blockchain
+and machine learning in the food supply chain and in smart cities tackling waste issues.
+We also proposed SmartNoshWaste, which is a blockchain based multi-layered framework
+utilizing cloud computing, QR code, and reinforcement learning in conjunction to reduce
+food waste in a decentralized Web 3.0 enabled smart city. As part of SmartNoshWaste we
+have also proposed a metric to quantify food production and waste data in the supply chain.
+Experimental evaluation of SmartNoshWaste on real data of potatoes collected from the
+nosh app shows the framework is capable of reducing food waste by 9.46% more compared
+to the potatoes wasted according to the nosh app.
+8. Code and Data Availability
+The program source code to implement the SmartNoshWaste and the data provided
+in the study could be accessed from https://github.com/somdipdey/SmartNoshWaste
+(accessed on 11 February 2022). No personal information was included in the dataset
+meeting the de-identiﬁcation criteria.
+Author Contributions: Conceptualization, S.D.; methodology, S.D.; software, S.D.; validation, S.D.
+and S.S.; formal analysis, S.D.; investigation, S.D.; resources, S.D. and S.S.; data curation, S.D.;
+writing–original draft preparation, S.D.; writing–review and editing, S.D. and S.S. and A.K.S. and
+K.M.-M.; visualization, S.D.; supervision, S.D.; project administration, S.D.; funding acquisition, S.D.
+All authors have read and agreed to the published version of the manuscript.
+Funding: This work is supported by Nosh Technologies under Grant nosh/agri-tech-000002.
+Data Availability Statement: Data used in the manuscript is accessible from https://github.com/
+somdipdey/SmartNoshWaste (accessed on 11 February 2022), which is sourced from the nosh app:
+https://nosh.tech (accessed on 11 February 2022). No personal information was included in the
+dataset meeting the de-identiﬁcation criteria.
+Conﬂicts of Interest: This research was pursued such that part of the proposed methodology could
+be implemented as a feature in the commercial mobile application named ‘nosh’ for food waste
+reduction: https://nosh.tech (accessed on 11 February 2022).
+References
+1.
+Batty, M.; Axhausen, K.W.; Giannotti, F.; Pozdnoukhov, A.; Bazzani, A.; Wachowicz, M.; Ouzounis, G.; Portugali, Y. Smart cities
+of the future. Eur. Phys. J. Spec. Top. 2012, 214, 481–518. [CrossRef]
+2.
+Alabdulwahhab, F.A. Web 3.0: The decentralized web blockchain networks and protocol innovation. In Proceedings of the 2018
+1st International Conference on Computer Applications & Information Security (ICCAIS), Riyadh, Saudi Arabia, 4–6 April 2018;
+pp. 1–4.
+3.
+Ragnedda, M.; Destefanis, G. Blockchain and Web 3.0: Social, Economic, and Technological Challenges; Routledge: London, UK, 2019.
+
+
+【第14页】
+Smart Cities 2022, 5
+175
+4.
+Peris-Ortiz, M.; Bennett, D.R.; Yábar, D.P.B. Sustainable Smart Cities. In Innovation, Technology, and Knowledge Management;
+Springer International Publishing: Cham, Switzerland, 2017.
+5.
+Schanes, K.; Dobernig, K.; Gözet, B. Food waste matters-A systematic review of household food waste practices and their policy
+implications. J. Clean. Prod. 2018, 182, 978–991. [CrossRef]
+6.
+Food Loss and Food Waste. Available online: https://www.fao.org/food-loss-and-food-waste/ﬂw-data (accessed on 22
+December 2021).
+7.
+Food Waste: Digesting the Impact on Climate. Available online: https://www.newfoodmagazine.com/article/153960/food-
+waste-climate/ (accessed on 22 December 2021).
+8.
+Tian, F. An agri-food supply chain traceability system for China based on RFID & blockchain technology. In Proceedings of the
+2016 13th international conference on service systems and service management (ICSSSM), Kunming, China, 24–26 June 2016;
+pp. 1–6.
+9.
+Zhao, G.; Liu, S.; Lopez, C.; Lu, H.; Elgueta, S.; Chen, H.; Boshkoska, B.M. Blockchain technology in agri-food value chain
+management: A synthesis of applications, challenges and future research directions. Comput. Ind. 2019, 109, 83–99. [CrossRef]
+10.
+Astill, J.; Dara, R.A.; Campbell, M.; Farber, J.M.; Fraser, E.D.; Sharif, S.; Yada, R.Y. Transparency in food supply chains: A review
+of enabling technology solutions. Trends Food Sci. Technol. 2019, 91, 240–247. [CrossRef]
+11.
+Kamble, S.S.; Gunasekaran, A.; Sharma, R. Modeling the blockchain enabled traceability in agriculture supply chain. Int. J. Inf.
+Manag. 2020, 52, 101967. [CrossRef]
+12.
+Dey, S.; Saha, S.; Singh, A.K.; McDonald-Maier, K. FoodSQRBlock: Digitizing Food Production and the Supply Chain with
+Blockchain and QR Code in the Cloud. Sustainability 2021, 13, 3486. [CrossRef]
+13.
+Yiannas, F. A new era of food transparency powered by blockchain. Innov. Technol. Gov. Glob. 2018, 12, 46–56. [CrossRef]
+14.
+Marin, M.P.; Marin, I.; Vidu, L.
+Learning about the reduction of food waste using blockchain technology.
+arXiv 2021,
+arXiv:2101.02026.
+15.
+Dey, S.; Mondal, K.; Nath, J.; Nath, A. Advanced Steganography Algorithm Using Randomized Intermediate QR Host Embedded
+With Any Encrypted Secret Message: ASA_QR Algorithm. Int. J. Mod. Educ. Comput. Sci. 2012, 4, 59–67. [CrossRef]
+16.
+Huang, P.C.; Chang, C.C.; Li, Y.H.; Liu, Y. Efﬁcient QR code secret embedding mechanism based on Hamming code. IEEE Access
+2020, 8, 86706–86714. [CrossRef]
+17.
+De Donno, M.; Tange, K.; Dragoni, N. Foundations and evolution of modern computing paradigms: Cloud, iot, edge, and fog.
+IEEE Access 2019, 7, 150936–150948. [CrossRef]
+18.
+Qi, Q.; Tao, F. A smart manufacturing service system based on edge computing, fog computing, and cloud computing. IEEE
+Access 2019, 7, 86769–86777. [CrossRef]
+19.
+Mitchell, T.M. Does machine learning really work? AI Mag. 1997, 18, 11–11.
+20.
+nosh—Food Stock Management. Available online: https://nosh.tech (accessed on 7 July 2020).
+21.
+Dey, S. Securing majority-attack in blockchain using machine learning and algorithmic game theory: A proof of work. In
+Proceedings of the 2018 10th Computer Science and Electronic Engineering (CEEC), Colchester, UK, 19–21 September 2018;
+pp. 7–10.
+22.
+Blockchain is Useful for a Lot More than Bitcoin. Available online: http://theconversation.com/blockchain-is-useful-fora-lot-
+more-than-just-bitcoin-58921 (accessed on 7 July 2020).
+23.
+How Could Blockchain Be Used in the Enterprise. Available online: https://www.computerworlduk.com/galleries/security/
+how-could-blockchain-be-used-the-enterprise3628558/ (accessed on 7 July 2020).
+24.
+Dey, S. Sd-eqr: A new technique to use qr codestm in cryptography. arXiv 2012, arXiv:1205.4829.
+25.
+Dey, S.; Agarwal, S.; Nath, A. Conﬁdential encrypted data hiding and retrieval using qr authentication system. In Proceedings
+of the 2013 International Conference on Communication Systems and Network Technologies, Gwalior, India, 6–8 April 2013;
+pp. 512–517.
+26.
+Dey, A.S.; Nath, B.J.; Nath, C.A. A New Technique to Hide Encrypted Data in QR Codes (TM). In Proceedings on the International
+Conference on Internet Computing (ICOMP), The Steering Committee of The World Congress in Computer Science, Las Vegas,
+NV, USA, 16–19 July 2012; p. 1.
+27.
+Lin, P.Y. Distributed secret sharing approach with cheater prevention based on QR code. IEEE Trans. Ind. Inform. 2016, 12, 384–392.
+[CrossRef]
+28.
+Dey, S. New generation of digital academic-transcripts using encrypted QR code™: Use of encrypted QR code™ in mark-sheets
+(academic transcripts). In Proceedings of the 2013 International Mutli-Conference on Automation, Computing, Communication,
+Control and Compressed Sensing (iMac4s), Kottayam, India, 22–23 March 2013; pp. 313–317.
+29.
+Sutton, R.S.; Barto, A.G. Reinforcement Learning: An Introduction; MIT Press: Cambridge, MA, USA, 2018.
+30.
+Bohn, R.B.; Messina, J.; Liu, F.; Tong, J.; Mao, J. NIST cloud computing reference architecture. In Proceedings of the 2011 IEEE
+World Congress on Services, Washington, DC, USA, 4–9 July 2011; pp. 594–596.
+31.
+Ali, A.Q.; Sultan, A.B.M.; Abd Ghani, A.A.; Zulzalil, H. A Systematic Mapping Study on the Customization Solutions of Software
+as a Service Applications. IEEE Access 2019, 7, 88196–88217. [CrossRef]
+32.
+Majeed, U.; Khan, L.U.; Yaqoob, I.; Kazmi, S.A.; Salah, K.; Hong, C.S. Blockchain for IoT-based smart cities: Recent advances,
+requirements, and future challenges. J. Netw. Comput. Appl. 2021, 181, 103007. [CrossRef]
+
+
+【第15页】
+Smart Cities 2022, 5
+176
+33.
+Gayialis, S.P.; Kechagias, E.P.; Konstantakopoulos, G.D.; Papadopoulos, G.A.; Tatsiopoulos, I.P. An approach for creating
+a blockchain platform for labeling and tracing wines and spirits.
+In IFIP International Conference on Advances in Production
+Management Systems; Springer: Berlin/Heidelberg, Germany, 2021; pp. 81–89.
+34.
+Li, D.; Kehoe, D.; Drake, P. Dynamic planning with a wireless product identiﬁcation technology in food supply chains. Int. J. Adv.
+Manuf. Technol. 2006, 30, 938–944. [CrossRef]
+35.
+Foroglou, G.; Tsilidou, A.L. Further applications of the blockchain. In Proceedings of the 12th Student Conference on Managerial
+Science and Technology, Athens, Greece, 14 May 2015; pp. 1–8.
+36.
+Singh, P.; Nayyar, A.; Kaur, A.; Ghosh, U. Blockchain and fog based architecture for internet of everything in smart cities. Future
+Internet 2020, 12, 61. [CrossRef]
+37.
+Tiscini, R.; Testarmata, S.; Ciaburri, M.; Ferrari, E. The blockchain as a sustainable business model innovation. Manag. Decis. 2020,
+58, 1621–1642. [CrossRef]
+38.
+Giacomarra, M.; Crescimanno, M.; Sakka, G.; Galati, A. Stakeholder engagement toward value co-creation in the F&B packaging
+industry. EuroMed J. Bus. 2019, 15, 315–331.
+39.
+Helliar, C.V.; Crawford, L.; Rocca, L.; Teodori, C.; Veneziani, M. Permissionless and permissioned blockchain diffusion. Int. J. Inf.
+Manag. 2020, 54, 102136. [CrossRef]
+40.
+Bogner, A.; Chanson, M.; Meeuw, A. A decentralised sharing app running a smart contract on the ethereum blockchain. In
+Proceedings of the 6th International Conference on the Internet of Things, Chengdu, China, 15–18 December 2016; pp. 177–178.
+41.
+Kumar, R.; Tripathi, R. Traceability of counterfeit medicine supply chain through Blockchain.
+In Proceedings of the 2019
+11th International Conference on Communication Systems & Networks (COMSNETS), Bengaluru, India, 7–11 January 2019;
+pp. 568–570.
+42.
+Baralla, G.; Pinna, A.; Corrias, G. Ensure traceability in European food supply chain by using a blockchain system. In Proceedings
+of the 2019 IEEE/ACM 2nd International Workshop on Emerging Trends in Software Engineering for Blockchain (WETSEB),
+Montreal, QC, Canada, 27 May 2019.
+43.
+Abdullah, N.; Alwesabi, O.A.; Abdullah, R. Iot-based smart waste management system in a smart city. In International Conference
+of Reliable Information and Communication Technology; Springer: Berlin/Heidelberg, Germany, 2018; pp. 364–371.
+44.
+Dubey, S.; Singh, P.; Yadav, P.; Singh, K.K. Household waste management system using IoT and machine learning. Procedia
+Comput. Sci. 2020, 167, 1950–1959. [CrossRef]
+45.
+Irving, G.; Holden, J. How blockchain-timestamped protocols could improve the trustworthiness of medical science. F1000Research
+2016, 5. [CrossRef]
+46.
+Papargyropoulou, E.; Lozano, R.; Steinberger, J.K.; Wright, N.; bin Ujang, Z. The food waste hierarchy as a framework for the
+management of food surplus and food waste. J. Clean. Prod. 2014, 76, 106–115. [CrossRef]
+47.
+Teigiserova, D.A.; Hamelin, L.; Thomsen, M. Towards transparent valorization of food surplus, waste and loss: Clarifying
+deﬁnitions, food waste hierarchy, and role in the circular economy. Sci. Total Environ. 2020, 706, 136033. [CrossRef]
+48.
+Watkins, C.J.; Dayan, P. Q-learning. Mach. Learn. 1992, 8, 279–292. [CrossRef]
+49.
+Food Waste Facts and Statistics. Available online: https://www.theecoexperts.co.uk/home-hub/food-waste-facts-and-statistics
+(accessed on 12 December 2021).
+50.
+General Food Law. Available online: https://ec.europa.eu/food/safety/general_food_law_en (accessed on 26 June 2020).
+51.
+Food Safety Modernization Act (FSMA). Available online: https://www.fda.gov/food/guidance-regulation-food-and-dietary-
+supplements/food-safety-modernization-act-fsma (accessed on 26 June 2020).
+52.
+Hakak, S.; Khan, W.Z.; Gilkar, G.A.; Imran, M.; Guizani, N. Securing smart cities through blockchain technology: Architecture,
+requirements, and challenges. IEEE Netw. 2020, 34, 8–14. [CrossRef]
+53.
+French City Brain. Available online: https://frenchcitybrain.com/en/ (accessed on 26 June 2020).
+54.
+Smart Dubai. Available online: https://www.digitaldubai.ae/ (accessed on 26 June 2020).
+55.
+Limestone Network (Singaporean Startup). Available online: https://limestone.network/ (accessed on 26 June 2020).
+56.
+QR Codes and Security. Available online: https://mobilephonesecurity.org/2011/09/qr-codes-and-security-my-take-html/
+(accessed on 26 June 2020).
+57.
+Kaelbling, L.P.; Littman, M.L.; Moore, A.W. Reinforcement learning: A survey. J. Artif. Intell. Res. 1996, 4, 237–285. [CrossRef]
+58.
+Gu, S.; Lillicrap, T.; Sutskever, I.; Levine, S. Continuous deep q-learning with model-based acceleration. In Proceedings of the
+International Conference on Machine Learning, New York, NY, USA, 19–24 June 2016; pp. 2829–2838.
+

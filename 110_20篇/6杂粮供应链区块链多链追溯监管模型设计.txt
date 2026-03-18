@@ -1,0 +1,1072 @@
+来源文件：6杂粮供应链区块链多链追溯监管模型设计.pdf
+============================================================
+
+【第1页】
+第 37 卷   第 20 期                        农 业 工 程 学 报                                Vol.37  No.20 
+      2021 年     10 月          Transactions of the Chinese Society of Agricultural Engineering           Oct. 2021   323   
+ 
+杂粮供应链区块链多链追溯监管模型设计 
+于华竟，徐大明，罗  娜，邢  斌，孙传恒
+※ 
+（1. 国家农业信息化工程技术研究中心，北京 100097；2. 农产品质量安全追溯技术及应用国家工程实验室，北京 100097） 
+ 
+摘  要：针对杂粮产品供应链链条长、主体多、区块链追溯过程数据无法差异化共享、链上数据难以实时监管等难题，
+通过分析杂粮供应链环节业务流程与监管特性，提出了基于区块链多链架构的杂粮追溯模型，并在此基础上建立多链
+数据存储架构，设计了基于监管授权组网建链的网络准入机制，并通过智能合约实现数据的链前监管与追溯节点的链
+上管控。为验证模型有效性，基于 Hyperledger Fabric 设计并实现区块链追溯系统，对山西忻州杂粮应用案例进行分
+析。在安全方面，企业组网授权扩散性测试密文平均改变率为 82.53%，相关性测试密文平均改变率为 82.39%，具备
+较高的安全性与混淆性。在效率方面，消费者查询公开追溯数据平均时间为 0.415 s，监管部门调用跨链接口查询企
+业敏感追溯数据平均时间为 0.871 s。结果表明，该研究设计并实现的面向监管的杂粮多链追溯系统在满足消费者追
+溯需求的基础上，能够实现追溯数据账本与链间交易记录的实时管控，为农产品区块链追溯监管系统研究提供借鉴与
+参考。 
+关键词：农产品；追溯；区块链；多链；数据监管；Hyperledger Fabric 
+doi：10.11975/j.issn.1002-6819.2021.20.036 
+中图分类号：TP309.2；TS201.6           文献标志码：A           文章编号：1002-6819(2021)-20-0323-10 
+于华竟，徐大明，罗娜，等. 杂粮供应链区块链多链追溯监管模型设计[J]. 农业工程学报，2021，37(20)：323-332.    
+doi：10.11975/j.issn.1002-6819.2021.20.036    http://www.tcsae.org 
+Yu Huajing, Xu Daming, Luo Na, et al. Design of the blockchain multi-chain traceability supervision model for coarse cereal 
+supply chain[J]. Transactions of the Chinese Society of Agricultural Engineering (Transactions of the CSAE), 2021, 37(20): 323-332. 
+(in Chinese with English abstract)    doi：10.11975/j.issn.1002-6819.2021.20.036    http://www.tcsae.org 
+ 
+0  引  言  
+杂粮具有丰富的营养物质，是中国西部地区农业经
+济的主要来源[1]。但近几年，食品质量安全问题频发，
+化学药品滥用、重金属超标等严重影响人们对农户的信
+任[2]，农产品信息亟须有效监管。构建杂粮追溯系统实
+现多方高效协作、快速追溯产品来源，能够重筑杂粮与
+消费者间信任桥梁[3]。现有的追溯系统研究集中于条形
+码[4]、二维码[5]、射频识别[6]以及无线传感网络等记录追
+溯数据，但中国杂粮存在种植、加工、物流等追溯链条
+长、生产分散、上下游信息断链和数据不透明等问题[7]，
+传统追溯系统难以关联并且高效监管各环节追溯记录，
+出现质量安全问题时无法及时召回问题产品、准确定位
+责任主体、精准管控追溯企业等问题。 
+区块链链式结构具有数据不可篡改、正向记录逆向
+追溯特点[8]，实现全维度、透明化追踪记录杂粮作物生产
+收获全过程，为解决杂粮供应链企业数据共享、数据价
+值深度挖掘等提供技术支撑[9]。近些年，国内外学者从不
+同角度探究区块链技术在农产品追溯中的应用，如杨信
+廷等[10]、于合龙等[11]、Yang 等[12]采用链下中心化数据
+                                                           
+收稿日期：2021-06-02    修订日期：2021-07-07 
+基金项目：国家自然科学基金面上项目（31871525） 
+作者简介：于华竟，研究方向为区块链追溯技术。 
+Email：18852897525@163.com 
+※通信作者：孙传恒，博士，研究员，研究方向为农产品追溯技术。 
+Email：sunch@nercita.org.cn 
+库协同存证的方式探究区块链技术在农产品供应链大
+数据中的应用；李宣等[13]、Cao 等[14]、Ding 等[15]、李梦
+琪等[16]设计双区块链架构存储产品追溯海量数据。然而，
+由于杂粮供应链追溯企业分散以及区块链网络账本公开
+透明，具备商业价值的敏感数据隐私保护以及授权访问
+等还需要进行深入研究。此外，陈纯[17]、洪学海等[18]指
+出区块链网络健康可持续的发展需要监管技术的支持，
+区块链安全监管技术已经成为区块链规模化应用的重点
+研究方向。在区块链农产品追溯系统数据监管方面，张
+燕等[19]、王毅[20]、许继平等[21]从追溯数据监管方面探究
+区块链技术在农产品追溯中的应用，霍红等[22]从供应链
+视角构建区块链农产品质量安全监管体系，指出供应链
+监管还包括参与主体的行为、意识的管控。针对以上问
+题，在保证杂粮供应链各企业间追溯数据隐私保护的基
+础上，如何实现数据、交易行为的穿透式监管，不仅体
+现在追溯数据的全方面监管，也体现在对追溯企业节点
+的管控。因此，设计适用于杂粮供应链的可监管追溯具
+有重要意义。 
+本文通过分析杂粮供应链全生命周期追溯流程，设
+计并实现基于区块链多链架构的可监管杂粮追溯系统，
+并根据实际生产情况提出面向监管的杂粮区块链多链数
+据存储模型，并设计基于监管授权的网络准入机制，通
+过智能合约实现链上链下协同监管，充分利用区块链技
+术保障各类生产要素资源与杂粮实体经济深度对接，将
+杂粮供应链与区块链双链融合，解决杂粮供应链存在的
+数据扩容、数据共享、监管难等问题。 
+
+
+【第2页】
+农业工程学报（http://www.tcsae.org）                                2021 年   
+ 
+324
+1  杂粮供应链关键信息分析 
+杂粮供应链包括种植、加工、仓储、运输、销售等
+多环节，由摄像头、传感器、北斗定位装置等物联网设
+备实时采集视频、音频、图像、位置等产品操作信息，
+达到物理级真实，保证高品质杂粮产品源头安全。但在
+规模化应用的杂粮产品追溯中，数据多源、海量、异构、
+种类繁杂，其中并非所有数据用于共享追溯，涉及生产
+数量、成本等与产品质量安全无关的敏感信息无法完全
+透明公开，并且供应链主体间关于数据采集、存储格式
+缺乏共识性标准，导致上下游企业间数据隐私性差、监
+管部门无法高效监管供应链数据。针对上述问题，在保
+证产品基本信息逆向追溯的基础上，为了提升监管部门
+工作效率以及保证企业敏感数据的安全，本文提取供应
+链各环节关键追溯数据并将其划分为可公开共享数据与
+敏感数据，具体如表 1 所示。 
+表 1  杂粮供应链关键信息 
+Table 1  Key information of coarse cereal supply-chain  
+供应链环节 
+Supply-chain 
+links 
+物联网设备 
+IoT machine 
+公开追溯数据 
+Public traceability data 
+敏感追溯数据 
+Private traceability 
+data 
+种植 
+Plant 
+摄像头、温湿度
+传感器、光敏传
+感器、北斗定位
+传感器 
+地理特征、土壤类型、
+气候、雨量、光照、昼
+夜温差、积温以及生产
+企业、采收日期、产品
+标识、施肥、检疫证明 
+种植成本、采收数
+量、出货数量、农场
+种植户信息 
+加工 
+Process 
+摄像头、温湿度
+传感器 
+产品清理、色选、抛光
+以及加工企业、日期、
+食品添加剂合格证书、
+检疫证明 
+原料成本、进货数
+量、加工成本、加工
+数量、出货数量、工
+人信息 
+运输 
+Logistics 
+车载温湿度传
+感器、北斗定位
+传感器 
+产品运输路线、运输过
+程产品温度、湿度、时
+间以及承运企业 
+运输成本、订单信
+息、运输产品批次及
+数量、承运车辆信
+息、运输人员信息
+仓储 
+Warehouse 
+摄像头、温湿度
+传感器、射频识
+别标签、标签扫
+描设备 
+产品仓储地点、温湿
+度、进仓时间、出仓时
+间以及存储时间 
+进仓数量、出仓数
+量、仓储数量、仓储
+成本、仓储管理人员
+信息 
+销售 
+Sale 
+摄像头 
+产品批次、销售企业 
+进货价格、销售单
+价、进货数量、销售
+数量、销售员信息
+ 
+2  基于区块链多链的杂粮供应链追溯模型设计 
+2.1  杂粮追溯区块链多链架构 
+中国杂粮供应链追溯环节多、追溯数据海量异构，
+而传统追溯系统通过企业中心化数据库存储追溯数据，
+造成企业间数据流通即时性差并且存在篡改风险[23]。区
+块链以分布式账本代替中心数据库存储企业数据，正向
+记录产品信息、逆向追溯，实现供应链上下游企业数据
+共享、价值传递，解决因企业间信任问题引起的数据壁
+垒问题。区块链追溯节点通过区块高度（Block height）
+或交易哈希（Transaction hash）等索引查询数据账本，无
+法做到链上数据的差异化共享[24]，而且区块单链式存储
+结构能够保证区块数据不可篡改、不可删除的永久可查、
+可用，但面临追溯大数据的扩容难题。在区块链追溯规
+模化应用后，因网络节点共识串行处理数据交易而无法
+获得传统中心化追溯系统的性能表现[25]。 
+针对上述问题，根据杂粮实际应用环境，综合考虑监管
+部门与供应链环节，在生产、加工、仓储、物流以及经销等
+供应链企业获取监管部门组网授权文件后建立企业区块链，
+并且由各企业追溯节点、消费者节点与监管节点建立追溯区
+块链，如图 1 所示。通过区块链通道技术建立面向企业数据
+存储的生产链、加工链、仓储链、物流链、分销链五条企业
+区块链，建立面向追溯需求、链间交易与可控监管的追溯链，
+以企业链多链结构和追溯主链的形式共同组建杂粮区块链
+追溯系统，实现数据容量扩增、数据隔离存储、消费者逆向
+追溯、链间交易留痕可控。追溯链作为区块链追溯网络主链，
+提供链间交易环境，实现杂粮供应链多企业链间数据交互以
+及上下游企业间交易留痕管控。 
+为保证区块链追溯网络健康可持续稳定发展，供应
+链企业首先获取监管部门审核授权文件，利用通道技术
+建立企业追溯多链以及企业节点组建追溯网络，通过通
+道天然的隔离性保证企业间数据的隐私性、安全性。监
+管部门与各企业追溯节点加入追溯通道创建追溯主链，
+企业产品生产加工过程中涉及商业价值敏感数据存储在
+企业链，具备追溯价值的可公开产品信息存储在追溯主
+链。同时由于通道隔离上下游企业链间交易无法直接进
+行，必须通过追溯主链交互完成信息交换与追溯价值传
+递。企业追溯节点在追溯主链上通过智能合约向监管节
+点提供同构多链跨链数据查询接口，企业敏感追溯数据
+面向监管追溯开放；同时对消费者节点提供追溯链上账
+本查询接口，公开追溯数据面向消费追溯开放。 
+2.2  追溯数据存储与监管模型 
+本文在深入分析杂粮供应链特点的基础上，基于区块
+链技术建立面向监管的杂粮多链追溯数据存储模型，如
+图 2 所示。追溯数据按照供应链环节从生产链开始记录并
+通过追溯链共享直到产品消费，产品敏感信息由企业链加
+密存储授权访问、公开信息由追溯链透明共享、产品交易
+由追溯链留痕管控。其中，企业链通过追溯链交互共享数
+据，数据上链时首先调用监管合约执行数据链前监管，判
+断数据格式、内容是否符合合约追溯条例；然后通过上链
+智能合约在企业节点共识记账，更新区块链企业节点数据
+库与区块索引记录；最后触发跨链合约将可公开共享追溯
+数据上传追溯链。上链键值对追溯数据如表 2 所示，由供
+应链企业物联网设备实时采集和上游企业交易的产品数
+据存入区块体默克尔树叶子节点出块记账，并且以键值对
+的形式更新世界状态数据库，同时将返回的交易哈希、区
+块高度存入世界状态索引数据库，通过区块高度或交易哈
+希索引查询追溯数据，降低查询时间。 
+从数据存储、数据监管两方面分析数据存储模型。
+数据存储中追溯文本数据选用 CouchDB 状态数据库以键
+值对方式存储，通过链下索引数据库检索数据提升数据
+上传与查询效率，多媒体流数据通过星际文件系统
+（Interplanetary File System，IPFS）分布式存储[26]。数据
+监管一方面是链前数据与链上账本的监管，数据链前监
+管是通过智能合约审计数据格式、内容，保证数据上链
+时安全可靠；链上监管是由监管节点实时接收追溯链上
+广播信息，根据动态关键字词库审计追溯数据账本，出
+
+
+【第3页】
+第 20 期 
+于华竟等：杂粮供应链区块链多链追溯监管模型设计 
+ 
+325 
+现违规追溯记录时及时进行数据取证、认定；另一方面
+是追溯节点的管控，监管部门根据审计实时反馈通过取
+消监管授权的方式限制追溯节点链上数据账本操作权
+限，为追溯网络数据内容安全提供有力支撑。 
+ 
+图 1  杂粮供应链追溯区块链多链架构 
+Fig.1  Blockchain multi-chain architecture for supply chain traceability of coarse cereal 
+ 
+图 2  多链追溯数据存储模型 
+Fig.2  Storage model of multi-chain traceability data  
+
+
+【第4页】
+农业工程学报（http://www.tcsae.org）                                2021 年   
+ 
+326
+表 2  上链键值对数据 
+Table 2  Key-value data of traceability blockchain  
+追溯数据键值对 Key-value of traceability data 
+键 Key 
+交易哈希 Transaction hash 
+区块高度 Block height
+产品 ID：prod_id_198|生产企业：山西忻州杂粮出口公司|生产日期：
+2021-5-28|所用供应链上游产品 ID：|所用供应链上游产品批次：|生产
+批次：prod_batch_1002|生产成本：20 万元|生产数据：种植环节追溯数
+据与敏感数据|负责人：张三 
+prod_id_198 
+fcab32576c62a29b1b007244161146a9
+0a9f281de1540e5cc06a665831e8cfa2 
+678 
+ 
+2.3  企业组网建链与授权管控模型 
+区块链基于 P2P 协议构建去中心化系统，全网节
+点平等、数据无成本快速传递[27-28]。在杂粮追溯网络
+规模化应用后，受到上链数据量大、时效性高限制，
+在加强链前数据审查的基础上，强化链上节点权限管
+控力度具有重要的研究意义。针对追溯节点监管，本
+文设计基于监管授权的网络准入机制，如图 3 所示。
+供应链企业通过非对称国密算法 SM2 生成公私密钥
+对，加入区块链追溯网络时，监管部门获取由供应链
+企业广播的公钥，并接收由供应链企业提交的授权申
+请；根据授权申请，对供应链企业进行建链资质审核；
+在建链资质审核通过的情况下，利用公钥对授权文件
+进行加密，生成授权密文；将授权密文作为建链资质
+审核结果发送给供应链企业，以供供应链企业利用私
+钥对授权密文进行解密，并根据解密后获取的授权文
+件构建相应的企业私有链；私钥与公钥相对应。本文
+设计的追溯企业组网建链与授权管控模型，监管部门
+通过对供应链企业进行建链授权的方式，管控链上追
+溯节点的网络账本操作权限。 
+ 
+图 3  基于监管授权组网建链 
+Fig.3  Deploy multi-chain based on regulatory authorization 
+ 
+由于供应链企业组网建链以及操作链上账本数据
+都需要企业授权文件 Key，所以追溯网络的安全性取
+决于 Key 是否安全不可破解。监管部门根据企业建链
+资质生成授权密文，并通过哈希函数生成唯一不可逆
+的授权签名，加密算法如公式（1）～（4）所示。为
+保证授权文件传输安全，如公式（5）～（6）所示通
+过企业公钥加密传输、私钥解密获取授权建链组建企
+业追溯网络。 
+ 
+
+
+1
+2
+Key
+KeySecret ,KeySecret ,HashSign
+
+（1） 
+下面依次阐释式中
+1
+KeySecret ,
+2
+KeySecret , HashSign ，根
+据加密算法 Cr 和加密类型 Ct，通过 Base64 加密生成授
+权文件的头部编码密文 Header ，记为 
+ 
+
+
+1
+KeySecret
+base64Encode
+,
+Header
+Cr Ct
+
+
+ （2） 
+根据授权过期时间信息 Et、授权名称信息 Na、授权
+企业信息 Org 和签发时间信息 It，生成授权文件的中间
+编码密文 Info，记为 
+ 
+
+
+2
+KeySecret
+base64Encode
+,
+,
+,
+Info
+Et Na Org It
+
+
+ 
+ 
+ 
+ 
+（3） 
+授权文件头部编码和中部编码密文通过 Base64 加密
+生成，为保证整体授权文件的安全性以及实现授权文件
+真实性和完整性的可验证，通过哈希单向散列函数构造
+授权消息认证码，通过监管部门密钥Surse 加密授权文件
+头部编码和中部编码密文，生成授权文件唯一且不可逆
+的尾部编码签名 TailSign ，记为 
+CryText
+Header
+"."
+Info
+
+
+
+
+
+HashSign
+HmacSha256 CryText,Surse
+TailSign
+
+
+ 
+ 
+Key
+Header
+"."+Info+"." TailSign
+
+
+
+ 
+（4） 
+监管部门接收到供应链企业的公钥和授权申请后，
+生成授权文件密文并通过公钥加密传输，生成具有保密
+性的的授权密文，由于只有企业保留的私钥可以对授权
+密文进行解密，进而读取解密后的内容，可以有效防止
+信息泄露。记为 
+ 
+pub
+Encry(key
+,Key)
+Key1
+
+ 
+（5） 
+ 
+pri
+Decry(key
+,Key1)
+Key
+
+ 
+（6） 
+2.4  智能合约设计 
+智能合约在触发条件满足时可自动执行合约逻辑，
+以信息化的方式传播、验证或执行合约协议，使区块链
+及时对外部治理做出反应[29-30]。本文设计监管智能合
+约，实现监管自动执行，强化数据链前监管、链上安全，
+减缓监管部门负载压力。监管合约将监管法律条例转化
+为合约条款，由杂粮供应链企业主体参与协商制定，内
+容公开透明且不可篡改，提供链上协作的基石，实现区
+块链追溯节点组网授权管控、追溯数据链前与链上交易
+监管、跨链数据穿透式查询监管，具体智能合约设计如
+表 3。 
+本文通过联盟链通道技术创建追溯多链网络，为多
+条企业链和追溯链封装出账本数据交互接口，通过合约
+调用接口实现链间数据交互。下面介绍数据上链与查询
+的智能合约算法，算法 1 描述追溯数据上链操作，算法 2
+描述监管追溯跨链查询步骤，第 7～9 步、12～14 中查询
+追溯链公开账本数据，面向消费者扫码追溯可返回相应
+企业公开追溯数据，面向监管追溯则返回上游企业链追
+溯码；第 3～5 步、15～17 中通过智能合约调用企业链账
+本查询接口获取企业链敏感追溯数据。 
+
+
+【第5页】
+第 20 期 
+于华竟等：杂粮供应链区块链多链追溯监管模型设计 
+ 
+327 
+表 3  智能合约设计 
+Table 3  Design of smart contract 
+合约功能 
+Function of smart contract 
+合约业务逻辑 
+Business logic of smart contract 
+合约方法 
+Interface of smart contract
+描述 
+Description 
+追溯企业管控 
+Management of 
+traceability company 
+组网授权 
+authGenerate () 
+监管机构根据杂粮供应链建链资质生成授权密文 
+取消授权 
+authCancel() 
+根据链上数据账本审计反馈取消追溯节点账本操作权限 
+数据监管 
+Data supervision 
+数据内容监管 
+isTdContentLegal() 
+判断数据内容是否包含敏感字词、数据格式是否符合区块链防伪追溯数
+据格式通用要求，进行追溯数据链前监管 
+数据格式监管 
+isTdTypeLegal() 
+数据交易监管 
+isTdTradeLegal() 
+产品责任随数据交易转移，企业链通过追溯链留痕交易，实现数据上下
+游企业间产品数量监管与快速追责 
+监管追溯链数据账本 
+reguPubTraceData() 
+监管节点加入追溯链，实时接收链上广播信息，透明备份追溯信息，实
+时监管追溯链账本数据 
+监管企业链数据账本 
+reguPriTraceData() 
+通过企业节点授权节点地址、企业合约以及企业账本访问权限穿透式访
+问监管企业敏感追溯数据 
+数据写入 
+Data input 
+数据写入企业链账本 
+wriComTraceChain() 
+将合规追溯数据写入企业链 
+数据写入追溯链账本 
+wriTraceChain() 
+将部分可公开追溯数据写入追溯链 
+数据查询 
+Data query 
+公开追溯数据查询 
+quPubTraceData() 
+消费者通过产品追溯二维码扫码追溯产品公开数据 
+敏感追溯数据查询 
+quPriTraceData() 
+监管部门通过企业授权监管追溯或企业间授权数据共享 
+ 
+算法 1：数据上链智能合约算法 
+输入：企业追溯节点 cTraPeer，企业链授权文件
+Keyproc，追溯链授权文件 Keytra，追溯数据 traceData 
+输出：交易哈希 txID，区块高度 blockNum，公开追
+溯数据 traceData’ 
+ 
+1. 
+if(Keyproc 验证有效 && Keytra 验证有效) 
+2. 
+    追溯数据链前监管 
+3. 
+    if(isTdTypeLegal(traceData) && isTdContentLegal(traceData)) 
+4. 
+      数据上链操作，追溯数据经全网节点共识背书写入企业链账本 
+5. 
+      if(wriComTraceChain(Keyproc,cTraPeer,traceData)) 
+6. 
+          return txID,blockNum; 
+7. 
+          将返回的交易哈希与区块高度和部分公开追溯数据通过
+跨链接口交互上传追溯链 
+8. 
+          
+if(wriTraceChain(Keytra,cTraPeer,(traceData’,txID,blockNum))) 
+9. 
+              return success; 
+10. 
+          else 
+11. 
+              return transError; 
+12. 
+      else 
+13. 
+         return transError; 
+14. 
+    else 
+15. 
+        return traceDataError; 
+16. 
+return authError; 
+ 
+算法 2：数据查询智能合约算法 
+输入：监管节点 sTraPeer，五条企业链授权文件 Key，
+追溯链授权文件 Keytra，产品追溯码 traceCode 
+输出：企业链产品敏感追溯数据 
+ 
+1. 
+if(Keyproc 验证有效 && Keytra 验证有效) 
+2. 
+    消费追溯码为分销追溯码，首先通过 traceCode 查询分销链敏感
+数据并根据 traceCode 查询追溯链获取上游物流链追溯码  
+3. 
+    if(!isEmpty(quPriTraceData(sTraPeer,Keysales,traceCode))) 
+4. 
+        return sales-Chain-PriTraceData; 
+5. 
+    return traceCodeErrror; 
+6. 
+    根据分销码查询追溯链账本获取物流追溯码 
+7. 
+    if(!isEmpty(quPubTraceData(sTraPeer,Keytra,traceCode))) 
+8. 
+        return logisTraceCode; 
+9. 
+    return traceCodeError; 
+10. 
+    按照供应链逆向追溯查询追溯链账本，获取上游企业链追溯码，
+直至查询出产品生产追溯码 
+11. 
+    … 
+12. 
+    if(!isEmpty(quPubTraceData(sTraPeer,Keytra,procTraceCode))) 
+13. 
+        return prodTraceCode; 
+14. 
+    return procTraceCodeError; 
+15. 
+    if(!isEmpty(quPriTraceData(sTraPeer,Keyprod,prodTraceCode))) 
+16. 
+        return prod-Chain-PriTraceData; 
+17. 
+    return prodTraceCodeErrror; 
+18. 
+return authError; 
+ 
+3  面向监管的杂粮区块链多链追溯系统实现 
+3.1  系统架构 
+通过联盟链构建杂粮产品追溯系统，基于通道技术
+创建多条企业链保证敏感数据的隐私保护与授权访问，
+通过追溯链保证公开数据多方共享与价值传递，由监管
+合约保证数据监管条例的实时运行与链上数据账本与节
+点的有效管控，实现追溯系统数据安全。 
+追溯系统架构分为 4 层：应用层、接口层、数据层、
+存储层。其中，应用层通过温湿度和光敏等传感器、北
+斗定位装置、摄像头等物联网设备采集链下追溯数据确
+保数据源头真实可信；面向消费者提供追溯扫码查询产
+品追溯信息，面向企业提供追溯数据跨链存储以及追溯
+链上交易留痕可管控；面向监管部门提供追溯企业节点
+授权管控和追溯数据穿透式监管。 
+接口层封装企业多链和追溯链账本数据写入与查询
+操作接口，对监管部门提供数据跨链操作接口和企业授
+权管控接口，对消费者提供追溯数据查询接口。 
+数据层中企业节点授权监管部门可穿透式监管企业
+链敏感数据；授权消费者透明查询公开追溯数据。消费
+者扫码发送产品追溯码查询追溯链上数据账本获取追溯
+信息，监管部门通过企业账本操作授权以及由追溯链获
+取的产品追溯码跨链监管企业敏感数据。 
+存储层中区块链数据账本由文件系统存储的区块结
+构和数据库维护的世界状态组成，通过智能合约执行交
+易更新区块链账本。文件系统以默克尔树哈希存储上链
+数据，通过链式区块结构实现数据正向记录和逆向追溯。
+世界状态包括状态数据库、区块索引数据库历史索引数
+据库，追溯数据以键值对的形式存储在状态数据库，将
+返回的交易哈希、区块高度、区块哈希等存放在索引数
+据库，对同一键值数据执行的更新操作存放历史索引数
+据库。索引数据库通过索引指向区块链文件系统区块位
+置，确保链上仅最新数据可查。状态数据库为链外保存
+的 CouchDB 数据库，存放帐本中所有键值对的当前值，
+通过智能合约执行交易时，可通过世界状态索引查询键
+
+
+【第6页】
+农业工程学报（http://www.tcsae.org）                                2021 年   
+ 
+328
+值的最新状态，无需全链遍历查询，提高数据查询效率。 
+3.2  测试环境 
+测试环境基于 Hyperledger Fabric 搭建，使用虚拟
+机的配置为：32 G 内存、16 核处理器、100 G 硬盘，
+64 万条追溯试验数据来源于山西忻州杂粮出口平台。
+其中，生产链、加工链、仓储链、物流链、分销链，每
+条链通过 4 个节点存储追溯数据，追溯链包括监管节点、
+消费者节点以及企业节点；所有节点采用外部状态数据
+库 CouchDB，通过索引检索状态数据库代替遍历查询；
+所有测试用例以及测试结果通过区块链基准测试工具
+Hyperledger Caliper 生成，试验环境具体的配置如表 4。 
+表 4  区块链配置 
+Table 4  Configuration of multi-chain  
+配置项 Configuration 
+值 Value 
+说明 Description 
+链数 Chain number 
+6 
+生产链、加工链、仓储链、物流链、
+分销链、追溯链 
+节点数 Peer number 
+23 
+每个企业链 4 个节点；追溯链包括监
+管节点和消费者节点；一个排序节点
+数据库 Database number 
+22 
+企业节点、消费者节点、监管节点配
+置 CouchDB 状态数据库 
+出块时间 
+Block interval/ms 
+500 
+排序节点以出块时间间隔检测缓存数
+据，最迟在出块时间后打包出块 
+区块最大交易数 
+Max transaction per block 
+50 
+区块中最大可以包含的交易数量 
+区块最大字节 
+Max bytes per block/MB 
+100 
+区块中交易最大可以包含的交易数据
+大小 
+3.3  应用案例分析  
+通过对杂粮产品供应链实地调研，基于 Hyperledger 
+Fabric 开发了区块链追溯系统正向记录“产、加、储、
+运、销”全过程追溯数据。系统应用在山西忻州杂粮
+企业，该企业涉及杂粮供应链所有追溯环节，但是数
+据存储在追溯企业中心数据库，数据易被篡改且难以
+即时动态监管，因此，应用本文开发的区块链多链杂
+粮可监管追溯系统进行优化。通过本文设计的区块链
+追溯系统，杂粮产品贴有追溯二维码，如图 4a 所示。
+消费者通过手持设备扫描二维码获取产品全供应链追
+溯数据，如图 4b 所示。杂粮追溯数据存储在区块链账
+本，追溯系统向用户展示区块链数据存储信息，包括
+区块链服务平台访问地址、链上追溯码、区块高度等，
+如图 4c 所示。杂粮区块链追溯服务平台记录交易数量
+3 万多笔，生成区块 1 万多，监管部门通过链上不可篡
+改交易记录监管杂粮供应链追溯企业数据交易行为，
+如图 4d 所示。监管部门通过服务平台可监管查看追溯
+数据，通过区块高度查询产品链上存证信息，如图 4e
+所示。目前，忻州建成 6 块、共计 746.67 hm2 的有机
+旱作区块链追溯基地，打通农业与区块链发展壁垒，
+通过优化追溯系统，杂粮产品质量有所保证、销量有
+所提升，其中玉米杂粮比较未采用区块链追溯系统前
+售价提升 28.8 个百分点。 
+     
+   
+ 
+a. 追溯二维码 
+b. 产品追溯信息 
+c. 区块链信息 
+a. Traceability QR code 
+b. Traceability data of products 
+c. Blockchain information 
+      
+ 
+d. 区块链数据交易监管界面 
+e. 区块链数据监管详情 
+d. Page of blockchain data transactions supervision 
+e. Blockchain data supervision detail 
+图 4  杂粮区块链追溯系统界面 
+Fig.4  Blockchain traceability system for coarse cereal foods 
+
+
+【第7页】
+第 20 期 
+于华竟等：杂粮供应链区块链多链追溯监管模型设计 
+ 
+329 
+4  性能与安全性分析 
+4.1  区块链追溯网络性能分析 
+杂粮追溯网络采用 Raft 共识机制，由全部追溯节点
+选取主节点进行记账、验证、广播，在主节点故障失联
+后全网节点重新选取主节点，期间旧主节点操作回滚撤
+销，增加网络故障节点的容错效率。图 5a 展示将
+Hyperledger Fabric 出块时间设置为 0.25～2.00 s 时，追溯
+数据共识记账时延。根据测试结果，数据记账完成时延
+与出块时间增长正相关，在出块时间为 0.50 s 时数据共识
+记账最大时延为 0.82 s，平均时延为 0.41 s，能够满足杂
+粮区块链追溯的应用需求。因此，本文设置出块时间为
+0.50 s。 
+测试区块链多链追溯网络数据写入与查询吞吐量，
+如图 5b 所示，在发送速率为 25～150 间网络写入吞吐量
+呈线性增加，在达到 135 后趋于平缓。在发送速率 25～
+200 间网络读取吞吐量呈线性增加，在达到 200 后趋于平
+缓。因此，本文建立的区块链杂粮多链追溯网络具有较
+高的数据写入与查询的吞吐量。 
+ 
+a. 共识记账时延 
+a. Consensus latency of transactions 
+b. 写入和查询吞吐量 
+b. Transaction and query 
+transactions per second( tps) 
+图 5  多链追溯网络测试 
+Fig.5  Test of mul-chain traceability network 
+ 
+4.2  系统效率分析 
+验证本文提出的区块链杂粮多链追溯系统中追溯
+数据的写入与查询效率，为保证实验数据的真实可靠
+性，所有测试结果均采用 60 次执行结果的平均值。如
+图 6a 所示，数据平均写入时间为 0.696 s；如图 6b 所示，
+公开追溯数据平均查询时间为 0.415 s，敏感追溯数据平
+均查询时间为 0.871 s。从测试结果可以看出，面向监管
+建立的杂粮供应链多链追溯模型具有较好的数据查询
+与写入效率，能够满足杂粮销售过程中的数据上链与查
+询需求。 
+4.3  安全性分析 
+供应链企业基于监管授权组网建链以及操作链上账
+本，因此，区块链链上监管安全性源于授权密文的安全
+性。以下对授权密文进行相关性与扩散性测试，相关性
+测试是在授权密钥不变的基础上，通过修改授权内容引
+起的密文变化情况，如图 7a 所示，相关性测试中授权密
+文平均变化率为 82.39%。扩散性测试是在授权内容不变
+的基础上，通过修改授权密钥引起的密文变化情况，如
+图 7b 所示，扩散性测试中授权密文平均变化率为
+82.53%。因此，该研究提出的授权算法具备较高的混淆
+性，能够保证杂粮溯源网络数据传输过程密文与密钥的
+安全性。 
+ 
+a. 写入效率 
+a. Transaction efficiency 
+b. 查询效率 
+b. Query efficiency 
+图 6  追溯数据存储与查询时间 
+Fig.6  Storage and query time of traceability data 
+ 
+ 
+a. 相关性测试 
+a. Correlation test 
+b. 扩散性测试 
+b. Diffusion test 
+图 7  授权算法安全性测试 
+Fig.7  Security test of authorization algorithm 
+ 
+5  结  论 
+本文设计并实现面向监管的杂粮区块链多链追溯模
+型，为规模化杂粮供应链追溯提供借鉴与参考，并得出
+以下结论： 
+1）通过联盟链 Hyperledger Fabric 通道技术构建杂粮
+多链追溯系统，通过多条企业链并行操作提升网络运行
+效率，扩展数据存储容量，通过通道天然隔离性实现数
+据隐私保护；提出基于监管部门授权的企业组网建链机
+制，监管部门根据链上数据账本实时审计结果管控追溯
+节点账本操作权限；设计追溯数据上链合约，实现数据
+的链前监管与链上管控；并设计数据查询智能合约实现
+面向消费溯源与监管溯源的差异化数据查询。本研究提
+出的监管授权方案，相关性测试中密文平均变化率为
+82.39%，扩散性测试中密文平均变化率为 82.53%；经区
+块链追溯网络吞吐量测试，消费者查询公开追溯数据平
+均时间为 0.415 s，监管调用跨链接口查询企业追溯数据
+平均时间为 0.871 s。 
+2）构建并实现的杂粮供应链追溯系统能够解决追溯
+链上多企业间数据隐私保护、数据差异化共享以及追溯
+数据的穿透式监管、追溯节点的实时管控问题，实现了
+杂粮追溯大数据价值的深度挖掘、追溯网络的安全可持
+续发展。 
+[参  考  文  献] 
+[1] 
+李顺国，刘斐，刘猛，等. 中国谷子产业和种业发展现状
+
+
+【第8页】
+农业工程学报（http://www.tcsae.org）                                2021 年   
+ 
+330
+与未来展望[J]. 中国农业科学，2021，54(3)：459-470.  
+Li Shunguo, Liu Fei, Liu Meng, et al. Current status and 
+future prospective of foxtail millet production and seed 
+industry in china[J]. Scientia Agricultural Sinica, 2021, 54(3): 
+459-470. (in Chinese with English abstract) 
+[2] 
+Thakali A, Macrae J D. A review of chemical and microbial 
+contamination in food: What are the threats to a circular food 
+system?[J]. Environmental Research, 2021, 194: 110635.  
+[3] 
+王新平，柴尚森. 基于 MCDM 的食用农产品追溯体系效
+能影响因素分析[J/OL]. 食品科学，[2021-05-28]，http: //kns. 
+cnki. net/kcms/detail/11. 2206. ts. 20210305. 1635. 002. html.  
+Wang Xinping, Chai Shangsen. Analysis of factors 
+influencing the effectiveness of edible agricultural products 
+traceability system based on MCDM[J/OL]. Food Science, 
+[2021-05-28], http: //kns. cnki. net/kcms/detail/11. 2206. ts. 
+20210305. 1635. 002. html. (in Chinese with English 
+abstract) 
+[4] 
+涂海宁，魏俊文，刘建胜，等. 条码图像模式识别的追
+溯 系 统设 计与 实 现[J]. 机械 设 计与 制造 ， 2021(7)：
+241-245.  
+Tu Haining, Wei Junwen, Liu Jiansheng, et al. Design and 
+implementation of traceability system for bar code image 
+pattern recognition[J]. Machinery Design & Manufacture, 
+2021(7): 241-245. (in Chinese with English abstract) 
+[5] 
+郑立华，冀荣华，王敏娟，等. 农产品追溯统一编码
+方案设计与应用[J]. 农业机械学报，2019，50(S1)：
+385-392.  
+Zheng Lihua, Ji Ronghua, Wang Minjuan, et al. Design and 
+application of traceable unified coding scheme for 
+agricultural products[J]. Transactions of the Chinese Society 
+for Agricultural Machinery, 2019, 50(S1): 385-392. (in 
+Chinese with English abstract) 
+[6] 
+王祖良，郭建新，张婷，等. 农产品质量追溯 RFID 标签
+批量识别[J]. 农业工程学报，2020，36(10)：150-157.  
+Wang Zuliang, Guo Jianxin, Zhang Ting, et al. RFID 
+batch-tag 
+identification 
+in 
+quality 
+traceability 
+of 
+agricultural products[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the 
+CSAE), 2020, 36(10): 150-157. (in Chinese with English 
+abstract) 
+[7] 
+钱建平，吴文斌，杨鹏. 新一代信息技术对农产品追溯系
+统智能化影响的综述[J]. 农业工程学报，2020，36(5)：
+182-191.  
+Qian Jianping, Wu Wenbin, Yang Peng. Review on 
+agricultural products smart traceability system affected by 
+new generation information technology[J]. Transactions of 
+the 
+Chinese 
+Society 
+of 
+Agricultural 
+Engineering 
+(Transactions of the CSAE), 2020, 36(5): 182-191. (in 
+Chinese with English abstract) 
+[8] 
+孙传恒，于华竟，徐大明，等. 农产品供应链区块链追
+溯技术研究进展与展望[J]. 农业机械学报，2021，52(1)：
+1-13.  
+Sun Chuanheng, Yu Huajing, Xu Daming, et al. Review and 
+prospect of agri-products supply chain traceability based on 
+blockchain technology[J]. Transactions of the Chinese 
+Society for Agricultural Machinery, 2021, 52(1): 1-13. (in 
+Chinese with English abstract) 
+[9] 
+Yang X T, Li M Q, Yu H J, et al. A trusted blockchain-based 
+traceability system for fruit and vegetable agricultural 
+products[J]. IEEE Access, 2021, 9: 36282-36293.  
+[10] 杨信廷，王明亭，徐大明，等. 基于区块链的农产品追溯
+系统信息存储模型与查询方法[J]. 农业工程学报，2019，
+35(22)：323-330.  
+Yang Xinting, Wang Mingting, Xu Daming, et al. Data 
+storage and query method of agricultural products traceability 
+information based on blockchain[J]. Transactions of the 
+Chinese Society of Agricultural Engineering (Transactions of 
+the CSAE), 2019, 35(22): 323-330. (in Chinese with English 
+abstract) 
+[11] 于合龙，陈邦越，徐大明，等. 基于区块链的水稻供应链
+追溯信息保护模型研究[J]. 农业机械学报，2020，51(8)：
+328-335.  
+Yu Helong, Chen Bangyue, Xu Daming, et al. Modeling of 
+rice supply chain traceability information protection based on 
+block chain[J]. Transactions of the Chinese Society for 
+Agricultural Machinery, 2020, 51(8): 328-335. (in Chinese 
+with English abstract) 
+[12] Yang Z L, Li X, He P. A decision algorithm for selecting the 
+design scheme for blockchain-based agricultural product 
+traceability system in q-rung orthopair fuzzy environment[J]. 
+Journal of Cleaner Production, 2021, 290: 125191.  
+[13] 李宣，柳毅. 基于双区块链及物联网技术的防伪追溯系统[J]. 
+计算机应用研究，2020，37(11)：3401-3405， 3421.  
+Li Xuan, Liu Yi. Traceability system based on double 
+blockchain and Internet of Things technology[J]. Application 
+Research of Computers, 2020, 37(11): 3401-3405, 3421. (in 
+Chinese with English abstract) 
+[14] Cao Y B, Cheng Y Y, Yang C Y, et al. Double chain 
+blockchain based on improved virginia algorithm[J]. Journal 
+of Physics: Conference Series, 2021, 1820(1): 012158.  
+[15] Ding Q Y, Gao S, Zhu J M, et al. Permissioned 
+blockchain-based double-layer framework for product 
+
+
+【第9页】
+第 20 期 
+于华竟等：杂粮供应链区块链多链追溯监管模型设计 
+ 
+331 
+traceability system[J]. IEEE Access, 2019, 8: 6209-6225.  
+[16] 李梦琪，杨信廷，徐大明，等. 基于主从多链的水产品区
+块链溯源信息管理系统设计与实现[J]. 渔业现代化，
+2021，48(3)：80-89.  
+Li Mengqi, Yang Xinting, Xu Daming, er al. Design and 
+implementation of aquatic product blockchain traceability 
+information management system based on master-slave 
+multi-chain[J]. Fishery Modernization, 2021, 48(3): 80-89. 
+(in Chinese with English abstract) 
+[17] 陈纯. 联盟区块链关键技术与区块链的监管挑战[J]. 中国
+工业和信息化，2020(11)：54-58.  
+[18] 洪学海，汪洋，廖方宇. 区块链安全监管技术研究综述[J]. 
+中国科学基金，2020，4(1)：18-24.  
+Hong Xuehai, Wang Yang, Liao Fangyu. Review on the 
+technology research of blockchain security supervision[J]. 
+Bulletin of National Natural Science Foundation of China. 
+2020, 34(1): 18-24. (in Chinese with English abstract) 
+[19] 张燕，侯启玲. “区块链+农业众筹”：创新、风险及其
+法治监管[J]. 华中农业大学学报：社会科学版，2021(4)：
+137-145，184-185.  
+Zhang Yan, Hou Qiling. “Blockchain + agricultural 
+crowdfunding”: invovation, risk and legal supervision[J]. 
+Journal of Huazhong Agricultural University: Social Sciences 
+Edition, 2021(4): 137-145, 184-185. (in Chinese with English 
+abstract) 
+[20] 王毅. 基于区块链的农产品质量安全追溯体系分析[J]. 青
+海农林科技，2020(3)：59-61， 80.  
+Wang Yi. Analysis on traceability system of agricultural 
+products quality safety based on the block chain[J]. Science 
+and Technology of Qinghai Agriculture and Forestry, 
+2020(3): 59-61, 80. (in Chinese with English abstract) 
+[21] 许继平，王健，张新，等. 区块链驱动的稻米供应链信息监
+管模型研究[J]. 农业机械学报：2021，52(5)：202-211， 101.  
+Xu Jiping, Wang Jian, Zhang Xin, et al. Information 
+supervision modeling of rice supply chain driven by 
+blockchain[J]. Transactions of the Chinese Society for 
+Agricultural Machinery, 2021, 52(5): 202-211, 101. (in 
+Chinese with English abstract) 
+[22] 霍红，詹帅. 集成供应链视角下农产品质量安全全过程监
+管体系构建[J]. 中国科技论坛，2019(8)：105-113.  
+Huo Hong, Zhan Shuai. Construction of a whole-process 
+supervision system for the quality and safety of agrifood from 
+the perspective of integrated supply chain[J]. Forum on 
+Science and Technology in China, 2019(8): 105-113. (in 
+Chinese with English abstract) 
+[23] 吴晓彤，柳平增，王志铧. 基于区块链的农产品溯源系统
+研究[J]. 计算机应用与软件，2021，38(5)：42-48.  
+Wu Xiaotong, Liu Pingzeng, Wang Zhihua. Traceability 
+system of agricultural products based on blockchain[J]. 
+Computer Applications and Software, 2021, 38(5): 42-48. (in 
+Chinese with English abstract) 
+[24] 孙知信，张鑫，相峰，等. 区块链存储可扩展性研究进展[J]. 
+软件学报，2021，32(1)：1-20.  
+Sun Zhixin, Zhang Xin, Xiang Feng, et al. Survey of storage 
+scalability on blockchain[J]. Journal of Software, 2021, 32(1): 
+1-20. (in Chinese with English abstract) 
+[25] 梁昊，刘思辰，张一诺，等. 面向农产品交易流程的多
+链式区块链应用技术研究[J]. 智慧农业，2019，1(4)：
+72-82.  
+Liang Hao, Liu Sichen, Zhang Yinuo, et al. Multi-blockchain 
+application technology for agricultural products transaction[J]. 
+Smart Agriculture, 2019, 1(4): 72-82. (in Chinese with 
+English abstract) 
+[26] Sanjeev K D, Ruhul A, Satyanarayana V. Blockchain-based 
+secured 
+ipfs-enable 
+event 
+storage 
+technique 
+with 
+authentication protocol in vanet[J]. IEEE/CAA Journal of 
+Automatica Sinica, 2021, 8(12): 1913-1922.  
+[27] 任守纲，何自明，周正己，等. 基于 CSBFT 区块链的农
+作物全产业链信息追溯平台设计[J]. 农业工程学报，
+2020，36(3)：279-286.  
+Ren Shougang, He Ziming, Zhou Zhengji, et al. Design and 
+implementation of information tracing platform for crop 
+whole industry chain based on CSBFT-blockchain[J]. 
+Transactions of the Chinese Society of Agricultural 
+Engineering (Transactions of the CSAE), 2020, 36(3): 
+279-286. (in Chinese with English abstract) 
+[28] 王小兵，杨潇钰，舒新峰，等. 面向 MSVL 的智能合约形
+式化验证[J]. 软件学报，2021，32(6)：1849-1866.  
+Wang Xiaobing, Yang Xiaoyu, Shu Xinfeng, et al. Formal 
+verification of smart contract based on MSVL[J]. Journal of 
+Software, 2021, 32(6): 1849-1866. (in Chinese with English 
+abstract) 
+[29] 张志威，王国仁，徐建良，等. 区块链的数据管理技术综
+述[J]. 软件学报，2020，31(9)：2903-2925.  
+Zhang Zhiwei, Wang Guoren, Xu Jianliang, et al. Survey on 
+data management in blockchain systems[J]. Journal of 
+Software, 2020, 31(9): 2903-2925. (in Chinese with English 
+abstract) 
+[30] Berdik D, Otoum S, Schmidt N, et al. A survey on 
+blockchain for information systems management and 
+security[J]. Information Processing & Management, 2021, 
+58(1): 102397.  
+
+
+【第10页】
+农业工程学报（http://www.tcsae.org）                                2021 年   
+ 
+332
+ 
+ 
+ 
+ 
+Design of the blockchain multi-chain traceability supervision model for 
+coarse cereal supply chain 
+ 
+Yu Huajing, Xu Daming, Luo Na, Xing Bin, Sun Chuanheng※ 
+(1. National Engineering Research Center for Information Technology in Agriculture,Beijing 100097, China; 2. National Engineering 
+Laboratory for Quality and Safety Traceability Technology and Application of Agricultural Products, Beijing 100097, China) 
+ 
+Abstract: A coarse cereal is one of the most important crops rich in nutrients. However, the frequently-occurred issues on food 
+quality and safety have seriously endangered the trust in recent years, for example, the abuse of chemicals, heavy metals 
+exceeding the standard, and harmful germs. Therefore, a traceability system is an urgent need for coarse cereals, in order to 
+bridge the trust between farms and consumers, where the source of agricultural coarse foods can be rapidly traced through 
+multi-party efficient collaboration. Most current traceability systems focus on recording data using bar or QR codes, radio 
+frequency identification, and wireless sensor networks. But the tracing information is broken easily between upstream and 
+downstream, leading to the blur transferred data, particularly on the long and scattered supply-chain of agricultural foods, 
+including cultivation, processing, logistics, storage, and sales. Furthermore, the traditional traceability system cannot 
+efficiently supervise the data records of each company, when quality and safety issues occur. As such, it is impossible to recall 
+the problematic foods in time, much less to accurately locate the responsible party. Fortunately, blockchain technology can be 
+utilized to integrate the distributed architecture, storage, and verification in the block, peer-to-peer network protocols, 
+encryption, consensus mechanisms, identity authentication, and smart contracts. The data disclosure can also be used to 
+enhance trust with fewer intermediate links. Therefore, this study aims to deal with the long supply-chain of coarse cereals, 
+many trace entities, the differentiate share of data ledger, and the real-time monitoring of on-chain data. A novel traceability 
+system was designed to implement the supervisable food products using the multi-chain architecture of blockchain and supply 
+chain in coarse cereal. The forward and reverse traceability data was also collected ranging from the planting, processing, 
+warehousing, transportation, and sales, using cameras, sensors, Beidou positioning devices, and IoT devices in real-time. 
+Moreover, a systematic investigation was made on the business process and supervision characteristics of the supply-chain, as 
+well as the full life cycle of coarse cereal. In addition, a new architecture of supervision-oriented multi-chain data storage was 
+proposed for the actual production of coarse cereal. Specifically, the off-chain CouchDB state database was selected to store 
+the key-value traceability data, particularly on the key-index instead of traversal query to improve the query efficiency. More 
+importantly, a network access mechanism was designed using the regulatory authority, further to realize the collaborative 
+supervision on- and off-chain through smart contracts. Correspondingly, blockchain technology was used to ensure the deep 
+connection of various production factor resources with the real economy of coarse cereal. Anyway, the supply chain of coarse 
+cereal integrated with the blockchain was utilized to strengthen the multi-party collaboration through mutual identity 
+authentication, especially on data expansion, data sharing, and supervision. In terms of security, the average change rate of 
+ciphertext in the enterprise network authorization diffusivity test was 82.53%, the average change rate of ciphertext in the 
+enterprise network authorization correlation test was 82.39%, indicating higher security and less confusion. In terms of 
+efficiency, the average time for consumers to query public traceability data was 0.415 s, and the average time for regulators to 
+call cross-link port to query enterprise sensitive traceability data was 0.871 s. Furthermore, an actual traceability system was 
+implemented to verify the model using Hyperledger Fabric for data privacy protection, data differentiation sharing, and the 
+penetration supervision of traceability data, together with the real-time management, and control of traceability nodes. The 
+in-depth mining was realized for the value of coarse cereal traceability big data, and sustainable development of the traced 
+network. As such, farmers can receive professional or industrial policy guidance, whereas, companies can obtain the market 
+trends and price conditions in real-time, and regulatory authorities can accurately control traceability data and transaction 
+behavior. The finding can greatly improve the quality and safety of coarse cereal, production efficiency, and economic 
+benefits. 
+Keywords: agricultural products; traceability; blockchain; multi-chain; data regulatory; Hyperledger Fabric 
+

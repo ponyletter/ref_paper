@@ -1,0 +1,1101 @@
+来源文件：14集群式农产品供应链区块链密文策略可验多部门监管方案.pdf
+============================================================
+
+【第1页】
+第 39 卷   第 3 期                         农 业 工 程 学 报                              Vol.39  No.3 
+      2023 年     2 月          Transactions of the Chinese Society of Agricultural Engineering         Feb. 2023     227   
+ 
+集群式农产品供应链区块链密文策略可验多部门监管方案
+ 
+景  旭，蒋  炎 
+（西北农林科技大学信息工程学院，杨凌 712100） 
+ 
+摘  要：集群式农产品供应链区块链上的数据逐渐采用加密存储模式，给跨企业、跨生产环节的监管带来挑战。为了适
+应集群式环境下的监管、减小监管带来的隐私泄露风险，该研究基于 CP-ABE 提出了集群式农产品供应链区块链密文策
+略可验多部门监管方案。明确划分监管部门的监管权限，根据链上数据的监管策略，企业用户基于 CP-ABE 加密数据，
+在保证数据隐私的同时实现数据对相关监管者的公开；设计基于 CP-ABE 的密文访问树验证方案，结合智能合约与监管
+策略，在数据上链前验证 CP-ABE 的访问树，以确保数据对指定监管者的公开。基于 Hyperledger Fabric 构建了测试原型
+系统，测试结果表明，监管策略中监管者数量每增加 10 个，系统上链时间延长约 500 ms，吞吐量约为 438 事务数/s
+（transactions/s）；安全性分析表明，系统具有较高的安全性。该方案实现了区块链密文条件下多部门的细粒度监管，减
+小了发生在监管端的隐私泄露风险，能够应对集群式农产品供应链区块链加密存储带来的监管挑战。 
+关键词：农产品；溯源；区块链；监管；供应链；密文策略属性基加密 
+doi：10.11975/j.issn.1002-6819.202210089 
+中图分类号：TP309.2; TS207           文献标志码：A           文章编号：1002-6819(2023)-03-0227-10 
+景旭，蒋炎. 集群式农产品供应链区块链密文策略可验多部门监管方案[J]. 农业工程学报，2023，39(3)：227-236.    
+doi：10.11975/j.issn.1002-6819.202210089    http://www.tcsae.org 
+JING Xu, JIANG Yan. Multi-department supervision scheme of the verifiable blockchain ciphertext policy for cluster agricultural 
+supply chain[J]. Transactions of the Chinese Society of Agricultural Engineering (Transactions of the CSAE), 2023, 39(3): 
+227-236. (in Chinese with English abstract)    doi：10.11975/j.issn.1002-6819.202210089    http://www.tcsae.org 
+ 
+0  引  言   
+农产品供应链区块链的数据涉及到企业、用户的隐
+私，上链数据隐私加密非常必要[1-2]。农产品具有公共物
+品的属性，客观上需要政府干预与监管其安全生产[3-4]。
+区块链网络的健康可持续发展需要监管技术的支持[5]。
+随着农业现代化和规模化的不断加速，农产品供应链已
+从单链式发展到了集群式[6]，因此研究集群式农产品供
+应链区块链密文条件下的监管具有重要现实意义。 
+国内外学者在供应链区块链密文条件下的监管方面
+开展了广泛研究。孙传恒[7]、于华竟等[8]分别在果蔬、
+杂粮供应链区块链上提出了单链下的隐私保护与单节点
+监管模型。伍德伦等[9]通过智能合约实现了农产品供应
+链区块链各个环节隐私数据的链前监管。巫光福等[10]构
+建了业务链和监管链的双链架构，实现了多节点但没有
+分职能的监管。汪金苗等[11]、李莉等[12]、李雪莲等[13]通
+过属性基加密、代理重加密等实现了区块链上数据的隐
+私保护与安全一对多共享，没有运用于农产品供应链区
+块链，但是为农产品供应链区块链密文条件下的多部门
+监管提供了思路。WEN 等[14]、DENG 等[15]利用基于密
+文策略的属性基加密（ciphertext-policy attribute-based 
+encryption，CP-ABE）技术实现了多链、密文条件下的多
+                                                           
+收稿日期：2022-10-12    修订日期：2022-11-20 
+基金项目：国家重点研发计划项目（2020YFD1100601），陕西省重点研发计
+划项目（2019ZDLNY07-02-01） 
+作者简介：景旭，副教授，研究方向为农业信息化、区块链技术、信息系统
+安全等。Email：jingxu@nwsuaf.edu.cn 
+参与者监管。以上方案中的监管者基本是一类角色，本
+质上仍是没有明确监管职能划分的单部门监管，不利于
+规模较大的集群式供应链监管，不符合计算机科学中的
+最小权限原则[16]，容易造成隐私泄露等问题。 
+当前实际应用环境下，监管是多种监管权力的博弈
+结果[17]。由 2018 年修订的《产品质量法》可见中国产品
+质量实行多部门监管模式[18]。多部门监管通过细粒度的
+职能划分，限制了单个监管者的监管权限，能够在一定
+程度上降低隐私数据在监管端泄露的风险。但是区块链
+密文存储条件下的数据加密操作由数据所有者执行，难
+以确保其使用正确的监管策略，如何实现多部门监管下
+强制性的监管是一个亟待解决的问题。 
+CP-ABE 本质上属于公钥加密体系，在保证数据隐
+私的同时实现了一对多的非交互式数据共享[19]，契合密
+文条件下多部门监管的应用需求。 
+本研究基于 CP-ABE 提出集群式农产品供应链区块
+链密文策略可验多部门监管方案。监管部门通过智能合
+约设置监管策略，为企业用户构造 CP-ABE 访问树提供
+指导，在保证数据隐私的同时实现对于相应多监管者的
+数据共享，减小发生在监管端隐私泄露的风险；采用混
+合加密提升方案整体效率；设计基于 CP-ABE 的访问树
+验证方案，结合区块链智能合约，在不需要监管节点参
+与的情况下确保隐私数据对相关监管者公开，实现监管
+策略的动态更新。本研究充分利用了区块链智能合约和
+CP-ABE 的特点，满足密文条件下农产品供应链区块链
+多部门监管的需求，对于集群式农产品供应链区块链监
+管具有一定意义。 
+·农产品加工工程· 
+ 
+
+
+【第2页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+228 
+1  关键技术 
+1.1  智能合约 
+智能合约本质是一套以信息化方式进行交易的触
+发、执行、结算的计算机协议[20]。区块链上的智能合约
+可以看作是一段所有节点都认可的代码，存储于区块
+中。当条件满足时，智能合约将自动被激活并执行[21]。 
+1.2  CP-ABE 
+CP-ABE 是在 BOLDYREVA 等[22]提出的基于身份加
+密的基础上发展起来的，采用一对多的加密方式[23]，消
+息发送方利用一组属性 S 来加密消息，消息接收者用
+一组可以描述身份的属性 S′与私钥相对应，只有当 S′
+和 S 交集个数超出系统设定的门限值 t 时，消息接收者
+才能解密密文[24-25]。文中 CP-ABE 方案涉及的参数如
+表 1 所示。 
+2011 年 WATERS[26]在 BETHENCOURT 等[27]的基
+础上，提出一个通用高效的 CP-ABE 方案，流程为： 
+1）初始化：(PK, MK)←Setup(1λ)。 
+2）密钥生成：SK←KeyGen(MK, S)。 
+3）加密：CT←Encrypt(PK, M, A)。 
+4）解密：M←Decrypt(PK, CT, SK)。 
+表 1  CP-ABE 方案涉及的参数 
+Table 1  Parameters in CP-ABE scheme 
+参数 Parameter 
+含义 Meaning 
+λ 
+系统安全参数 
+MK 
+系统主密钥 
+PK 
+系统公钥 
+S 
+用户属性集 
+K 
+属性私钥含系统主密钥部分 
+L 
+属性私钥含生成随机数部分 
+Ki(i≠0) 
+属性私钥含用户属性部分 
+SK 
+用户属性私钥 
+VSK 
+访问树验证参数，即验证参数 
+A 
+加密访问树 
+s 
+秘密共享参数 
+λi 
+访问树叶子节点上的秘密共享份额 
+M 
+明文信息 
+C 
+密文含明文部分 
+C
+n 
+i  
+密文含共享密钥部分 
+CT 
+密文 
+2  集群式农产品供应链区块链密文策略可验多部
+门监管方案 
+2.1  集群式农产品供应链区块链多部门监管架构 
+基于 Fabric 联盟链的多通道机制，本文构建密文条
+件下集群式农产品供应链区块链密文策略可验证多部门
+监管模型。集群式农产品供应链区块链多部门监管架构
+如图 1 所示。 
+ 
+图 1  集群式农产品供应链区块链多部门监管架构 
+Fig.1  Clustered blockchain-based multi-departmental supervision architecture for agricultural supply chain 
+
+
+【第3页】
+第 3 期 
+景  旭等：集群式农产品供应链区块链密文策略可验多部门监管方案 
+ 
+229 
+由图 1 可见，针对农产品生产原料获取、产品生产、
+加工和销售 4 个供应链环节，构建了集群式农产品供应链
+区块链的基础架构，依次设置农资电商、农业合作社、
+企业加工以及电商平台等业务区块链（业务链）。同一供
+应链环节的企业处于同一个业务链中，共同维护溯源数
+据账本，防止数据篡改。在多条业务链间加入一条中继
+区块链（中继链），实现数据跨链[28]。企业数据存储到企
+业所在的业务链中，方便监管部门的监督与追责。 
+监管部门管理员以及监管者组成一条监管区块链
+（监管链），构成业务链的链外监管。每个监管部门中设
+置一个管理员，监管部门管理员通过智能合约设置业务
+链上的监管策略，指定部门下的监管者对链上具体数据
+类型的监管。监管部门所属的监管者可以审核上链数据
+的正确性、合法性，及时发现非法行为。业务链内的企
+业设置专门的链内监管实现数据源头的监管，即业务链
+内监管。业务链通过监管策略获取智能合约跨链获取并
+更新监管策略。由监管链上的多监管部门、多监管者以
+及业务链内的监管者实现“链内+链外”双重维度的多
+部门监管。当链上数据出现问题时，监管链上相关业务
+监管者可以追责到链内监管，由链内监管确定最终的责
+任者。 
+2.2  链上数据分类 
+业务链中上链的数据包括采购、生产、加工、仓
+储、销售等供应链数据，以及员工信息等。特定的隐
+私数据只需要受到特定的监管部门的监督，并不是所
+有的数据向所有的监管部门公开。例如，国家市场监
+督管理总局统一监管食品供给过程，对食品经营主体
+的登记注册、经营行为和消费者的正当维权依法严格
+履行责任；国家卫生健康委员会专职管理国家食品安
+全标准的制定和食品安全风险评估；农业农村部履行
+初级产品生产环节的管理职责；质监局负责食品的检
+疫、检验及认证工作，依法查处违法食品；工信部推
+动网络市场食品信息化建设，统筹网络市场食品各监
+管部门信息，监管信息服务市场，负责信息安全管理
+工作[29]。以上述部门职责划分为蓝本，监管部门下属
+的不同监管者分别监管不同链上的不同类型数据，使
+监管职能更加细化。通过属性区分监管者的身份与职
+责，监管部门所需数据如表 2 所示。 
+表 2  监管部门所需数据 
+Table 2  Data required by regulators 
+监管部门 
+Regulatory authorities 
+监管数据 
+Regulatory data 
+市场监督管理部门 
+采购数据、销售数据、生产数据、加工数据、
+仓储数据 
+卫生部门 
+生产数据、加工数据、仓储数据、员工数据 
+农业农村部门 
+生产数据（农业合作社）、采购数据（农业合
+作社）、销售数据（农业合作社） 
+质监部门 
+生产数据、加工数据、仓储数据 
+工信部门 
+员工数据、仓储数据、采购数据、销售数据 
+ 
+2.3  数据加密与共享 
+集群式农产品供应链的同一级生产企业之间可能存
+在相互竞争，链上数据公开容易泄露商业机密，因此，
+需要加密上链的敏感数据。这些敏感数据又需要向相应
+的多监管者共享，一般的加密算法难以适应。CP-ABE
+能够在保证数据隐私的同时实现一对多的非交互式共
+享，适用于该应用环境。 
+业务链中不同类型的数据，按照事先的规定，赋予
+监管链中不同监管部门不同的监管权限。每个监管部门
+下都有许多的监管者，监管者的职责各不相同，需要明
+确企业链中数据向哪些监管者公开。监管部门管理员通
+过制定监管策略，向所有区块链共享，明确业务链上的
+具体类型数据的加密策略，指导企业密文数据对特定的
+监管者公开。监管部门管理员设置监管策略的时序图如
+图 2 所示。 
+ 
+图 2  策略设置时序图 
+Fig.2  Policy setting sequence diagram 
+ 
+在图 2 中，监管部门管理员设置监管策略使业务链
+中指定类型数据向该部门下指定的监管者公开，并写入
+区块链，如步骤①②③所示。业务链中的用户请求获取
+最新的监管策略，如步骤④⑤所示。若策略的设置时间
+为最新的，则写入本地区块链，如步骤⑥⑦⑧⑨所示。 
+依据监管部门管理员设置的监管策略，企业用户采
+用 CP-ABE 加密相应类型的数据，实现密文数据对于相
+应监管者的共享。例如，对于员工数据的监管，卫生部
+门需要获得访问权限，而在卫生部门下又包括多个监管
+者，卫生部门管理员设置部门下的监管者 A 负责生产链
+上员工数据，则生产链上的企业执行员工数据加密操作
+时，采用的加密访问树必须包含监管者 A 的属性，即 A
+能够解密生产链上的员工数据；对于同一监管部门下的
+监管者 B，由于没有设置访问权限，则不向监管者 B 共
+享数据。 
+对于将要上链的数据，企业用户如果直接采用
+CP-ABE 加密，则效率较低[30]。为了提高方案整体的效
+率，上链数据采用混合加密机制，如图 3 所示。 
+在图 3 中，业务链中的企业用户共享数据时，首先
+采用 AES 加密将要上链的业务数据；然后获取链上相应
+数据类型的监管策略中的监管者属性，构造满足监管策
+略的访问树；第三，根据该访问树采用 CP-ABE 加密
+AES 密钥；第四，通过数据上链智能合约验证密文数据
+
+
+【第4页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+230 
+是否满足 CP-ABE 的加密策略；最后，上传到企业用户
+所在的企业链中。例如，监管者 A 具有“卫生部门监管
+者”“生产链监管者”和“员工数据监管者”属性，由
+卫生部门管理员设置为可管理生产链即农业合作社链上
+员工数据的监管者。当生产链中的企业上传数据类型为
+“员工数据”的数据时，构造的访问树要满足监管者 A
+的属性子集能够组成到达访问树根节点的一条路径。数
+据需要共享的监管者的属性作为访问树的叶子节点，在
+解密时若用户属性和某一叶子节点代表的属性相同，则
+返回真值。根节点和中间节点为逻辑上的门电路，在解
+密时，只有子节点返回的真值个数大于等于门限值时，
+才会返回真值。 
+ 
+图 3  上链数据加密与共享 
+Fig.3  Uploading data encryption and sharing 
+ 
+原始数据采用 AES 加密实现了链上数据的隐私保
+护；通过监管部门管理员设置监管策略，企业用户获取
+监管策略并用来构造 CP-ABE 加密的访问树，实现不同
+类型数据对于指定监管者的共享，保证链上数据隐私的
+同时实现了数据对于特定监管者的共享。 
+2.4  基于 CP-ABE 的密文访问树验证 
+当上链数据的加密操作只由数据上传者执行，只能
+由相应监管者验证密文访问树是否满足监管策略，增大
+了监管链的压力，降低了系统的效率。因此，本研究构
+造了用于验证 CP-ABE 加密访问树结构的验证参数
+（VSK），使用同一随机数、公开参数和用户属性生成用
+户的验证参数，没有泄露有关 CP-ABE 加密的信息，能
+够向所有用户公开[27]。所有满足访问树结构的 VSK，可
+以在恢复访问树根节点时获得相同的值。普通用户可以
+通过 VSK 代替 监管 者 验 证 密文访问树。监管链的
+Fabric-CA 担当可信授权中心，具有 CP-ABE 方案初始
+化、属性密钥以及验证参数生成等功能。本文中的访问
+策略使用访问树结构表示，基于 CP-ABE 方案[26]实现加
+密和解密过程，具体流程为： 
+1）初始化：(PK, MK)←Setup(1λ) 
+由可信授权中心生成CP-ABE方案的系统主密钥MK
+和公开参数 PK。 
+可信授权中心选取 2 个大素数 p、q，设 G1、G2 为 q
+阶乘法循环群，g 为 G1 的生成元，Zp 为 p 阶循环群，双
+线性映射 e:G1×G1→G2，可信授权中心生成双线性对相
+关的公共参数集合（e, g, G1, G2, Zp），选取 Zp 上的随机
+数 α，β，计算 Y=e(g,g)α、MK=gα 以及 PK=(Y,g,gβ)。MK
+由可信授权中心保管，PK 为公开参数，在密钥分发阶段
+发送给监管部门管理员后，发送给各业务链。 
+2）密钥生成：SK←KeyGen(MK, S) 
+由所在部门的管理员向可信授权中心申请监管者 i
+的属性私钥，如图 4 所示。 
+ 
+图 4  属性私钥分发 
+Fig.4  Attribute private key distribution 
+ 
+在图 4 中，可信授权中心由主密钥 MK、公开参数
+PK 和申请节点 i 的属性集 Si 生成对应的属性私钥 SKi。
+可 信 授 权 中 心 生 成 属 性 私 钥 的 过 程 为 ：
+,
+t
+t
+p
+t
+Z
+K
+g g
+L
+g
+α
+β
+∀ ∈
+→
+=
+=
+，对于用户属性列表中的每
+一个属性 j 计算 Kj=H(j)t，监管者的属性私钥为 SKi=(K, L, 
+{Kj}j∈attributeSet)。 
+3）验证参数生成：VSK←VGen(t′, PK, S) 
+可信授权中心使用同一随机数 t′、公开参数 PK 和用户
+属性集 Si，生成参数 L′=gt′，对于用户属性列表中的每一个
+属性 j 计算 K′j=H(j)t′，得到验证参数 VSKi=(L′, {K′j}j ∈
+attributeSet)。可信授权中心将 SKi、VSKi 和 PK 使用申请密钥
+的监管部门管理员的公钥加密后发送给申请密钥监管部
+门管理员，然后由该管理员用对应监管者的公钥加密
+SKi，发送给监管者。监管部门管理员通过中继链跨链将
+VSKi 和 PK 发送给各业务链。各业务链保存所有的
+VSKi，维持一个全局唯一的 PK。 
+4）加密算法：CT←Encrypt(PK, M, A)。 
+业务链上的用户在加密算法执行前获取原始业务数
+
+
+【第5页】
+第 3 期 
+景  旭等：集群式农产品供应链区块链密文策略可验多部门监管方案 
+ 
+231 
+据的监管策略，并生成一个满足该监管策略的访问树
+A。然后，使用从所在区块链获取的公开参数 PK、M 以
+及 A，对 AES 加密密钥 M 采用 CP-ABE 加密。 
+加密过程为：用户随机选取 r 阶循环群
+r
+s
+Z
+∀ ∈
+，计
+算 C0=gs，C=M·Ys=M·e(g,g)αs，将s 作为秘密，沿访问树A
+进行秘密共享。假设编号为 i 的叶子节点对应的秘密分片
+为 λi，对于每个叶子节点计算
+1
+2
+( )
+,
+i
+i
+i
+r
+r
+i
+i
+C
+g
+H i
+C
+g
+βλ
+-
+=
+=
+，
+最终的密文为
+1
+2
+0
+( ,
+{
+,
+}
+)
+i
+i
+i Nodes
+CT
+C C C C
+∈
+=
+。 
+5）解密算法：Ｍ←Decrypt(PK, CT, A, SK) 
+监管链上的监管者 i 解密时，传入公开参数 PK、从
+业务链上获取密文 CT、密文的访问树 A 以及属性私钥
+SKi。对于监管者的属性集 Si 和访问树 A 的叶子节点中重
+合的属性 j，计算
+1
+2
+(
+, ) (
+,
+)
+( , )
+j
+t
+j
+j
+j
+j
+P
+e C
+L e C
+K
+e g g
+β λ
+=
+=
+。然
+后，监管者从叶子节点开始通过拉格朗日插值逐步恢复
+父节点的秘密值，最终恢复得到根节点的值为 e(g,g)βts，
+若 是 不 满 足 策 略 的 监 管 者 则 无 法 得 到 该 值 。 计 算
+0
+(
+,
+)/ ( , )
+( , )
+ts
+s
+e C
+K
+e g g
+e g g
+β
+α
+=
+，求得明文加密的参数Ys，
+计算出明文 M=C/Ys，即加密原始数据的 AES 密钥。 
+6）访问树验证 
+业务链上的企业用户执行访问树验证操作时，对于
+该链上相应数据类型监管策略中每一个监管者的验证
+为：传入公开参数 PK、密文 CT、密文的访问树 A 以及
+验证参数 VSKi，执行与解密过程中访问树根节点值恢复
+相同的步骤，最终根节点的秘密值形式为 e(g,g)βt′s。若
+使用该数据类型对应的监管策略中所有监管者的验证
+参数恢复出的根节点值都一致，则验证通过；否则，
+验证失败。 
+将该方案写入智能合约中，在企业数据上链前验证
+密文的访问树结构，实现密文策略的可公开验证，确保
+密文访问树和监管策略相对应。 
+2.5  智能合约设计 
+针对集群式农产品供应链区块链密文条件下的多部
+门监管，设置数据上链、监管策略设置以及监管策略获
+取等智能合约，用于供应链中密文数据的访问策略验证
+和监管者策略设置与更新。 
+2.5.1  数据上链智能合约 
+数据上链之前，通过该智能合约验证访问树，保证
+上链的数据符合指定的监管规则，实现强制性监管。访
+问树验证流程如图 5 所示。 
+在图 5 中，在链内监管的监督下，企业用户加密原
+始数据，将原始数据密文、对称密钥密文、访问树以及
+链内监管的签名作为数据上链智能合约的输入，验证
+CP-ABE 加密策略。若验证通过，则将数据写入节点所
+在区块链网络中，实现数据对指定多监管者的共享，如
+算法 1 所示。 
+算法 1：访问树验证与数据上链智能合约 
+输入：发起数据上链节点 peer，通道名称 channel，
+合约名称 cc，公司名称 name，原始数据密文 C，原始数
+据类型 T，对称密钥密文 CT，访问树 A，链内节点签名
+sig，数据唯一订单号 key； 
+输出：数据上链状态及链上位置； 
+If(A.IsNull) //数据没有加密 
+value=conbine(name，CT，A，sig)//写入区块链 
+res = writeToBlockchain(key，value) 
+return res 
+policy=getpolicy(T)//获取原始数据类型 T 的监管策略 
+if(!policy.IsSubset(A))//访问树不符合预先要求，返回
+错误 
+    return error 
+allKey = getAttributeKeyFrom(policy) //获取对应策略
+的验证密钥 
+topMessage=Decrypt(C，allKey[0]) //验证访问树结构 
+for key in allKey 
+    message = Decrypt(C，key) 
+    if(message != topMessage) 
+        return err 
+value = conbine(name，CT，A，sig) //写入区块链 
+res = writeToBlockchain(key，value) 
+return res 
+ 
+图 5  访问树验证 
+Fig.5  Access tree verification 
+ 
+在算法 1 中，判断企业用户提交的数据是否标记为
+密文，明文直接上链，密文上链过程如下：首先获取拟
+上链数据的监管策略；然后，判断公开的访问树 A 是否
+满足该策略，不满足则返回错误；获取策略中所有监管
+者的验证参数 VSK，验证密文 CT 的访问树，若验证成
+功，将数据上链，返回上链信息；否则，返回错误。 
+2.5.2  监管策略设置智能合约 
+监管策略需要根据实际情况调整。监管部门的管理
+员有权修改业务区块链系统中指定数据类型本部门的监
+管策略，也能添加部门监管信息，但不能删除其他部门
+的监管权限。监管策略设置流程如算法 2 所示。 
+算法 2：监管策略设置智能合约 
+输入：发起数据上链节点 peer，通道名称 channel，
+合约名称 cc，提议者签名 sig，修改策略的具体区块链
+blockchainName，修改监管数据类型 dataType，修改后
+策略 policy； 
+
+
+【第6页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+232 
+输出：提议结果； 
+id = getId(sig) //获取提议者身份 
+if(!includePermission(id，policy)) //判断提议者是够
+有权限修改策略 
+return error 
+result = add(blochchainName+dataType，policy) //策
+略上链 
+return result 
+在算法 2 中，智能合约获取设置策略的监管部门管
+理员身份，判断是否有设置该数据监管策略的权限，通
+过后将该新策略写入区块链，返回上链信息。 
+2.5.3  监管策略获取智能合约 
+业务链中的节点定期从监管链获取最新的监管策略，
+判断是否更新策略。监管策略获取流程如算法 3 所示。 
+算法 3：监管策略获取智能合约 
+输入：发起数据上链节点 peer，通道名称 channel，合
+约名称 cc，提议者签名 sig，所在区块链 blockchainName，
+修改策略的数据类型 dataType，获取时间 time； 
+输出：提议结果； 
+policy = getPolicy(blockchainName+dataType) 
+oldTime = getTime(policy) 
+if(oldTime>time) 
+    return error 
+ans = add(dataType，policy) 
+return ans 
+在算法 3 中，业务链上业务用户获取所在区块链的
+数据类型的最新监管策略，与相同数据类型监管策略的
+时间对比，若是最新的则写入区块链，返回上链信息；
+否则直接返回。 
+3  集群式猕猴桃供应链区块链密文条件下的多部
+门监管系统 
+3.1  系统架构 
+基于 Hyperledger Fabric 联盟链构建集群式猕猴桃供
+应链区块链密文条件下的多部门监管系统。系统架构分
+为存储层、服务层、接口层、应用层 4 层，如图 6 所示。 
+存储层将隐私数据及其通过 CP-ABE 加密的密钥以
+键值对的方式索引存储在状态数据库 LevelDB 中，同时
+存储监管策略以及各监管者的验证参数。 
+服务层通过共识算法保证区块链上的数据一致性、
+完整性以及不可篡改性，保证监管溯源信息的可靠性；
+提供 AES 和 CP-ABE 的加密服务；通过智能合约为监管
+部门提供监管策略设置服务，为业务链用户提供监管策
+略获取和数据验证与上链服务。 
+接口层面向企业节点开放数据上链之前的链内监管
+以及数据加密策略的验证、监管策略更新、密文数据验
+证上链功能；面向监管链中的管理员开放监管策略的设
+置功能；为监管链上的监管者提供链上数据获取功能。 
+应用层在链内监管的参与下采集数据，为企业提供
+使用 AES 加密隐私数据以及根据访问树加密 AES 密钥的
+功能；对监管用户提供数据监管应用。 
+ 
+图 6  系统架构图 
+Fig.6  The structure of the system 
+ 
+3.2  测试环境 
+1）在 CPU 型号为 i7-12700H 搭载 Windowns11，使
+用 VMware Workstation 构建 4 核 2 线程的虚拟机，运行
+内存 6 GB，存储容量 90 GB，操作系统 Ubuntu20.10。 
+2）使用 Hyperledger Fabric 2.3 构建区块链网络，采
+用 raft 共 识 ， 状 态 数 据 库 LevelDB 。 后 端 采 用
+Spring-Boot 框架，前端使用 Bootstrap + Java Script。 
+3）AES 采用 Oracle JDK 1.8.0_271 的加密接口，工
+作模式选用 CBC。CP-ABE 基于密码库 jpbc v2.0.0 
+(http://gas.dia.unisa.it/projects/jpbc)，双线性映射 Type A
+型，选择默认参数。 
+3.3  应用案例功能分析 
+以猕猴桃溯源为例，构造集群式农产品供应链区块
+链密文策略可验多部门监管方案的原型系统。由属性授
+权中心生成的系统主密钥、公钥和属性私钥如图 7a 所
+示。某工信部门监管者的属性私钥如图 7b 所示。 
+以 工 信 部 门 为 例 ， 管 理 员 分 别 设 置 生 产 链
+（channel1）上数据类型为 transaction（销售数据）的监管
+者为 gxDep01（属性包括工信部门监管者、生产链监管
+者、销售数据监管者）和 gxDep02（属性包括工信部门监
+管者、加工链监管者、销售数据监管者）。管理员也可以
+删除已设置策略。监管策略的设置与删除如图 7c 所示。 
+业务链中的业务用户在上传数据类型为 transaction
+的数据之前，根据当前监管策略构造的访问树如图 7d 所
+示。依据该访问树，业务用户加密原始数据加密的 AES
+密钥，然后执行上链验证操作，经过上链智能合约验证
+后写入区块链。该访问树满足设定的监管策略，上链结
+果如图 7e 所示。如果将该数据的监管策略增加一个
+gxDep02，构造的访问树不满足监管策略，则上链验证
+无法通过，数据无法上链。 
+针对成功上链的数据，满足密文访问树结构的
+gxDep01 使用属性私钥解密如图 7f 所示。 
+
+
+【第7页】
+第 3 期 
+景  旭等：集群式农产品供应链区块链密文策略可验多部门监管方案 
+ 
+233 
+监管链和业务链间、业务链和业务链间均通过跨
+Fabric 通 道 的 方 式 实 现 跨 链 操 作 。 例 如 ， 监 管 链
+（ channel-jg ） 上 的 节 点 调 用 该 通 道 内 cross 链 码 的
+“getcross”方法跨通道调用生产链（channel1）上的 scCC
+链码获取索引值为“testdata”的信息，如图 7g 和 7h
+所示。 
+ 
+ 
+a. 主密钥和公钥生成 
+a. Master key & public key generation 
+b. 属性私钥生成 
+b. Attribute private key generation 
+ 
+ 
+c. 监管策略设置 
+c. Regulatory policy configuration 
+d. 访问树 
+d. Access tree 
+ 
+ 
+e. 上链成功 
+e. Succeed to upload 
+f. 解密成功 
+f. Succeed to decrypt 
+ 
+ 
+g. 跨链查询 
+g. Query by cross-channel 
+h. 跨链信息 
+h. Information for cross-channel 
+ 
+图 7  功能测试 
+Fig.7  Function test 
+ 
+3.4  区块链网络性能分析 
+上链智能合约需要验证监管策略中所有监管者的解
+密情况，使用的时间和监管策略中的监管者个数有关。
+分别设置交易数据类型的监管节点个数为 10、20、
+30……100，监管节点的属性个数为 4，使用 Caliper 测试
+加密数据上链时延以及系统的吞吐量，每类策略取 5 轮
+测试的平均值，加密数据上链时延如图 8a 所示，系统吞
+吐量如图 8b 所示。 
+由图8a可以看出，策略中监管者数量每增加10个，
+平均上链时间延长约 500 ms。由图 8b 可以看出，在共享
+节点数小于 100 时，策略中监管者个数每增加 10，系统
+吞吐量大概下降 1.3 事务数/s（transactions/s,TPS），监管
+者个数的增加对于系统吞吐量的影响较小，此时，系统
+的平均吞吐量为 438 事务数/s（transactions/s,TPS）。 
+ 
+图 8  性能测试 
+Fig.8  Performance test 
+ 
+区块链网络性能分析表明，该系统能够基本适应农
+产品供应链的应用需求。 
+
+
+【第8页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+234 
+3.5  安全性分析 
+企业隐私数据加密存储在区块链网络上，被非授权
+用 户 获 取 的 方 式 有 ： 破 解 AES ， 或 者 CP-ABE 。
+AES-CBC 算法满足 IND-CPA（自适应选择明文攻击），
+是语义安全的[31]。 
+CP-ABE 满足双线性指数 Diffie-Hellman (Bilinear 
+Diffie-Hellman Exponent，BDHE)安全[26]，因此，破解
+CP-ABE 是困难的。 
+因此，理论上使用本文采用的隐私保护方法在区块
+链网络上是安全可靠的，非授权用户无法查看链上隐私
+数据。 
+3.6  方案对比分析 
+从加/解密速率、是否确保数据对监管者共享、是否
+考虑监管权限、数据隐私性、密钥安全分发和密钥管理
+简易性等方面，对比本文方案与已有的农产品供应链区
+块链密文监管方案如表 3 所示。 
+表 3  不同方案安全性和性能对比 
+Table 3  Comparison of safety and performance of different schemes 
+方案 
+Scheme 
+类型 
+Type 
+加/解密速率 
+Encryption/ 
+Decryption rate 
+确保数据对于监管者的共享 
+Ensuring that data is shared 
+with regulators 
+考虑监管权限 
+Consideration of 
+regulatory authority 
+数据隐私性 
+Data privacy 
+密钥安全分发 
+Secure key 
+distribution 
+密钥管理简易性 
+Manage key easily 
+方案 1 Scheme1[3] 
+明文 
+― 
+√ 
+― 
+× 
+― 
+― 
+方案 2 Scheme2[8] 
+SM2 
+慢 
+× 
+× 
+√ 
+√ 
+√ 
+方案 3 Scheme3[7] 
+AES+ECC 
+较快 
+× 
+× 
+√ 
+√ 
+√ 
+本文方案 Our scheme 
+AES+CP-ABE 
+较快 
+√ 
+√ 
+√ 
+√ 
+√ 
+注：“√”文献方案支持此特性，“×”文献方案不支持此特性，“―”文献方案中无相应的特性要求。 
+Note: “√” This feature is supported by the literature scheme, “×” This feature is not supported by the literature scheme, “―” There is no corresponding feature 
+requirement in the literature scheme 
+ 
+由表 3 可以看出，与已有方案相比，本方案在较快
+的加/解密速率前提下，能够确保数据对于监管者的共
+享，考虑了监管者的权限，保证密钥安全分发以及简化
+了密钥的管理工作。 
+4  结  论 
+本研究基于 CP-ABE 设计了集群式农产品供应链区
+块链密文策略可验多部门监管方案，一定程度上减小了
+发生在监管端隐私泄露的可能，得出以下结论： 
+1）针对集群式农产品供应链区块链多部门监管的需
+求以及区块链链上数据加密存储带来的监管数据共享问
+题，本研究构建了密文条件下分职能的多部门监管体
+系，采用链内外两层监管加强了监管的强度；采用
+CP-ABE 和 AES 混合加密，结合监管策略，实现监管数
+据对于多监管者的共享；基于 CP-ABE 提出了密文访问
+树验证方案，与区块链智能合约相结合，确保了业务链
+上链数据对于相应监管者的共享，防止用户采用不正确
+的监管策略加密数据，导致链上出现无法监管的数据，
+实现了链上数据强制性监管和监管策略的动态更新。 
+2）基于 Hyperledger Fabric 构建了基于 CP-ABE 的集
+群式农产品供应链区块链密文策略可验证多部门监管原
+型系统。功能测试结果表明，该方案能够适应数据加密
+情况下的区块链上数据多部门分职能、专业化、细粒度
+的监管。性能测试结果表明，监管策略中监管者数量每
+增加 10 个，系统的平均上链时间延长约 500 ms，吞吐量
+降低 1.3 事务数/s（transactions/s）。策略中监管者个数小
+于 100 时 ， 系 统 的 平 均 吞 吐 量 为 438 事 务 数 /s
+（transactions/s），表明该系统基本能适应农产品供应链的
+应用需求；安全性分析表明，该系统具备较高的安全
+性；与其他农产品供应链区块链监管方案的对比，进一
+步说明了本方案在多部门监管方面的优势。 
+本方案实现了密文条件下密文策略可验证的多部门
+监管，明确了监管者的权限，一定程度上减小了发生在
+监管者端的数据隐私泄露风险，实现了更为专业化、细
+粒度的监管，为集群式农产品供应链区块链监管提供了
+一定的借鉴与参考。 
+[参  考  文  献] 
+[1] 
+杨信廷，王明亭，徐大明，等. 基于区块链的农产品追溯
+系统信息存储模型与查询方法[J]. 农业工程学报，2019，
+35(22)：323-330. 
+YANG Xinting, WANG Mingting, XU Daming, et al. Data 
+storage and query method of agricultural products traceability 
+information based blockchain[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the 
+CSAE), 2019, 35(22): 323-330. (in Chinese with English 
+abstract) 
+[2] 
+李佳利，陈宇，钱建平，等. 融合 HACCP 体系的农产品
+区块链追溯系统精准上链机制改进[J]. 农业工程学报，
+2022，38(20)：276-285. 
+LI Jiali, CHEN Yu, QIAN Jianping, et al. Improvement of 
+the precise up-chain mechanism of the agricultural products 
+blockchain traceability system integrating the HACCP 
+system[J]. 
+Transactions 
+of 
+the 
+Chinese 
+Society 
+of 
+Agricultural Engineering (Transactions of the CSAE), 2022, 
+38(20): 276-285. (in Chinese with English abstract)  
+[3] 
+任守纲，何自明，周正己，等. 基于 CSBFT 区块链的农
+作物全产业链信息溯源平台设计[J]. 农业工程学报，
+2020，36(3)：279-286. 
+REN Shougang, HE Ziming, ZHOU Zhengji, et al. Design 
+and implementation of information tracing platform for crop 
+whole industry chain based on CSBFT-Blockchain[J]. 
+Transactions of the Chinese Society of Agricultural 
+Engineering (Transactions of the CSAE), 2020, 36(3): 
+279-286. (in Chinese with English abstract)  
+[4] 
+和军，郭安皓. 国内农产品监管实践及研究新进展[J]. 治
+理现代化研究，2022，38(4)：29-38. 
+HE Jun, GUO Anhao. New progress in domestic agricultural 
+product supervision practice and research[J]. Governance 
+Modernization Studies, 2022, 38(4): 29-38. (in Chinese with 
+English abstract) 
+[5] 
+洪学海，汪洋，廖方宇. 区块链安全监管技术研究综述[J]. 
+中国科学基金，2020，34(1)：18-24. 
+
+
+【第9页】
+第 3 期 
+景  旭等：集群式农产品供应链区块链密文策略可验多部门监管方案 
+ 
+235 
+HONG Xuehai, WANG Yang, LIAO Fangyu. Review on the 
+technology research of blockchain security supervision[J]. 
+Bulletin of National Natural Science Foundation of China, 
+2020, 34(1): 18-24. (in Chinese with English abstract) 
+[6] 
+景旭，刘滋雨，秦源泽. 基于区块链中继技术的集群式农
+产品供应链溯源模型[J]. 农业工程学报，2022，38(11)：
+299-308. 
+JING Xu, LIU Ziyu, QIN Yuanze. Traceabiflity model of 
+cluster agricultural product supply chains based on 
+blockchain relay technology[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the CSAE), 
+2022, 38(11): 299-308. (in Chinese with English abstract) 
+[7] 
+孙传恒，于华竟，罗娜，等. 基于智能合约的果蔬区块链
+溯源数据存储方法研究[J]. 农业机械学报，2022，53(8)：
+361-370. 
+SUN Chuanheng, YU Huajing, LUO Na, et al. Research for 
+blockchain traceability data storage of fruit and vegetable 
+foods supply chain based on smart contract[J]. Transactions 
+of the Chinese Society for Agricultural Machinery, 2022, 
+53(8): 361-370. (in Chinese with English abstract) 
+[8] 
+于华竟，徐大明，罗娜，等. 杂粮供应链区块链多链追溯
+监管模型设计[J]. 农业工程学报，2021，37(20)：323-332. 
+YU Huajing, XU Daming, LUO Na, et al. Design of the 
+blockchain multi-chain traceability supervision model for 
+coarse cereal supply chain[J]. Transactions of the Chinese 
+Society of Agricultural Engineering (Transactions of the 
+CSAE), 2021, 37(20): 323-332. (in Chinese with English 
+abstract) 
+[9] 
+伍德伦，饶元，许磊，等. 农产品区块链信息可信评估差
+异化共享模型设计与实现[J]. 农业工程学报，2022，
+38(11)：309-317. 
+WU Delun, RAO Yuan, XU Lei, et al. Design and 
+implementation of the trusted evaluation and differentiated 
+sharing model for agricultural blockchain information[J]. 
+Transactions of the Chinese Society of Agricultural 
+Engineering (Transactions of the CSAE), 2022, 38(11): 
+309-317. (in Chinese with English abstract) 
+[10] 巫光福，余攀，王柯柯. 双链式区块链交易监管研究[J]. 计
+算机工程与应用，2020，56(23)：116-123. 
+WU Guangfu, YU Pan, WANG Keke. Transaction regulatory 
+research 
+on 
+double-Chain 
+blockchain[J]. 
+Computer 
+Engineering and Applications, 2020, 56(23): 116-123. (in 
+Chinese with English abstract) 
+[11] 汪金苗，谢永恒，王国威，等. 基于属性基加密的区块链
+隐私保护与访问控制方法[J]. 信息网络安全，2020，20(9)：
+47-51. 
+WANG Jinmiao, XIE Yongheng, WANG Guowei, et al. A 
+method of privacy preserving and access control in 
+blockchain based on attribute-based encryption[J]. Netinfo 
+Security, 2020, 20(9): 47-51. (in Chinese with English 
+abstract) 
+[12] 李莉，曾庆贤，文义红，等. 基于区块链与代理重加密的
+数据共享方案[J]. 信息网络安全，2020，20(8)：16-24. 
+LI Li, ZENG Qingxian, WEN Yihong, et al. Data sharing 
+scheme 
+based 
+on 
+the 
+blockchain 
+and 
+the 
+proxy 
+re-encryption[J]. Netinfo Security, 2020, 20(8): 16-24. (in 
+Chinese with English abstract) 
+[13] 李雪莲，张夏川，高军涛，等. 支持属性和代理重加密的
+区块链数据共享方案[J]. 西安电子科技大学学报，2022，
+49(1)：1-16. 
+LI Xuelian, ZHANG Xiachuan, GAO Juntao, et al. 
+Blockchain data sharing scheme supporting attribute and 
+proxy re-encryption[J]. Journal of Xidian University, 2022, 
+49(1): 1-16. (in Chinese with English abstract) 
+[14] WEN B D, WANG Y J, DING Y, et al. A privacy-preserving 
+blockchain supervision framework in the multiparty setting[J]. 
+Wireless Communications and Mobile Computing, 2021(3): 
+5236579. 
+[15] DENG W W, XIANG T, LIAO X F. STEAC: Towards 
+secure, traceable, and efficient cryptographic access control 
+scheme 
+in 
+smart 
+healthcare[J]. 
+Multimedia 
+Tools 
+Applications. 2022, 81(21): 30069-30092.  
+[16] SALTZER J H, SCHROEDER M D. The protection of 
+information in computer systems[J]. Proceedings of the IEEE. 
+1975, 63(9): 1278-1308. 
+[17] 和军，黄子龙. 协同监管: 国外研究与实践新进展及借鉴[J]. 
+治理现代化研究，2019(6)：41-48. 
+HE Jun, HUANG Zilong. Collaborative regulation: The new 
+progress and reference of foreign research[J]. Governance 
+Modernization Studies, 2019(6): 41-48. (in Chinese with 
+English abstract) 
+[18] 安森东. 市场监管现代化：问题与破题[J]. 行政管理改革，
+2022(5)：41-47. 
+AN 
+Sendong. Modernization 
+of 
+market supervision: 
+Problems and resolutions[J]. Administration Reform, 2022(5): 
+41-47. (in Chinese with English abstract) 
+[19] 刘尚，郭银章. 云计算多授权中心 CP-ABE 代理重加密方
+案[J]. 网络与信息安全学报，2022，8(3)：176-188. 
+LIU Shang, GUO Yinzhang. Multi-authority based CP-ABE 
+proxy re-encryption scheme for cloud computing[J]. Chinese 
+Journal of Network and Information Security, 2022, 8(3): 
+176-188. (in Chinese with English abstract) 
+[20] 郭伟嘉，刘敦楠，王文，等. 基于智能合约的电动汽车充
+电服务费自适应调整机制[J]. 电力自动化设备，2022，
+42(10)：13-20，61. 
+GUO Weijia, LIU Dunnan, WANG Wen, et al. Adaptive 
+adjustment mechanism of electric vehicle charging service 
+fee based on smart contract[J]. Electric Power Automation 
+Equipment, 2022, 42(10): 13-20, 61. (in Chinese with 
+English abstract) 
+[21] 张志威，王国仁，徐建良，等. 区块链的数据管理技术综
+述[J]. 软件学报，2020，31(9)：2903-2925. 
+ZHANG Zhiwei, WANG Guoren, XU Jianliang, et al. Survey 
+on data management in blockchain systems[J]. Journal of 
+Software, 2020, 31(9): 2903-2925. (in Chinese with English 
+abstract) 
+[22] BOLDYREVA A. Identity-based encryption with efficient 
+revocation[C]//GOYAL V, KUMAR V. Proceedings of the 
+15th ACM Conference on Computer and communications 
+security. New York, USA, 2008: 417-426.  
+[23] 邱云翔，张红霞，曹琪，等. 基于 CP-ABE 算法的区块链
+数据访问控制方案[J]. 网络与信息安全学报，2020，6(3)：
+88-98. 
+QIU Yunxiang, ZHANG Hongxia, CAO Qi, et al. Blockchain 
+data access control scheme based on CP-ABE algorithm[J]. 
+Chinese Journal of Network and Information Security, 2020, 
+6(3): 88-98. (in Chinese with English abstract) 
+[24] 芦效峰，付淞兵. 属性基加密和区块链结合的可信数据访
+问控制方案[J]. 信息网络安全，2021，21(3)：7-14. 
+LU Xiaofeng, FU Songbing. A trusted data access control 
+scheme 
+combining 
+attribute 
+based 
+encryption 
+and 
+blockchain[J]. Netinfo Security, 2021, 21(3): 7-14. (in 
+Chinese with English abstract) 
+[25] 张兴兰，崔遥. 基于群签名的属性加密方案[J]. 网络与信
+息安全学报，2019，5(1)：19-25. 
+ZHANG Xinglan, CUI Yao. Attribute-based encryption 
+scheme with group signatures[J]. Chinese Journal of Network 
+and Information Security, 2019, 5(1): 19-25. (in Chinese with 
+English abstract) 
+[26] WATERS B. Ciphertext-Policy attribute-based encryption: 
+An 
+expressive, 
+efficient, 
+and 
+Provably 
+Secure 
+Realization[C]// 2011 Lecture Notes in Computer Science. 
+Berlin, Germany, Springer, 2011: 53-70. 
+[27] BETHENCOURT J, SAHAI A, WATERS B. Ciphertext-policy 
+
+
+【第10页】
+农业工程学报（http://www.tcsae.org）                                2023 年   
+ 
+236 
+attribute-based encryption[C]//2007 IEEE Symposium on 
+Security and Privacy (SP'07). Berkeley, USA, IEEE. 2007: 
+321-334. 
+[28] 潘晨，刘志强，刘振，等. 区块链可扩展性研究：问题与
+方法[J]. 计算机研究与发展，2018，55(10)：2099-2110. 
+PAN Chen, LIU Zhiqiang, LIU Zhen, et al. Research on 
+scalability 
+of 
+blockchain 
+technology: 
+Problems 
+and 
+methods[J]. Journal of Computer Research and Development, 
+2018, 55(10): 2099-2110. (in Chinese with English abstract) 
+[29] 蒋宇. 我国网络市场食品安全监管中的政府责任研究[D]. 
+哈尔滨：黑龙江大学，2018. 
+JIANG Yu. Research on Government Responsibility in Food 
+Safety Supervision of Chinese Internet Market[D]. Harbin: 
+Heilongjiang University, 2018. (in Chinese with English 
+abstract) 
+[30] 周彦萍，马艳东. 基于 CP-ABE 访问控制系统的设计与实
+现[J]. 计算机技术与发展，2014，24(2)：145-148，152. 
+ZHOU Yanping, MA Yandong. Design and implementation 
+for access control system based on CP-ABE[J]. Computer 
+Technology and Development, 2014, 24(2): 145-148, 152. (in 
+Chinese with English abstract) 
+[31] POPA R A, REDFIELD  C M S, ZELDOVICH  N, et al. 
+CryptDB: protecting confidentiality with encrypted query 
+processing[C]// Proceedings of the Twenty-third ACM 
+Symposium on Operating Systems Principles. Cascais, 
+Portugal, 2011: 85-100. 
+ 
+ 
+ 
+Multi-department supervision scheme of the verifiable blockchain 
+ciphertext policy for cluster agricultural supply chain 
+ 
+JING Xu, JIANG Yan 
+(College of Information Engineering, Northwest A&F University, Yangling 712100, China) 
+ 
+Abstract: Agricultural product supply chain and blockchain are closely integrated with the continuous acceleration of 
+agricultural modernization. The clustered supply chain has gradually developed from a single supply chain in recent years. 
+There is heat competition among peer enterprises in the clustered agricultural product supply chain blockchain. Among them, 
+the data on the blockchain is publicly available to all participants. The private data on the chain has been adopted as an 
+encrypted storage model, in order to protect users' privacy. The existing single-department supervision scheme is unsuitable for 
+the complex cluster agricultural supply chain. The multi-sector supervision can be expected to serve as a promising way in the 
+current reality. However, multi-department supervision is still challenging to ensure the sharing of encrypted data on the chain 
+without redundant information for irrelevant departments. It is a high demand to improve supervision efficiency and credibility. 
+Fortunately, the ciphertext-policy attribute-based encryption (CP-ABE) can be a one-to-numerous encryption, essentially a 
+public key encryption system. The CP-ABE can realize the sharing of data for the users with specified attributes suitable for 
+the application environment of multi-department supervision of the blockchain in the clustered agricultural supply chain. In 
+this research, a multi-department supervision scheme was proposed in the verifiable blockchain ciphertext policy for the cluster 
+agricultural supply chains using CP-ABE. A chain of custody was set up outside the business chain, including the supervisors 
+from various departments to facilitate the management of supervisors. The chain of custody managed data on the business 
+chain through “cross-chain governance”. Different supervision strategies were set for the data on the chain, according to the 
+data type. The administrator of the supervision department was set as the department's supervisor to supervise the specific data 
+of the specific chain. According to the supervision strategy on the chain, the enterprise users encrypted the data using CP-ABE 
+to realize the disclosure of data for privacy. A CP-ABE-based access tree verification scheme was designed to combine the 
+smart contracts and supervision strategies, and then to verify the CP-ABE access tree before the data was uploaded to the chain, 
+in order to ensure that the data was available to the designated supervisor. The direct use of CP-ABE was inefficient for data 
+encryption. Therefore, hybrid encryption was used to encrypt and share the data. The specific implementation was to encrypt 
+the original data with symmetric encryption and then use the CP-ABE to encrypt the symmetric encryption key. A supervision 
+prototype system was constructed under the blockchain ciphertext of the clustered agricultural supply chain using Hyperledger 
+Fabric. The system was tested in two aspects of function and performance. The functional test showed that the system fully 
+met the needs of essential multi-department supervision. The performance test showed that each time the number of 
+supervisors in the supervision strategy increased by 10, while the average on-chain time was extended by about 500 ms, and 
+the average throughput was 438 transactions/s. When the number of supervisors for a single data type of a single enterprise 
+was within a reasonable range, the clustered system was adept to the multi-department supervision under the condition of the 
+primary clustered agricultural supply chain blockchain ciphertext-application requirements. Security analysis indicated the 
+high-security system. As such, this scheme can be expected suitable for the multi-departmental, specialized, and fine-grained 
+supervision of data on the blockchain under data encryption. The pressure of regulators can be inspired by the development of 
+blockchain supervision of cluster agricultural supply chains. 
+Keywords: agricultural products; traceability; blockchain; supervision; supply chain; ciphertext-policy attribute-based 
+encryption 
+

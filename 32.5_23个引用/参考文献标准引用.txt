@@ -1,0 +1,21 @@
+[1]李富强,张路.基于汽车生态圈的区块链应用模型构建研究[J].专用汽车,2024,(11):64-66.DOI:10.19999/j.cnki.1004-0226.2024.11.018.
+[2]赵阳,孟慧敏.我国重要产品追溯体系建设实践和对策建议[J].轻工标准与质量,2024,(05):131-134.DOI:10.19541/j.cnki.issn1004-4108.2024.05.032.
+[3]王家峰.基于混合算法的互联网访问用户身份认证方法[J].齐齐哈尔大学学报(自然科学版),2024,40(03):5-10.DOI:10.20171/j.cnki.23-1419/n.2024.03.009.
+[4]倪雪莉,马卓,王群.区块链P2P网络及安全研究[J].计算机工程与应用,2024,60(05):17-29.
+[5]Hossein M T ,Roman V ,Raghavan N V .Understanding blockchain: Definitions, architecture, design, and system comparison[J].Computer Science Review,2023,50DOI:10.1016/J.COSREV.2023.100575.
+[6]王晶宇,马兆丰,徐单恒,等.支持国密算法的区块链交易数据隐私保护方案[J].信息网络安全,2023,23(03):84-95.
+
+[8]王新庄.食品安全问题探讨及法律规制研究——评《食品安全法原理》[J].食品安全质量检测学报,2022,13(17):5769.DOI:10.19812/j.cnki.jfsq11-5956/ts.2022.17.044.
+[9]刘丁宁.基于国密SM2批量验签的区块链系统的研究与应用[D].北京邮电大学,2022.DOI:10.26969/d.cnki.gbydu.2022.001396.
+[10]Somdip D ,Suman S ,Kumar A S , et al.SmartNoshWaste: Using Blockchain, Machine Learning, Cloud Computing and QR Code to Reduce Food Waste in Decentralized Web 3.0 Enabled Smart Cities[J].Smart Cities,2022,5(1):162-176.DOI:10.3390/SMARTCITIES5010011.
+[11]Yi L ,Peng L ,He X .A Food anti-counterfeiting traceability system based on Blockchain and Internet of Things[J].Procedia Computer Science,2022,199629-636.DOI:10.1016/J.PROCS.2022.01.077.
+[12]Hai J ,Jiang X .Towards trustworthy blockchain systems in the era of “Internet of value”: development, challenges, and future trends[J].Science China Information Sciences,2021,65(5):DOI:10.1007/S11432-020-3183-0.
+[13]Soares E M ,Rodrigo R R D ,Victória L J B , et al.APTM: A Model for Pervasive Traceability of Agrochemicals[J].Applied Sciences,2021,11(17):8149-8149.DOI:10.3390/APP11178149.
+[14]K. C N Y .Decentralizing Supply Chain Anti-Counterfeiting and Traceability Systems Using Blockchain Technology[J].Future Internet,2021,13(4):84-84.DOI:10.3390/FI13040084.
+[15]Somdip D ,Suman S ,Kumar A S , et al.FoodSQRBlock: Digitizing Food Production and the Supply Chain with Blockchain and QR Code in the Cloud[J].Sustainability,2021,13(6):3486-3486.DOI:10.3390/SU13063486.
+[16]曹琪,阮树骅,陈兴蜀,等.Hyperledger Fabric平台的国密算法嵌入研究[J].网络与信息安全学报,2021,7(01):65-75.
+[17]Lu W ,Longqin X ,Zhiying Z , et al.Smart Contract-Based Agricultural Food Supply Chain Traceability[J].IEEE ACCESS,2021,99296-9307.DOI:10.1109/ACCESS.2021.3050112.
+[18]Sensen H ,Shan H ,Jing H , et al.Blockchain and Edge Computing Technology Enabling Organic Agricultural Supply Chain: A Framework Solution to Trust Crisis[J].Computers & Industrial Engineering,2020,(prepublish):107079-.DOI:10.1016/J.CIE.2020.107079.
+[19]朱祉琴.浅谈食品卫生法与安全现状分析[J].食品安全导刊,2020,(18):38-39.DOI:10.16043/j.cnki.cfs.2020.18.035.
+[20]司冰茹, 肖江, 刘存扬, et al. 区块链网络综述[J]. 软件学报, 2024, 35(2): 773-799.
+[21]吴三斌.基于区块链的农产品溯源系统研究[J].南方农机,2025,56(10):15-18.

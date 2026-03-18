@@ -1,0 +1,889 @@
+来源文件：1Research on a Blockchain-Based Quality and Safety Traceability System for Hymenopellis raphanipes.pdf
+============================================================
+
+【第1页】
+Academic Editor: Assunta Di Vaio
+Received: 25 June 2025
+Revised: 17 July 2025
+Accepted: 21 July 2025
+Published: 16 August 2025
+Citation: Xu, W.; Guo, H.; Zhang, X.;
+Lin, M.; Liu, P. Research on a
+Blockchain-Based Quality and Safety
+Traceability System for Hymenopellis
+raphanipes. Sustainability 2025, 17, 7413.
+https://doi.org/10.3390/
+su17167413
+Copyright: © 2025 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed under the terms and
+conditions of the Creative Commons
+Attribution (CC BY) license
+(https://creativecommons.org/
+licenses/by/4.0/).
+Article
+Research on a Blockchain-Based Quality and Safety Traceability
+System for Hymenopellis raphanipes
+Wei Xu 1,2,3, Hongyan Guo 1,2,3, Xingguo Zhang 1,2,3, Mingxia Lin 1,2,3 and Pingzeng Liu 1,2,3,*
+1
+School of Information Science and Engineering, Shandong Agricultural University, Taian 271018, China;
+xuwei202425@163.com (W.X.); guohongyan1008@163.com (H.G.); xingguo_zhang@163.com (X.Z.);
+linmingxia666@163.com (M.L.)
+2
+Key Laboratory of Huang-Huai-Hai Smart Agricultural Technology, Ministry of Agriculture and Rural Affairs,
+Taian 271018, China
+3
+Agricultural Big-Data Research Center, Shandong Agricultural University, Taian 271018, China
+*
+Correspondence: pzliu@sdau.edu.cn
+Abstract
+Hymenopellis raphanipes is a high-value edible fungus with a short shelf life and high
+perishability, which poses significant challenges for quality control and safety assurance
+throughout its supply chain. Ensuring effective traceability is essential for improving pro-
+duction management, strengthening consumer trust, and supporting brand development.
+This study proposes a comprehensive traceability system tailored to the full lifecycle of
+Hymenopellis raphanipes, addressing the operational needs of producers and regulators alike.
+Through detailed analysis of the entire supply chain, from raw material intake, cultiva-
+tion, and processing to logistics and sales, the system defines standardized traceability
+granularity and a unique hierarchical coding scheme. A multi-layered system architec-
+ture is designed, comprising a data acquisition layer, network transmission layer, storage
+management layer, service orchestration layer, business logic layer, and user interaction
+layer, ensuring modularity, scalability, and maintainability. To address performance bottle-
+necks in traditional systems, a multi-chain collaborative traceability model is introduced,
+integrating a mainchain–sidechain storage mechanism with an on-chain/off-chain hybrid
+management strategy. This approach effectively mitigates storage overhead and enhances
+response efficiency. Furthermore, data integrity is verified through hash-based validation,
+supporting high-throughput queries and reliable traceability. Experimental results from its
+real-world deployment demonstrate that the proposed system significantly outperforms
+traditional single-chain models in terms of query latency and throughput. The solution
+enhances data transparency and regulatory efficiency, promotes sustainable practices in
+green agricultural production, and offers a scalable reference model for the traceability of
+other high-value agricultural products.
+Keywords:
+blockchain; traceability model; Hymenopellis raphanipes; industry chain;
+smart contract
+1. Introduction
+Over the past four decades, the annual output of edible fungi in China has increased
+nearly 730 fold, making it the fifth largest agricultural plantation sector after grain, veg-
+etables, fruits, and oil crops, with an annual output value exceeding 400 billion CNY [1].
+Moreover, China is the world’s largest producer and consumer of edible mushrooms [2].
+The edible mushroom industry plays a crucial role in optimizing and restructuring the
+Sustainability 2025, 17, 7413
+https://doi.org/10.3390/su17167413
+
+
+【第2页】
+Sustainability 2025, 17, 7413
+2 of 19
+agricultural sector, promoting the development of the health industry, and contributing
+to national food security [3,4]. With the rapid growth of the industry—particularly the
+expanding cultivation of high-value varieties such as Hymenopellis raphanipes (black-skinned
+chicken matsutake)—strengthening quality and safety management throughout the entire
+process has become a critical factor to ensure the industry’s sustainable development. On
+one hand, issues such as opaque information and lax management persist in the production,
+processing, and distribution stages, necessitating the application of scientific methods to
+enhance product quality and safety control. On the other hand, establishing a robust
+traceability system helps to increase consumer confidence in product quality and facilitates
+accurate and efficient supervision by regulatory authorities. Furthermore, a comprehensive
+traceability mechanism also contributes to enhancing industrial brand value and promoting
+the sustainable development of the edible mushroom industry. Therefore, researching and
+constructing a scientific and efficient quality safety and traceability system holds significant
+practical importance for modernizing the Hymenopellis raphanipes industry and improving
+its market competitiveness.
+Food safety and supply chain integrity are critical for high-value edibles like Hy-
+menopellis raphanipes. Current traceability systems still face challenges in terms of data
+transparency and tamper resistance. Blockchain technology, with its characteristics of de-
+centralization, immutability, and traceability, holds great promise for achieving end-to-end
+traceability [5,6]. However, challenges related to system scalability and interoperability
+remain significant barriers to its widespread adoption. This study specifically addresses
+these critical issues. Zhao [7] constructed a safe and efficient blockchain traceability model
+to realize the safe storage of traceability confidentiality data and designed and realized
+a safe and trustworthy traceability system for ginger product quality. He [8] and others
+integrated blockchain technology into traditional seed information traceability and pro-
+posed a seed quality traceability model with distributed data storage to achieve accurate
+traceability and the rapid identification of seed quality. Ren [9] and others proposed a
+consensus algorithm based on the reputation supervision mechanism and designed and
+realized an information traceability platform for the whole industry chain of wheat. In
+addition, existing studies have involved the construction of quality and safety traceability
+systems for many types of agricultural and animal products, such as tea [10], Agaricus
+bisporus [11], millet [12], fish [13,14], fruits and vegetables [15], and so on. Although
+previous studies have achieved success in specific domains, Hymenopellis raphanipes, as
+an emerging high-value-added fresh edible mushroom, presents unique challenges due
+to its short shelf life, high perishability, and strong reliance on cold chain logistics. The
+time span from harvest to consumption is relatively short, placing stringent demands on
+temperature and humidity control, transportation efficiency, and real-time information
+synchronization. Existing agricultural traceability systems are often designed for conven-
+tional products, characterized by long data acquisition cycles and limited responsiveness.
+These systems typically lack essential functionalities such as cold chain temperature mon-
+itoring, real-time tracking, and multi-source data integration, making them insufficient
+for the precise traceability and quality control required throughout the entire lifecycle of
+Hymenopellis raphanipes. This mismatch significantly hinders the sustainable development
+of the Hymenopellis raphanipes industry.
+Based on the aforementioned background, this paper focuses on quality management
+throughout the entire lifecycle of Hymenopellis raphanipes and proposes a comprehensive
+quality and safety traceability solution applicable to the entire industry chain of the black-
+skinned chanterelle mushroom. Starting from an analysis of the supply chain’s information
+characteristics, this study examines data flows and the practical needs of enterprises,
+progressively constructing a traceability system architecture capable of accommodating
+
+
+【第3页】
+Sustainability 2025, 17, 7413
+3 of 19
+multiple stages and stakeholders. To address issues in existing traceability mechanisms—
+such as unclear granularity, information silos, and insufficient data credibility—this paper
+designs a hierarchical and highly scalable system framework, combined with a unified
+coding scheme and information association strategy to enhance the accuracy and consis-
+tency of data across the whole chain. To further improve system performance and security,
+the research introduces a multi-chain collaborative mechanism, establishing a mainchain
+and sidechain storage model and leveraging on-chain/off-chain cooperation technologies
+and smart contracts to achieve the automatic verification and closed-loop management
+of key node information. Finally, the system is deployed and functionally validated on
+the Hyperledger Fabric platform. To achieve the aforementioned objectives, this study
+is grounded on the following methodological assumptions: a unified coding system and
+information association strategy can ensure data consistency and accuracy across multi-
+ple stages and stakeholders within the supply chain; a collaborative storage architecture
+combining main and sidechains, integrated with the Hyperledger Fabric platform, can
+significantly enhance the system’s scalability and data processing efficiency; and the imple-
+mentation of smart contracts for the automatic verification and closed-loop management of
+key node information can improve system security and trustworthiness. This study aims
+to address existing technical gaps in the Hymenopellis raphanipes industry, particularly in
+high-frequency data acquisition, cold chain temperature control integration, and end-to-
+end trustworthy traceability. It seeks to provide a replicable and scalable framework for the
+intelligent quality management of high-value-added, perishable agricultural products and
+to offer a theoretical and technical foundation for advancing digital agricultural supervision
+in China.
+This paper is organized as follows: Section 2 introduces the relevant technologies used
+for the design of the traceability system for black-skinned chanterelle mushroom, provides
+an in-depth analysis of the supply chain information, and puts forward the overall system
+framework and a traceability granularity design scheme. Section 3 describes in detail the
+blockchain-based traceability model of black skinned chanterelle mushroom, covering the
+design of the traceability code, fast query mechanism, smart contract design, and data
+collection method. Section 4 describes the specific realization process of the system and the
+experimental verification studies. Section 5 discusses the system’s advantages, problems,
+and future directions for improvement. Section 6 summarizes the whole paper and predicts
+future research directions.
+2. Design of Blockchain-Based Traceability Scheme for
+Hymenopellis raphanipes
+2.1. Related Technologies
+2.1.1. Blockchain Technology
+Blockchain is a distributed ledger based technology in which all data is stored in
+multiple nodes in a decentralized manner and secured by cryptographic algorithms [15–17].
+Each block contains multiple transaction records and is connected to the previous block
+by a hash algorithm to form a chain structure, making the data untamperable once writ-
+ten [18,19]. This tamperproofing and decentralization [20,21] have led to the widespread
+application of blockchain in the field of food safety and quality traceability. In the qual-
+ity and safety traceability system of Hymenopellis raphanipes, blockchain technology can
+effectively guarantee the authenticity and traceability of the information in each link and
+enhance the overall transparency and credibility of the system.
+
+
+【第4页】
+Sustainability 2025, 17, 7413
+4 of 19
+2.1.2. Smart Contracts
+Smart contracts are self-checking, tamperproof, automated protocols running on the
+blockchain with the characteristics of determinism, autonomy, decentralization, and au-
+tomatic execution, meaning they are capable of automatically executing predetermined
+contract terms when specific conditions are met [22–25]. Smart contracts do not require a
+third-party intermediary and can realize the execution of contracts without human inter-
+vention, ensuring the transparency and efficiency of the execution process [26,27]. In the
+quality and safety traceability system of Hymenopellis raphanipes, a smart contract guaran-
+tees the authenticity and integrity of data flow on the chain by automatically verifying the
+hash value and key information of the production process data.
+2.2. Supply Chain Information Analysis of Hymenopellis raphanipes
+To achieve the quality and safety traceability of Hymenopellis raphanipes, it is essential
+to comprehensively record and securely store key product quality and safety information
+at each stage of the supply chain, ensuring the authenticity and security of information
+transmission and sharing, thereby obtaining reliable traceability data. The supply chain
+of Hymenopellis raphanipes is divided into several stages based on the factory production
+process, including strain preparation (mixing, the bagging of culture materials, mother
+liquor preparation, and liquid strain cultivation), mushroom development management
+(fermentation, inoculation, mushroom growth, and mulching), mushroom production and
+harvesting (mushroom management, picking, and grading), storage, processing, trans-
+portation, and sales. The overall supply chain process is illustrated in Figure 1.
+ 
+Figure 1. Supply chain process of Hymenopellis raphanipes.
+At each stage of the supply chain, aligned with the practical needs of enterprises,
+two categories of key information must be simultaneously collected and managed: produc-
+tion material information and operational information. Production material information
+includes substrate materials and their proportions, strain sources and batches, and related
+production equipment data. Operational information covers operation records, growth
+environment monitoring data, daily management logs, harvesting records, product grading
+
+
+【第5页】
+Sustainability 2025, 17, 7413
+5 of 19
+and packaging details, and environmental conditions during transportation and storage.
+Together, these two categories of information form a comprehensive quality management
+and traceability data support system covering the entire lifecycle.
+However, in current enterprise production practices, each stage of the Hymenopellis
+raphanipes supply chain faces specific quality and safety risks and challenges in information
+management. At the strain preparation stage, issues include lack of transparency in raw
+material sources, missing records of culture material ratios, and the inaccurate recording of
+key parameters such as sterilization temperature and duration. During the germination
+management stage, the main challenges stem from insufficient environmental control and
+data recording. High standards for environmental variables such as temperature, humidity,
+ventilation frequency, and light are required, yet automated monitoring and data reten-
+tion are often absent, making it difficult to trace the causes of abnormal mushroom stick
+development and to assign management responsibility. In mushroom production and
+harvesting, common problems are inconsistent picking standards, the lack of operation
+process records, and unclear product grading classifications. In storage and processing,
+issues include substandard cold storage conditions, lax batch labeling management, and the
+inadequate recording of processing operations. The transportation phase frequently suffers
+from cold chain interruptions, missing location data, and fragmented, non-communicative
+transport data, which can lead to serious product spoilage due to temperature control
+failures, while responsibility remains unclear. The sales stage faces problems such as inef-
+fective binding between packaging information and product batches and ambiguous origin
+information, preventing consumers from identifying the product source, which under-
+mines brand trust and consumer confidence. In summary, the production and distribution
+processes within the Hymenopellis raphanipes supply chain exhibit notable weaknesses in
+quality control, with prominent issues including opaque information, missing data, and
+unclear responsibility divisions.
+2.3. Overall System Framework
+The quality and safety credible traceability system for Hymenopellis raphanipes adopts
+a six-layer system architecture comprising the data collection layer, network layer, storage
+layer, service management layer, business layer, and application layer. The system design
+architecture is illustrated in Figure 2.
+The data acquisition layer is responsible for the real-time collection of environmental
+and equipment data during the production process of Hymenopellis raphanipes and trans-
+mitting it to the system backend for processing. This layer integrates IoT devices such
+as temperature and humidity sensors and RFID tags, enabling precise monitoring and
+environmental optimization via WiFi, LAN, and other communication protocols, with
+data compression applied to enhance transmission efficiency. The network layer, based
+on blockchain technology, adopts peer nodes and a browser/server (B/S) architecture,
+ensuring secure data transmission and storage through access control and attribute-based
+encryption mechanisms, thereby safeguarding the immutability of supply chain informa-
+tion and supporting credible traceability and accurate tracking. The service management
+layer integrates smart contract functionalities through API interfaces, handling data record-
+ing, management, and verification across all supply chain stages. It writes information into
+the blockchain using a decentralized storage model and implements automatic verification
+and querying via smart contracts to guarantee data authenticity and integrity, providing
+reliable traceability support for consumers, enterprises, and regulatory bodies.
+The storage layer comprises data storage, access, and management modules, utilizing
+distributed databases and IPFS technology to achieve high data availability and security
+through on-chain and off-chain collaborative storage. It also implements granular privilege
+
+
+【第6页】
+Sustainability 2025, 17, 7413
+6 of 19
+management based on role-based access control policies, balancing transparency with
+privacy protection. The business layer supports various functional modules, including
+traceability queries, supply chain management, and procurement management, catering
+to the diverse needs of consumers, enterprises, and regulators: consumers can access
+product lifecycle information via the traceability query module, enterprises can optimize
+quality control through the supply chain management module, and regulators can conduct
+risk early warning and compliance checks via the regulatory module. The application
+layer serves all users by providing interactive interfaces for web and mobile platforms,
+supporting query, statistical analysis, and data export functions. It combines strict access
+control and encryption mechanisms to ensure data security while enhancing user experience
+and traceability reliability.
+ 
+Figure 2. System design architecture diagram.
+2.4. Traceability Granularity Design
+In food quality and safety traceability systems, “traceability granularity” refers to the
+minimum identifiable management unit within the traceability process—namely, the small-
+est unit that can be independently identified, recorded, and traced. The granularity design
+directly influences the system’s tracking accuracy, data processing cost, and operational
+efficiency. An overly coarse granularity may obscure the attribution of responsibilities,
+while an excessively fine granularity can result in increased storage demands and mainte-
+nance overhead. Therefore, the determination of traceability granularity should adopt a
+phased and strategic approach, balancing traceability requirements with the enterprise’s
+production processes, distribution of risk points, and data collection capabilities.
+
+
+【第7页】
+Sustainability 2025, 17, 7413
+7 of 19
+The supply chain of Hymenopellis raphanipes encompasses multiple stages including
+mushroom stick production, inoculation, cultivation, warehousing, logistics, and sales, in
+which data isolation at each link may cause information discontinuities. To address the
+practical production needs of enterprises, the system employs a batch management mecha-
+nism, assigning a unique traceability identification code to each product batch to accurately
+correlate data from raw material warehousing to final sales, ensuring the continuity and
+integrity of the information chain. Furthermore, integrating blockchain technology, smart
+contracts automatically verify the temporal consistency and logical integrity of key infor-
+mation such as hash values uploaded at each stage, effectively preventing data tampering
+and enhancing the credibility and supervisability of the entire traceability system.
+In response to management challenges such as unclear batch tracking and the difficulty
+in defining quality responsibility, as well as traceability requirements in enterprise produc-
+tion, the system adopts a hierarchical traceability granularity strategy. Appropriate tracking
+units are established according to the process logic and risk levels at different stages: during
+the preparation stage of mushroom sticks, the incoming batch of raw materials is taken
+as the granularity unit, grouping raw materials by arrival time and quality standards to
+address the sources of quality variation in the mushroom sticks; at the inoculation stage,
+collections of sticks from the same strain batch serve as the granularity unit to ensure strain
+consistency and facilitate the identification of contamination risks; during cultivation, the
+mushroom room is used as the granularity unit, leveraging physical isolation and consis-
+tent environmental parameters to reduce data redundancy and improve environmental
+monitoring efficiency; at the warehousing stage, a combination of storage location and
+the product batch is adopted as the tracking unit to enhance the management efficiency
+of the warehouse’s in-and-out information; in the logistics stage, the transportation task
+number serves as the granularity unit, integrating cold chain temperature control and
+GPS positioning data to support cold chain process tracking; finally, to satisfy consumer
+trust and accountability demands, the sales and after-sales stages use product batches as
+the granularity unit, enabling transparent consumer queries and facilitating after-sales
+responsibility tracing.
+The granularity design effectively balances data processing costs and system opera-
+tional efficiency while ensuring traceability accuracy, thereby enhancing the practicality
+and cost-effectiveness of the traceability system. However, high-frequency data collection
+depends heavily on the performance of IoT devices; sensor failures or inadequate calibra-
+tion may result in data loss, necessitating increased equipment redundancy and regular
+maintenance [28]. Additionally, the computational overhead associated with blockchain
+validation can increase system latency [29]. Future work may focus on optimizing data
+collection frequency and validation algorithms to reduce costs and latency.
+3. Results of the Blockchain-Based Traceability System for
+Hymenopellis raphanipes
+3.1. Blockchain-Based Traceability Model of Hymenopellis Raphanipes
+The supply chain of Hymenopellis raphanipes covers multiple links, and the data vol-
+ume is large and presents heterogeneous characteristics from multiple sources [30], To
+meet the demand for efficient traceability, a hierarchical storage architecture featuring a
+mainchain and multiple sidechains is established, complemented by an on-chain and off-
+chain collaborative management mechanism. This approach alleviates issues such as high
+data storage pressure on blockchain nodes, low query efficiency, and network congestion
+during data uploads within the traceability blockchain network. The mainchain functions
+as a global index, recording transaction data for each product’s traceability code and the
+associated sidechains.
+
+
+【第8页】
+Sustainability 2025, 17, 7413
+8 of 19
+Traceability data from different stages of the supply chain are stored in their respective
+sidechains, facilitating classified management and parallel processing. The mainchain acts
+as a global index, recording the mapping between each product’s traceability code and the
+transaction addresses of traceability data on the sidechains, enabling rapid data retrieval.
+Instead of storing original sensitive data directly on the sidechains, core information such as
+the hash value index of sensitive traceability data and transaction addresses—encrypted us-
+ing the SHA–256 algorithm—is stored. Off-chain, a local database or trusted cloud database
+is deployed to store original data such as link information, images, and environmental
+parameters, thereby reducing on-chain storage costs and network bandwidth pressure.
+During the data traceability query stage, consumers enter the traceability code through
+the Hymenopellis raphanipes traceability system to perform a query. The client node first
+verifies the validity of the traceability code and transmits it to the blockchain network.
+The query process begins by invoking the mainchain’s mapping contract to locate the
+transaction address of the corresponding sidechain, then simultaneously retrieves hash
+summary records from each sidechain in parallel, and accesses the off-chain database to
+extract the original data as needed. To ensure data integrity and prevent tampering, the
+system recalculates the SHA–256 hash of the original information retrieved off-chain and
+compares it with the summary stored on the sidechains. If the hashes match, the data
+is considered untampered and the query results are reliable; if not, the system alerts the
+user that the data is abnormal. The system consolidates traceability information from
+each stage into a complete product lifecycle record and presents it to users via graphical
+visualization. This design not only achieves the efficient and tamper-resistant traceability
+of Hymenopellis raphanipes quality and safety data, but also effectively protects user privacy
+and enhances system scalability by isolating private hashes on sidechains and storing
+original data off-chain. The trusted traceability model of Hymenopellis raphanipes quality
+and safety is illustrated in Figure 3.
+Figure 3. Trusted traceability model for quality and safety of Hymenopellis raphanipes.
+
+
+【第9页】
+Sustainability 2025, 17, 7413
+9 of 19
+3.1.1. Traceability Code Design
+Based on the actual business needs of the enterprise and a systematic analysis of
+the various links in the Hymenopellis raphanipes supply chain, the GS1–128 code was se-
+lected. Due to its international universality and high coding capacity, GS1–128 can meet
+the traceability requirements across the entire Hymenopellis raphanipes supply chain. Ac-
+cordingly, a 42-bit traceability code tailored to the characteristics of Hymenopellis raphanipes
+was designed, and its structure is shown in Figure 4.
+ 
+Figure 4. Schematic diagram of traceability code.
+In the design of the traceability code for Hymenopellis raphanipes, the 69X prefix is the
+identification code assigned to China by the International Article Numbering Association
+(EAN), and the subsequent components contain multi-level information. First, in the
+design of the traceability code for Hymenopellis raphanipes, the prefix code “69X” is the
+identification assigned to China by the International Article Numbering Association (EN).
+The subsequent components encode information at multiple levels. The last four digits
+represent the enterprise identification code, specifying the production entity, followed
+by a four-digit variety identification code distinguishing different types of Hymenopellis
+raphanipes. The identifier (10) field contains a four-digit origin code and an eight-digit
+harvest date (formatted as YYYYMMDD), corresponding to the raw material granularity
+during the mushroom stick preparation stage. The identifier (11) field includes a two-digit
+processing method code, differentiating fresh from processed products, and a three-digit
+batch number reflecting batch management in the inoculation and cultivation stages. Finally,
+a combination of a four-digit individual code and a six-digit random code further ensures
+code uniqueness and supports item-level traceability in sales and after-sales processes.
+The traceability code, serving as the primary key for data association throughout the
+supply chain, is generated at the mushroom stick production stage and persists through
+the entire product lifecycle. The system parses the code structure and, together with
+the interface design, enables automatic mapping between collected data and code fields,
+thereby establishing a chain granularity mapping relationship spanning raw materials,
+inoculation, cultivation, warehousing, logistics, and sales. This ensures precise data binding
+and continuous tracking at each stage. On the consumer side, consumers can scan the
+QR code on the product packaging or enter the traceability code to access comprehensive
+information covering raw material sources, production environment, processing methods,
+and transportation conditions.
+The advantage of this coding scheme lies in its standardization and international
+compatibility, which facilitates future collaboration and data sharing across upstream
+and downstream segments of the industry chain, while also enhancing the ease of cross-
+regional regulation and market expansion [31]. Furthermore, the comprehensive design of
+the coding fields supports multi-level granularity management, meeting the need for fine-
+grained traceability in complex supply chains. However, the scheme has certain limitations:
+the relatively long code length may increase the complexity of data entry and scanning,
+placing higher demands on the compatibility of hardware devices and information systems.
+Additionally, the complexity of the coding design may raise initial deployment costs for
+enterprises and pose challenges for employee training [32]. Therefore, it is essential to
+continuously optimize the coding structure and system interfaces based on feedback from
+real-world operations to improve usability and adaptability.
+
+
+【第10页】
+Sustainability 2025, 17, 7413
+10 of 19
+3.1.2. Fast Query Mechanism
+When a user initiates a traceability query request, the system first quickly locates the
+addresses of multiple data nodes associated with the product identifier through a mapping
+mechanism. Then, an asynchronous parallel approach using multi-threading or coroutines
+is employed to simultaneously send query requests to all data nodes, thereby improving
+retrieval efficiency and reducing response latency.
+At the data service interface layer, each node provides an aggregated interface support-
+ing batch queries, enabling the system to retrieve data summaries and metadata related to
+the current session in a single request, which significantly reduces network round trips and
+avoids performance bottlenecks caused by sequential communication. After obtaining the
+summary information, the system accesses the corresponding local or off-chain databases
+in parallel based on the returned indexes, recalculates the hash values of the original data,
+and compares them with the registered data summaries to verify information integrity and
+consistency. This process is supported by underlying trusted mechanisms, including hash
+verification and signature authentication, ensuring the tamper-proof nature of traceability
+data throughout its lifecycle. Upon completing data verification, the system extracts the
+original business data associated with each link, and finally, the query result aggregation
+module consolidates information from multiple nodes according to the product lifecycle
+timeline, generating a comprehensive traceability record covering production, processing,
+circulation, and other key aspects of Hymenopellis raphanipes, thereby enhancing informa-
+tion transparency and query credibility. The traceability data query process is illustrated
+in Figure 5.
+ 
+Figure 5. Traceable data query process.
+3.1.3. Smart Contract Design
+Under the Hyperledger architecture, smart contracts trigger function executions based
+on preset conditions to enable data uploading and verification across each link of the sup-
+ply chain. The system defines a unified data structure model tailored to the data types of
+different links, with each sidechain storing data as key-value pairs according to its business
+standards, in which the key consists of the original traceability code and transaction ad-
+dress, and the value contains the sidechain’s transaction address or the data hash summary.
+Each organization invokes the smart contract via its node to hash local data and upload it
+on-chain, extracting batch numbers and link identification codes to synchronize with the
+
+
+【第11页】
+Sustainability 2025, 17, 7413
+11 of 19
+mainchain; if the batch number already exists on the mainchain, the corresponding link
+information is automatically updated. To enhance modularity and maintainability, smart
+contracts are divided into three categories: (1) the data uploading contract, responsible for
+receiving and verifying data summaries from each sidechain, performing field validation,
+and synchronizing information; (2) the data mapping contract, which maintains the map-
+ping relationships between the main- and sidechains and establishes queryable indexes
+by batch number and link identifier; and (3) the data validation contract, which checks
+the consistency of hash values and key information to prevent forgery or redundant data
+from entering the system, thereby improving data credibility. The supply chain traceability
+smart contract for Hymenopellis raphanipes is illustrated in Figure 6.
+Figure 6. Hymenopellis raphanipes supply chain traceability smart contract.
+3.2. Data Acquisition
+In the quality and safety traceability system of Hymenopellis raphanipes, data acquisi-
+tion serves as a fundamental link for realizing the visualization, verification, and credible
+on-chain uploading of information across each supply chain stage. It plays a critical role
+in ensuring the integrity of the information chain and the consistency of the traceability
+path. The system integrates the actual production processes with the design of traceability
+granularity to establish a multi-source data collection mechanism that encompasses raw
+material warehousing, mushroom stick preparation, inoculation and cultivation, warehous-
+ing management, logistics and transportation, as well as sales and circulation. Leveraging
+a combination of IoT devices and manual data entry, the system builds an information
+collection network characterized by vertical continuity and horizontal collaboration.
+In supply chain links in which automated data collection is feasible, the system
+deploys devices such as sensors, QR codes, RFID tags, and edge computing gateways to
+enable the real-time sensing and acquisition of data, including environmental parameters,
+operation times, equipment status, and location information. Each IoT device adopts a
+unified interface protocol and undergoes regular calibration and testing to ensure data
+accuracy and stability. For information that cannot be automatically sensed, such as quality
+inspection results, personnel operation records, and raw material sources, the system
+utilizes standardized form templates for manual data entry and review via mobile terminals
+or web interfaces. All manually entered information is bound to the operator’s identity
+and timestamp, with smart contracts performing on-chain verification and recording to
+ensure data authenticity and traceability.
+Data collected at each supply chain stage is uniformly formatted and mapped ac-
+cording to traceability granularity and coding standards. Combined with technologies
+such as hash value summaries and digital signatures, this ensures on-chain certification.
+Throughout data collection, transmission, processing, and uploading, strict access control
+and encrypted transmission mechanisms are enforced to guarantee the consistency and
+
+
+【第12页】
+Sustainability 2025, 17, 7413
+12 of 19
+security of both on-chain and off-chain data. The data collection methods for each supply
+chain link are detailed in Table 1.
+Table 1. Data collection method for each link of the supply chain.
+Session Name
+Data Collection Methods
+Strain Preparation
+RFID tag, manual entry
+Germination Management
+Environmental sensors, manual entry,
+RFID tags
+Mushroom Emergence and Harvesting
+Environmental sensors, manual entry,
+RFID tags
+Storage
+Temperature and humidity sensors, RFID
+tags, manual entry, video
+surveillance equipment
+Processing
+Equipment sensors, manual entry,
+QR codes, RFID tags
+Transportation
+GPS positioning equipment, temperature
+control sensors, RFID tags, manual entry
+Sales
+QR code, web-based entry, consumer
+scanning feedback
+At the same time, taking into account the realities of the weak network infrastruc-
+ture, unstable power supply, and limited computing capabilities of terminal devices in
+agricultural settings, the system incorporates edge computing nodes into its architecture
+to enable local data caching, preliminary processing, and fault tolerance for anomalies.
+Data collected by various sensors and terminal devices is first transmitted to the edge
+nodes for real-time processing and format conversion, and then uploaded to the blockchain
+network when network conditions permit. This architecture effectively reduces reliance on
+network bandwidth and continuous connectivity, while enhancing the robustness of data
+transmission and ensuring the continuity of on-chain verification. Additionally, the system
+implements a breakpoint retransmission mechanism and a data replenishment strategy to
+guarantee the complete recording and restoration of traceability data on the blockchain
+even in the event of network fluctuations or interruptions.
+4. System Implementation
+This system has been successfully deployed based on Hyperledger Fabric 1.4.6 within
+the context of the Chinese agricultural environment, fully validating the platform’s feasibil-
+ity and stability for practical applications in complex supply chain scenarios. The Fabric
+platform was developed using Java SDK 1.8 and deployed on a cloud server. The front end
+is developed with the Vue.js framework 2.6.14, while the back end utilizes the Spring Boot
+framework 2.1.9. For on-chain distributed data management, the system employs CouchDB
+3.1.1 and LevelDB 1.20, with MySQL 5.7 serving as the supplementary and backup database
+for off-chain data storage.
+Hyperledger Fabric provided the chain code to realize business logic control, including
+data uploading, authentication, rights management, history records queries, and other
+functions. The chain code was developed in the Go language and deployed to each node,
+and all operations were confirmed by the consensus mechanism before it was written,
+which further ensures the non-tamperability and transparency of data. For different
+participants, such as farmers, processors, transporters, and consumers, the system designs a
+user permission model based on Fabric’s access control policy, thus realizing the hierarchical
+management of data access. In terms of on-chain data storage, the system adopts LevelDB
+as the default state database for the management of book state information and at the same
+time is combined with CouchDB to provide rich query support for on-chain data, so that
+
+
+【第13页】
+Sustainability 2025, 17, 7413
+13 of 19
+users can quickly retrieve the target information through multi-dimensional conditions.
+The off-chain data management module uses MySQL as the core for storing auxiliary
+information and redundant data, such as user behavior records, system logs, and non-
+critical traceability fields, to improve the overall operational efficiency and data persistence
+of the system.
+To accommodate different participants—such as farmers, processors, transporters, and
+consumers—the system designs a user permission model based on Fabric’s access control
+policies, enabling the hierarchical management of data access. For on-chain data storage,
+LevelDB serves as the default state database for managing ledger state information, com-
+plemented by CouchDB, which provides rich query capabilities to allow users to quickly
+retrieve target data using multi-dimensional conditions. The off-chain data management
+module centers on MySQL to store auxiliary information and redundant data, including
+user behavior records, system logs, and non-critical traceability fields, thereby improving
+overall system efficiency and data persistence.
+Additionally, the system adopts a multi-chain storage model and is divided into three
+subsystems: management, web, and mobile, which work collaboratively to ensure data
+transparency, trustworthiness, and an efficient flow. The management subsystem serves
+participants across the planting, processing, and logistics stages of the industry chain,
+supporting the collection and management of information, such as agricultural records,
+processing techniques, quality testing results, and cold chain transportation data. The web
+subsystem enables consumers to query the entire lifecycle information of Hymenopellis
+raphanipes—from planting environment to logistics—by entering the traceability code
+via a computer. The mobile subsystem provides a QR code-based traceability query
+function, allowing consumers to use their smartphones to access traceability data through
+an API. It visually presents traceability details such as planting environment, processing
+information, and quality inspection reports, enabling consumers to intuitively understand
+the origin and flow path of the agricultural product, thereby enhancing consumer trust and
+brand recognition. The quality and safety traceability system for Hymenopellis raphanipes is
+illustrated in Figures 7–9.
+ 
+Figure 7. Mobile interface of the Hymenopellis raphanipes quality and safety traceability system.
+It provides consumers with convenient access to traceability information, such as information on
+production bases and raw material inputs, as well as other relevant topics.
+
+
+【第14页】
+Sustainability 2025, 17, 7413
+14 of 19
+ 
+Figure 8. Management interface of the Hymenopellis raphanipes quality and safety traceability system.
+The interface allows enterprises to enter information related to the production of strains, mainly
+including the time of production of strains, types of strains, and other related topics.
+ 
+Figure 9. Web page interface of the Hymenopellis raphanipes quality and safety traceability system.
+It contains traceability query information on production bases, products, production, and other
+relevant topics.
+Experimental Verification
+To verify the advantages of the proposed multi-masterchain model in terms of query
+efficiency and throughput, this study conducts a comparative performance analysis be-
+tween the traditional single-chain storage model and the multi-masterchain storage model,
+with a focus on differences in query time and throughput. The experimental environment
+consists of multiple blockchain nodes deployed within the same network setting. The
+tests were performed on Ubuntu 20.04, using Hyperledger Fabric version 1.4.6 and Docker
+version 20.10.18 to ensure a stable and efficient environment. The blockchain benchmarking
+tool Caliper was employed for comparative testing. The data query time was tested with
+
+
+【第15页】
+Sustainability 2025, 17, 7413
+15 of 19
+varying data volumes, and the results are shown in Figure 10. The throughput was evalu-
+ated by varying the number of nodes, and as the number of nodes increased, the system
+throughput improved accordingly. The throughput test results are presented in Figure 11.
+Figure 10. Comparison chart of query time.
+Figure 11. Throughput comparison chart.
+The experimental results demonstrate that, compared to the traditional single-chain
+model, the multi-masterchain storage model offers significant advantages in query effi-
+ciency, system throughput, and storage optimization. By employing split-chain storage
+and parallel processing, the multi-masterchain model effectively reduces the mainchain’s
+load, alleviates system bottlenecks, and significantly lowers data access latency. These
+performance improvements make it particularly well-suited for large-scale quality and
+safety traceability systems for Hymenopellis raphanipes, substantially enhancing the effi-
+ciency and reliability of food traceability while providing robust technical support for the
+modernization and development of the rare edible mushroom industry.
+5. Discussion
+This study addresses the quality and safety traceability requirements for Hymenopellis
+raphanipes. Based on a detailed analysis of the supply chain information flow, a comprehen-
+sive traceability solution suitable for the entire industrial chain of Hymenopellis raphanipes
+was proposed. The overall system architecture comprises six layers: data acquisition,
+network transmission, storage management, service management, business functionality,
+and application interaction, ensuring system scalability and maintainability. Building upon
+this, a multi-chain collaborative traceability model was developed, employing a mainchain–
+sidechain storage mechanism combined with on-chain and off-chain coordination. By
+integrating blockchain technology, the system achieves the efficient management of trace-
+ability data with a high degree of transparency, effectively alleviating storage pressure and
+latency issues commonly found in traditional systems. The functional validation demon-
+
+
+【第16页】
+Sustainability 2025, 17, 7413
+16 of 19
+strates that the system successfully balances data credibility and user experience, fulfilling
+the diverse requirements of consumers, enterprises, and regulatory bodies. The one-click
+QR code query feature greatly enhances product information accessibility and transparency,
+reinforcing brand credibility and contributing to the socio-economic sustainability of local
+specialty agriculture.
+Currently, the system is deployed at the pilot scale within a single enterprise. Future
+work should focus on multi-stakeholder collaboration across organizations to test inter-
+operability in heterogeneous information integration, cross-chain communication, and
+regulatory interactions, laying the groundwork for large-scale adoption and digital transfor-
+mation of green agriculture. In addition, the system faces several challenges and limitations
+that cannot be overlooked. Firstly, the procurement and maintenance costs of IoT equip-
+ment may impose a significant financial burden on small- and medium-sized agricultural
+enterprises, thereby limiting the system’s large-scale adoption. Secondly, although a consor-
+tium blockchain architecture has been adopted to reduce energy consumption, blockchain
+technology still demands ongoing computational resources. This energy consumption
+may partially conflict with the principles of “low-carbon and environmentally friendly”
+green agriculture. Future research should prioritize optimizing energy efficiency—such as
+through the design and deployment of lightweight nodes—and conduct comprehensive
+cost–benefit analyses of system construction and maintenance to support the sustainable
+development of digital agricultural infrastructure.
+Although this study centers on the traceability of Hymenopellis raphanipes as a core
+application scenario, the proposed system architecture, coding scheme, and multi-chain
+coordination mechanism exhibit strong generalizability. When extending the system to
+other agricultural products, it is essential to consider differences in production processes,
+quality standards, and supply chain structures. Accordingly, the traceability granularity,
+coding rules, IoT device selection, and smart contract logic must be dynamically adjusted
+to ensure system adaptability and traceability accuracy. Future research will focus on
+tailoring the system to different agricultural product workflows, conducting multi-scenario
+validations across regions and categories, and further assessing its practical scalability and
+industrial support capabilities.
+Based on the research outcomes, work could be further extended in the following
+areas in the future.
+To meet the demands for real-time responsiveness and system stability in large-scale
+green agricultural supply chains, blockchain sharding and parallel consensus mechanisms
+can be introduced to improve processing efficiency and concurrency. Additionally, future
+research may leverage tools such as Hyperledger Caliper to conduct scalability and perfor-
+mance benchmarking under larger-scale deployments, enabling a systematic evaluation of
+system behavior in complex and dynamic environments.
+While ensuring data availability and sharing, the system should further strengthen its
+capabilities to protect sensitive information. Integrating privacy-preserving technologies
+such as zero-knowledge proofs, homomorphic encryption, and federated learning can
+facilitate secure and compliant data collaboration among stakeholders throughout the
+supply chain, thereby reducing the risk of data leakage.
+Establishing interoperability mechanisms between multiple blockchain platforms and
+agricultural standards is crucial for supporting the traceability of diverse agricultural prod-
+ucts and promoting coordinated development within sustainable agricultural value chains.
+Through cross-institutional collaboration, the system can explore the application of privacy-
+enhancing technologies—such as zero-knowledge proofs—in cross-chain communication,
+ensuring secure and efficient data exchange across different blockchain networks. This
+
+
+【第17页】
+Sustainability 2025, 17, 7413
+17 of 19
+will lay a solid technical foundation for extending the system to additional agricultural
+traceability scenarios.
+6. Conclusions
+To address the quality and safety management requirements across the entire supply
+chain of Hymenopellis raphanipes, this study proposes and implements a comprehensive
+blockchain-based traceability solution, encompassing the construction of a traceability
+model, the design of a layered system architecture, and the application of key technologies.
+The system ensures data consistency and traceability throughout planting, harvesting,
+processing, cold chain logistics, and retail by adopting a unified coding scheme and infor-
+mation association strategy. Leveraging a collaborative storage architecture that integrates
+mainchains and sidechains, along with coordinated on-chain and off-chain management
+techniques, the system significantly enhances scalability and data processing efficiency.
+Moreover, smart contracts are employed to automatically verify and record information at
+critical nodes, thereby improving data credibility and overall system security.
+In the actual deployment process, the system still faces certain challenges in the
+standardization of data collection, the security management of the off-chain database and
+the participation of multiple subjects in synergy. For example, the data collection terminals
+of different production subjects have different standards, leading to differences in the
+front-end information structure and affecting the efficiency of data fusion; the security
+strategy and access rights of the off-chain database need to be further optimized to ensure
+data integrity and privacy. In addition, some farmers are not familiar enough with the
+operation of the system, which increases the cost of training and promotion. In view of
+the above problems, it is suggested to focus on strengthening three aspects of work in
+the promotion process: first, to establish a unified data collection interface and standard
+template to improve data quality and compatibility; second, to introduce better access
+control and auditing mechanisms to improve the security and protection of the data under
+the chain; and third, to strengthen the training and incentive mechanism for users, and
+to promote the active participation of upstream and downstream subjects in the industry
+chain in the construction and operation of the system.
+This study, based on the Hyperledger Fabric platform, deployed and validated the
+system within the real-world context of China’s agricultural supply chain, demonstrat-
+ing the practicality and feasibility of the proposed solution. The research results have
+effectively enhanced the environmental, economic, and social sustainability of the Hy-
+menopellis raphanipes industry, improved its management level and market competitiveness,
+and provided a valuable reference for building trustworthy traceability systems for other
+agricultural products.
+With ongoing advances in blockchain technology and agricultural digitalization, this
+system holds strong potential for broader application. It is expected to support green
+agricultural transformation and modernization, enhancing food safety assurance and
+promoting the achievement of sustainable development goals.
+Author Contributions: Conceptualization, W.X. and P.L.; methodology, W.X.; software development,
+W.X. and H.G.; validation, W.X. and M.L.; investigation, W.X.; resources, W.X. and H.G.; data
+curation, X.Z.; writing—original draft preparation, W.X.; writing—review and editing, W.X. and
+P.L.; supervision, P.L.; project administration, X.Z. and M.L. All authors have read and agreed to the
+published version of the manuscript.
+Funding: This research was funded by the Key Research Development Program (Major Science and
+Technology Innovation Projects) of Shandong Province, grant number 2022CXGC010609.
+Institutional Review Board Statement: Not applicable.
+
+
+【第18页】
+Sustainability 2025, 17, 7413
+18 of 19
+Informed Consent Statement: Not applicable.
+Data Availability Statement: The data presented in this study are available on request from the
+corresponding author.
+Acknowledgments: Thanks to the Key Laboratory of Huang-Huai-Hai Smart Agricultural Technol-
+ogy, Ministry of Agriculture and Rural Affairs, for its support of our scientific research.
+Conflicts of Interest: The authors declare no conflicts of interest.
+References
+1.
+Li, Y. Little Mushrooms, Thriving Industry: Powering an All-encompassing Approach to Food. Curr. Biotechnol. 2024, 14, 885.
+2.
+Bao, D.P. Discussion on the Construction of Edible Mushroom Discipline Based on the Development of Edible Mushroom Industry
+in China. J. Fungal Res. 2020, 18, 139–148+136. [CrossRef]
+3.
+Li, Y. The Sustainable Development of Edible Fungi Industry in China in the Post Epidemic Era. J. Fungal Res. 2021, 19, 1–5.
+[CrossRef]
+4.
+Li, Y. The Role of Edible Fungi Building in the Overall Situation of Food Security Theme Report on Practicing Big Food Concept”
+and Exploring the Development Path of Edible Fungi Industry. J. Fungal Res. 2022, 20, 157–159. [CrossRef]
+5.
+Yang, X.T.; Wang, M.T.; Xu, D.M.; Luo, N.; Sun, C.H. Data storage and query method of agricultural products traceability
+information based on blockchain. Trans. Chin. Soc. Agric. Eng. 2019, 35, 323–330.
+6.
+Xu, J.P.; Sun, P.C.; Zhang, X.; Wang, X.Y.; Kong, J.L.; Zhao, Z.Y. Prototype System of Information Security Management of Cereal
+and Oil Food Whole Supply Chain Based on Blockchain. Trans. Chin. Soc. Agric. Mach. 2020, 51, 341–349.
+7.
+Zhao, K. Research on a Safe and Efficient Agricultural Product Trusted Traceability Model. Master’s Thesis, Shandong Agricultural
+University, Taian, China, 2022.
+8.
+He, J.; Fan, X.F.; Yao, J.F.; Sun, L.; Li, X.D.; Suo, X.S. Design and research of the information traceability and credit enhancement of
+the seed supply chain based on the blockchain. J. Chin. Agric. Mech. 2022, 43, 145–151. [CrossRef]
+9.
+Ren, S.G.; He, Z.M.; Zhou, Z.J.; Gu, X.J.; Xiong, Y.J.; Yuan, P.S.; Xu, H.L. Design and implementation of information tracing
+platform for crop whole industry chain based on CSBFT-Blockchain. Trans. Chin. Soc. Agric. Eng. 2020, 36, 279–286.
+10.
+Wu, Y.; Jin, X.; Yang, H.; Tu, L.; Ye, Y.; Li, S. Blockchain-Based Internet of Things: Machine Learning Tea Sensing Trusted
+Traceability System. J. Sens. 2022, 2022, 8618230. [CrossRef]
+11.
+Zhang, X.; Liu, P.; Zhang, Y.; Sun, F.; Gong, A.; Zhang, C. Research on Flexible Traceability System of Agaricus Bisporus Supply
+Chain. Appl. Sci. 2023, 13, 11303. [CrossRef]
+12.
+Ning, Y.; Wang, T.; Liu, T.; Gao, Z.; Sun, L.; Zhang, H. The Traceability of Millet Based on Blockchain Smart Contracts in
+Agricultural Supply Chain. In Proceedings of the 2023 2nd International Conference on Artificial Intelligence and Blockchain
+Technology (AIBT), Zibo, China, 14–16 April 2023; pp. 65–70.
+13.
+Tokkozhina, U.; Martins, A.L.; Ferreira, J.C. Multi-Tier Supply Chain Behavior with Blockchain Technology: Evidence from a
+Frozen Fish Supply Chain. Oper. Manag. Res. 2023, 16, 1562–1576. [CrossRef]
+14.
+Patro, P.K.; Jayaraman, R.; Salah, K.; Yaqoob, I. Blockchain-Based Traceability for the Fishery Supply Chain. IEEE Access 2022, 10,
+81134–81154. [CrossRef]
+15.
+Yang, X.; Li, M.; Yu, H.; Wang, M.; Xu, D.; Sun, C. A Trusted Blockchain-Based Traceability System for Fruit and Vegetable
+Agricultural Products. IEEE Access 2021, 9, 36282–36293. [CrossRef]
+16.
+Wang, Q.; Li, F.J.; Ni, X.L.; Xia, L.L.; Liang, G.J. Data Formation and Privacy Threat of Blockchain. Comput. Eng. 2023, 49, 1–12.
+17.
+Zheng, Z.; Xie, S.; Dai, H.-N.; Chen, X.; Wang, H. Blockchain Challenges and Opportunities: A Survey. Int. J. Web Grid Serv. 2018,
+14, 352–375. [CrossRef]
+18.
+Dong, Z.H.; Lü, X.Q.; Ren, W.P.; Jiang, Y.; Li, G.L. Review of Key Technologies of High Performance Blockchain. Data Anal. Knowl.
+Discov. 2021, 5, 14–24.
+19.
+Agrawal, T.K.; Kumar, V.; Pal, R.; Wang, L.; Chen, Y. Blockchain-Based Framework for Supply Chain Traceability: A Case Example
+of Textile and Clothing Industry. Comput. Ind. Eng. 2021, 154, 107130. [CrossRef]
+20.
+Shao, Y.M.; Zhao, F.; Wang, Y.; Wang, B.Q. Survey of visualization research based on blockchain technology and application. J.
+Comput. Appl. 2023, 10, 3038–3046.
+21.
+Wen, X.R.; Li, D.G. Application Scenarios and Implementation Strategies of Blockchain in China’s Edible Fungi Industry. Edible
+Fungi China 2020, 39, 65–67.
+22.
+Chu, H.; Zhang, P.; Dong, H.; Xiao, Y.; Ji, S.; Li, W. A Survey on Smart Contract Vulnerabilities: Data Sources, Detection and
+Repair. Inf. Softw. Technol. 2023, 159, 107221. [CrossRef]
+23.
+Vacca, A.; Sorbo, A.D.; Visaggio, C.A.; Canfora, G. A Systematic Literature Review of Blockchain and Smart Contract Development:
+Techniques, Tools, and Open Challenges. J. Syst. Softw. 2021, 174, 110891. [CrossRef]
+
+
+【第19页】
+Sustainability 2025, 17, 7413
+19 of 19
+24.
+Wang, S.; Huang, C.; Li, J.; Yuan, Y.; Wang, F.-Y. Decentralized Construction of Knowledge Graphs for Deep Recommender
+Systems Based on Blockchain-Powered Smart Contracts. IEEE Access 2019, 7, 136951–136961. [CrossRef]
+25.
+Androulaki, E.; Barger, A.; Bortnikov, V.; Cachin, C.; Christidis, K.; De Caro, A.; Enyeart, D.; Ferris, C.; Laventman, G.; Manevich,
+Y.; et al. Hyperledger Fabric. In Proceedings of the EuroSys ‘18: Thirteenth EuroSys Conference, Porto, Portugal, 23–26 April
+2018; pp. 1–15. [CrossRef]
+26.
+Liu, Y.; He, J.; Li, X.; Chen, J.; Liu, X.; Peng, S.; Cao, H.; Wang, Y. An Overview of Blockchain Smart Contract Execution Mechanism.
+J. Ind. Inf. Integr. 2024, 41, 100674. [CrossRef]
+27.
+Ouyang, L.W.; Wang, S.; Yuan, Y.; Ni, X.C.; Wang, F.Y. Smart Contracts: Architecture and Research Progresses. Acta Autom. Sin.
+2019, 45, 445–457. [CrossRef]
+28.
+Afraz, N.; Wilhelmi, F.; Ahmadi, H.; Ruffini, M. Blockchain and Smart Contracts for Telecommunications: Requirements vs. Cost
+Analysis. IEEE Access 2023, 11, 95653–95666. [CrossRef]
+29.
+Lv, G.; Song, C.; Xu, P.; Qi, Z.; Song, H.; Liu, Y. Blockchain-Based Traceability for Agricultural Products: A Systematic Literature
+Review. Agriculture 2023, 13, 1757. [CrossRef]
+30.
+Qg, W.; He, P.; Tz, N.; Dr, S.; Yu, G. Survey of Data Storage and Query Techniques in Blockchain Systems. Comput. Sci. 2018, 45, 7.
+31.
+Lin, C.X.; Huang, K.; He, R. Research on encoding of traceability codes for agricultural products. Agric. Eng. 2024, 14, 110–114.
+[CrossRef]
+32.
+Demestichas, K.; Peppes, N.; Alexakis, T.; Adamopoulou, E. Blockchain in Agriculture Traceability Systems: A Review. Appl. Sci.
+2020, 10, 4113. [CrossRef]
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.
+

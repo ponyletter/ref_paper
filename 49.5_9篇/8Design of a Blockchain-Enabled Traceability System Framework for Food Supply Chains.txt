@@ -1,0 +1,969 @@
+来源文件：8Design of a Blockchain-Enabled Traceability System Framework for Food Supply Chains.pdf
+============================================================
+
+【第1页】
+����������
+�������
+Citation: Wang, L.; He, Y.; Wu, Z.
+Design of a Blockchain-Enabled
+Traceability System Framework for
+Food Supply Chains. Foods 2022, 11,
+744. https://doi.org/10.3390/
+foods11050744
+Academic Editors: Theodoros
+Varzakas and Rui M.S. Cruz
+Received: 8 February 2022
+Accepted: 1 March 2022
+Published: 3 March 2022
+Publisher’s Note: MDPI stays neutral
+with regard to jurisdictional claims in
+published maps and institutional afﬁl-
+iations.
+Copyright:
+© 2022 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed
+under
+the
+terms
+and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+foods
+Article
+Design of a Blockchain-Enabled Traceability System
+Framework for Food Supply Chains
+Lixing Wang 1,2,*
+, Yulin He 1 and Zhenning Wu 3
+1
+School of Computers and Engineering, Northeastern University, Shenyang 110000, China;
+hyl1026789105@163.com
+2
+Laboratory for Soft Machines and Electronics, School of Packaging, Michigan State University,
+East Lansing, MI 48824, USA
+3
+College of Information Science and Engineering, Northeastern University, Shenyang 110000, China;
+wuzhenning@ise.neu.edu.cn
+*
+Correspondence: wanglixing@mail.neu.edu.cn
+Abstract: Tracing food products along the entire supply chain is important for achieving better
+management of food products. Traditionally, centralized traceability systems have been developed
+for such purposes. One major drawback of this approach is that different users of the supply chain
+have their own systems with their own complexities and distinct features; thus, the interaction among
+them creates challenges when implementing a single centralized system. Therefore, a decentralized
+traceability system is favorable for tracing food products along the supply chain. In this study, we
+develop a supply chain traceability system framework based on blockchain and radio frequency
+identiﬁcation (RFID) technology. The system consists of a decentralized blockchain-enabled data
+storage platform for data management and an RFID system at the packaging level for data collection
+and storage. We applied a consortium blockchain to the application. Fabric 2.0 in Hyperledger
+was chosen as the development platform. The proposed blockchain-enabled platform can provide
+decentralized data management and its underlying algorithm can guarantee data security. The
+system includes a creatively designed blockchain-enabled data structure in the RFID tag. When
+people scan the tag, the relevant information is written in the tag as a block linked to the previous
+blocks; simultaneously, the information is transmitted to the blockchain platform and recorded on
+the platform. No battery is required and the system works when there is an RFID reader nearby. The
+usage conditions included shipment, stocking, and storage. The RFID tag can be directly attached to
+paper packaging. This approach embeds the blockchain technique into the RFID tag and develops
+a corresponding system. The new traceability system has the potential to simplify the tracking of
+products and can be scaled for industrial use.
+Keywords: blockchain; RFID; food package; food supply chain
+1. Introduction
+People often have contact with food products in their daily lives and food quality is a
+universal concern. Food quality problems also lead to serious social issues. Some examples
+of the most serious incidents include milk powder contaminated with melamine, pork
+contaminated with clenbuterol, Sudan dyes found in duck eggs, and recycled gutter oil
+used in cooking [1]. Most fresh food products are perishable. Their quality is sensitive to
+temperature and other environmental factors. Incorrect storage or transportation usually
+results in considerable economic loss to the corresponding companies. For example, 25–30%
+of food losses and damages are caused by inadequate transportation and distribution
+facilities such as cold storage units, dedicated ﬂeets, and cold trucks [2]. In a report
+published by the United Nations, the National Development and Reform Commission [3]
+estimated that every year approximately one-third of all food items are lost globally with
+Foods 2022, 11, 744. https://doi.org/10.3390/foods11050744
+https://www.mdpi.com/journal/foods
+
+
+【第2页】
+Foods 2022, 11, 744
+2 of 18
+a value of approximately $8.3 billion. Consequently, tracing and tracking food products
+along the supply chain is an important topic for researchers.
+The Internet of Things (IoT) technologies are immensely helpful in the food supply
+chain [4,5]. Radio frequency identiﬁcation (RFID) is one of the most popular techniques.
+RFID has been increasingly used in logistics and supply chain management, because it can
+increase the efﬁciency of data input [6]. Between 2005 and 2006, an electronic pedigree
+(ePedigree) was proposed. It is an electronic document that provides data on the history
+of a particular product item. Therefore, RFID technology allows the tracking of items in
+real-time across the supply chain. This makes it easier to identify and trace products [7,8].
+Jedermann, R. et al., developed a real-time autonomous sensor system for monitoring
+products when they were being transported [9]. Woo, S. H. et al., proposed an activity
+product state tracking system architecture for tracking products even when they were in a
+box or container [10].
+With the widespread use of RFID, many researchers have designed systems to enhance
+food safety management. Abad, E. et al., developed an RFID-based system for the tracking
+and cold-chain monitoring of food [11]. The ePedigree was advocated to gain full supply
+chain visibility with detailed trace and track information. In another study, Wang, L. et al.,
+proposed a system called the “supply-chain pedigree” [12].
+Recently, the quick response (QR) code has also become a popular technology in
+traceability systems. Compared with barcodes, QR codes have a larger storage capacity
+without increasing costs. Compared with RFID, the cost of implementation of a QR code
+system is lower. People can easily obtain product information by scanning the code using a
+smartphone. There is no need to invest in dedicated reading devices such as RFID readers.
+For this application, Dong, Y. et al., applied QR codes to analyze China’s leafy vegetable
+supply chain [13]. Xu, Z. and Gao, H. M. used QR code technology to build a white guard
+traceability system for SHUNZI Vegetable Cooperatives in order to achieve farm-to-table
+whole process recordability and traceability [14]. Peng, Y. et al., presented a QR code based
+tracing method for a meat quality tracing system [15]. Li, Z. et al., combined RFID and QR
+code techniques together to realize real-time tracking and tracing for a prepackaged food
+supply chain [16].
+Many approaches provide interactive and dynamic explorations for the public and
+governments to explore the information in each part of the food chain and provide easy
+implementation of hazard analysis and critical control points in the food industry. One
+major drawback of these approaches is the complexity and distinct features in the individual
+systems from different users/customers owing to the different requirements, facilities, and
+conditions among them, resulting in difﬁculty in adopting a centralized system for all
+customers. The emerging blockchain technique can help improve this situation.
+Blockchain was ﬁrst proposed by Nakamoto, S. in 2008 [17]. The well-known cryp-
+tocurrency Bitcoin was created based on this technique. A blockchain is a distributed
+database. It comprises a series of orderly blocks that are chained together. Data are stored
+in blocks such as the ledger [18]. One deﬁning characteristic of blockchain is decentraliza-
+tion. Many researchers have noticed this advantage and have applied it in supply chain
+management [19–21], including the food supply chain [22–25]. However, most studies
+have ignored data collection. Different companies still need to upload information to
+a centralized platform. Thus, a practical model incorporating decentralization has not
+been demonstrated.
+In summary, it is necessary to trace and track food products along the supply chain.
+In recent years, several types of approaches to achieve this goal have been developed.
+However, each company has its own system, which makes it difﬁcult to implement a
+traceability system for all the stakeholders along the supply chain. Any missing data in
+the links in the supply chain makes product tracing inaccurate. The integration of RFID
+and blockchain techniques in food packaging can help the implementation of a traceability
+system with different stakeholders; consequently, the objective of this study is to develop
+a packaging system framework for tracing and tracking food supply chains based on
+
+
+【第3页】
+Foods 2022, 11, 744
+3 of 18
+blockchain and RFID technologies. The system consists of a decentralized blockchain-
+enabled data storage platform for data management and an RFID system for data collection
+and storage. It works when there is an RFID reader nearby. The usage conditions include
+shipment, stocking, and storage. The new traceability system makes tracing and tracking
+products much easier and cheaper.
+The remainder of this paper is organized as follows: Section 2 brieﬂy reviews previous
+research on blockchain and RFID techniques in supply chains and food supply chains, in
+Section 3, the entire framework of the proposed system is introduced, Section 4 presents
+a case study to demonstrate the workﬂow of the proposed system, Section 5 presents the
+research conclusions and provides an outlook for future work.
+2. Literature Review
+The extensive research interest in blockchain began in 2018. We looked at research
+records covering the last ﬁve years (2017–September 2021) using keyword searches such as
+“blockchain”, “blockchain + supply chain”, and “blockchain + food” to explore the Web
+of Science database. The results are listed in Table 1a. We also calculated the percentages
+of the publications with the latter two keywords in the publications with the keyword
+“blockchain”. The results are listed in Table 1b. The publication trends are shown in Figure 1.
+We can see that there is an increasing interest in blockchain research. Studies applying
+this technique to supply chains and food areas are increasing yearly. This means that
+researchers have noticed that this emerging technique has the potential to bring beneﬁts to
+these areas. However, the limited number of publications suggests that the current studies
+remain in the early stages.
+Table 1. (a) Absolute numbers of recent publications regarding blockchain and relevant applications,
+(b) percentages of recent publications about blockchain computing related to food or supply chains
+(based on keyword search).
+(a)
+Keywords
+2017
+2018
+2019
+2020
+January–September 2021
+Blockchain
+743
+2933
+8144
+13,685
+8811
+Blockchain + Supply Chain
+31
+125
+379
+620
+508
+Blockchain + Food
+6
+33
+91
+173
+128
+(b)
+Keywords
+2017
+2018
+2019
+2020
+January–September 2021
+Blockchain + Supply Chain
+4.17%
+4.26%
+4.65%
+4.53%
+5.77%
+Blockchain + Food
+0.81%
+1.13%
+1.12%
+1.26%
+1.45%
+Decentralization makes blockchain technology attractive to researchers aiming to
+apply it to the supply chain, but there is little research to apply blockchain in supply chain
+management [26–29]. Smart contracts and consensus algorithms need to be redesigned for
+blockchain applications in supply chains [30–32]. Based on these studies, there are also
+some successful cases of blockchain applications in the supply chain. Wang et al., built a
+novel blockchain-based information management framework for a precast supply chain,
+thereby extending the applications of blockchain in the domain of construction supply
+chains [33]. Ho, G. T. et al., proposed a blockchain-based system for the accurate recording
+of aircraft spare parts traceability data with organizational consensus and validation using
+Hyperledger Fabric [34]. Omar, I. A. et al., presented a blockchain-based approach using
+Ethereum smart contracts and decentralized storage systems to transform vendor-managed
+inventory supply chain operations [35].
+Insofar as studies targeting the food supply chain are concerned [36–39], among
+these studies how to apply blockchain for food traceability in the supply chain is a hot
+topic. Lin, Q. et al., designed a decentralized traceability system for food safety problems
+
+
+【第4页】
+Foods 2022, 11, 744
+4 of 18
+based on blockchain and an electronic product code information services network [40].
+Tsang, Y. P. et al., proposed a blockchain–IoT based food traceability system that integrates
+a blockchain, IoT technology, and fuzzy logic for managing perishable food. A new
+consensus mechanism for considering the shipment transit time, stakeholder assessment,
+and shipment volume was developed to address the needs for food traceability, weight
+minimization, and vaporization characteristics [41]. Powell, W. et al., analyzed an ongoing
+beef supply chain project integrating the blockchain and IoT for supply chain event tracking
+and beef provenance assurance and proposed two solutions for increasing data integrity
+and trust in the blockchain and IoT-enabled food supply chain [42].
+Foods 2022, 11, x FOR PEER REVIEW 
+4 of 20 
+ 
+ 
+ 
+(a) 
+ 
+(b) 
+Figure 1. Publication trends: (a) blockchain, (b) percentages in publications about blockchain. 
+Decentralization makes blockchain technology attractive to researchers aiming to ap-
+ply it to the supply chain, but there is little research to apply blockchain in supply chain 
+management [26–29]. Smart contracts and consensus algorithms need to be redesigned for 
+blockchain applications in supply chains [30–32]. Based on these studies, there are also 
+some successful cases of blockchain applications in the supply chain. Wang et al., built a 
+novel blockchain-based information management framework for a precast supply chain, 
+thereby extending the applications of blockchain in the domain of construction supply 
+chains [33]. Ho, G. T. et al., proposed a blockchain-based system for the accurate recording 
+of aircraft spare parts traceability data with organizational consensus and validation using 
+Hyperledger Fabric [34]. Omar, I. A. et al., presented a blockchain-based approach using 
+Ethereum smart contracts and decentralized storage systems to transform vendor-man-
+aged inventory supply chain operations [35]. 
+Insofar as studies targeting the food supply chain are concerned [36–39], among these 
+studies how to apply blockchain for food traceability in the supply chain is a hot topic. 
+Lin, Q. et al., designed a decentralized traceability system for food safety problems based 
+on blockchain and an electronic product code information services network [40]. Tsang, 
+Y. P. et al., proposed a blockchain–IoT based food traceability system that integrates a 
+blockchain, IoT technology, and fuzzy logic for managing perishable food. A new consen-
+sus mechanism for considering the shipment transit time, stakeholder assessment, and 
+shipment volume was developed to address the needs for food traceability, weight mini-
+mization, and vaporization characteristics [41]. Powell, W. et al., analyzed an ongoing beef 
+supply chain project integrating the blockchain and IoT for supply chain event tracking 
+and beef provenance assurance and proposed two solutions for increasing data integrity 
+and trust in the blockchain and IoT-enabled food supply chain [42]. 
+Figure 1. Publication trends: (a) blockchain, (b) percentages in publications about blockchain.
+The aforementioned studies primarily focused on data management. However, data
+collection is also important for supply chain management. As stated in Section 1, RFID
+and QR codes are currently two popular techniques used in tracing and tracking systems
+to increase the efﬁciency of data input. Therefore, some studies have considered hybrid
+RFID approaches, QR codes, IOT techniques, and blockchains. Lakshmi, G. V. et al., used
+QR codes and a blockchain for inventory management [43]. Baralla, G. et al., developed a
+generic agri-food supply chain traceability system based on blockchain technology using
+
+
+【第5页】
+Foods 2022, 11, 744
+5 of 18
+Hyperledger Sawtooth. The system acquired data simply through a QR code scan [44]. Dey,
+S. et al., proposed a blockchain-technology-based framework, which made food product
+information easily accessible, traceable, and veriﬁable by consumers and producers by
+using QR codes to embed the information [45]. Bencic, F. M. et al., proposed a smart tag,
+called a DL-tag, which is used to track products during their lifecycle. The tags contain
+QR codes and the system implements a blockchain [46]. Compared with RFID, the cost of
+deploying a QR code system is much lower. However, the main drawback of QR codes is
+that they are easy to physically duplicate or destroy. There are safety risks in food supply
+chain management, where food safety is the main concern. In view of these different
+concerns, and in light of the current literature, we focused this research on a combination
+of blockchain and RFID technologies.
+Feng, T. ﬁrst utilized RFID and blockchain techniques to develop an agri-food supply
+chain traceability system framework. The system could realize traceability with trusted
+information across the entire agri-food supply chain, thereby effectively guaranteeing
+food safety by gathering, transferring, and sharing the relevant data in the production,
+processing, warehousing, distribution, and selling stages [47]. Meanwhile, the same author
+proposed the concept of “BigchainDB” [48], aiming to improve performance by applying
+blockchain for high-volume data storage. Helo, P. and Shamsuzzoha, H. M. considered the
+challenges of tracing and tracking in multi-company project environments. They proposed
+a pilot system formed by the combination of RFID, IoT, and blockchain technologies for
+real-time tracking and tracing of logistics and supply chains [49]. Mondal, S. et al., pro-
+posed a blockchain-inspired IoT architecture for creating a transparent food supply chain.
+The architecture was realized by integrating an RFID-based sensor at the physical layer
+and a blockchain at the cyber layer [50]. Mazzei, D. et al., described the implementation
+of a portable, platform-agnostic, secured blockchain tokenizer for industrial IoT trustless
+applications. The system was designed, implemented, and tested in two supply chain
+scenarios [51]. Sfa, A. et al., proposed two blockchain-based decentralized mutual authenti-
+cation protocols for IoT systems. Moreover, combining blockchain with RFID can also help
+anti-counterfeiting efforts in the supply chain as these tags can be easily cloned in the post
+supply chain [52]. Toyoda, K. et al., proposed a novel product ownership management
+system for anti-counterfeiting RFID-attached products [53].
+From the review, it can be found that most studies have considered the use of RFID for
+data collection, and blockchain for uploaded data processing and storage. In fact, these two
+techniques are generally used separately and only in the supply chain. Based on previous
+studies, this research focused on improving food packaging. We propose a traceability
+system framework for supply chain management. The system integrates blockchain with
+RFID much more deeply at the package level. The detailed design of the system is described
+in the following sections.
+3. Traceability System Design
+Figure 2 illustrates the application scenarios of the system. The system has three main
+parts. One part comprises blockchain-enabled RFID tags attached to the product packaging.
+The blockchain-enabled RFID tags follow the products along the entire supply chain. The
+relevant product information, transactions, storage, and delivery status are all recorded.
+Some tags can be coupled with sensors to measure and record environmental conditions.
+When the RFID tags are read by the RFID readers at each link of the supply chain, the
+information is transmitted to the blockchain light nodes. These comprise the second part
+of the system. The light nodes are integrated with the RFID readers. They are responsible
+for the communication and veriﬁcation of RFID tags. Owing to the limited capacity of the
+RFID reader, the light node does not store all the ledgers. In addition, cross-validation is
+performed to guarantee safety. The approach is described in Section 3.3. The third part of
+the system comprises a blockchain platform. This platform stores all the ledgers. It also
+contains a designed consensus mechanism for making decisions on how to record ledgers.
+
+
+【第6页】
+Foods 2022, 11, 744
+6 of 18
+Users are also provided with an interface for product information inquiry. Figure 3 shows
+the relationship between these three parts, along with the system architecture.
+Figure 2. Application scenarios of the traceability system.
+Figure 3. Traceability system architecture (The color is used to distinguish the blocks from different
+sessions in the supply chain.).
+
+
+【第7页】
+Foods 2022, 11, 744
+7 of 18
+3.1. System Architecture
+As presented in Figure 3, the system comprises three parts: the RFID tags, RFID
+reader, and backend blockchain platform. A simple blockchain is contained in a blockchain-
+enabled RFID tag. Each time the tag passes a reader, a block is generated. The information
+written in the tag and the hash value of the previous block are calculated using the SHA-256
+algorithm. The result is also written in the tag as the hash value of the current block. In this
+way, the blocks are individually linked. The second part is an RFID reader. Similar to the
+role of the normal RFID system, the RFID reader builds communication between the RFID
+tags and the backend system. In addition to the basic functions of a normal RFID reader,
+the reader in this blockchain-based traceability system contains a blockchain layer to justify
+whether the tag is a blockchain-enabled tag and for deciding what information should be
+written on the tag after encryption. An encryption module is also included in the RFID
+reader and is used to calculate the hash value of the input information. Finally, the RFID
+reader sends the information that the reader writes to the backend blockchain platform.
+The reader also stores parts of the ledgers of the blockchain platform as a light blockchain
+node. The third part is the blockchain platform. All the ledgers are stored on it. The main
+functions of the platform are data management and veriﬁcation. A user application linked
+to the blockchain platform was also designed. Its main purpose is to provide a convenient
+user interface for inquiries regarding food product supply chain information.
+3.2. Blockchain-Enabled Radio Frequency Identiﬁcation (RFID) Tag Design
+This is the base of the system. As stated in Section 2, in most previous studies
+integrating RFID and blockchain, RFID tags were only used to collect data. In this study,
+the RFID tags contain a blockchain data structure. The tags must be attached to all the
+products in the entire supply chain. When the reader reads a tag, the information is recorded
+and a block is formed. The blocks form a chain and are stored in the tags; consequently,
+people only need to scan the tags. Then, they can obtain all the information regarding the
+product and what it has experienced from source to destination. There is no need for a
+central database or system for management because all the information users might need
+is stored in the RFID tags. Moreover, the blockchain structure guarantees data safety. If
+anyone wanted to modify it, it would have to be modiﬁed from the beginning.
+With the explosion of chip technologies, the storage space in RFID tags has experi-
+enced exponential growth; consequently, it is possible for RFID tags to store all product
+information and transaction records, that is, much more than a mere ID number. Further-
+more, the safety mechanism of an RFID system uses a hash chain scheme, as shown in
+Figure 4, which is the same as the basic principle of blockchain. In the hash chain, the
+tag and reader share two hash functions: G( ) and H( ). G( ) is used to calculate response
+messages. H( ) is used for updating. They also share an initial random identiﬁer (s). When
+the RFID reader investigates the tag, the tag responds to the hash value ai = G(si) of the
+current identiﬁer si; simultaneously, the tag updates the current identiﬁer si to si+1 = H(si).
+These two functions make it feasible to integrate blockchain with RFID.
+Figure 4. Safety mechanism of radio frequency identiﬁcation (RFID).
+
+
+【第8页】
+Foods 2022, 11, 744
+8 of 18
+The blockchain design in the RFID tags and the corresponding mechanisms are dis-
+cussed below. When a food product is packaged, all the relevant information is coded by
+the hash algorithm and then recorded in the block; this block is called the “genesis block”.
+The block is stored in an RFID tag attached to the food package. When the product enters
+the next session, for example, storage in the warehouse, the relevant information is coded
+by the hash algorithm (SHA-256) and then recorded in a second block linked to the genesis
+block. When the product proceeds to the next session, the same work is repeated until the
+product reaches the consumer. Figure 5 illustrates the procedure. The data structure design
+of the blocks is presented in Table 2. It contains an RFID tag ID, reader IP address, product
+information, and relevant sensor data. The table also provides an example of the data (the
+only example). In fact, there is no need to ﬁll all the columns or follow the data format. In
+addition to the necessary reader IP address, location, timestamp, and hash value the reader
+in each link of the supply chain only needs to input the information it can provide. In this
+way, it effectively solves the data-sharing problem of different companies with different
+types of information systems in a complex supply chain and at a low cost. The only thing
+the manufacturer needs to do is update the RFID reader at the software level.
+Figure 5. Work procedure of the RFID system (The color is used to distinguish the blocks from
+different sessions in the supply chain.).
+Table 2. Sample record for a single product data structure design.
+Data Structure
+Manufacture
+Storage
+Delivery
+Retailer
+Tag ID
+30373004012900
+30373004012900
+30373004012900
+30373004012900
+Reader IP
+175.160.137.100
+127.155.155.100
+165.129.69.105
+168.122.53.107
+Timestamp
+2110231409
+2110231611
+2110250632
+2110261017
+Product Name
+Milk
+Milk
+Milk
+Milk
+Product ID
+30373004740000
+30373004740000
+30373004740000
+30373004740000
+Location
+39.773, 119.253
+38.476, 117.245
+36.279, 118.366
+34.773, 113.727
+Company
+A
+B
+C
+D
+Job
+Manufacture
+Storage
+Delivery
+Retailer
+Sensor
+Not Applicable
+Temperature
+Temperature
+Temperature
+Sensor Data
+Not Applicable
+5
+7
+3
+Previous Hash
+Not Applicable
+3a6fed5fc11392b3ee9f81
+caf017b48640d74587
+66a8eb0382899a60
+5b41f2b9
+d807aa9812835b0
+1243185be550c
+7dc372be5d7480
+deb1fe9bdc06a
+7c19bf174
+748f82ee78a563
+6f84c878148cc
+7020890befffaa4
+506cebbef9a3f
+7c67178f2
+Hash Value
+3a6fed5fc1139
+2b3ee9f81caf017b
+48640d7458766
+a8eb0382899
+a605b41f2b9
+d807aa981283
+5b01243185
+be550c7dc372
+be5d7480deb 1fe9bdc06
+a7c19bf174
+748f82ee78
+a5636f84c878
+148cc70208 90befffaa4
+506cebbef9
+a3f7c67178f2
+
+
+【第9页】
+Foods 2022, 11, 744
+9 of 18
+3.3. Blockchain Light Node Design
+The RFID reader takes the role of a bridge between the RFID tag and the blockchain
+platform. The main function of this system is communication. For the RFID tag, the RFID
+reader is responsible for reading the data of the tags, decrypting the data, and recording it
+in the database of the corresponding system. This system is also responsible for writing
+data in the RFID tags and for encryption. Meanwhile, ledgers in a period relevant to when
+the tags were read are also stored in the reader. If there are any data safety problems, the
+reader can also provide cross-veriﬁcation. For a given (limited) storage capacity, the ledgers
+stored in the reader have a maximum size requirement. An RFID reader is a blockchain
+light node. Therefore, we need to develop a blockchain platform with full functionality.
+For the blockchain platform, the RFID reader includes a communication module for data
+processing and uploading.
+For the communication with RFID tags, the work procedure is as follows:
+Step 1: The RFID reader reads the RFID tag and determines whether it is a blockchain-
+enabled tag. If it is, proceed to Step 2; otherwise, the normal RFID reader procedure
+is completed.
+Step 2: The reader determines whether the tag has been read before. If it has, proceed
+to Step 3. If it has not, proceed to Step 5.
+Step 3: The reader determines whether the time interval between reads is longer than
+a user-deﬁned value, t. If it is, proceed to Step 4. If it is not, proceed to Step 5.
+Step 4: The reader reads the hash value from the second to the last block, then proceeds
+to Step 6.
+Step 5: The reader reads the hash value of the last block.
+Step 6: The reader writes the data into a tag with the hash value of the last step.
+Step 7: The reader calculates the hash value of the input information using the
+SHA-256 algorithm.
+Step 8: The reader writes the hash value into the tag.
+Step 9: After data processing, the reader transforms the data into a blockchain platform.
+The communication module is described in the next section. Figure 6 shows a ﬂowchart of
+how the RFID reader writes the data in the RFID tags.
+The communication module in the RFID reader comprises four parts. The ﬁrst part
+includes a radio signal transmitting and processing module, command parser, and data
+integration and processing module, which realize the basic RFID reader function. If
+the reader ﬁnds that the tag it has read is a blockchain-enabled RFID tag, the data are
+transmitted to the blockchain layer in the RFID reader. This is the second part of the
+communication module and represents its core. The blockchain layer reads the hash value
+of the last block in the tag and sends it, together with the new information it wants to write
+to the tag, to the third part of the communication module: the encryption module. The
+encryption module uses the SHA-256 algorithm to calculate a new hash value derived from
+the previous hash value and the input data. After encryption, this new (now current) hash
+value and input data are transmitted back from the blockchain layer, via the RFID reader,
+to the RFID tag as a new block. The blockchain layer also stores recent ledgers relevant to
+the tags it has read (within the limits of its storage capacity). When there is any veriﬁcation
+requirement, these recorded ledgers can be used for cross-validation. The fourth part is the
+network module. It connects the reader to the Internet. Then, the hash value, input data,
+tag ID, and product ID can be transmitted to the blockchain platform. The recent ledgers
+of this RFID system will also be downloaded and updated from the blockchain platform.
+Figure 7 shows the architecture of the communication module between the light node and
+blockchain platform. This module also solves the problems of data integration, processing,
+and bulk data upload.
+
+
+【第10页】
+Foods 2022, 11, 744
+10 of 18
+Figure 6. Workﬂow of the RFID reader.
+
+
+【第11页】
+Foods 2022, 11, 744
+11 of 18
+Figure 7. Data operational process to the blockchain platform.
+3.4. Blockchain Platform Design
+A blockchain platform was developed on Hyperledger Fabric. The system architecture
+is illustrated in Figure 8. The central part of the architecture is an ordering service. It orga-
+nizes different parties in the supply chain actions for veriﬁcation. Consensus algorithms
+and chain codes are both located here. The ordering service node also connects to a client
+application, as introduced in Section 3.5.
+Figure 8. System architecture (The color is used to distinguish the blocks from different sessions in
+the supply chain.).
+
+
+【第12页】
+Foods 2022, 11, 744
+12 of 18
+According to the characteristics of the supply chain, the parties can be divided into
+four groups: manufacturers, warehouses, logistics, and retailers. Each group is the re-
+sponsibility of a different company. Channels are built between the group and ordering
+service; consequently, there are four channels in this platform, thus there are four ledgers.
+Each group contains the fabric certiﬁcation authority, leader peer, anchor peer, endorser
+peers, and committer peers. The endorser peers and committer peers are connected to the
+responding RFID readers. RFID readers are the light nodes of their peers, as they only store
+parts of the ledgers. All the peer nodes, regardless of the company they belong to, store the
+entire ledger for their group. The records can also be the reader data, transmitted back by
+the RFID reader, and set as blocks linked together by a hash value. They are saved in their
+respective ledgers. In contrast to the client application, the tag ID in the ledger is set as the
+inquiry number. In fact, the RFID tag in the platform can also be considered as a peer node,
+however it contains parts of all four ledgers along with their relevant smart contracts.
+The workﬂow for the data transmitted from the RFID reader to the platform is illus-
+trated in Figure 9. First, the platform veriﬁes the validity of the reader. Second, the RFID
+tag ID is extracted for the platform to identify the block of the RFID tag from the previous
+session. Then, the platform compares the hash value recorded in the last block of this RFID
+tag with the hash value of the previous block in the tag transmitted back by the RFID reader.
+If they are identical, all the information transmitted back is recorded as a block of that tag
+and linked with other blocks in the same group. If they are different, a warning is issued.
+Figure 9. Workﬂow of the communication between the RFID reader and blockchain platform (The
+color is used to distinguish the blocks from different sessions in the supply chain).
+3.5. Client Application Design
+We also designed a client application for the traceability system (the platform was
+developed in Chinese; we translated the words in the following ﬁgures for clarity). This
+application only provides an interface for users for inquiries. There is no need for companies
+in the product supply chain to use it; they only need to write relevant information on the
+tag through the RFID reader.
+As shown in Figure 10, there are six modules in the application: product information,
+manufacturing management, storage management, delivery management, retail manage-
+ment, and food safety analysis. The product information module includes basic product
+information such as shelf life and name. The manufacturing management module pro-
+cesses the information from the manufacturer. The details can be decided by the company
+itself, for example, details about storage management, delivery management, and retail
+management. The relevant parties in the supply chain can only provide their company
+
+
+【第13页】
+Foods 2022, 11, 744
+13 of 18
+names or more detailed information such as the storage environment, delivery truck, and
+arrival time. The ﬁnal part is the food safety analysis module. In this module, the food
+pedigree is analyzed to locate the key node in the supply chain. If a product has any
+problems, the module can also help to recall the problem product and analyze which chain
+has the problem. Detailed information can be found in our previous study [12,54].
+Figure 10. Client Application Interface.
+In this user application, all modules contained the product ID. The product ID is the
+index number for this system. The tag ID and hash value are not shown to the users owing
+to safety considerations.
+4. Case Study
+In this section, a case study is presented to demonstrate the operation of the system.
+The case is based on Tiandi Yuan Ltd., a famous beverage company. Their main products
+are white wines.
+When a product is manufactured, a serial number is generated. We use the example
+“6926582705239LW-2013-0300001” for demonstration. Furthermore, a UHF RFID tag, as
+shown in Figure 11, is also attached to the product package. An RFID reader scans the tag
+and the tag ID is linked to the product ID. The system uploads relevant product information
+to the system, as shown in Figure 12. A hash value is calculated using SHA-256 with the
+input of the tag ID and the product information. The hash value is written on the tag by the
+RFID reader as the genesis block (block 0). The RFID reader also connects to the blockchain
+platform and transmits the tag ID, product information, and hash value to the platform.
+These inputs and the previous hash value of the block in the platform are calculated using
+SHA-256. Then, a new block is generated in the platform. Parts of the ledger of the
+manufacturing node are also downloaded onto the RFID reader. When the product enters
+the next session, the same steps are repeated. In the storage session, the reader reads the
+tag, links the tag ID with the storage information, and uploads the information to the
+system. Meanwhile, the reader uses the information and the hash value recorded in block 0
+to generate a new hash value associated with block 1 to be recorded in the RFID tag. The
+rest of the procedure is the same as in the manufacturing session. The procedure for the
+remaining sessions is also the same for each session.
+
+
+【第14页】
+Foods 2022, 11, 744
+14 of 18
+Figure 11. The attached UHF RFID Tag.
+Figure 12. Detailed Information in Client Application.
+Finally, as shown in Figure 13, when the consumer inputs the product ID at the
+interface, the application shows the entire supply chain of the product. The user can also
+ﬁnd detailed information by clicking the nodes in the supply chain or clicking the buttons
+in the left column.
+Figure 13. Food Supply Chain in Client Application.
+This company has different partners in its product supply chain, especially in logistics
+and retailer sessions. In the past, it was difﬁcult for companies to follow their products along
+the entire supply chain, because not all companies are willing to upload the information
+to the company’s information platform. With the help of this system, the company has
+better information about its products in the supply chain, such as ﬁnal consumers. The
+company merely needs to update its partners’ RFID readers. The reader can automatically
+identify the blockchain-enabled RFID tag in order to perform its functions, as stated above.
+
+
+【第15页】
+Foods 2022, 11, 744
+15 of 18
+Although some companies in the supply chain are resistant to sharing information, basic
+information such as time and location will also be recorded automatically through the RFID
+reader. With a more transparent supply chain, the company can better manage its products.
+The data also helps the company analyze its product supply chain. If there are any problem
+products, they can be easily recalled. Moreover, the application of blockchain techniques in
+both the platform and the RFID tags signiﬁcantly increases product security and facilitates
+anti-counterfeiting measures.
+The case study proves that the proposed system can effectively help different compa-
+nies with different information system collect and upload data to the blockchain plat-form.
+With the information, all the traces of a product along the supply chain can be clearly
+presented to the consumers. Furthermore, the system also has the potential to enable
+companies to manage their products better with some data analysis modules.
+5. Conclusions
+This research proposed a blockchain and RFID-enabled traceability system for the food
+industry. The system consists of three parts. The ﬁrst is a blockchain–RFID tag. We deeply
+integrated blockchain and RFID techniques. A simple blockchain storage structure was
+designed for data storage in an RFID tag based on the original safety scheme of the RFID
+system. All information regarding the product as it follows the supply chain is recorded
+in the tags in a blockchain format. The second part is an RFID reader with a blockchain
+light node. Its main function is to build communication between the RFID and backend
+blockchain platforms in a normal RFID system. In addition to these basic functions, the
+reader also contains blockchain and encryption modules. These two modules change the
+reader to a blockchain light node. The blockchain layer can determine whether a tag is a
+blockchain-enabled RFID tag. If it is, the data will be dealt with by the encryption module
+and written on the tag with a calculated hash value. Moreover, the recent ledgers of the
+tags that the RFID reader has read previously are also stored in it. If there is any uncertainty
+about the data, the reader can also help in cross-validation. The third part is the blockchain
+platform. The platform was developed using Hyperledger Fabric. It stores all the ledgers.
+The reader transmits the data written on the tags to the platform. The platform manages
+and veriﬁes the data and the reader. Finally, we designed a user application which has the
+look and feel of a webpage. It provides a user interface for convenient inquiries regarding
+the pedigrees of food products. Detailed information on each chain, as provided by the
+responding company, can also be obtained using this application.
+The main contribution of this research is the creative design of a blockchain-based
+RFID tag. The tag can be attached to a food package with low costs for the application
+of this new emerging blockchain technique. Blockchain technology allows supply chain
+monitoring to be decentralized. For the various companies referred to in the complex
+supply chain, there is no need to use different types of information systems or to follow
+different types of data formats for different companies. They need to (and can simply)
+update their RFID readers at the software level. Anyone requiring the product supply chain
+information can download it from the blockchain platform. With the help of blockchain,
+the food supply chain can be more transparent and can be easily traced and tracked.
+Comparisons between our proposed system and other popular blockchain-based
+methods for tracing and tracking systems are shown in Table 3. From the comparison, it
+can be seen that our proposed system has a high security level and relatively low cost,
+allowing convenient data input, and it needs to be equipped with RFID readers without
+simultaneously demanding a uniform information system.
+
+
+【第16页】
+Foods 2022, 11, 744
+16 of 18
+Table 3. Comparisons between different blockchain based methods for tracing and tracking systems.
+Approaches
+Security Level
+Convenient for Data Input
+Cost
+Blockchain
+High
+No (data need to be input
+manually)
+Low
+Blockchain + QR code
+Low
+Yes (But data need to be
+scanned individually)
+Low
+Blockchain + RFID
+Medium
+Yes (Each stakeholder needs to
+connect their RFID system to a
+uniform information system)
+Medium
+Blockchain + IoT
+High
+Yes (Each stakeholder should
+guarantee the device can be
+connected to the Internet)
+High
+Our method
+High
+Yes (Each stakeholder merely
+needs an RFID reader)
+Medium
+We did not redesign the consensus mechanism for blockchain platforms. The system
+is only in the research phase, therefore there is no problem with the current volume of data.
+However, a traditional consensus mechanism, such as practical Byzantine fault tolerance,
+may not satisfy the data throughput in the supply chain. The data in the supply chain have
+their own characteristics. In future studies, we will consider developing a new consensus
+mechanism that is more suitable for the food supply chain. We will also consider printing
+QR codes on the RFID tags. Companies without RFID readers can also be involved in
+this system. Moreover, with the help of the blockchain technique, the food supply chain
+becomes much more transparent and easier to safeguard. The analysis of these data will
+also be our research focus in the next phase.
+Author Contributions: L.W. and Z.W. conceived the ideas and designed the framework of the
+system; L.W. contributed to the blockchain platform design and the client application design; Z.W.
+contributed to the RFID system design; L.W. prepared the draft; Y.H. contributed to the manuscript
+writing and editing. All authors commented on the manuscript. All authors have read and agreed to
+the published version of the manuscript.
+Funding: This research was funded by the National Natural Science Foundation of China under
+Grant 71502029 and Grant 61703087.
+Acknowledgments: The authors would like to acknowledge the ﬁnancial support from the China
+Scholarship Council (CSC) and technical support from Michigan State University.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+References
+1.
+Liu, S.; Xie, Z.; Zhang, W.; Cao, X.; Pei, X. Risk assessment in Chinese food safety. Food Control 2013, 30, 162–167. [CrossRef]
+2.
+Raut, R.D. Improvement in the food losses in fruits and vegetable supply chain—A perspective of cold third-party logistics
+approach. Oper. Res. Perspect. 2019, 6, 100–117. [CrossRef]
+3.
+NRDC. Wasted: How America Is Losing up to 40 Percent of Its Food from Farm to Fork to Landﬁll. 2012. Available online:
+https://www.nrdc.org/sites/default/ﬁles/wasted-food-IP.pdf (accessed on 2 August 2018).
+4.
+Jagtap, S.; Duong, L.; Trollman, H.; Bader, F.; Garcia-Garcia, G.; Skouteris, G.; Li, J.; Pathare, P.; Martindale, W.; Swainson, M.;
+et al. Iot Technologies in The Food Supply Chain. In Food Technology Disruptions; Academic Press: Cambridge, MA, USA, 2021;
+pp. 175–211.
+5.
+Bader, F.; Jagtap, S. Internet of Things-Linked Wearable Devices for Managing Food Safety in The Healthcare Sector. In Wearable
+and Implantable Medical Devices; Academic Press: Cambridge, MA, USA, 2019.
+6.
+Jedermann, R.; Ruiz-Garcia, L.; Lang, W. Spatial temperature proﬁling by semi-passive RFID loggers for perishable food
+transportation. Comput. Electron. Agric. 2009, 65, 145–154. [CrossRef]
+7.
+Kwok, S.K.; Ting, J.S.L.; Tsang, A.H.C.; Lee, W.B.; Cheung, B.C.F. Design and development of a mobile epc-rﬁd-based self-
+validation system (mess) for product authentication. Comput. Ind. 2010, 61, 624–635. [CrossRef]
+8.
+Kwok, S.K.; Ting, S.L.; Tsang, A.; Cheung, C.F. A counterfeit network analyzer based on RFID and EPC. Ind. Manag. Data Syst.
+2010, 110, 1018–1037. [CrossRef]
+
+
+【第17页】
+Foods 2022, 11, 744
+17 of 18
+9.
+Jedermann, R.; Behrens, C.; Westphal, D.; Lang, W. Applying autonomous sensor systems in logistics-combining sensor networks,
+RFIDs and software agents. Sens. Actuators 2006, 132, 370–375. [CrossRef]
+10.
+Woo, S.H.; Choi, J.Y.; Kwak, C.J.; Kim, C.O. An active product state tracking architecture in logistics sensor networks. Comput. Ind.
+2009, 60, 149–160. [CrossRef]
+11.
+Abad, E.; Palacio, F.; Nuin, M.; AGDZárate Marco, S. RFID smart tag for traceability and cold chain monitoring of foods:
+Demonstration in an intercontinental fresh ﬁsh logistic chain. J. Food Eng. 2009, 93, 394–399. [CrossRef]
+12.
+Wang, L.; Ting, S.L.; Ip, W.H. Design of supply-chain pedigree interactive dynamic explore (SPIDER) for food safety and
+implementation of hazard analysis and critical control points. Comput. Electron. Agric. 2013, 90, 14–23. [CrossRef]
+13.
+Dong, Y.; Fu, Z.; Stankovski, S.; Wang, S.; Li, X. Nutritional quality and safety traceability system for China’s leafy vegetable
+supply chain based on fault tree analysis and QR code. IEEE Access 2020, 8, 161261–161275. [CrossRef]
+14.
+Xu, Z.; Gao, H.M. The construction of melon traceability system based on QR code for SHUNZI vegetable cooperative. In
+Proceedings of the International Conference on Management Science and Management Innovation, Guilin, China, 15–16 August
+2015; Atlantis Press: Paris, France, 2015; pp. 120–126.
+15.
+Peng, Y.; Zhang, L.; Song, Z.; Yan, J.; Li, X.; Li, Z. A QR code based tracing method for fresh pork quality in cold chain. J. Food
+Process Eng. 2018, 41, 12685. [CrossRef]
+16.
+Li, Z.; Liu, G.; Liu, L.; Lai, X.; Xu, G. Iot-based tracking and tracing platform for prepackaged food supply chain. Ind. Manag. Data
+Syst. 2017, 117, 1906–1916. [CrossRef]
+17.
+Nakamoto, S. Bitcoin: A Peer-to-Peer Electronic Cash System. Social Science Electronic Publishing. 2018. Available online:
+https://bitcoin.org/bitcoin.pdf (accessed on 1 February 2022).
+18.
+Lee, D.; Chuen, K. Handbook of Digital Currency; Elsevier: Amsterdam, The Netherlands, 2015.
+19.
+Wang, Y.; Han, J.H.; Beynon-Davies, P. Understanding blockchain technology for future supply chains: A systematic literature
+review and research agenda. Supply Chain. Manag. 2018, 24, 62–84. [CrossRef]
+20.
+Kouhizadeh, M.; Saberi, S.; Sarkis, J. Blockchain technology and the sustainable supply chain: Theoretically exploring adoption
+barriers. Int. J. Prod. Econ. 2021, 231, 1078311. [CrossRef]
+21.
+Chang, S.E.; Chen, Y.C.; Lu, M.F. Supply chain re-engineering using blockchain technology: A case of smart contract based
+tracking process. Technol. Forecast. Soc. Change 2019, 144, 1–11. [CrossRef]
+22.
+Feng, H.; Wang, X.; Duan, Y.; Zhang, J.; Zhang, X. Applying blockchain technology to improve agri-food traceability: A review of
+development methods, beneﬁts and challenges. J. Clean. Prod. 2020, 260, 121031. [CrossRef]
+23.
+Kamilaris, A.; Fonts, A.; Prenafeta-Boldu, F.X. The rise of blockchain technology in agriculture and food supply chains. Trends
+Food Sci. Technol. 2019, 91, 640–652. [CrossRef]
+24.
+Galvez, J.F.; Mejuto, J.C.; Simal-Gandara, J. Future challenges on the use of blockchain for food traceability analysis. TrAC Trends
+Anal. Chem. 2018, 107, 222–232. [CrossRef]
+25.
+Kamble, S.S.; Gunasekaran, A.; Sharma, R. Modeling the blockchain enabled traceability in agriculture supply chain. Int. J. Inf.
+Manag. 2019, 52, 101967. [CrossRef]
+26.
+Azzi, R.; Kilany, R.; Sokhn, M. The power of a blockchain-based supply chain. Comput. Ind. Eng. 2019, 135, 582–592. [CrossRef]
+27.
+Abeyratne, S.; Monfared, R. Blockchain ready manufacturing supply chain using distributed ledger. Int. J. Res. Eng. Technol. 2016,
+5, 1–10.
+28.
+Bai, C.; Sarkis, J. A supply chain transparency and sustainability technology appraisal model for blockchain technology. Int. J.
+Prod. Res. 2019, 58, 2142–2162. [CrossRef]
+29.
+Cole, R.; Stevenson, M.; Aitken, J. Blockchain technology: Implications for operations and supply chain management. Supply
+Chain. Manag. 2019, 24, 469–483. [CrossRef]
+30.
+Huertas. Eximchain: Supply Chain Finance Solutions on a Secured Public, Permissioned Blockchain Hybird. 2018. Available
+online: https://eximchain.com/Whitepaper%20-%20Eximchain.pdf (accessed on 1 March 2018).
+31.
+Dolgui, A.; Ivanov, D.; Potryasaev, S.A.; Sokolov, B.V.; Werner, F. Blockchain-oriented dynamic modelling of smart contract design
+and execution in the supply chain. Int. J. Prod. Res. 2020, 58, 2184–2199. [CrossRef]
+32.
+Xu, X.; Zhu, D.; Yang, X.; Wang, S.; Qi, L.; Dou, W. Concurrent practical byzantine fault tolerance for integration of blockchain
+and supply chain. ACM Trans. Internet Technol. (TOIT) 2020, 21, 1–17. [CrossRef]
+33.
+Wang, Z.; Wang, T.; Hu, H.; Gong, J.; Ren, X.; Xiao, Q. Blockchain-based framework for improving supply chain traceability and
+information sharing in precast construction. Autom. Constr. 2020, 111, 103063. [CrossRef]
+34.
+Ho GT, S.; Tang, Y.M.; Tsang, K.Y.; Tang, V.; Ka, Y.C. A blockchain-based system to enhance aircraft parts traceability and
+trackability for inventory management. Expert Syst. Appl. 2021, 179, 115101.
+35.
+Omar, I.A.; Jayaraman, R.; Salah, K.; Debe, M.; Omar, M.A. Enhancing vendor managed inventory supply chain operations using
+blockchain smart contracts. IEEE Access 2020, 8, 182704–182719. [CrossRef]
+36.
+Bumblauskas, D.; Mann, A.; Dugan, B.; Rittmer, J. A blockchain use case in food distribution: Do you know where your food has
+been? Int. J. Inf. Manag. 2019, 52, 102008. [CrossRef]
+37.
+Biswas, K.; Muthukkumarasamy, V.; Lum, W. Blockchain based wine supply chain traceability system. In Proceedings of the
+Future Technologies Conference (FTC) 2017, Vancouver, BC, Canada, 29–30 November 2017; pp. 56–62.
+
+
+【第18页】
+Foods 2022, 11, 744
+18 of 18
+38.
+Caro, M.P.; Ali, M.S.; Vecchio, M.; Gia Ff Reda, R. Blockchain-based traceability in Agri-Food supply chain management: A
+practical implementation. In Proceedings of the 2018 IoT Vertical and Topical Summit on Agriculture—Tuscany (IOT Tuscany),
+Tuscany, Italy, 8–9 May 2018; pp. 1–4.
+39.
+Mhaa, B.; Lc, C.; Ak, D.; Sz, E.; Kht, F. A sustainable blockchain framework for the halal food supply chain: Lessons from malaysia.
+Technol. Forecast. Soc. Change 2021, 170, 120870.
+40.
+Lin, Q.; Wang, H.; Pei, X.; Wang, J. Food safety traceability system based on blockchain and EPCIS. IEEE Access 2019, 7,
+20698–20707. [CrossRef]
+41.
+Tsang, Y.P.; Choy, K.L.; Wu, C.H.; Ho GT, S.; Lam, H.Y. Blockchain-driven iot for food traceability with an integrated consensus
+mechanism. IEEE Access 2019, 7, 129000–129017. [CrossRef]
+42.
+Powell, W.; Foth, M.; Cao, S.; Natanelov, V. Garbage in garbage out: The precarious link between IoT and blockchain in food
+supply chains. J. Ind. Inf. Integr. 2021, 25, 100261. [CrossRef]
+43.
+Lakshmi, G.V.; Gogulamudi, S.; Nagaeswari, B.; Reehana, S. BlockChain based inventory management by QR code using open
+CV. In Proceedings of the International Conference on Computer Communication and Informatics (ICCCI-2021), Coimbatore,
+India, 27–29 January 2021.
+44.
+Baralla, G.; Pinna, A.; Corrias, G. Ensure traceability in european food supply chain by using a blockchain system. In Proceedings
+of the 2019 IEEE/ACM 2nd International Workshop on Emerging Trends in Software Engineering for Blockchain (WETSEB),
+Montreal, QC, Canada, 27–27 May 2019.
+45.
+Dey, S.; Saha, S.; Singh, A.K.; Mcdonald-Maier, K. Foodsqrblock: Digitizing food production and the supply chain with blockchain
+and qr code in the cloud. Sustainability 2021, 13, 3486. [CrossRef]
+46.
+Benˇci´c, F.M.; Skoˇcir, P.; Žarko, I.P. Dl-tags: DLT and smart tags for decentralized, privacy-preserving and veriﬁable supply chain
+management. IEEE Access 2019, 7, 46198–46209. [CrossRef]
+47.
+Feng, T. An agri-food supply chain traceability system for China based on RFID & blockchain technology. In Proceedings of the
+2016 13th International Conference on Service Systems and Service Management (ICSSSM), Kunming, China, 24–26 June 2016;
+IEEE Press: Piscataway, NJ, USA, 2016; pp. 1–6.
+48.
+Feng, T. A supply Chain Traceability System for Food Safety Based on HACCP, Blockchain & Internet of things. In Proceedings
+of the 2017 International Conference on Service Systems and Service Management, Dalian, China, 6–18 June 2017; IEEE Press:
+Piscataway, NJ, USA, 2017; pp. 1–6.
+49.
+Helo, P.; Shamsuzzoha, A.H.M. Real-time supply chain—A blockchain architecture for project deliveries. Robot. Comput. Integr.
+Manuf. 2020, 63, 101909. [CrossRef]
+50.
+Mondal, S.; Wijewardena, K.; Karuppuswami, S.; Kriti, N.; Kumar, D.; Chahal, P. Blockchain inspired RFID-based information
+architecture for food supply chain. IEEE Internet Things J. 2019, 6, 5803–5813. [CrossRef]
+51.
+Mazzei, D.; Baldi, G.; Fantoni, G.; Montelisciani, G.; Rizzello, L. A blockchain tokenizer for industrial IOT trustless applications.
+Future Gener. Comput. Syst. 2019, 105, 432–445. [CrossRef]
+52.
+Sfa, A.; Hm, B.; Cs, C.; Ms, D.; Rt, D. Closed-loop and open-loop authentication protocols for blockchain-based IOT systems. Inf.
+Process. Manag. 2021, 58, 102568.
+53.
+Toyoda, K.; Mathiopoulos, P.T.; Sasase, I.; Ohtsuki, T. A novel blockchain-based product ownership management system (poms)
+for anti-counterfeits in the post supply chain. IEEE Access 2017, 5, 17465–17477. [CrossRef]
+54.
+Wang, L. Design optimization of food safety monitoring system with social network analysis. IEEE Trans. Comput. Soc. Syst. 2018,
+5, 676–686. [CrossRef]
+
